@@ -227,6 +227,17 @@
 <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>Atlas77 is a statically typed, compiled programming language that I do in my free time.
 I hope to be able to use it for future projects. Don't expect it to be production-ready anytime soon.</p>
+<h1 id="goals"><a class="header" href="#goals">Goals</a></h1>
+<ul>
+<li>Having a <code>core/graphics</code> module that links to Vulkan/OpenGL/DirectX.</li>
+<li>Having a <code>core/sdl</code> module that links to SDL.</li>
+<li>Bootstrapping the compiler.</li>
+<li>Having a <code>core/ffi</code> module that allows interfacing with C libraries.</li>
+<li>Having a <code>core/ffi</code> module that allows interfacing with Rust libraries.</li>
+<li>Making a game with it.</li>
+<li>Linking to <a href="https://github.com/AryanpurTech/BlueEngine">blue_engine</a></li>
+<li>It should work 😁</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><style>
 .mdbook-alerts {
   padding: 8px 16px;
@@ -306,11 +317,7 @@ for writing code in the language (WIP).</p>
 <p>Here is a simple "Hello, World!" program written in Atlas77:</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
+func main() -&gt; int64 {
     print("Hello, World!")
 }
 </code></pre>
@@ -350,14 +357,10 @@ It can span multiple lines.
 <code>const</code> keyword, which creates an immutable variable.</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
+func main() -&gt; int64 {
     let x: i64 = 5;
     x = 10;
-    print_int(x); // Output: 10
+    print(x); // Output: 10
 
     const y: i64 = 5;
     y = 10; // Error: Cannot assign to a constant variable
@@ -407,24 +410,12 @@ At present, the minimum memory size for numeric types is 8 bytes.</p>
 body. The return type of a function is specified after the <code>-&gt;</code> symbol. For example:</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-add(x
-:
-i64, y
-:
-i64
-) -&gt;
-i64
-{
+func add(x: int64, y: int64) -&gt; int64{
     return x + y;
 }
 
-func
-main()
--&gt;
-i64
-{
-    let result: i64 = add(5, 10);
+func main() -&gt; int64 {
+    let result: int64 = add(5, 10);
     print(result); // Output: 15
 }
 </code></pre>
@@ -443,12 +434,8 @@ loops. The syntax for these control structures is similar to other programming l
 </blockquote>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
-    let x: i64 = 5;
+func main() -&gt; int64 {
+    let x: int64 = 5;
 
     if x &gt; 0 {
         print("x is positive");
@@ -473,11 +460,7 @@ handling, string &amp; list manipulation, time &amp; math functions. The standar
 keyword, followed by the library name. For example:</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
+func main() -&gt; int64 {
     print("Hello, World!");
 }
 </code></pre>
@@ -514,7 +497,13 @@ so it's a bit hard to implement more complex functions.</p>
 <p>WIP</p>
 </blockquote>
 <p>Current state of <code>std/fs</code>:</p>
-<pre><code>public class File {
+<pre><code class="language-cpp">extern read_dir(path: str) -&gt; [str]
+extern read_file(path: str) -&gt; str
+extern write_file(path: str, content: str)
+extern remove_file(path: str)
+extern file_exists(path: str) -&gt; bool
+
+public class File {
     private:
         flag: i64;
         content: str;
@@ -549,14 +538,16 @@ so it's a bit hard to implement more complex functions.</p>
             return read_file(path);
         }
 }
-
-extern read_dir(path: str) -&gt; [str];
-extern read_file(path: str) -&gt; str;
-extern write_file(path: str, content: str);
-extern remove_file(path: str);
-extern file_exists(path: str) -&gt; bool;
 </code></pre>
 <h2 id="11-generics"><a class="header" href="#11-generics">11. Generics</a></h2>
+<p>As of now generics are only implemented for external functions.</p>
+<h3 id="example"><a class="header" href="#example">Example:</a></h3>
+<pre><code class="language-ts">extern generic_func&lt;T&gt;(val: T) -&gt; T
+extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
+</code></pre>
+<blockquote>
+<p>[!NOTE] You can't return a generic that is not used in any parameter. Type inference is not implemented yet.</p>
+</blockquote>
 <blockquote>
 <p>WIP</p>
 </blockquote>
@@ -742,41 +733,52 @@ extern file_exists(path: str) -&gt; bool;
 </style>
 <h1 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h1>
 <blockquote>
-<p>NB: All the standard library is a work in progress.</p>
+<p>[!Note]: All the standard library is a work in progress.
+Most of the modules aren't implement or finished yet. The documentation is here to give an idea of what the standard library will look like.</p>
 </blockquote>
 <div class="table-wrapper"><table><thead><tr><th>Module</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>std/io</code></td><td>Input/output functions</td></tr>
 <tr><td><code>std/fs</code></td><td>File handling functions</td></tr>
-<tr><td><code>std/str</code></td><td>String manipulation functions</td></tr>
+<tr><td><code>std/string</code></td><td>String manipulation functions</td></tr>
 <tr><td><code>std/list</code></td><td>List manipulation functions</td></tr>
 <tr><td><code>std/time</code></td><td>Time functions</td></tr>
 <tr><td><code>std/math</code></td><td>Math functions</td></tr>
+<tr><td><code>std/vec</code></td><td>Vector functions</td></tr>
 </tbody></table>
 </div>
-<p>As of now only part of the <code>std/io</code> module is implemented and working properly.
-When the <code>v0.5.1</code> will be released, <code>std/fs</code>, <code>std/str</code>, <code>std/io</code>, <code>std/math</code> &amp; <code>std/time</code> should be fully implemented
-and working.</p>
+<p>You can see what is implemented with the checkboxes below.</p>
 <h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
 <ul>
-<li><code>print(val: str) -&gt; unit</code>: Print a string to the standard output.</li>
-<li><code>println(val: str) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
-<li><code>input() -&gt; str</code>: Read a line from the standard input.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>input() -&gt; str</code>: Read a line from the standard input.</li>
 </ul>
 <h2 id="stdfs"><a class="header" href="#stdfs"><code>std/fs</code></a></h2>
 <ul>
-<li><code>File</code>: A file type that can be used to read and write files.</li>
+<li><input disabled="" type="checkbox"/>
+<code>File</code>: A file type that can be used to read and write files.</li>
 </ul>
 <blockquote>
 <p>NB: The <code>File</code> type is not implemented yet.</p>
 </blockquote>
 <ul>
-<li><code>open(filename: str, mode: str) -&gt; File</code>: Open a file in the specified mode.</li>
-<li><code>read(file: File) -&gt; str</code>: Read the content of a file.</li>
-<li><code>write(file: File, content: str) -&gt; unit</code>: Write content to a file.</li>
-<li><code>close(file: File) -&gt; unit</code>: Close a file.</li>
-<li><code>exists(filename: str) -&gt; bool</code>: Check if a file exists.</li>
-<li><code>remove(filename: str) -&gt; unit</code>: Remove a file.</li>
-<li><code>rename(old: str, new: str) -&gt; unit</code>: Rename a file.</li>
+<li><input disabled="" type="checkbox"/>
+<code>open(filename: str, mode: str) -&gt; File</code>: Open a file in the specified mode.</li>
+<li><input disabled="" type="checkbox"/>
+<code>read(file: File) -&gt; str</code>: Read the content of a file.</li>
+<li><input disabled="" type="checkbox"/>
+<code>write(file: File, content: str) -&gt; unit</code>: Write content to a file.</li>
+<li><input disabled="" type="checkbox"/>
+<code>close(file: File) -&gt; unit</code>: Close a file.</li>
+<li><input disabled="" type="checkbox"/>
+<code>exists(filename: str) -&gt; bool</code>: Check if a file exists.</li>
+<li><input disabled="" type="checkbox"/>
+<code>remove(filename: str) -&gt; unit</code>: Remove a file.</li>
+<li><input disabled="" type="checkbox"/>
+<code>rename(old: str, new: str) -&gt; unit</code>: Rename a file.</li>
 </ul>
 <h2 id="stdstr"><a class="header" href="#stdstr"><code>std/str</code></a></h2>
 <ul>
@@ -785,61 +787,169 @@ and working.</p>
 <blockquote>
 <p>NB: The <code>String</code> type is not implemented yet.</p>
 </blockquote>
+<h3 id="implements"><a class="header" href="#implements">Implements</a></h3>
 <ul>
-<li><code>str_len(s: String) -&gt; u64</code>: Get the length of a string.</li>
-<li><code>concat(s1: String, s2: String) -&gt; String</code>: Concatenate two strings.</li>
-<li><code>split(s: String, sep: str) -&gt; List</code>: Split a string into a list of substrings.</li>
-<li><code>join(lst: List, sep: str) -&gt; String</code>: Join a list of strings into a single string.</li>
-<li><code>replace(s: String, old: str, new: str) -&gt; String</code>: Replace all occurrences of a substring in a string.</li>
-<li><code>to_upper(s: String) -&gt; String</code>: Convert a string to uppercase.</li>
-<li><code>to_lower(s: String) -&gt; String</code>: Convert a string to lowercase.</li>
-<li><code>trim(s: String) -&gt; String</code>: Remove leading and trailing whitespace from a string.</li>
-<li><code>starts_with(s: String, prefix: str) -&gt; bool</code>: Check if a string starts with a prefix.</li>
-<li><code>ends_with(s: String, suffix: str) -&gt; bool</code>: Check if a string ends with a suffix.</li>
-<li><code>contains(s: String, sub: str) -&gt; bool</code>: Check if a string contains a substring.</li>
-<li><code>find(s: String, sub: str) -&gt; i64</code>: Find the index of the first occurrence of a substring in a string.</li>
-<li><code>rfind(s: String, sub: str) -&gt; i64</code>: Find the index of the last occurrence of a substring in a string.</li>
-<li><code>slice(s: String, start: i64, end: i64) -&gt; String</code>: Get a substring of a string.</li>
+<li><code>Indexable&lt;char&gt;</code>: A trait that defines the <code>get</code> and <code>set</code> methods.</li>
+</ul>
+<blockquote>
+<p>NB: The <code>Indexable</code> trait is not implemented yet.</p>
+</blockquote>
+<h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>str_len(s: String) -&gt; uint64</code>: Get the length of a string.</li>
+<li><input disabled="" type="checkbox"/>
+<code>concat(s1: String, s2: String) -&gt; String</code>: Concatenate two strings.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>split(s: String, sep: str) -&gt; List</code>: Split a string into a list of substrings.</li>
+<li><input disabled="" type="checkbox"/>
+<code>join(lst: List, sep: str) -&gt; String</code>: Join a list of strings into a single string.</li>
+<li><input disabled="" type="checkbox"/>
+<code>replace(s: String, old: str, new: str) -&gt; String</code>: Replace all occurrences of a substring in a string.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>to_upper(s: String) -&gt; String</code>: Convert a string to uppercase.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>to_lower(s: String) -&gt; String</code>: Convert a string to lowercase.</li>
+<li><input disabled="" type="checkbox"/>
+<code>trim(s: String) -&gt; String</code>: Remove leading and trailing whitespace from a string.</li>
+<li><input disabled="" type="checkbox"/>
+<code>starts_with(s: String, prefix: str) -&gt; bool</code>: Check if a string starts with a prefix.</li>
+<li><input disabled="" type="checkbox"/>
+<code>ends_with(s: String, suffix: str) -&gt; bool</code>: Check if a string ends with a suffix.</li>
+<li><input disabled="" type="checkbox"/>
+<code>contains(s: String, sub: str) -&gt; bool</code>: Check if a string contains a substring.</li>
+<li><input disabled="" type="checkbox"/>
+<code>find(s: String, sub: str) -&gt; int64</code>: Find the index of the first occurrence of a substring in a string.</li>
+<li><input disabled="" type="checkbox"/>
+<code>rfind(s: String, sub: str) -&gt; int64</code>: Find the index of the last occurrence of a substring in a string.</li>
+<li><input disabled="" type="checkbox"/>
+<code>slice(s: String, start: int64, end: int64) -&gt; String</code>: Get a substring of a string.</li>
+</ul>
+<h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>+</code>: Concatenate two strings.</li>
+<li><input disabled="" type="checkbox"/>
+<code>[]</code>: Get a character from a string by index.</li>
+<li><input disabled="" type="checkbox"/>
+<code>[]=</code>: Set a character in a string by index.</li>
 </ul>
 <h2 id="stdlist"><a class="header" href="#stdlist"><code>std/list</code></a></h2>
-<blockquote>
-<p>NB: <code>std/list</code> is not implemented yet.</p>
-</blockquote>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>len&lt;T&gt;(lst: [T]) -&gt; uint64</code>: Get the length of a list.</li>
+<li><input disabled="" type="checkbox"/>
+<code>push&lt;T&gt;(lst: [T], val: T) -&gt; unit</code>: Add an element to the end of a list.</li>
+<li><input disabled="" type="checkbox"/>
+<code>pop&lt;T&gt;(lst: [T]) -&gt; T</code>: Remove and return the last element of a list.</li>
+<li><input disabled="" type="checkbox"/>
+<code>slice&lt;T&gt;(lst: [T], start: uint64, end: uint64) -&gt; [T]</code>: Get a slice of a list.</li>
+<li><input disabled="" type="checkbox"/>
+<code>remove&lt;T&gt;(lst: [T], index: uint64) -&gt; T</code>: Remove and return an element from a list by index.</li>
+</ul>
+<h2 id="stdvec"><a class="header" href="#stdvec"><code>std/vec</code></a></h2>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>Vec&lt;T&gt;</code>: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.</li>
+</ul>
+<h3 id="implements-1"><a class="header" href="#implements-1">Implements</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>Indexable&lt;T&gt;</code>: A trait that defines the <code>get</code> and <code>set</code> methods.</li>
+</ul>
+<h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>Vec(data: [T]) -&gt; Vec&lt;T&gt;</code>: Create a new vector from a list.</li>
+<li><input disabled="" type="checkbox"/>
+<code>len() -&gt; uint64</code>: Get the length of the vector.</li>
+<li><input disabled="" type="checkbox"/>
+<code>is_empty() -&gt; bool</code>: Check if the vector is empty.</li>
+<li><input disabled="" type="checkbox"/>
+<code>push(val: T) -&gt; unit</code>: Add an element to the end of the vector.</li>
+<li><input disabled="" type="checkbox"/>
+<code>pop() -&gt; T</code>: Remove and return the last element of the vector.</li>
+<li><input disabled="" type="checkbox"/>
+<code>get(index: uint64) -&gt; T</code>: Get an element from the vector by index.</li>
+<li><input disabled="" type="checkbox"/>
+<code>set(index: uint64, val: T) -&gt; unit</code>: Set an element in the vector by index.</li>
+</ul>
+<h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"/>
+<code>[]</code>: Get an element from the vector by index.</li>
+<li><input disabled="" type="checkbox"/>
+<code>[]=</code>: Set an element in the vector by index.</li>
+</ul>
 <h2 id="stdtime"><a class="header" href="#stdtime"><code>std/time</code></a></h2>
 <ul>
-<li><code>Time</code>: A time type that can be used to represent time.</li>
-</ul>
-<pre><code>struct Time {
-    sec: u64;
-    nsect: u64;
-}
-</code></pre>
-<ul>
-<li><code>now() -&gt; Time</code>: Get the current time.</li>
-<li><code>format(t: Time, fmt: str) -&gt; str</code>: Format a time value as a string.</li>
-<li><code>sleep(ms: u64) -&gt; unit</code>: Sleep for the specified number of milliseconds.</li>
-<li><code>sleep_us(us: u64) -&gt; unit</code>: Sleep for the specified number of microseconds.</li>
-<li><code>sleep_ns(ns: u64) -&gt; unit</code>: Sleep for the specified number of nanoseconds.</li>
-<li><code>elapsed(start: Time, end: Time) -&gt; u64</code>: Calculate the elapsed time between two time values in milliseconds.</li>
-<li><code>elapsed_us(start: Time, end: Time) -&gt; u64</code>: Calculate the elapsed time between two time values in microseconds.</li>
-<li><code>elapsed_ns(start: Time, end: Time) -&gt; u64</code>: Calculate the elapsed time between two time values in nanoseconds.</li>
-<li><code>parse(s: str, fmt: str) -&gt; Time</code>: Parse a string into a time value.</li>
-<li><code>add(t: Time, ms: u64) -&gt; Time</code>: Add milliseconds to a time value.</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>Time</code>: A time type that can be used to represent time.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>now() -&gt; Time</code>: Get the current time.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>format(t: Time, fmt: str) -&gt; str</code>: Format a time value as a string.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>sleep(ms: uint64) -&gt; unit</code>: Sleep for the specified number of milliseconds.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>sleep_us(us: uint64) -&gt; unit</code>: Sleep for the specified number of microseconds.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>sleep_ns(ns: uint64) -&gt; unit</code>: Sleep for the specified number of nanoseconds.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>elapsed(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in milliseconds.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>elapsed_us(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in microseconds.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>elapsed_ns(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in nanoseconds.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>parse(s: str, fmt: str) -&gt; Time</code>: Parse a string into a time value.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"/>
+<code>add(t: Time, ms: uint64) -&gt; Time</code>: Add milliseconds to a time value.</p>
+</li>
 </ul>
 <h2 id="stdmath"><a class="header" href="#stdmath"><code>std/math</code></a></h2>
 <ul>
-<li><code>abs(x: f64) -&gt; f64</code>: Compute the absolute value of a floating-point number.</li>
-<li><code>sqrt(x: f64) -&gt; f64</code>: Compute the square root of a floating-point number.</li>
-<li><code>pow(x: f64, y: f64) -&gt; f64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
-<li><code>exp(x: f64) -&gt; f64</code>: Compute the exponential function of a floating-point number.</li>
-<li><code>log(x: f64) -&gt; f64</code>: Compute the natural logarithm of a floating-point number.</li>
-<li><code>log10(x: f64) -&gt; f64</code>: Compute the base 10 logarithm of a floating-point number.</li>
-<li><code>sin(x: f64) -&gt; f64</code>: Compute the sine of a floating-point number.</li>
-<li><code>cos(x: f64) -&gt; f64</code>: Compute the cosine of a floating-point number.</li>
-<li><code>tan(x: f64) -&gt; f64</code>: Compute the tangent of a floating-point number.</li>
-<li><code>asin(x: f64) -&gt; f64</code>: Compute the arcsine of a floating-point number.</li>
-<li><code>acos(x: f64) -&gt; f64</code>: Compute the arccosine of a floating-point number.</li>
-<li><code>atan(x: f64) -&gt; f64</code>: Compute the arctangent of a floating-point number.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>abs(x: int64) -&gt; int64</code>: Compute the absolute value of a integer number.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>abs_f(x: float64) -&gt; float64</code>: Compute the absolute value of a floating-point number.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>round(x: float64) -&gt; int64</code>: Round a floating-point number to the nearest integer.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>random(min: int64, max: int64) -&gt; int64</code>: Generate a random integer number in the range <code>[min, max]</code>.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>pow(x: int64, y: int64) -&gt; int64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>pow_f(x: float64, y: float64) -&gt; float64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>min(x: int64, y: int64) -&gt; int64</code>: Compute the minimum of two integer numbers.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>min_f(x: float64, y: float64) -&gt; float64</code>: Compute the minimum of two floating-point numbers.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>max(x: int64, y: int64) -&gt; int64</code>: Compute the maximum of two integer numbers.</li>
+<li><input disabled="" type="checkbox" checked=""/>
+<code>max_f(x: float64, y: float64) -&gt; float64</code>: Compute the maximum of two floating-point numbers.</li>
 </ul>
 
                     </main>
