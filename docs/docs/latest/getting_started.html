@@ -238,11 +238,7 @@ for writing code in the language (WIP).</p>
 <p>Here is a simple "Hello, World!" program written in Atlas77:</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
+func main() -&gt; int64 {
     print("Hello, World!")
 }
 </code></pre>
@@ -282,14 +278,10 @@ It can span multiple lines.
 <code>const</code> keyword, which creates an immutable variable.</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
+func main() -&gt; int64 {
     let x: i64 = 5;
     x = 10;
-    print_int(x); // Output: 10
+    print(x); // Output: 10
 
     const y: i64 = 5;
     y = 10; // Error: Cannot assign to a constant variable
@@ -339,24 +331,12 @@ At present, the minimum memory size for numeric types is 8 bytes.</p>
 body. The return type of a function is specified after the <code>-&gt;</code> symbol. For example:</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-add(x
-:
-i64, y
-:
-i64
-) -&gt;
-i64
-{
+func add(x: int64, y: int64) -&gt; int64{
     return x + y;
 }
 
-func
-main()
--&gt;
-i64
-{
-    let result: i64 = add(5, 10);
+func main() -&gt; int64 {
+    let result: int64 = add(5, 10);
     print(result); // Output: 15
 }
 </code></pre>
@@ -375,12 +355,8 @@ loops. The syntax for these control structures is similar to other programming l
 </blockquote>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
-    let x: i64 = 5;
+func main() -&gt; int64 {
+    let x: int64 = 5;
 
     if x &gt; 0 {
         print("x is positive");
@@ -405,11 +381,7 @@ handling, string &amp; list manipulation, time &amp; math functions. The standar
 keyword, followed by the library name. For example:</p>
 <pre><code class="language-ts">import "std/io"
 
-func
-main()
--&gt;
-i64
-{
+func main() -&gt; int64 {
     print("Hello, World!");
 }
 </code></pre>
@@ -446,7 +418,13 @@ so it's a bit hard to implement more complex functions.</p>
 <p>WIP</p>
 </blockquote>
 <p>Current state of <code>std/fs</code>:</p>
-<pre><code>public class File {
+<pre><code class="language-cpp">extern read_dir(path: str) -&gt; [str]
+extern read_file(path: str) -&gt; str
+extern write_file(path: str, content: str)
+extern remove_file(path: str)
+extern file_exists(path: str) -&gt; bool
+
+public class File {
     private:
         flag: i64;
         content: str;
@@ -481,14 +459,16 @@ so it's a bit hard to implement more complex functions.</p>
             return read_file(path);
         }
 }
-
-extern read_dir(path: str) -&gt; [str];
-extern read_file(path: str) -&gt; str;
-extern write_file(path: str, content: str);
-extern remove_file(path: str);
-extern file_exists(path: str) -&gt; bool;
 </code></pre>
 <h2 id="11-generics"><a class="header" href="#11-generics">11. Generics</a></h2>
+<p>As of now generics are only implemented for external functions.</p>
+<h3 id="example"><a class="header" href="#example">Example:</a></h3>
+<pre><code class="language-ts">extern generic_func&lt;T&gt;(val: T) -&gt; T
+extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
+</code></pre>
+<blockquote>
+<p>[!NOTE] You can't return a generic that is not used in any parameter. Type inference is not implemented yet.</p>
+</blockquote>
 <blockquote>
 <p>WIP</p>
 </blockquote>

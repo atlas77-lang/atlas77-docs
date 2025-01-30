@@ -15,11 +15,7 @@ Here is a simple "Hello, World!" program written in Atlas77:
 ```ts
 import "std/io"
 
-func
-main()
-->
-i64
-{
+func main() -> int64 {
     print("Hello, World!")
 }
 ```
@@ -70,14 +66,10 @@ Variables in Atlas77 are either mutable or immutable. The design follows in some
 ```ts
 import "std/io"
 
-func
-main()
-->
-i64
-{
+func main() -> int64 {
     let x: i64 = 5;
     x = 10;
-    print_int(x); // Output: 10
+    print(x); // Output: 10
 
     const y: i64 = 5;
     y = 10; // Error: Cannot assign to a constant variable
@@ -130,24 +122,12 @@ body. The return type of a function is specified after the `->` symbol. For exam
 ```ts
 import "std/io"
 
-func
-add(x
-:
-i64, y
-:
-i64
-) ->
-i64
-{
+func add(x: int64, y: int64) -> int64{
     return x + y;
 }
 
-func
-main()
-->
-i64
-{
-    let result: i64 = add(5, 10);
+func main() -> int64 {
+    let result: int64 = add(5, 10);
     print(result); // Output: 15
 }
 ```
@@ -169,12 +149,8 @@ loops. The syntax for these control structures is similar to other programming l
 ```ts
 import "std/io"
 
-func
-main()
-->
-i64
-{
-    let x: i64 = 5;
+func main() -> int64 {
+    let x: int64 = 5;
 
     if x > 0 {
         print("x is positive");
@@ -203,11 +179,7 @@ keyword, followed by the library name. For example:
 ```ts
 import "std/io"
 
-func
-main()
-->
-i64
-{
+func main() -> int64 {
     print("Hello, World!");
 }
 ```
@@ -245,7 +217,13 @@ public enum Color {
 
 Current state of `std/fs`:
 
-```
+```cpp
+extern read_dir(path: str) -> [str]
+extern read_file(path: str) -> str
+extern write_file(path: str, content: str)
+extern remove_file(path: str)
+extern file_exists(path: str) -> bool
+
 public class File {
     private:
         flag: i64;
@@ -281,15 +259,20 @@ public class File {
             return read_file(path);
         }
 }
-
-extern read_dir(path: str) -> [str];
-extern read_file(path: str) -> str;
-extern write_file(path: str, content: str);
-extern remove_file(path: str);
-extern file_exists(path: str) -> bool;
 ```
 
 ## 11. Generics
+
+As of now generics are only implemented for external functions.
+
+### Example:
+```ts
+extern generic_func<T>(val: T) -> T
+extern other_generic_func<T, G>(t: [T], g: [G]) -> [T]
+```
+
+> [!NOTE] You can't return a generic that is not used in any parameter. Type inference is not implemented yet.
+
 
 > WIP
 
