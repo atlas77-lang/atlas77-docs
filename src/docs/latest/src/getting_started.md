@@ -12,7 +12,7 @@ for writing code in the language (WIP).
 
 Here is a simple "Hello, World!" program written in Atlas77:
 
-```ts
+```cpp
 import "std/io"
 
 func main() -> int64 {
@@ -63,7 +63,7 @@ Variables in Atlas77 are either mutable or immutable. The design follows in some
 `const` & `let` keywords. Variables can be declared using the `let` keyword, which creates a mutable variable, or the
 `const` keyword, which creates an immutable variable.
 
-```ts
+```cpp
 import "std/io"
 
 func main() -> int64 {
@@ -119,7 +119,7 @@ following table lists the built-in data types in Atlas77:
 Functions in Atlas77 are defined using the `func` keyword, followed by the function name, parameters, return type, and
 body. The return type of a function is specified after the `->` symbol. For example:
 
-```ts
+```cpp
 import "std/io"
 
 func add(x: int64, y: int64) -> int64{
@@ -146,7 +146,7 @@ loops. The syntax for these control structures is similar to other programming l
 
 > Note: Nested if-else (i.e. `if {} else if {} else {}`) isn't supported yet.
 
-```ts
+```cpp
 import "std/io"
 
 func main() -> int64 {
@@ -176,10 +176,10 @@ Atlas77 comes with a relatively small standard library, which includes functions
 handling, string & list manipulation, time & math functions. The standard library is imported using the `import`
 keyword, followed by the library name. For example:
 
-```ts
+```cpp
 import "std/io"
 
-func main() -> int64 {
+func main() {
     print("Hello, World!");
 }
 ```
@@ -195,13 +195,17 @@ As of writing this document, the following standard libraries are available:
 > Yes it is very limited, but tbh `str`, `array` & structs are still not implemented,
 > so it's a bit hard to implement more complex functions.
 
-## 9. Enums
+## 9 Arrays
+
+
+
+## 10. Enums
 
 > WIP
 
 Example:
 
-```ts
+```cpp
 public enum Color {
     Red = 1,
     Yellow,
@@ -211,7 +215,7 @@ public enum Color {
 }
 ```
 
-## 10. Class & Structs
+## 11. Class & Structs
 
 > WIP
 
@@ -261,7 +265,7 @@ public class File {
 }
 ```
 
-## 11. Generics
+## 12. Generics
 
 As of now generics are only implemented for external functions.
 
@@ -276,7 +280,7 @@ extern other_generic_func<T, G>(t: [T], g: [G]) -> [T]
 
 > WIP
 
-## 12. Traits
+## 13. Traits
 
 > The name is still to be decided
 

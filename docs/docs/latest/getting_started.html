@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Getting Started - Atlas77</title>
+        <title>Start - Atlas77</title>
 
 
         <!-- Custom HTML head -->
@@ -236,7 +236,7 @@ still being powerful enough to handle complex tasks. This document describes the
 for writing code in the language (WIP).</p>
 <h2 id="2-hello-world"><a class="header" href="#2-hello-world">2. Hello, World!</a></h2>
 <p>Here is a simple "Hello, World!" program written in Atlas77:</p>
-<pre><code class="language-ts">import "std/io"
+<pre><code class="language-cpp">import "std/io"
 
 func main() -&gt; int64 {
     print("Hello, World!")
@@ -276,7 +276,7 @@ It can span multiple lines.
 <p>Variables in Atlas77 are either mutable or immutable. The design follows in some sense TypeScript/JavaScript, with the
 <code>const</code> &amp; <code>let</code> keywords. Variables can be declared using the <code>let</code> keyword, which creates a mutable variable, or the
 <code>const</code> keyword, which creates an immutable variable.</p>
-<pre><code class="language-ts">import "std/io"
+<pre><code class="language-cpp">import "std/io"
 
 func main() -&gt; int64 {
     let x: i64 = 5;
@@ -329,7 +329,7 @@ At present, the minimum memory size for numeric types is 8 bytes.</p>
 <h2 id="6-functions"><a class="header" href="#6-functions">6. Functions</a></h2>
 <p>Functions in Atlas77 are defined using the <code>func</code> keyword, followed by the function name, parameters, return type, and
 body. The return type of a function is specified after the <code>-&gt;</code> symbol. For example:</p>
-<pre><code class="language-ts">import "std/io"
+<pre><code class="language-cpp">import "std/io"
 
 func add(x: int64, y: int64) -&gt; int64{
     return x + y;
@@ -353,7 +353,7 @@ loops. The syntax for these control structures is similar to other programming l
 <blockquote>
 <p>Note: Nested if-else (i.e. <code>if {} else if {} else {}</code>) isn't supported yet.</p>
 </blockquote>
-<pre><code class="language-ts">import "std/io"
+<pre><code class="language-cpp">import "std/io"
 
 func main() -&gt; int64 {
     let x: int64 = 5;
@@ -379,9 +379,9 @@ func main() -&gt; int64 {
 <p>Atlas77 comes with a relatively small standard library, which includes functions &amp; types for input/output, file
 handling, string &amp; list manipulation, time &amp; math functions. The standard library is imported using the <code>import</code>
 keyword, followed by the library name. For example:</p>
-<pre><code class="language-ts">import "std/io"
+<pre><code class="language-cpp">import "std/io"
 
-func main() -&gt; int64 {
+func main() {
     print("Hello, World!");
 }
 </code></pre>
@@ -400,12 +400,13 @@ func main() -&gt; int64 {
 <p>Yes it is very limited, but tbh <code>str</code>, <code>array</code> &amp; structs are still not implemented,
 so it's a bit hard to implement more complex functions.</p>
 </blockquote>
-<h2 id="9-enums"><a class="header" href="#9-enums">9. Enums</a></h2>
+<h2 id="9-arrays"><a class="header" href="#9-arrays">9 Arrays</a></h2>
+<h2 id="10-enums"><a class="header" href="#10-enums">10. Enums</a></h2>
 <blockquote>
 <p>WIP</p>
 </blockquote>
 <p>Example:</p>
-<pre><code class="language-ts">public enum Color {
+<pre><code class="language-cpp">public enum Color {
     Red = 1,
     Yellow,
     Green = 3,
@@ -413,7 +414,7 @@ so it's a bit hard to implement more complex functions.</p>
     Blue = 5,
 }
 </code></pre>
-<h2 id="10-class--structs"><a class="header" href="#10-class--structs">10. Class &amp; Structs</a></h2>
+<h2 id="11-class--structs"><a class="header" href="#11-class--structs">11. Class &amp; Structs</a></h2>
 <blockquote>
 <p>WIP</p>
 </blockquote>
@@ -460,7 +461,7 @@ public class File {
         }
 }
 </code></pre>
-<h2 id="11-generics"><a class="header" href="#11-generics">11. Generics</a></h2>
+<h2 id="12-generics"><a class="header" href="#12-generics">12. Generics</a></h2>
 <p>As of now generics are only implemented for external functions.</p>
 <h3 id="example"><a class="header" href="#example">Example:</a></h3>
 <pre><code class="language-ts">extern generic_func&lt;T&gt;(val: T) -&gt; T
@@ -472,7 +473,7 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 <blockquote>
 <p>WIP</p>
 </blockquote>
-<h2 id="12-traits"><a class="header" href="#12-traits">12. Traits</a></h2>
+<h2 id="13-traits"><a class="header" href="#13-traits">13. Traits</a></h2>
 <blockquote>
 <p>The name is still to be decided</p>
 </blockquote>
@@ -481,11 +482,11 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="hello_world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="configuration.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="guessing_game.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -495,11 +496,11 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="hello_world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="configuration.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="guessing_game.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

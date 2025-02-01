@@ -1,11 +1,19 @@
 # Atlas77
 
-[Introduction](./introduction.md)
-[Getting Started](./getting_started.md)
+- [Introduction](./introduction.md)
+
+# Getting Started
+
+- [Installation](./installation.md)
+- [Hello, World!](./hello_world.md)
+- [Start](./getting_started.md)
+
+# Programming a Guessing Game
+
+- [Programming a Guessing Game](./guessing_game.md)
 
 # Basic Usage
 
-- [Configuration](./configuration.md)
 - [Syntax]()
 
 # Standard Library

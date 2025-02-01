@@ -1,6 +1,7 @@
 # Standard Library
 
-> [!Note]: All the standard library is a work in progress.
+> [!Note] 
+> All the standard library is a work in progress.
 > Most of the modules aren't implement or finished yet. The documentation is here to give an idea of what the standard library will look like.
 
 | Module       | Description                   |
