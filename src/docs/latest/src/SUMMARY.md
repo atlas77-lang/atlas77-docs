@@ -1,15 +1,9 @@
-# Atlas77
-
-- [Introduction](./introduction.md)
-
-# Getting Started
-
-- [Installation](./installation.md)
-- [Hello, World!](./hello_world.md)
-- [Start](./getting_started.md)
-
-# Programming a Guessing Game
-
+# The Atlas77 Programming Language
+[The Atlas77 Programming Language](./title-page.md)
+[Introduction](./introduction.md)
+- [Getting Started](./getting_started.md)
+    - [Installation](./installation.md)
+    - [Hello, World!](./hello_world.md)
 - [Programming a Guessing Game](./guessing_game.md)
 
 # Basic Usage

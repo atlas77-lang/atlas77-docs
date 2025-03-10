@@ -1,5 +1,7 @@
 # Introduction
 
+Welcome to *The Atlas77 Programming Language*, an experimental book about the Atlas77 programming language. Experimental because I'm trying to gather and lay down my thoughts about the language as I develop it to normalize the language in itself. It could be compared to how C++ has its own version (C++11, C++14, C++17, C++20, etc.) with each having thousands of page of documentation to formalize the language.
+
 Atlas77 is a statically typed, compiled programming language that I do in my free time.
 I hope to be able to use it for future projects. Don't expect it to be production-ready anytime soon.
 
