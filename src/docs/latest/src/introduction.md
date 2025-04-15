@@ -5,6 +5,10 @@ Welcome to *The Atlas77 Programming Language*, an experimental book about the At
 Atlas77 is a statically typed, compiled programming language that I do in my free time.
 I hope to be able to use it for future projects. Don't expect it to be production-ready anytime soon.
 
+I would describe it as a modern take of C++. And for that it takes inspiration from many languages like:
+- Rust/C++/C# for the syntax
+- Java/CPython for the runtime
+
 # Goals
 
 - Having a `core/graphics` module that links to Vulkan/OpenGL/DirectX.

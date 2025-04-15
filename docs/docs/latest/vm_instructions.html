@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Programming a Guessing Game - Atlas77</title>
+        <title>Instructions - Atlas77</title>
 
 
         <!-- Custom HTML head -->
@@ -130,7 +130,7 @@
                         <a href="https://github.com/atlas77-lang/Atlas77" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/guessing_game.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/vm_instructions.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -226,21 +226,67 @@
 }
 
 </style>
-<h1 id="programming-a-guessing-game"><a class="header" href="#programming-a-guessing-game">Programming a Guessing Game</a></h1>
-<h2 id="setting-up"><a class="header" href="#setting-up">Setting up</a></h2>
-<p>First, create a new atlas77 file named <code>guessing_game.atlas</code></p>
+<h1 id="the-atlas77-vm-instruction-set"><a class="header" href="#the-atlas77-vm-instruction-set">The Atlas77 VM instruction set</a></h1>
+<p>The Atlas77 VM is a stack-based typed virtual machine that executes bytecode instructions, its design is similar to the Java Virtual Machine (JVM) and the .NET Common Language Runtime (CLR). It handles memory management with reference counting, and values don't carry additional data about their type. Instead, the type information is stored in the instruction set.</p>
+<h2 id="types"><a class="header" href="#types">Types</a></h2>
+<p>The Atlas77 VM supports the following types:</p>
+<ul>
+<li><code>int8</code>: 8-bit signed integer</li>
+<li><code>int16</code>: 16-bit signed integer</li>
+<li><code>int32</code>: 32-bit signed integer</li>
+<li><code>int64</code>: 64-bit signed integer</li>
+<li><code>uint8</code>: 8-bit unsigned integer</li>
+<li><code>uint16</code>: 16-bit unsigned integer</li>
+<li><code>uint32</code>: 32-bit unsigned integer</li>
+<li><code>uint64</code>: 64-bit unsigned integer</li>
+<li><code>float32</code>: 32-bit floating point number</li>
+<li><code>float64</code>: 64-bit floating point number</li>
+<li><code>bool</code>: boolean value (true or false)</li>
+<li><code>str</code>: string value</li>
+<li><code>char</code>: character value</li>
+<li><code>unit</code>: unit type (similar to null or void in C/C++)</li>
+</ul>
+<h2 id="arithmetic-instructions"><a class="header" href="#arithmetic-instructions">Arithmetic Instructions</a></h2>
+<p>The Atlas77 VM supports the following arithmetic instructions:</p>
+<ul>
+<li><code>add.&lt;type&gt;</code>: Adds two values of the same type and pushes the result onto the stack.</li>
+<li><code>sub.&lt;type&gt;</code>: Subtracts the second value from the first value of the same type and pushes the result onto the stack.</li>
+<li><code>mul.&lt;type&gt;</code>: Multiplies two values of the same type and pushes the result onto the stack.</li>
+<li><code>div.&lt;type&gt;</code>: Divides the first value by the second value of the same type and pushes the result onto the stack.</li>
+<li><code>mod.&lt;type&gt;</code>: Computes the modulus of the first value by the second value of the same type and pushes the result onto the stack.</li>
+<li><code>neg.&lt;type&gt;</code>: Negates the value of the given type and pushes the result onto the stack.</li>
+<li><code>inc.&lt;type&gt;</code>: Increments the value of the given type by 1 and pushes the result onto the stack.</li>
+<li><code>dec.&lt;type&gt;</code>: Decrements the value of the given type by 1 and pushes the result onto the stack.</li>
+</ul>
+<h2 id="comparison-instructions"><a class="header" href="#comparison-instructions">Comparison Instructions</a></h2>
+<p>The Atlas77 VM supports the following comparison instructions:</p>
+<ul>
+<li><code>eq.&lt;type&gt;</code>: Compares two values of the same type for equality and pushes the result (true or false) onto the stack.</li>
+<li><code>ne.&lt;type&gt;</code>: Compares two values of the same type for inequality and pushes the result (true or false) onto the stack.</li>
+<li><code>lt.&lt;type&gt;</code>: Compares two values of the same type to check if the first value is less than the second value and pushes the result (true or false) onto the stack.</li>
+<li><code>le.&lt;type&gt;</code>: Compares two values of the same type to check if the first value is less than or equal to the second value and pushes the result (true or false) onto the stack.</li>
+<li><code>gt.&lt;type&gt;</code>: Compares two values of the same type to check if the first value is greater than the second value and pushes the result (true or false) onto the stack.</li>
+<li><code>ge.&lt;type&gt;</code>: Compares two values of the same type to check if the first value is greater than or equal to the second value and pushes the result (true or false) onto the stack.</li>
+</ul>
+<h2 id="bitwise-instructions"><a class="header" href="#bitwise-instructions">Bitwise Instructions</a></h2>
+<p>The Atlas77 VM supports the following bitwise instructions:</p>
+<ul>
+<li><code>and.&lt;type&gt;</code>: Performs a bitwise AND operation on two values of the same type and pushes the result onto the stack. (Supported types: <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>)</li>
+<li><code>or.&lt;type&gt;</code>: Performs a bitwise OR operation on two values of the same type and pushes the result onto the stack. (Supported types: <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>)</li>
+<li><code>xor.&lt;type&gt;</code>: Performs a bitwise XOR operation on two values of the same type and pushes the result onto the stack. (Supported types: <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>)</li>
+<li><code>not.&lt;type&gt;</code>: Performs a bitwise NOT operation on the value of the given type and pushes the result onto the stack. (Supported types: <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>)</li>
+<li><code>shl.&lt;type&gt;</code>: Performs a left shift operation on the value of the given type and pushes the result onto the stack. (Supported types: <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>)</li>
+<li><code>shr.&lt;type&gt;</code>: Performs a right shift operation on the value of the given type and pushes the result onto the stack. (Supported types: <code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>)</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="hello_world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="std.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -248,13 +294,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="hello_world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="std.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

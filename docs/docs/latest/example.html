@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Programming a Guessing Game - Atlas77</title>
+        <title>Example - Atlas77</title>
 
 
         <!-- Custom HTML head -->
@@ -130,7 +130,7 @@
                         <a href="https://github.com/atlas77-lang/Atlas77" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/guessing_game.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/example.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -226,19 +226,53 @@
 }
 
 </style>
-<h1 id="programming-a-guessing-game"><a class="header" href="#programming-a-guessing-game">Programming a Guessing Game</a></h1>
-<h2 id="setting-up"><a class="header" href="#setting-up">Setting up</a></h2>
-<p>First, create a new atlas77 file named <code>guessing_game.atlas</code></p>
+<p>List of all of the keywords in the language:</p>
+<ul>
+<li>class</li>
+<li>struct</li>
+<li>enum</li>
+<li>concept</li>
+<li>package</li>
+<li>import</li>
+<li>fn</li>
+<li>let</li>
+<li>const (both for <code>const T</code> and <code>const t: T</code>, one is constant type and the other is constant variable)</li>
+<li>new</li>
+<li>delete</li>
+<li>if/else/while/for</li>
+<li>return</li>
+<li>break/continue</li>
+<li>operator</li>
+<li>extern</li>
+<li>public/private</li>
+<li>override (but not sure, it'll probably part of a future comptime thingy that user can define manually to add more checks)</li>
+<li>as (for casting)</li>
+<li>comptime (for compile-time evaluation)</li>
+<li>self</li>
+<li>int8/int16/int32/int64</li>
+<li>uint8/uint16/uint32/uint64</li>
+<li>float32/float64</li>
+<li>bool</li>
+<li>str</li>
+<li>char</li>
+<li>unit/null</li>
+<li>true/false</li>
+</ul>
+<blockquote>
+<p>Primitive types are considered as keywords, but I do plan to change that, because it risks to bloat the keyword list.</p>
+</blockquote>
+<pre><code class="language-c">// Nothing to see here yet, just a placeholder for now.
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="hello_world.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="guessing_game.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="std.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -248,11 +282,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="hello_world.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="guessing_game.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="std.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

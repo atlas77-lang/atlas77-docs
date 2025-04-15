@@ -5,6 +5,7 @@
     - [Installation](./installation.md)
     - [Hello, World!](./hello_world.md)
 - [Programming a Guessing Game](./guessing_game.md)
+- [Example](./example.md)
 
 # Basic Usage
 
@@ -13,3 +14,6 @@
 # Standard Library
 
 - [std](./std.md)
+
+# VM Instructions
+- [Instructions](./vm_instructions.md)
