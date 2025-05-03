@@ -6,12 +6,12 @@ multilingual = false
 src = "./src"
 
 [build]
-build-dir = "../../../docs/docs/latest"
+build-dir = "../../docs/docs/latest"
 
 [output.html]
 theme = "../theme"
 default-theme = "dark"
-preferred-dark-theme = "Atlas77"
+preferred-dark-theme = "atlas"
 git-repository-url = "https://github.com/atlas77-lang/Atlas77"
 git-repository-icon = "fa-github"
 site-url = "/docs/latest/"
