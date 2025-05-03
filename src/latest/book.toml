@@ -10,7 +10,7 @@ build-dir = "../../../docs/docs/latest"
 
 [output.html]
 theme = "../theme"
-default-theme = "dark"
+default-theme = "atlas"
 preferred-dark-theme = "Atlas77"
 git-repository-url = "https://github.com/atlas77-lang/Atlas77"
 git-repository-icon = "fa-github"
