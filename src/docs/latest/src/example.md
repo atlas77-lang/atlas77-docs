@@ -5,9 +5,9 @@ List of all of the keywords in the language:
 - concept
 - package
 - import
-- fn
+- fun
 - let
-- const (both for `const T` and `const t: T`, one is constant type and the other is constant variable)
+- const (both for `&const T` and `const t: T`, one is constant reference type and the other is constant variable)
 - new
 - delete
 - if/else/while/for
@@ -16,7 +16,6 @@ List of all of the keywords in the language:
 - operator
 - extern
 - public/private
-- override (but not sure, it'll probably part of a future comptime thingy that user can define manually to add more checks)
 - as (for casting)
 - comptime (for compile-time evaluation)
 - self

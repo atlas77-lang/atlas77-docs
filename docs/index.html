@@ -1,219 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <!-- Primary Meta Tags -->
-    <title>Atlas 77 - 🔥 Blazinigly-Fast 🔥 Programming Language</title>
-    <meta name="title" content="Atlas 77" />
-    <meta
-      name="description"
-      content="🔥 Blazinigly-Fast 🔥 Programming Language"
-    />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://github.com/atlas77-lang/Atlas77" />
-    <meta property="og:title" content="Atlas 77" />
-    <meta
-      property="og:description"
-      content="🔥 Blazinigly-Fast 🔥 Programming Language"
-    />
-    <meta
-      property="og:image"
-      content="https://raw.githubusercontent.com/atlas77-lang/Atlas77/refs/heads/main/images/logo.png"
-    />
-    <meta content="#8b0000" data-react-helmet="true" name="theme-color" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:url"
-      content="https://github.com/atlas77-lang/Atlas77"
-    />
-    <meta property="twitter:title" content="Atlas 77" />
-    <meta
-      property="twitter:description"
-      content="🔥 Blazinigly-Fast 🔥 Programming Language"
-    />
-    <meta
-      property="twitter:image"
-      content="https://raw.githubusercontent.com/atlas77-lang/Atlas77/refs/heads/main/images/logo.png"
-    />
-
-    <!-- The rest -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/logo.png" />
+    <title>Atlas 77 — Programming Language</title>
+    <meta name="description" content="Atlas 77 — a modern take on the goofyness of C++." />
+    <link rel="icon" href="logo.png" />
     <style>
-      body {
-        font-family: "Roboto", sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #000000;
-        color: #d3d3d3;
+      :root{--bg:#f7f9fb;--card:#ffffff;--accent:#e07a5f;--muted:#4b5563}
+      html,body{height:100%;}
+      body{
+        margin:0;
+        font-family: Inter,Segoe UI,Roboto,system-ui,Arial;
+        background:var(--bg);
+        color:var(--muted);
+        -webkit-font-smoothing:antialiased;
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
       }
-      .hero {
-        background: linear-gradient(135deg, #8b0000, #000000);
-        padding: 100px 20px;
-        text-align: center;
-      }
-      .hero h1 {
-        font-size: 3em;
-        margin: 0;
-      }
-      .hero p {
-        font-size: 1.5em;
-        margin: 20px 0;
-      }
-      .hero .cta {
-        background-color: #8b0000;
-        color: #d3d3d3;
-        padding: 15px 30px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 1.2em;
-        margin: 10px;
-      }
-      .hero .cta:hover {
-        background-color: #660000;
-      }
-      .features,
-      .testimonials {
-        padding: 50px 20px;
-        text-align: center;
-      }
-      .features .feature-card {
-        background-color: #2a2a2a;
-        border: 2px solid #8b0000;
-        border-radius: 10px;
-        margin: 20px;
-        padding: 20px;
-        display: inline-block;
-        width: calc(33% - 40px);
-        vertical-align: top;
-        transition: transform 0.3s;
-      }
-      .features .feature-card:hover {
-        transform: translateY(-10px);
-      }
-      .features .feature-card h3 {
-        color: #ff6347; /* Lighter red for better readability */
-        margin: 0 0 10px;
-        font-size: 1.5em;
-      }
-      .features .feature-card .icon {
-        font-size: 2em;
-        margin-bottom: 10px;
-        color: #8b0000;
-      }
-      .testimonials .testimonial-card {
-        background-color: #1a1a1a;
-        border: 2px solid #8b0000;
-        border-radius: 10px;
-        margin: 20px;
-        padding: 20px;
-        display: inline-block;
-        width: calc(33% - 40px);
-        vertical-align: top;
-      }
-      .testimonials .testimonial-card h3 {
-        margin: 0 0 10px;
-      }
-      .footer {
-        background-color: #8b0000;
-        padding: 20px;
-        text-align: center;
-      }
-      .footer a {
-        color: #d3d3d3;
-        margin: 0 15px;
-        text-decoration: none;
-      }
-      .footer a:hover {
-        text-decoration: underline;
-      }
-      .footer p {
-        margin-top: 20px;
-      }
+      .container{max-width:900px;margin:4rem auto;padding:1rem;flex:1}
+      .header{display:flex;justify-content:space-between;align-items:center}
+      .brand{display:flex;align-items:center;gap:12px}
+      .brand img{height:44px}
+      h1{margin:0;font-size:1.5rem;color:#1f2937}
+      .lead{margin:6px 0 0;color:#556}
+      .buttons{display:flex;gap:8px}
+      .buttons a{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+      .btn-primary{background:var(--accent);color:#fff}
+      .btn-ghost{background:transparent;border:1px solid rgba(31,45,61,0.08);color:var(--muted)}
+      .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 18px rgba(31,45,61,0.06);margin-top:20px}
+      .code{background:#0b1220;color:#dff3ff;padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Roboto Mono,monospace}
+      .footer{margin-top:36px;text-align:center;color:#90a0ad;font-size:0.9rem;flex-shrink:0}
+      @media(max-width:640px){.header{flex-direction:column;align-items:flex-start;gap:12px}}
     </style>
   </head>
   <body>
-    <div class="hero">
-      <h1>Atlas 77: The Future of Programming</h1>
-      <p>
-        Sleek, performant, and powerful. Revolutionize your coding experience
-        with Atlas 77.
-      </p>
-      <br />
-      <a href="./docs/latest/index.html" class="cta">Get Started</a>
-      <a href="https://github.com/atlas77-lang/Atlas77" class="cta"
-        >Visit GitHub</a
-      >
-    </div>
+    <div class="container">
+      <header class="header">
+        <div class="brand">
+          <img src="logo.png" alt="Atlas 77 logo"/>
+          <div>
+            <h1>Atlas 77</h1>
+            <div class="lead">A modern take on the goofyness of C++.</div>
+          </div>
+        </div>
+        <nav class="buttons">
+          <a class="btn-primary" href="./docs/latest/index.html">Get Started</a>
+          <a class="btn-ghost" href="https://github.com/atlas77-lang/Atlas77" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+      </header>
 
-    <div class="features" id="features">
-      <div class="feature-card">
-        <div class="icon">🏃</div>
-        <h3>Unmatched Performance</h3>
-        <p>
-          Experience optimized compilation, low-latency execution, and efficient
-          memory management for high-performance applications.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🎨</div>
-        <h3>Sleek Syntax</h3>
-        <p>
-          Leverage concise grammar, powerful abstractions, and built-in support
-          for modern programming paradigms to write clean and maintainable code.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">👥</div>
-        <h3>Active Community</h3>
-        <p>
-          Engage with active roadmaps, issue tracking, devlogs, and
-          collaborative development in a thriving community of developers.
-        </p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🔧</div>
-        <h3>Highly Extensible</h3>
-        <p>
-          Utilize a modular architecture, plugin support, and customizable
-          toolchains to tailor Atlas 77 to your specific project requirements.
-        </p>
-      </div>
-    </div>
+      <section class="card">
+        <h2>Install</h2>
+        <p>Atlas 77 is distributed via <code>cargo</code>. Make sure you have the Rust toolchain (including <code>cargo</code>) installed — see <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener">Rust installation</a>.</p>
+        <p>Once Rust is installed, install Atlas 77 from crates.io:</p>
+        <pre class="code"><code>cargo install atlas_77</code></pre>
+        <p style="margin-top:8px;color:#6b7280">There is currently no installer script; use the Rust toolchain to install and update Atlas 77.</p>
+        <p style="margin-top:10px;color:#6b7280">Alternatively, you can compile Atlas 77 from source directly on GitHub:</p>
+        <pre class="code"><code>git clone https://github.com/atlas77-lang/Atlas77.git
+cd Atlas77
+cargo build --release
+# the built binary will be at target/release/atlas_77
+</code></pre>
+        <p style="margin-top:8px;color:#6b7280">Copy the release binary into a folder on your PATH (for example <code>/usr/local/bin</code>) or run it from <code>target/release</code>.</p>
+      </section>
 
-    <div class="testimonials" id="testimonials">
-      <h2>What Developers Say</h2>
-      <div class="testimonial-card">
-        <p>
-          "Atlas 77 has revolutionized the way I code. It's fast, efficient, and
-          a joy to use."
-        </p>
-        <h3>- John Doe</h3>
-      </div>
-      <div class="testimonial-card">
-        <p>
-          "The community support is amazing. I've never felt more welcomed in a
-          programming language community."
-        </p>
-        <h3>- Jane Smith</h3>
-      </div>
-      <div class="testimonial-card">
-        <p>
-          "The sleek syntax makes my code so much cleaner and easier to
-          maintain."
-        </p>
-        <h3>- Alice Johnson</h3>
-      </div>
-    </div>
+      <section class="card">
+        <h2>Quick start</h2>
+        <p>Create a new project and build:</p>
+        <pre class="code"><code>atlas_77 init my-project
+cd my-project
+atlas_77 build</code></pre>
+      </section>
 
-    <div class="footer" id="contact">
-      <a href="/docs/latest">Documentation</a>
-      <a href="https://github.com/atlas77-lang/Atlas77">GitHub</a>
-      <p>&copy; 2023 Atlas 77. All rights reserved.</p>
+        <section class="card">
+        <h2>Examples — v0.6 (development build)</h2>
+        <p>These examples target the <a href="https://github.com/atlas77-lang/atlas77/tree/v0.6.x" target="_blank" rel="noopener">v0.6.0</a> development branch.</p>
+
+        <h3>Example: Hello World</h3>
+        <pre class="code"><code>
+import std::io;
+fun main() {
+  println("Hello, Atlas 77 v0.6");
+}
+    </code></pre>
+
+        <h3>Example: Basic IO</h3>
+        <pre class="code"><code>
+import std::fs;
+import std::io;
+
+fun main() {
+  let my_file = new File("data.txt");
+  my_file.open();
+  my_file.write("Hello, file!\n");
+  println(my_file.contents());
+}
+    </code></pre>
+        </section>
+
+        <footer class="footer">
+        <p>&copy; 2025 Atlas 77 — <a href="https://github.com/atlas77-lang/Atlas77" target="_blank" rel="noopener">Project on GitHub</a></p>
+      </footer>
     </div>
   </body>
 </html>

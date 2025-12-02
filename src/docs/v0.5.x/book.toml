@@ -1,0 +1,13 @@
+[book]
+title = "Atlas77"
+authors = ["Gipson62"]
+language = "en"
+src = "./src"
+
+[build]
+build-dir = "../../../docs/docs/v0.5.x"
+
+[output.html]
+git-repository-url = "https://github.com/atlas77-lang/atlas77/tree/v0.5.1"
+site-url = "/docs/v0.5.x/"
+edit-url-template = "https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/v0.5.x/{path}"

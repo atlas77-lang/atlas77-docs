@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="dark sidebar-visible" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -13,40 +13,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
 
-        <!-- Provide site root to javascript -->
+        <!-- Provide site root and default themes to javascript -->
         <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "atlas77" : "dark";
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-c063cbf4.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
+        <script src="toc-2a46b18d.js"></script>
     </head>
     <body>
-    <div id="body-container">
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -60,65 +72,69 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             const html = document.documentElement;
-            html.classList.remove('dark')
+            html.classList.remove('light')
             html.classList.add(theme);
             html.classList.add("js");
         </script>
 
-        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
             </noscript>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
                         </label>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="atlas">atlas</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -126,179 +142,51 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/atlas77-lang/Atlas77" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
-                        <style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
-<h1 id="the-atlas77-programming-language"><a class="header" href="#the-atlas77-programming-language">The Atlas77 Programming Language</a></h1>
+                        <h1 id="the-atlas77-programming-language"><a class="header" href="#the-atlas77-programming-language">The Atlas77 Programming Language</a></h1>
 <p><em>by Gipson62</em></p>
 <p>This version of the documentation is currently only experimental and thoughts I gathered while developing the language. It may not reflect the current state of the language.</p>
 <p>The documentation as a whole will be available offline in the compiler itself in future updates.</p>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
-<p>Welcome to <em>The Atlas77 Programming Language</em>, an experimental book about the Atlas77 programming language. Experimental because I'm trying to gather and lay down my thoughts about the language as I develop it to normalize the language in itself. It could be compared to how C++ has its own version (C++11, C++14, C++17, C++20, etc.) with each having thousands of page of documentation to formalize the language.</p>
-<p>Atlas77 is a statically typed, compiled programming language that I do in my free time.
-I hope to be able to use it for future projects. Don't expect it to be production-ready anytime soon.</p>
+<p>Welcome to <em>The Atlas77 Programming Language</em>, an experimental book about the Atlas77 programming language. Experimental because I’m trying to gather and lay down my thoughts about the language as I develop it to normalize the language in itself.</p>
+<p>Atlas77 is a statically typed, compiled programming language running on a VM that I do in my free time.
+I hope to be able to use it for future projects. Don’t expect it to be production-ready anytime soon.</p>
 <p>I would describe it as a modern take of C++. And for that it takes inspiration from many languages like:</p>
 <ul>
 <li>Rust/C++/C# for the syntax</li>
@@ -306,82 +194,16 @@ I hope to be able to use it for future projects. Don't expect it to be productio
 </ul>
 <h1 id="goals"><a class="header" href="#goals">Goals</a></h1>
 <ul>
-<li>Having a <code>core/graphics</code> module that links to Vulkan/OpenGL/DirectX.</li>
-<li>Having a <code>core/sdl</code> module that links to SDL.</li>
+<li>Having a <code>core::graphics</code> module that links to Vulkan/OpenGL/DirectX.</li>
+<li>Having a <code>core::sdl</code> module that links to SDL.</li>
 <li>Bootstrapping the compiler.</li>
-<li>Having a <code>core/ffi</code> module that allows interfacing with C libraries.</li>
-<li>Having a <code>core/ffi</code> module that allows interfacing with Rust libraries.</li>
+<li>Having a <code>core::ffi</code> module that allows interfacing with C libraries.</li>
+<li>Having a <code>core::ffi</code> module that allows interfacing with Rust libraries.</li>
 <li>Making a game with it.</li>
-<li>Linking to <a href="https://github.com/AryanpurTech/BlueEngine">blue_engine</a></li>
+<li>Linking to <a href="https://github.com/AryanpurTech/BlueEngine">blue_engine</a> (see <a href="#blue-engine-library">blue_engine</a> documentation).</li>
 <li>It should work 😁</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+<div style="break-before: page; page-break-before: always;"></div>
 <blockquote>
 <p>NB: This is a work in progress document. The syntax is subject to change.</p>
 </blockquote>
@@ -391,7 +213,7 @@ I hope to be able to use it for future projects. Don't expect it to be productio
 still being powerful enough to handle complex tasks. This document describes the syntax of Atlas77, including the rules
 for writing code in the language (WIP).</p>
 <h2 id="2-hello-world"><a class="header" href="#2-hello-world">2. Hello, World!</a></h2>
-<p>Here is a simple "Hello, World!" program written in Atlas77:</p>
+<p>Here is a simple “Hello, World!” program written in Atlas77:</p>
 <pre><code class="language-cpp">import "std/io"
 
 func main() -&gt; int64 {
@@ -414,7 +236,7 @@ let x: i64 = 5; // This is also a single-line comment
 <h1 id="32-multi-line-comments"><a class="header" href="#32-multi-line-comments">3.2. Multi-line Comments</a></h1>
 <p>Multi-line comments start with <code>/*</code> and end with <code>*/</code>. For example:</p>
 <blockquote>
-<p>NB: Multi-line comments aren't supported yet (you'll see a lot of WIPs in this document)</p>
+<p>NB: Multi-line comments aren’t supported yet (you’ll see a lot of WIPs in this document)</p>
 </blockquote>
 <pre><code class="language-rs">/*
 This is a multi-line comment.
@@ -446,7 +268,12 @@ func main() -&gt; int64 {
 <h2 id="5-data-types"><a class="header" href="#5-data-types">5. Data Types</a></h2>
 <p>Atlas77 has several built-in data types, including integers, floating-point numbers, booleans, strings, and arrays. The
 following table lists the built-in data types in Atlas77:</p>
-<div class="table-wrapper"><table><thead><tr><th>Data Type</th><th>Description</th><th>State</th></tr></thead><tbody>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Data Type</th><th>Description</th><th>State</th></tr>
+</thead>
+<tbody>
 <tr><td><code>i8</code></td><td>8-bit signed integer</td><td>💤</td></tr>
 <tr><td><code>i16</code></td><td>16-bit signed integer</td><td>💤</td></tr>
 <tr><td><code>i32</code></td><td>32-bit signed integer</td><td>💤</td></tr>
@@ -463,7 +290,8 @@ following table lists the built-in data types in Atlas77:</p>
 <tr><td><code>char</code></td><td>Unicode character</td><td>💭</td></tr>
 <tr><td><code>str</code></td><td>String</td><td>💭</td></tr>
 <tr><td><code>array</code></td><td>Array (syntax: <code>[YourType]</code>)</td><td>💭</td></tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <blockquote>
 <p>Note: The <code>str</code> and <code>array</code> types will be mutable and resizable.
@@ -499,15 +327,21 @@ func main() -&gt; int64 {
 <h2 id="7-control-structures"><a class="header" href="#7-control-structures">7. Control Structures</a></h2>
 <p>Atlas77 supports several control structures, including <code>if</code> statements, <code>match</code> expression, <code>while</code> loops, and <code>for</code>
 loops. The syntax for these control structures is similar to other programming languages. For example:</p>
-<div class="table-wrapper"><table><thead><tr><th>Control Structure</th><th>Description</th><th>State</th></tr></thead><tbody>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Control Structure</th><th>Description</th><th>State</th></tr>
+</thead>
+<tbody>
 <tr><td><code>if</code> statement</td><td>Conditional statement</td><td>✅</td></tr>
 <tr><td><code>match</code> expression</td><td>Pattern matching expression</td><td>💤</td></tr>
 <tr><td><code>while</code> loop</td><td>Loop with a condition</td><td>✅</td></tr>
 <tr><td><code>for</code> loop</td><td>Loop over a range or collection</td><td>💤</td></tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <blockquote>
-<p>Note: Nested if-else (i.e. <code>if {} else if {} else {}</code>) isn't supported yet.</p>
+<p>Note: Nested if-else (i.e. <code>if {} else if {} else {}</code>) isn’t supported yet.</p>
 </blockquote>
 <pre><code class="language-cpp">import "std/io"
 
@@ -554,7 +388,7 @@ func main() {
 </ul>
 <blockquote>
 <p>Yes it is very limited, but tbh <code>str</code>, <code>array</code> &amp; structs are still not implemented,
-so it's a bit hard to implement more complex functions.</p>
+so it’s a bit hard to implement more complex functions.</p>
 </blockquote>
 <h2 id="9-arrays"><a class="header" href="#9-arrays">9 Arrays</a></h2>
 <h2 id="10-enums"><a class="header" href="#10-enums">10. Enums</a></h2>
@@ -624,7 +458,7 @@ public class File {
 extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 </code></pre>
 <blockquote>
-<p>[!NOTE] You can't return a generic that is not used in any parameter. Type inference is not implemented yet.</p>
+<p>[!NOTE] You can’t return a generic that is not used in any parameter. Type inference is not implemented yet.</p>
 </blockquote>
 <blockquote>
 <p>WIP</p>
@@ -633,73 +467,7 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 <blockquote>
 <p>The name is still to be decided</p>
 </blockquote>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <ul>
@@ -742,210 +510,14 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 </code></pre>
 </li>
 </ol>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="hello-world"><a href="#hello-world" class="header">Hello, World!</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="programming-a-guessing-game"><a class="header" href="#programming-a-guessing-game">Programming a Guessing Game</a></h1>
 <h2 id="setting-up"><a class="header" href="#setting-up">Setting up</a></h2>
 <p>First, create a new atlas77 file named <code>guessing_game.atlas</code></p>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="example-1"><a href="#example-1" class="header">Example</a></h1>
 <p>List of all of the keywords in the language:</p>
 <ul>
 <li>class</li>
@@ -954,9 +526,9 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 <li>concept</li>
 <li>package</li>
 <li>import</li>
-<li>fn</li>
+<li>fun</li>
 <li>let</li>
-<li>const (both for <code>const T</code> and <code>const t: T</code>, one is constant type and the other is constant variable)</li>
+<li>const (both for <code>&amp;const T</code> and <code>const t: T</code>, one is constant reference type and the other is constant variable)</li>
 <li>new</li>
 <li>delete</li>
 <li>if/else/while/for</li>
@@ -965,7 +537,6 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 <li>operator</li>
 <li>extern</li>
 <li>public/private</li>
-<li>override (but not sure, it'll probably part of a future comptime thingy that user can define manually to add more checks)</li>
 <li>as (for casting)</li>
 <li>comptime (for compile-time evaluation)</li>
 <li>self</li>
@@ -983,127 +554,58 @@ extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
 </blockquote>
 <pre><code class="language-c">// Nothing to see here yet, just a placeholder for now.
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
-}
-
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
-}
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="generics"><a href="#generics" class="header">Generics</a></h1>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h1>
-<div class="mdbook-alerts mdbook-alerts-note">
-<p class="mdbook-alerts-title">
-  <span class="mdbook-alerts-icon"></span>
-  note
-</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
 <p>All the standard library is a work in progress.
-Most of the modules aren't implement or finished yet. The documentation is here to give an idea of what the standard library will look like.</p>
-</div>
-<div class="table-wrapper"><table><thead><tr><th>Module</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>std/io</code></td><td>Input/output functions</td></tr>
-<tr><td><code>std/fs</code></td><td>File handling functions</td></tr>
-<tr><td><code>std/string</code></td><td>String manipulation functions</td></tr>
-<tr><td><code>std/list</code></td><td>List manipulation functions</td></tr>
-<tr><td><code>std/time</code></td><td>Time functions</td></tr>
-<tr><td><code>std/math</code></td><td>Math functions</td></tr>
-<tr><td><code>std/vec</code></td><td>Vector functions</td></tr>
-</tbody></table>
+Most of the modules aren’t implement or finished yet. The documentation is here to give an idea of what the standard library will look like.</p>
+</blockquote>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>std::io</code></td><td>Input/output functions</td></tr>
+<tr><td><code>std::fs</code></td><td>File handling functions</td></tr>
+<tr><td><code>std::string</code></td><td>String manipulation functions</td></tr>
+<tr><td><code>std::list</code></td><td>List manipulation functions</td></tr>
+<tr><td><code>std::vector</code></td><td>Vector manipulation functions</td></tr>
+<tr><td><code>std::time</code></td><td>Time functions</td></tr>
+<tr><td><code>std::math</code></td><td>Math functions</td></tr>
+<tr><td><code>std::vec</code></td><td>Vector functions</td></tr>
+<tr><td><code>std::option</code></td><td>Option type and functions</td></tr>
+<tr><td><code>std::result</code></td><td>Result type and functions</td></tr>
+</tbody>
+</table>
 </div>
 <p>You can see what is implemented with the checkboxes below.</p>
-<h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
+<h2 id="stdio"><a class="header" href="#stdio"><code>std::io</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>input() -&gt; str</code>: Read a line from the standard input.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>input() -&gt; str</code>: Read a line from the standard input.</li>
 </ul>
-<h2 id="stdfs"><a class="header" href="#stdfs"><code>std/fs</code></a></h2>
+<h2 id="stdfs"><a class="header" href="#stdfs"><code>std::fs</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>File</code>: A file type that can be used to read and write files.</li>
+<li><input disabled="" type="checkbox"> <code>File</code>: A file type that can be used to read and write files.</li>
 </ul>
 <blockquote>
 <p>NB: The <code>File</code> type is not implemented yet.</p>
 </blockquote>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>open(filename: str, mode: str) -&gt; File</code>: Open a file in the specified mode.</li>
-<li><input disabled="" type="checkbox"/>
-<code>read(file: File) -&gt; str</code>: Read the content of a file.</li>
-<li><input disabled="" type="checkbox"/>
-<code>write(file: File, content: str) -&gt; unit</code>: Write content to a file.</li>
-<li><input disabled="" type="checkbox"/>
-<code>close(file: File) -&gt; unit</code>: Close a file.</li>
-<li><input disabled="" type="checkbox"/>
-<code>exists(filename: str) -&gt; bool</code>: Check if a file exists.</li>
-<li><input disabled="" type="checkbox"/>
-<code>remove(filename: str) -&gt; unit</code>: Remove a file.</li>
-<li><input disabled="" type="checkbox"/>
-<code>rename(old: str, new: str) -&gt; unit</code>: Rename a file.</li>
+<li><input disabled="" type="checkbox"> <code>open(filename: str, mode: str) -&gt; File</code>: Open a file in the specified mode.</li>
+<li><input disabled="" type="checkbox"> <code>read(file: File) -&gt; str</code>: Read the content of a file.</li>
+<li><input disabled="" type="checkbox"> <code>write(file: File, content: str) -&gt; unit</code>: Write content to a file.</li>
+<li><input disabled="" type="checkbox"> <code>close(file: File) -&gt; unit</code>: Close a file.</li>
+<li><input disabled="" type="checkbox"> <code>exists(filename: str) -&gt; bool</code>: Check if a file exists.</li>
+<li><input disabled="" type="checkbox"> <code>remove(filename: str) -&gt; unit</code>: Remove a file.</li>
+<li><input disabled="" type="checkbox"> <code>rename(old: str, new: str) -&gt; unit</code>: Rename a file.</li>
 </ul>
-<h2 id="stdstr"><a class="header" href="#stdstr"><code>std/str</code></a></h2>
+<h2 id="stdstring"><a class="header" href="#stdstring"><code>std::string</code></a></h2>
 <ul>
 <li><code>String</code>: A string type that can be used to manipulate strings.</li>
 </ul>
@@ -1119,230 +621,163 @@ Most of the modules aren't implement or finished yet. The documentation is here 
 </blockquote>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
 <ul>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>str_len(s: String) -&gt; uint64</code>: Get the length of a string.</li>
-<li><input disabled="" type="checkbox"/>
-<code>concat(s1: String, s2: String) -&gt; String</code>: Concatenate two strings.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>split(s: String, sep: str) -&gt; List</code>: Split a string into a list of substrings.</li>
-<li><input disabled="" type="checkbox"/>
-<code>join(lst: List, sep: str) -&gt; String</code>: Join a list of strings into a single string.</li>
-<li><input disabled="" type="checkbox"/>
-<code>replace(s: String, old: str, new: str) -&gt; String</code>: Replace all occurrences of a substring in a string.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>to_upper(s: String) -&gt; String</code>: Convert a string to uppercase.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>to_lower(s: String) -&gt; String</code>: Convert a string to lowercase.</li>
-<li><input disabled="" type="checkbox"/>
-<code>trim(s: String) -&gt; String</code>: Remove leading and trailing whitespace from a string.</li>
-<li><input disabled="" type="checkbox"/>
-<code>starts_with(s: String, prefix: str) -&gt; bool</code>: Check if a string starts with a prefix.</li>
-<li><input disabled="" type="checkbox"/>
-<code>ends_with(s: String, suffix: str) -&gt; bool</code>: Check if a string ends with a suffix.</li>
-<li><input disabled="" type="checkbox"/>
-<code>contains(s: String, sub: str) -&gt; bool</code>: Check if a string contains a substring.</li>
-<li><input disabled="" type="checkbox"/>
-<code>find(s: String, sub: str) -&gt; int64</code>: Find the index of the first occurrence of a substring in a string.</li>
-<li><input disabled="" type="checkbox"/>
-<code>rfind(s: String, sub: str) -&gt; int64</code>: Find the index of the last occurrence of a substring in a string.</li>
-<li><input disabled="" type="checkbox"/>
-<code>slice(s: String, start: int64, end: int64) -&gt; String</code>: Get a substring of a string.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>str_len(s: String) -&gt; uint64</code>: Get the length of a string.</li>
+<li><input disabled="" type="checkbox"> <code>concat(s1: String, s2: String) -&gt; String</code>: Concatenate two strings.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>split(s: String, sep: str) -&gt; List</code>: Split a string into a list of substrings.</li>
+<li><input disabled="" type="checkbox"> <code>join(lst: List, sep: str) -&gt; String</code>: Join a list of strings into a single string.</li>
+<li><input disabled="" type="checkbox"> <code>replace(s: String, old: str, new: str) -&gt; String</code>: Replace all occurrences of a substring in a string.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_upper(s: String) -&gt; String</code>: Convert a string to uppercase.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_lower(s: String) -&gt; String</code>: Convert a string to lowercase.</li>
+<li><input disabled="" type="checkbox"> <code>trim(s: String) -&gt; String</code>: Remove leading and trailing whitespace from a string.</li>
+<li><input disabled="" type="checkbox"> <code>starts_with(s: String, prefix: str) -&gt; bool</code>: Check if a string starts with a prefix.</li>
+<li><input disabled="" type="checkbox"> <code>ends_with(s: String, suffix: str) -&gt; bool</code>: Check if a string ends with a suffix.</li>
+<li><input disabled="" type="checkbox"> <code>contains(s: String, sub: str) -&gt; bool</code>: Check if a string contains a substring.</li>
+<li><input disabled="" type="checkbox"> <code>find(s: String, sub: str) -&gt; int64</code>: Find the index of the first occurrence of a substring in a string.</li>
+<li><input disabled="" type="checkbox"> <code>rfind(s: String, sub: str) -&gt; int64</code>: Find the index of the last occurrence of a substring in a string.</li>
+<li><input disabled="" type="checkbox"> <code>slice(s: String, start: int64, end: int64) -&gt; String</code>: Get a substring of a string.</li>
 </ul>
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>+</code>: Concatenate two strings.</li>
-<li><input disabled="" type="checkbox"/>
-<code>[]</code>: Get a character from a string by index.</li>
-<li><input disabled="" type="checkbox"/>
-<code>[]=</code>: Set a character in a string by index.</li>
+<li><input disabled="" type="checkbox"> <code>+</code>: Concatenate two strings.</li>
+<li><input disabled="" type="checkbox"> <code>[]</code>: Get a character from a string by index.</li>
+<li><input disabled="" type="checkbox"> <code>[]=</code>: Set a character in a string by index.</li>
 </ul>
-<h2 id="stdlist"><a class="header" href="#stdlist"><code>std/list</code></a></h2>
+<h2 id="stdlist"><a class="header" href="#stdlist"><code>std::list</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>len&lt;T&gt;(lst: [T]) -&gt; uint64</code>: Get the length of a list.</li>
-<li><input disabled="" type="checkbox"/>
-<code>push&lt;T&gt;(lst: [T], val: T) -&gt; unit</code>: Add an element to the end of a list.</li>
-<li><input disabled="" type="checkbox"/>
-<code>pop&lt;T&gt;(lst: [T]) -&gt; T</code>: Remove and return the last element of a list.</li>
-<li><input disabled="" type="checkbox"/>
-<code>slice&lt;T&gt;(lst: [T], start: uint64, end: uint64) -&gt; [T]</code>: Get a slice of a list.</li>
-<li><input disabled="" type="checkbox"/>
-<code>remove&lt;T&gt;(lst: [T], index: uint64) -&gt; T</code>: Remove and return an element from a list by index.</li>
+<li><input disabled="" type="checkbox"> <code>len&lt;T&gt;(lst: [T]) -&gt; uint64</code>: Get the length of a list.</li>
+<li><input disabled="" type="checkbox"> <code>push&lt;T&gt;(lst: [T], val: T) -&gt; unit</code>: Add an element to the end of a list.</li>
+<li><input disabled="" type="checkbox"> <code>pop&lt;T&gt;(lst: [T]) -&gt; T</code>: Remove and return the last element of a list.</li>
+<li><input disabled="" type="checkbox"> <code>slice&lt;T&gt;(lst: [T], start: uint64, end: uint64) -&gt; [T]</code>: Get a slice of a list.</li>
+<li><input disabled="" type="checkbox"> <code>remove&lt;T&gt;(lst: [T], index: uint64) -&gt; T</code>: Remove and return an element from a list by index.</li>
 </ul>
-<h2 id="stdvec"><a class="header" href="#stdvec"><code>std/vec</code></a></h2>
+<h2 id="stdvector"><a class="header" href="#stdvector"><code>std::vector</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>Vec&lt;T&gt;</code>: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.</li>
+<li><input disabled="" type="checkbox"> <code>Vec&lt;T&gt;</code>: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.</li>
 </ul>
 <h3 id="implements-1"><a class="header" href="#implements-1">Implements</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>Indexable&lt;T&gt;</code>: A trait that defines the <code>get</code> and <code>set</code> methods.</li>
+<li><input disabled="" type="checkbox"> <code>Indexable&lt;T&gt;</code>: A trait that defines the <code>get</code> and <code>set</code> methods.</li>
 </ul>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>Vec(data: [T]) -&gt; Vec&lt;T&gt;</code>: Create a new vector from a list.</li>
-<li><input disabled="" type="checkbox"/>
-<code>len() -&gt; uint64</code>: Get the length of the vector.</li>
-<li><input disabled="" type="checkbox"/>
-<code>is_empty() -&gt; bool</code>: Check if the vector is empty.</li>
-<li><input disabled="" type="checkbox"/>
-<code>push(val: T) -&gt; unit</code>: Add an element to the end of the vector.</li>
-<li><input disabled="" type="checkbox"/>
-<code>pop() -&gt; T</code>: Remove and return the last element of the vector.</li>
-<li><input disabled="" type="checkbox"/>
-<code>get(index: uint64) -&gt; T</code>: Get an element from the vector by index.</li>
-<li><input disabled="" type="checkbox"/>
-<code>set(index: uint64, val: T) -&gt; unit</code>: Set an element in the vector by index.</li>
+<li><input disabled="" type="checkbox"> <code>Vec(data: [T]) -&gt; Vec&lt;T&gt;</code>: Create a new vector from a list.</li>
+<li><input disabled="" type="checkbox"> <code>len() -&gt; uint64</code>: Get the length of the vector.</li>
+<li><input disabled="" type="checkbox"> <code>is_empty() -&gt; bool</code>: Check if the vector is empty.</li>
+<li><input disabled="" type="checkbox"> <code>push(val: T) -&gt; unit</code>: Add an element to the end of the vector.</li>
+<li><input disabled="" type="checkbox"> <code>pop() -&gt; T</code>: Remove and return the last element of the vector.</li>
+<li><input disabled="" type="checkbox"> <code>get(index: uint64) -&gt; T</code>: Get an element from the vector by index.</li>
+<li><input disabled="" type="checkbox"> <code>set(index: uint64, val: T) -&gt; unit</code>: Set an element in the vector by index.</li>
 </ul>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"/>
-<code>[]</code>: Get an element from the vector by index.</li>
-<li><input disabled="" type="checkbox"/>
-<code>[]=</code>: Set an element in the vector by index.</li>
+<li><input disabled="" type="checkbox"> <code>[]</code>: Get an element from the vector by index.</li>
+<li><input disabled="" type="checkbox"> <code>[]=</code>: Set an element in the vector by index.</li>
 </ul>
-<h2 id="stdtime"><a class="header" href="#stdtime"><code>std/time</code></a></h2>
+<h2 id="stdtime"><a class="header" href="#stdtime"><code>std::time</code></a></h2>
 <ul>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>Time</code>: A time type that can be used to represent time.</p>
+<p><input disabled="" type="checkbox"> <code>Time</code>: A time type that can be used to represent time.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>now() -&gt; Time</code>: Get the current time.</p>
+<p><input disabled="" type="checkbox"> <code>now() -&gt; Time</code>: Get the current time.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>format(t: Time, fmt: str) -&gt; str</code>: Format a time value as a string.</p>
+<p><input disabled="" type="checkbox"> <code>format(t: Time, fmt: str) -&gt; str</code>: Format a time value as a string.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>sleep(ms: uint64) -&gt; unit</code>: Sleep for the specified number of milliseconds.</p>
+<p><input disabled="" type="checkbox"> <code>sleep(ms: uint64) -&gt; unit</code>: Sleep for the specified number of milliseconds.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>sleep_us(us: uint64) -&gt; unit</code>: Sleep for the specified number of microseconds.</p>
+<p><input disabled="" type="checkbox"> <code>sleep_us(us: uint64) -&gt; unit</code>: Sleep for the specified number of microseconds.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>sleep_ns(ns: uint64) -&gt; unit</code>: Sleep for the specified number of nanoseconds.</p>
+<p><input disabled="" type="checkbox"> <code>sleep_ns(ns: uint64) -&gt; unit</code>: Sleep for the specified number of nanoseconds.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>elapsed(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in milliseconds.</p>
+<p><input disabled="" type="checkbox"> <code>elapsed(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in milliseconds.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>elapsed_us(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in microseconds.</p>
+<p><input disabled="" type="checkbox"> <code>elapsed_us(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in microseconds.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>elapsed_ns(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in nanoseconds.</p>
+<p><input disabled="" type="checkbox"> <code>elapsed_ns(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in nanoseconds.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>parse(s: str, fmt: str) -&gt; Time</code>: Parse a string into a time value.</p>
+<p><input disabled="" type="checkbox"> <code>parse(s: str, fmt: str) -&gt; Time</code>: Parse a string into a time value.</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"/>
-<code>add(t: Time, ms: uint64) -&gt; Time</code>: Add milliseconds to a time value.</p>
+<p><input disabled="" type="checkbox"> <code>add(t: Time, ms: uint64) -&gt; Time</code>: Add milliseconds to a time value.</p>
 </li>
 </ul>
-<h2 id="stdmath"><a class="header" href="#stdmath"><code>std/math</code></a></h2>
+<h2 id="stdmath"><a class="header" href="#stdmath"><code>std::math</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>abs(x: int64) -&gt; int64</code>: Compute the absolute value of a integer number.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>abs_f(x: float64) -&gt; float64</code>: Compute the absolute value of a floating-point number.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>round(x: float64) -&gt; int64</code>: Round a floating-point number to the nearest integer.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>random(min: int64, max: int64) -&gt; int64</code>: Generate a random integer number in the range <code>[min, max]</code>.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>pow(x: int64, y: int64) -&gt; int64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>pow_f(x: float64, y: float64) -&gt; float64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>min(x: int64, y: int64) -&gt; int64</code>: Compute the minimum of two integer numbers.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>min_f(x: float64, y: float64) -&gt; float64</code>: Compute the minimum of two floating-point numbers.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>max(x: int64, y: int64) -&gt; int64</code>: Compute the maximum of two integer numbers.</li>
-<li><input disabled="" type="checkbox" checked=""/>
-<code>max_f(x: float64, y: float64) -&gt; float64</code>: Compute the maximum of two floating-point numbers.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>abs(x: int64) -&gt; int64</code>: Compute the absolute value of a integer number.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>abs_f(x: float64) -&gt; float64</code>: Compute the absolute value of a floating-point number.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>round(x: float64) -&gt; int64</code>: Round a floating-point number to the nearest integer.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>random(min: int64, max: int64) -&gt; int64</code>: Generate a random integer number in the range <code>[min, max]</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>pow(x: int64, y: int64) -&gt; int64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>pow_f(x: float64, y: float64) -&gt; float64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>min(x: int64, y: int64) -&gt; int64</code>: Compute the minimum of two integer numbers.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>min_f(x: float64, y: float64) -&gt; float64</code>: Compute the minimum of two floating-point numbers.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>max(x: int64, y: int64) -&gt; int64</code>: Compute the maximum of two integer numbers.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>max_f(x: float64, y: float64) -&gt; float64</code>: Compute the maximum of two floating-point numbers.</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><style>
-.mdbook-alerts {
-  padding: 8px 16px;
-  margin-bottom: 16px;
-  border-left: 0.25em solid var(--mdbook-alerts-color);
+<h2 id="stdoption"><a class="header" href="#stdoption"><code>std::option</code></a></h2>
+<ul>
+<li><input disabled="" type="checkbox"> <code>Option&lt;T&gt;</code>: A type that represents an optional value, which can either be <code>Some(T)</code> or <code>None</code>.</li>
+</ul>
+<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> <code>is_some() -&gt; bool</code>: Check if the option is <code>Some</code>.</li>
+<li><input disabled="" type="checkbox"> <code>is_none() -&gt; bool</code>: Check if the option is <code>None</code>.</li>
+<li><input disabled="" type="checkbox"> <code>unwrap() -&gt; T</code>: Get the value inside the option if it is <code>Some</code>, otherwise panic.</li>
+<li><input disabled="" type="checkbox"> <code>unwrap_or(default: T) -&gt; T</code>: Get the value inside the option if it is <code>Some</code>, otherwise return the default value.</li>
+</ul>
+<h2 id="stdresult"><a class="header" href="#stdresult"><code>std::result</code></a></h2>
+<ul>
+<li><input disabled="" type="checkbox"> <code>Result&lt;T, E&gt;</code>: A type that represents either a success (<code>Ok(T)</code>) or an error (<code>Err(E)</code>).</li>
+</ul>
+<h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> <code>is_ok() -&gt; bool</code>: Check if the result is <code>Ok</code>.</li>
+<li><input disabled="" type="checkbox"> <code>is_err() -&gt; bool</code>: Check if the result is <code>Err</code>.</li>
+<li><input disabled="" type="checkbox"> <code>unwrap() -&gt; T</code>: Get the value inside the result if it is <code>Ok</code>, otherwise panic.</li>
+<li><input disabled="" type="checkbox"> <code>unwrap_err() -&gt; E</code>: Get the error inside the result if it is <code>Err</code>, otherwise panic.</li>
+<li><input disabled="" type="checkbox"> <code>unwrap_or(default: T) -&gt; T</code>: Get the value inside the result if it is <code>Ok</code>, otherwise return the default value.</li>
+<li><input disabled="" type="checkbox"> <code>unwrap_err_or(default: E) -&gt; E</code>: Get the error inside the result if it is <code>Err</code>, otherwise return the default error.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="blue-engine-library"><a class="header" href="#blue-engine-library">Blue Engine Library</a></h1>
+<p>Blue Engine is the experimental FFI testbed connecting Atlas77 to Rust.
+It serves as one of the core libraries shipped with Atlas77 and can be imported directly:</p>
+<blockquote>
+<pre><code>import blue_engine::triangle;
+import blue_engine::Engine;
+import blue_engine::ObjectSettings;
+import blue_engine::call_update_function;
+import std::result;
+import std::time;
+
+fun main() {
+  let engine = Engine::init();
+  triangle("my_triangle", ObjectSettings::init("default"), &amp;engine.renderer, &amp;engine.objects).expect("Failed to create triangle");
+  let start = Time::now();
+  call_update_function(&amp;engine, "update", start);
 }
 
-.mdbook-alerts > *:first-child {
-  margin-top: 0;
+fun update(delta: Time, engine: &amp;Engine) {
+  return;
 }
-
-.mdbook-alerts > *:last-child {
-  margin-bottom: 0;
-}
-
-.mdbook-alerts-title {
-  display: flex;
-  font-weight: 600;
-  align-items: center;
-  line-height: 1;
-  color: var(--mdbook-alerts-color);
-  text-transform: capitalize;
-}
-
-.mdbook-alerts-icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
-  background-color: currentColor;
-  -webkit-mask: no-repeat center / 100%;
-  mask: no-repeat center / 100%;
-  -webkit-mask-image: var(--mdbook-alerts-icon);
-  mask-image: var(--mdbook-alerts-icon);
-}
-
-.mdbook-alerts-note {
-  --mdbook-alerts-color: rgb(9, 105, 218);
-  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-tip {
-  --mdbook-alerts-color: rgb(26, 127, 55);
-  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-important {
-  --mdbook-alerts-color: rgb(130, 80, 223);
-  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-warning {
-  --mdbook-alerts-color: rgb(154, 103, 0);
-  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
-}
-
-.mdbook-alerts-caution {
-  --mdbook-alerts-color: rgb(207, 34, 46);
-  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
-  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
-}
-
-</style>
+</code></pre>
+</blockquote>
+<p>The objective is to replicate the public API and general usage patterns of the original Blue Engine crate while adapting
+it to Atlas77’s execution model, type system, and VM. This library is under active development. Interfaces may change,
+features may remain incomplete, and stability is not guaranteed.</p>
+<p>Current scope: a safe Atlas77 wrapper layer built entirely on extern_ptr and extern_fn, exposing Rust engine components
+without unsafe surface area in Atlas77.</p>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="the-atlas77-vm-instruction-set"><a class="header" href="#the-atlas77-vm-instruction-set">The Atlas77 VM instruction set</a></h1>
-<p>The Atlas77 VM is a stack-based typed virtual machine that executes bytecode instructions, its design is similar to the Java Virtual Machine (JVM) and the .NET Common Language Runtime (CLR). It handles memory management with reference counting, and values don't carry additional data about their type. Instead, the type information is stored in the instruction set.</p>
+<p>The Atlas77 VM is a stack-based typed virtual machine that executes bytecode instructions, its design is similar to the Java Virtual Machine (JVM) and the .NET Common Language Runtime (CLR). It handles memory management with reference counting, and values don’t carry additional data about their type. Instead, the type information is stored in the instruction set.</p>
 <h2 id="types"><a class="header" href="#types">Types</a></h2>
 <p>The Atlas77 VM supports the following types:</p>
 <ul>
@@ -1411,6 +846,11 @@ Most of the modules aren't implement or finished yet. The documentation is here 
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -1419,13 +859,13 @@ Most of the modules aren't implement or finished yet. The documentation is here 
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
@@ -1434,6 +874,7 @@ Most of the modules aren't implement or finished yet. The documentation is here 
             window.setTimeout(window.print, 100);
         });
         </script>
+
 
     </div>
     </body>

@@ -10,10 +10,15 @@
 # Basic Usage
 
 - [Syntax]()
+- [Generics](./generics.md)
 
 # Standard Library
 
 - [std](./std.md)
+
+# Libraries and Modules
+
+- [Blue Engine](./blue_engine.md)
 
 # VM Instructions
 - [Instructions](./vm_instructions.md)

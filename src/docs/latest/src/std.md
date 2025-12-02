@@ -6,23 +6,26 @@
 
 | Module       | Description                   |
 |------------- |-------------------------------|
-| `std/io`     | Input/output functions        |
-| `std/fs`     | File handling functions       |
-| `std/string` | String manipulation functions |
-| `std/list`   | List manipulation functions   |
-| `std/time`   | Time functions                |
-| `std/math`   | Math functions                |
-| `std/vec`    | Vector functions              |
+| `std::io`     | Input/output functions        |
+| `std::fs`     | File handling functions       |
+| `std::string` | String manipulation functions |
+| `std::list`   | List manipulation functions   |
+| `std::vector` | Vector manipulation functions |
+| `std::time`   | Time functions                |
+| `std::math`   | Math functions                |
+| `std::vec`    | Vector functions              |
+| `std::option` | Option type and functions     |
+| `std::result` | Result type and functions     |
 
 You can see what is implemented with the checkboxes below.
 
-## `std/io`
+## `std::io`
 
 - [x] `print<T>(val: T) -> unit`: Print a string to the standard output.
 - [x] `println<T>(val: T) -> unit`: Print a string to the standard output followed by a newline.
 - [x] `input() -> str`: Read a line from the standard input.
 
-## `std/fs`
+## `std::fs`
 
 - [ ] `File`: A file type that can be used to read and write files.
 
@@ -36,7 +39,7 @@ You can see what is implemented with the checkboxes below.
 - [ ] `remove(filename: str) -> unit`: Remove a file.
 - [ ] `rename(old: str, new: str) -> unit`: Rename a file.
 
-## `std/str`
+## `std::string`
 
 - `String`: A string type that can be used to manipulate strings.
 
@@ -71,7 +74,7 @@ You can see what is implemented with the checkboxes below.
 - [ ] `[]`: Get a character from a string by index.
 - [ ] `[]=`: Set a character in a string by index.
 
-## `std/list`
+## `std::list`
 
 - [ ] `len<T>(lst: [T]) -> uint64`: Get the length of a list.
 - [ ] `push<T>(lst: [T], val: T) -> unit`: Add an element to the end of a list.
@@ -79,7 +82,7 @@ You can see what is implemented with the checkboxes below.
 - [ ] `slice<T>(lst: [T], start: uint64, end: uint64) -> [T]`: Get a slice of a list.
 - [ ] `remove<T>(lst: [T], index: uint64) -> T`: Remove and return an element from a list by index.
 
-## `std/vec`
+## `std::vector`
 
 - [ ] `Vec<T>`: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.
 
@@ -102,7 +105,7 @@ You can see what is implemented with the checkboxes below.
 - [ ] `[]=`: Set an element in the vector by index.
 
 
-## `std/time`
+## `std::time`
 
 - [ ] `Time`: A time type that can be used to represent time.
 
@@ -118,7 +121,7 @@ You can see what is implemented with the checkboxes below.
 - [ ] `parse(s: str, fmt: str) -> Time`: Parse a string into a time value.
 - [ ] `add(t: Time, ms: uint64) -> Time`: Add milliseconds to a time value.
 
-## `std/math`
+## `std::math`
 
 - [x] `abs(x: int64) -> int64`: Compute the absolute value of a integer number.
 - [x] `abs_f(x: float64) -> float64`: Compute the absolute value of a floating-point number.
@@ -130,4 +133,27 @@ You can see what is implemented with the checkboxes below.
 - [x] `min_f(x: float64, y: float64) -> float64`: Compute the minimum of two floating-point numbers.
 - [x] `max(x: int64, y: int64) -> int64`: Compute the maximum of two integer numbers.
 - [x] `max_f(x: float64, y: float64) -> float64`: Compute the maximum of two floating-point numbers.
+
+## `std::option`
+
+- [ ] `Option<T>`: A type that represents an optional value, which can either be `Some(T)` or `None`.
+
+### Methods
+- [ ] `is_some() -> bool`: Check if the option is `Some`.
+- [ ] `is_none() -> bool`: Check if the option is `None`.
+- [ ] `unwrap() -> T`: Get the value inside the option if it is `Some`, otherwise panic.
+- [ ] `unwrap_or(default: T) -> T`: Get the value inside the option if it is `Some`, otherwise return the default value.
+
+## `std::result`
+
+- [ ] `Result<T, E>`: A type that represents either a success (`Ok(T)`) or an error (`Err(E)`).
+
+### Methods
+
+- [ ] `is_ok() -> bool`: Check if the result is `Ok`.
+- [ ] `is_err() -> bool`: Check if the result is `Err`.
+- [ ] `unwrap() -> T`: Get the value inside the result if it is `Ok`, otherwise panic.
+- [ ] `unwrap_err() -> E`: Get the error inside the result if it is `Err`, otherwise panic.
+- [ ] `unwrap_or(default: T) -> T`: Get the value inside the result if it is `Ok`, otherwise return the default value.
+- [ ] `unwrap_err_or(default: E) -> E`: Get the error inside the result if it is `Err`, otherwise return the default error.
 
