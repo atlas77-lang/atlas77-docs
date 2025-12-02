@@ -5,9 +5,15 @@ language = "en"
 src = "./src"
 
 [build]
-build-dir = "../../../docs/docs/latest"
+build-dir = "../../docs/docs/latest"
 
 [output.html]
+<<<<<<< HEAD:src/docs/latest/book.toml
+=======
+theme = "../theme"
+default-theme = "dark"
+preferred-dark-theme = "atlas"
+>>>>>>> 225bdd6e9342ee8ca5b7d344d15ef624a92af496:src/latest/book.toml
 git-repository-url = "https://github.com/atlas77-lang/Atlas77"
 site-url = "/docs/latest/"
 edit-url-template = "https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/{path}"
