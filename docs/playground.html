@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atlas 77 Playground</title>
+    <meta name="description" content="Try Atlas 77 in your browser - an interactive playground for the Atlas 77 programming language." />
+    <link rel="icon" href="logo.png" />
+    <style>
+      :root{
+        --bg:#f7f9fb;
+        --card:#ffffff;
+        --accent:#e07a5f;
+        --muted:#4b5563;
+        --dark-bg:#1e1e1e;
+        --editor-bg:#0b1220;
+        --output-bg:#0f1419;
+        --border:#e5e7eb;
+        --success:#10b981;
+        --error:#ef4444;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body{
+        margin:0;
+        font-family: Inter,Segoe UI,Roboto,system-ui,Arial;
+        background:var(--bg);
+        color:var(--muted);
+        -webkit-font-smoothing:antialiased;
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+      }
+      .header{
+        background:var(--card);
+        border-bottom:1px solid var(--border);
+        padding:1rem 2rem;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        box-shadow:0 2px 4px rgba(0,0,0,0.05);
+      }
+      .brand{display:flex;align-items:center;gap:12px}
+      .brand img{height:32px}
+      .brand h1{font-size:1.25rem;color:#1f2937}
+      .nav-links{display:flex;gap:16px;align-items:center}
+      .nav-links a{
+        color:var(--muted);
+        text-decoration:none;
+        font-weight:500;
+        transition:color 0.2s;
+      }
+      .nav-links a:hover{color:var(--accent)}
+      .btn{
+        display:inline-block;
+        padding:8px 16px;
+        border-radius:6px;
+        text-decoration:none;
+        font-weight:600;
+        cursor:pointer;
+        border:none;
+        transition:all 0.2s;
+      }
+      .btn-primary{
+        background:var(--accent);
+        color:#fff;
+      }
+      .btn-primary:hover{
+        background:#c96a4d;
+      }
+      .btn-secondary{
+        background:transparent;
+        border:1px solid var(--border);
+        color:var(--muted);
+      }
+      .btn-success{
+        background:var(--success);
+        color:#fff;
+      }
+      .btn-success:hover{
+        background:#059669;
+      }
+      .playground-container{
+        flex:1;
+        display:flex;
+        overflow:hidden;
+      }
+      .editor-panel{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        border-right:1px solid var(--border);
+      }
+      .toolbar{
+        background:var(--card);
+        border-bottom:1px solid var(--border);
+        padding:0.75rem 1rem;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+      }
+      .toolbar-left{display:flex;gap:8px;align-items:center}
+      .toolbar-right{display:flex;gap:8px;align-items:center}
+      .status{
+        font-size:0.875rem;
+        color:var(--muted);
+        display:flex;
+        align-items:center;
+        gap:6px;
+      }
+      .status.success{color:var(--success)}
+      .status.error{color:var(--error)}
+      .status-dot{
+        width:8px;
+        height:8px;
+        border-radius:50%;
+        background:currentColor;
+      }
+      .editor{
+        flex:1;
+        background:var(--editor-bg);
+        padding:1rem;
+        overflow:auto;
+        font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,'Cascadia Code',monospace;
+        font-size:14px;
+        line-height:1.6;
+        color:#dff3ff;
+        resize:none;
+        border:none;
+        outline:none;
+      }
+      .output-panel{
+        width:40%;
+        display:flex;
+        flex-direction:column;
+        background:var(--dark-bg);
+      }
+      .output-toolbar{
+        background:#2a2a2a;
+        border-bottom:1px solid #3a3a3a;
+        padding:0.75rem 1rem;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+      }
+      .output-title{
+        font-weight:600;
+        color:#e0e0e0;
+        font-size:0.875rem;
+        text-transform:uppercase;
+        letter-spacing:0.5px;
+      }
+      .output{
+        flex:1;
+        background:var(--output-bg);
+        padding:1rem;
+        overflow:auto;
+        font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,'Cascadia Code',monospace;
+        font-size:13px;
+        line-height:1.6;
+        color:#c9d1d9;
+      }
+      .output pre{margin:0;white-space:pre-wrap;word-wrap:break-word}
+      .output .error{color:#ff7b72}
+      .output .success{color:#7ee787}
+      .output .info{color:#79c0ff}
+      .coming-soon-banner{
+        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+        color:#fff;
+        padding:1rem;
+        text-align:center;
+        font-weight:500;
+        box-shadow:0 2px 8px rgba(102,126,234,0.3);
+      }
+      select{
+        padding:6px 12px;
+        border:1px solid var(--border);
+        border-radius:4px;
+        background:var(--card);
+        color:var(--muted);
+        font-size:0.875rem;
+        cursor:pointer;
+      }
+      @media(max-width:768px){
+        .playground-container{flex-direction:column}
+        .editor-panel{border-right:none;border-bottom:1px solid var(--border)}
+        .output-panel{width:100%;height:300px}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="coming-soon-banner">
+      🚀 Playground is coming soon! This is a preview of the interface.
+    </div>
+    
+    <div class="header">
+      <div class="brand">
+        <img src="logo.png" alt="Atlas 77" onerror="this.style.display='none'"/>
+        <h1>Atlas 77 Playground</h1>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="docs/latest/index.html">Docs</a>
+        <a href="https://github.com/atlas77-lang/Atlas77" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="playground-container">
+      <div class="editor-panel">
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <select id="example-select">
+              <option value="">Select an example...</option>
+              <option value="hello">Hello World</option>
+              <option value="variables">Variables</option>
+              <option value="functions">Functions</option>
+              <option value="loops">Loops</option>
+              <option value="io">File I/O</option>
+            </select>
+          </div>
+          <div class="toolbar-right">
+            <span class="status" id="status">
+              <span class="status-dot"></span>
+              Ready
+            </span>
+            <button class="btn btn-success" id="run-btn">
+              ▶ Run
+            </button>
+          </div>
+        </div>
+        <textarea class="editor" id="editor" spellcheck="false" placeholder="// Write your Atlas 77 code here...
+// Example:
+import std/io;
+
+fun main() {
+  println(&quot;Hello, Atlas 77!&quot;);
+}">import std/io;
+fun main() {
+  println("Hello, Atlas 77!");
+}</textarea>
+      </div>
+
+      <div class="output-panel">
+        <div class="output-toolbar">
+          <div class="output-title">Output</div>
+          <button class="btn btn-secondary" id="clear-btn" style="font-size:0.75rem;padding:4px 8px">Clear</button>
+        </div>
+        <div class="output" id="output">
+          <pre class="info">// Atlas 77 Playground (Preview)
+//
+// TODO: WASM integration pending
+// - Compile atlas77-compiler to WebAssembly
+// - Load WASM module on page init
+// - Wire up Run button to call compile_and_run()
+//
+// See PLAYGROUND.md for implementation details
+
+Click "Run" to execute code (mock output for now)...</pre>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // TODO: Replace with actual WASM integration
+      // import init, { compile_and_run } from './pkg/atlas77_wasm.js';
+      
+      const editor = document.getElementById('editor');
+      const output = document.getElementById('output');
+      const runBtn = document.getElementById('run-btn');
+      const clearBtn = document.getElementById('clear-btn');
+      const status = document.getElementById('status');
+      const exampleSelect = document.getElementById('example-select');
+
+      // Example snippets
+      const examples = {
+        hello: `import std/io;
+
+fun main() {
+  println("Hello, Atlas 77!");
+}`,
+        variables: `import std/io;
+
+fun main() {
+  let name = "Atlas";
+  let version = "0.6.0-dev";
+  //Sadly string concatenation is not supported yet
+  print("Welcome to ")
+  print(name)
+  print(" version");
+  println(version);
+}`,
+        functions: `import std/io;
+
+fun add(a: int64, b: int64) -> int64 {
+  return a + b;  
+}
+
+fun main() {
+  let result = add(5, 7);
+  println(result);
+}`,
+        loops: `import std/io;
+
+fun main() {
+  let i = 0;
+  while (i < 5) {
+    println("Iteration: " + i);
+    i = i + 1;
+  }
+}`,
+        io: `import std/fs;
+import std/io;
+
+fun main() {
+  let my_file = new File("data.txt");
+  my_file.open();
+  my_file.write("Hello, file!\\n");
+  println(my_file.contents());
+}`
+      };
+
+      // Example selector
+      exampleSelect.addEventListener('change', (e) => {
+        const example = examples[e.target.value];
+        if (example) {
+          editor.value = example;
+        }
+      });
+
+      // Mock run function (replace with WASM call)
+      async function runCode() {
+        const code = editor.value.trim();
+        if (!code) {
+          appendOutput('<span class="error">Error: No code to execute</span>');
+          return;
+        }
+
+        setStatus('running', 'Compiling...');
+        runBtn.disabled = true;
+        
+        // Simulate compilation delay
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        // TODO: Replace with actual WASM call:
+        // try {
+        //   const result = compile_and_run(code);
+        //   appendOutput(`<span class="success">Compilation successful!</span>\n${result}`);
+        //   setStatus('success', 'Executed successfully');
+        // } catch (error) {
+        //   appendOutput(`<span class="error">Error: ${error}</span>`);
+        //   setStatus('error', 'Compilation failed');
+        // }
+
+        // Mock output
+        appendOutput('<span class="success">✓ Compilation successful!</span>');
+        appendOutput('<span class="info">--- Program Output ---</span>');
+        
+        if (code.includes('println')) {
+          const match = code.match(/println\(['"](.*?)['"]\)/);
+          if (match) {
+            appendOutput(match[1]);
+          } else {
+            appendOutput('Hello, Atlas 77!');
+          }
+        } else {
+          appendOutput('(Program executed with no output)');
+        }
+        
+        setStatus('success', 'Executed successfully');
+        runBtn.disabled = false;
+      }
+
+      function appendOutput(text) {
+        const pre = document.createElement('pre');
+        pre.innerHTML = text;
+        output.appendChild(pre);
+        output.scrollTop = output.scrollHeight;
+      }
+
+      function clearOutput() {
+        output.innerHTML = '';
+      }
+
+      function setStatus(type, message) {
+        status.className = `status ${type}`;
+        status.innerHTML = `<span class="status-dot"></span>${message}`;
+      }
+
+      runBtn.addEventListener('click', runCode);
+      clearBtn.addEventListener('click', clearOutput);
+
+      // Keyboard shortcut: Ctrl+Enter to run
+      editor.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          runCode();
+        }
+      });
+
+      // Tab key support in editor
+      editor.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '  ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 2;
+        }
+      });
+    </script>
+  </body>
+</html>
