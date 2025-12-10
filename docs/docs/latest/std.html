@@ -32,15 +32,10 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-<<<<<<< HEAD
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-c063cbf4.js";
-=======
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "atlas" : "dark";
->>>>>>> 225bdd6e9342ee8ca5b7d344d15ef624a92af496
+            window.path_to_searchindex_js = "searchindex-4d90fe75.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-2a46b18d.js"></script>
@@ -197,147 +192,206 @@ Most of the modules aren’t implement or finished yet. The documentation is her
 <tr><th>Module</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code>std::io</code></td><td>Input/output functions</td></tr>
-<tr><td><code>std::fs</code></td><td>File handling functions</td></tr>
-<tr><td><code>std::string</code></td><td>String manipulation functions</td></tr>
-<tr><td><code>std::list</code></td><td>List manipulation functions</td></tr>
-<tr><td><code>std::vector</code></td><td>Vector manipulation functions</td></tr>
-<tr><td><code>std::time</code></td><td>Time functions</td></tr>
-<tr><td><code>std::math</code></td><td>Math functions</td></tr>
-<tr><td><code>std::vec</code></td><td>Vector functions</td></tr>
-<tr><td><code>std::option</code></td><td>Option type and functions</td></tr>
-<tr><td><code>std::result</code></td><td>Result type and functions</td></tr>
+<tr><td><code>std/io</code></td><td>Input/output functions</td></tr>
+<tr><td><code>std/fs</code></td><td>File handling functions</td></tr>
+<tr><td><code>std/string</code></td><td>String manipulation functions</td></tr>
+<tr><td><code>std/vector</code></td><td>Vector manipulation functions</td></tr>
+<tr><td><code>std/time</code></td><td>Time functions</td></tr>
+<tr><td><code>std/math</code></td><td>Math functions</td></tr>
+<tr><td><code>std/option</code></td><td>Option type and functions</td></tr>
+<tr><td><code>std/result</code></td><td>Result type and functions</td></tr>
+<tr><td><code>std/box</code></td><td>Box type and functions</td></tr>
+<tr><td><code>std/iter</code></td><td>Iterator type and functions</td></tr>
+<tr><td><code>std/map</code></td><td>Map type and functions</td></tr>
 </tbody>
 </table>
 </div>
 <p>You can see what is implemented with the checkboxes below.</p>
-<h2 id="stdio"><a class="header" href="#stdio"><code>std::io</code></a></h2>
+<h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>input() -&gt; str</code>: Read a line from the standard input.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>panic(msg: string) -&gt; !</code>: Abort the program with an error message.</li>
 </ul>
-<h2 id="stdfs"><a class="header" href="#stdfs"><code>std::fs</code></a></h2>
+<h2 id="stdfs"><a class="header" href="#stdfs"><code>std/fs</code></a></h2>
+<h3 id="structs"><a class="header" href="#structs">Structs</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>File</code>: A file type that can be used to read and write files.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>File</code>: A file type that can be used to read and write files.</li>
 </ul>
 <blockquote>
-<p>NB: The <code>File</code> type is not implemented yet.</p>
+<p>NB: <code>File</code> is not stable yet. BEWARE.</p>
+<p>Lack of copy/move semantics makes it tricky to handle files safely.</p>
 </blockquote>
-<ul>
-<li><input disabled="" type="checkbox"> <code>open(filename: str, mode: str) -&gt; File</code>: Open a file in the specified mode.</li>
-<li><input disabled="" type="checkbox"> <code>read(file: File) -&gt; str</code>: Read the content of a file.</li>
-<li><input disabled="" type="checkbox"> <code>write(file: File, content: str) -&gt; unit</code>: Write content to a file.</li>
-<li><input disabled="" type="checkbox"> <code>close(file: File) -&gt; unit</code>: Close a file.</li>
-<li><input disabled="" type="checkbox"> <code>exists(filename: str) -&gt; bool</code>: Check if a file exists.</li>
-<li><input disabled="" type="checkbox"> <code>remove(filename: str) -&gt; unit</code>: Remove a file.</li>
-<li><input disabled="" type="checkbox"> <code>rename(old: str, new: str) -&gt; unit</code>: Rename a file.</li>
-</ul>
-<h2 id="stdstring"><a class="header" href="#stdstring"><code>std::string</code></a></h2>
-<ul>
-<li><code>String</code>: A string type that can be used to manipulate strings.</li>
-</ul>
-<blockquote>
-<p>NB: The <code>String</code> type is not implemented yet.</p>
-</blockquote>
-<h3 id="implements"><a class="header" href="#implements">Implements</a></h3>
-<ul>
-<li><code>Indexable&lt;char&gt;</code>: A trait that defines the <code>get</code> and <code>set</code> methods.</li>
-</ul>
-<blockquote>
-<p>NB: The <code>Indexable</code> trait is not implemented yet.</p>
-</blockquote>
+<pre><code>struct File {
+private:
+    content: string;
+public:
+    path: string;
+    File(path: string) {
+        this.content = "";
+        this.path = path;
+    }
+}
+</code></pre>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
 <ul>
-<li><input disabled="" type="checkbox" checked=""> <code>str_len(s: String) -&gt; uint64</code>: Get the length of a string.</li>
-<li><input disabled="" type="checkbox"> <code>concat(s1: String, s2: String) -&gt; String</code>: Concatenate two strings.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>split(s: String, sep: str) -&gt; List</code>: Split a string into a list of substrings.</li>
-<li><input disabled="" type="checkbox"> <code>join(lst: List, sep: str) -&gt; String</code>: Join a list of strings into a single string.</li>
-<li><input disabled="" type="checkbox"> <code>replace(s: String, old: str, new: str) -&gt; String</code>: Replace all occurrences of a substring in a string.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_upper(s: String) -&gt; String</code>: Convert a string to uppercase.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_lower(s: String) -&gt; String</code>: Convert a string to lowercase.</li>
-<li><input disabled="" type="checkbox"> <code>trim(s: String) -&gt; String</code>: Remove leading and trailing whitespace from a string.</li>
-<li><input disabled="" type="checkbox"> <code>starts_with(s: String, prefix: str) -&gt; bool</code>: Check if a string starts with a prefix.</li>
-<li><input disabled="" type="checkbox"> <code>ends_with(s: String, suffix: str) -&gt; bool</code>: Check if a string ends with a suffix.</li>
-<li><input disabled="" type="checkbox"> <code>contains(s: String, sub: str) -&gt; bool</code>: Check if a string contains a substring.</li>
-<li><input disabled="" type="checkbox"> <code>find(s: String, sub: str) -&gt; int64</code>: Find the index of the first occurrence of a substring in a string.</li>
-<li><input disabled="" type="checkbox"> <code>rfind(s: String, sub: str) -&gt; int64</code>: Find the index of the last occurrence of a substring in a string.</li>
-<li><input disabled="" type="checkbox"> <code>slice(s: String, start: int64, end: int64) -&gt; String</code>: Get a substring of a string.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>read(this: File) -&gt; string</code>: Read the entire content of the file.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>open(path: string) -&gt; File</code>: Open a file for reading and writing.</li>
 </ul>
-<h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
+<blockquote>
+<p>Does the same shit as “read()” but it makes more sense to open once then use <code>read()</code> later if the file got updated</p>
+</blockquote>
 <ul>
-<li><input disabled="" type="checkbox"> <code>+</code>: Concatenate two strings.</li>
-<li><input disabled="" type="checkbox"> <code>[]</code>: Get a character from a string by index.</li>
-<li><input disabled="" type="checkbox"> <code>[]=</code>: Set a character in a string by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>close(this: File) -&gt; unit</code>: Close the file.</li>
 </ul>
-<h2 id="stdlist"><a class="header" href="#stdlist"><code>std::list</code></a></h2>
+<blockquote>
+<p>NB: This is called automatically in the destructor, BUT because of the current state of the memory, you might wanna do it manually just to be sure.</p>
+</blockquote>
 <ul>
-<li><input disabled="" type="checkbox"> <code>len&lt;T&gt;(lst: [T]) -&gt; uint64</code>: Get the length of a list.</li>
-<li><input disabled="" type="checkbox"> <code>push&lt;T&gt;(lst: [T], val: T) -&gt; unit</code>: Add an element to the end of a list.</li>
-<li><input disabled="" type="checkbox"> <code>pop&lt;T&gt;(lst: [T]) -&gt; T</code>: Remove and return the last element of a list.</li>
-<li><input disabled="" type="checkbox"> <code>slice&lt;T&gt;(lst: [T], start: uint64, end: uint64) -&gt; [T]</code>: Get a slice of a list.</li>
-<li><input disabled="" type="checkbox"> <code>remove&lt;T&gt;(lst: [T], index: uint64) -&gt; T</code>: Remove and return an element from a list by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>exists(this: File) -&gt; bool</code>: Check if the file exists.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>read_dir(this: File) -&gt; [string]</code>: Read the contents of a directory.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>read_file(this: File) -&gt; string</code>: Read the entire content of the file and returns it to you. It does not set <code>File.content</code> to the content of the file.</li>
 </ul>
-<h2 id="stdvector"><a class="header" href="#stdvector"><code>std::vector</code></a></h2>
+<h3 id="functions"><a class="header" href="#functions">Functions</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>Vec&lt;T&gt;</code>: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>read_dir(path: string) -&gt; [string]</code>: Read the contents of a directory.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>read_file(path: string) -&gt; string</code>: Read the entire content of a file.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>write_file(path: string, content: string) -&gt; unit</code>: Write content to a file.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>remove_file(path: string) -&gt; unit</code>: Remove a file.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>file_exists(path: string) -&gt; bool</code>: Check if a file exists.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>close_file(path: string) -&gt; unit</code>: Close a file.</li>
 </ul>
-<h3 id="implements-1"><a class="header" href="#implements-1">Implements</a></h3>
+<h2 id="stdstring"><a class="header" href="#stdstring"><code>std/string</code></a></h2>
+<h3 id="structs-1"><a class="header" href="#structs-1">Structs</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>Indexable&lt;T&gt;</code>: A trait that defines the <code>get</code> and <code>set</code> methods.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>String</code>: A string type that can be used to manipulate strings.</li>
 </ul>
-<h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
+<pre><code>struct String {
+    s: string;
+    len: uint64;
+    String(s: string) {
+        self.s = s;
+        self.len = str_len(s);
+    }
+}
+</code></pre>
+<h4 id="methods-1"><a class="header" href="#methods-1">Methods</a></h4>
 <ul>
-<li><input disabled="" type="checkbox"> <code>Vec(data: [T]) -&gt; Vec&lt;T&gt;</code>: Create a new vector from a list.</li>
-<li><input disabled="" type="checkbox"> <code>len() -&gt; uint64</code>: Get the length of the vector.</li>
-<li><input disabled="" type="checkbox"> <code>is_empty() -&gt; bool</code>: Check if the vector is empty.</li>
-<li><input disabled="" type="checkbox"> <code>push(val: T) -&gt; unit</code>: Add an element to the end of the vector.</li>
-<li><input disabled="" type="checkbox"> <code>pop() -&gt; T</code>: Remove and return the last element of the vector.</li>
-<li><input disabled="" type="checkbox"> <code>get(index: uint64) -&gt; T</code>: Get an element from the vector by index.</li>
-<li><input disabled="" type="checkbox"> <code>set(index: uint64, val: T) -&gt; unit</code>: Set an element in the vector by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>String::from_chars(chars: [char]) -&gt; String</code>: Create a new <code>String</code> struct from a list of characters.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>String::str_len(s: string) -&gt; uint64</code>: Get the length of a string primitive.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>len(this: String) -&gt; uint64</code>: Get the length of the String.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>is_empty(this: String) -&gt; bool</code>: Check if the String is empty.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>concat(this: String, other: String) -&gt; String</code>: Concatenate two Strings.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>push(this: String, c: char) -&gt; unit</code>: Add a character to the end of the String.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>push_str(this: String, s: String) -&gt; unit</code>: Add a String to the end of the String.</li>
+<li><input disabled="" type="checkbox"> <code>find(this: String, sub_string: String) -&gt; Option&lt;uint64&gt;</code>: Find the index of a substring in the String.</li>
 </ul>
-<h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
+<blockquote>
+<p>Not stable yet. BEWARE.</p>
+</blockquote>
 <ul>
-<li><input disabled="" type="checkbox"> <code>[]</code>: Get an element from the vector by index.</li>
-<li><input disabled="" type="checkbox"> <code>[]=</code>: Set an element in the vector by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>get(this: String, index: uint64) -&gt; char</code>: Get a character from the String by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>set(this: String, index: uint64, c: char) -&gt; unit</code>: Set a character in the String by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_str(this: String) -&gt; string</code>: Convert the String struct to a string primitive.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_chars(this: String) -&gt; [char]</code>: Convert the String struct to a list of characters.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_upper(this: String) -&gt; String</code>: Convert the String to uppercase.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_lower(this: String) -&gt; String</code>: Convert the String to lowercase</li>
+<li><input disabled="" type="checkbox" checked=""> <code>trim(this: String) -&gt; String</code>: Trim whitespace from both ends of the String.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>split(this: String, sep: string) -&gt; [String]</code>: Split the String by a separator.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>into_iter(this: String) -&gt; Iter&lt;char&gt;</code>: Create an iterator (from <code>std/iter</code>) over the characters of the String.</li>
 </ul>
-<h2 id="stdtime"><a class="header" href="#stdtime"><code>std::time</code></a></h2>
+<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
 <ul>
-<li>
-<p><input disabled="" type="checkbox"> <code>Time</code>: A time type that can be used to represent time.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>now() -&gt; Time</code>: Get the current time.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>format(t: Time, fmt: str) -&gt; str</code>: Format a time value as a string.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>sleep(ms: uint64) -&gt; unit</code>: Sleep for the specified number of milliseconds.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>sleep_us(us: uint64) -&gt; unit</code>: Sleep for the specified number of microseconds.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>sleep_ns(ns: uint64) -&gt; unit</code>: Sleep for the specified number of nanoseconds.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>elapsed(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in milliseconds.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>elapsed_us(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in microseconds.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>elapsed_ns(start: Time, end: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in nanoseconds.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>parse(s: str, fmt: str) -&gt; Time</code>: Parse a string into a time value.</p>
-</li>
-<li>
-<p><input disabled="" type="checkbox"> <code>add(t: Time, ms: uint64) -&gt; Time</code>: Add milliseconds to a time value.</p>
-</li>
+<li><input disabled="" type="checkbox" checked=""> <code>str_len(s: string) -&gt; uint64</code>: Get the length of a string primitive.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>trim(s: string) -&gt; string</code>: Trim whitespace from both ends of a string.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_upper(s: string) -&gt; string</code>: Convert a string to uppercase.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_lower(s: string) -&gt; string</code>: Convert a string to lowercase.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>split(s: string, sep: string) -&gt; [string]</code>: Split a string by a separator.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>str_cmp(s1: string, s2: string) -&gt; uint64</code>: Compare two strings.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_chars(s: string) -&gt; [char]</code>: Convert a string to a list of characters.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>from_chars(s: [char]) -&gt; string</code>: Convert a list of characters to a string.</li>
 </ul>
-<h2 id="stdmath"><a class="header" href="#stdmath"><code>std::math</code></a></h2>
+<h2 id="stdvector"><a class="header" href="#stdvector"><code>std/vector</code></a></h2>
+<h3 id="structs-2"><a class="header" href="#structs-2">Structs</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>Vector&lt;T&gt;</code>: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.</li>
+</ul>
+<pre><code>struct Vector&lt;T&gt; {
+private:
+    data: [T];
+public:
+    length: uint64;
+    capacity: uint64;
+    Vector(data: [T]) {
+        this.length = len(data);
+        this.capacity = this.length;
+        this.data = data;
+    }
+}
+</code></pre>
+<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>len(this: Vector&lt;T&gt;) -&gt; uint64</code>: Get the length of the vector.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>is_empty(this: Vector&lt;T&gt;) -&gt; bool</code>: Check if the vector is empty.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>push(this: Vector&lt;T&gt;, val: T) -&gt; unit</code>: Add an element to the end of the vector.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>pop(this: Vector&lt;T&gt;) -&gt; T</code>: Remove and return the last element of the vector.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>get(this: Vector&lt;T&gt;, index: uint64) -&gt; T</code>: Get an element from the vector by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>set(this: Vector&lt;T&gt;, index: uint64, val: T) -&gt; unit</code>: Set an element in the vector by index.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>into_iter(this: Vector&lt;T&gt;) -&gt; Iter&lt;T&gt;</code>: Create an iterator (from <code>std/iter</code>) over the elements of the vector.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Vector::&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code>: Create a new vector with a specified capacity.</li>
+</ul>
+<h3 id="functions-2"><a class="header" href="#functions-2">Functions</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>len&lt;T&gt;(lst: [T]) -&gt; uint64</code>: Get the length of a list.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>slice&lt;T&gt;(lst: [T], start: uint64, end: uint64) -&gt; [T]</code>: Get a slice of a list from start to end.</li>
+</ul>
+<h2 id="stdtime"><a class="header" href="#stdtime"><code>std/time</code></a></h2>
+<h3 id="structs-3"><a class="header" href="#structs-3">Structs</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>Time</code>: A time type that can be used to represent time.</li>
+</ul>
+<pre><code>struct Time {
+public:
+    sec: int64;
+    nsec: int64;
+    Time(sec: int64, nsec: int64) {
+        this.sec = sec;
+        this.nsec = nsec;
+    }
+}
+</code></pre>
+<h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>Time::now() -&gt; Time</code>: Get the current time.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>format(this: Time, fmt: str) -&gt; str</code>: Format the time as a string.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>to_iso_string(this: Time) -&gt; str</code>: Convert the time to an ISO 8601 string.</li>
+</ul>
+<blockquote>
+<p>Yeah well, I don’t know why this function exists, but who knows, maybe it will be useful one day.</p>
+</blockquote>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>sleep(this: Time) -&gt; unit</code>: Sleep for the specified time.</li>
+</ul>
+<blockquote>
+<p>NB: This is a blocking sleep. Might not work. BEWARE.</p>
+</blockquote>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>elapsed(this: Time, since: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in milliseconds.</li>
+</ul>
+<h3 id="functions-3"><a class="header" href="#functions-3">Functions</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>now() -&gt; Time</code>: Get the current time.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>sleep(t: Time) -&gt; unit</code>: Sleep for the specified time.</li>
+</ul>
+<blockquote>
+<p>NB: This is a blocking sleep. Might not work. BEWARE.</p>
+</blockquote>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>format_time(t: Time, fmt: str) -&gt; str</code>: Format the time as a string.</li>
+</ul>
+<h2 id="stdmath"><a class="header" href="#stdmath"><code>std/math</code></a></h2>
+<h3 id="functions-4"><a class="header" href="#functions-4">Functions</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>abs(x: int64) -&gt; int64</code>: Compute the absolute value of a integer number.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>abs_f(x: float64) -&gt; float64</code>: Compute the absolute value of a floating-point number.</li>
@@ -350,29 +404,143 @@ Most of the modules aren’t implement or finished yet. The documentation is her
 <li><input disabled="" type="checkbox" checked=""> <code>max(x: int64, y: int64) -&gt; int64</code>: Compute the maximum of two integer numbers.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>max_f(x: float64, y: float64) -&gt; float64</code>: Compute the maximum of two floating-point numbers.</li>
 </ul>
-<h2 id="stdoption"><a class="header" href="#stdoption"><code>std::option</code></a></h2>
+<h2 id="stdoption"><a class="header" href="#stdoption"><code>std/option</code></a></h2>
+<h3 id="structs-4"><a class="header" href="#structs-4">Structs</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>Option&lt;T&gt;</code>: A type that represents an optional value, which can either be <code>Some(T)</code> or <code>None</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Option&lt;T&gt;</code>: A type that represents an optional value, which can either be <code>SOME</code> or <code>NONE</code>.</li>
 </ul>
-<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
+<pre><code>private enum OptionTag {
+	NONE = 0;
+	SOME = 256;
+}
+
+struct Option&lt;T&gt; {
+private:
+  	tag: OptionTag;
+  	data: T;
+  	Option(data: T, tag: OptionTag) {
+		this.tag = tag;
+		this.data = data;
+	}
+}
+</code></pre>
+<h3 id="methods-4"><a class="header" href="#methods-4">Methods</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>is_some() -&gt; bool</code>: Check if the option is <code>Some</code>.</li>
-<li><input disabled="" type="checkbox"> <code>is_none() -&gt; bool</code>: Check if the option is <code>None</code>.</li>
-<li><input disabled="" type="checkbox"> <code>unwrap() -&gt; T</code>: Get the value inside the option if it is <code>Some</code>, otherwise panic.</li>
-<li><input disabled="" type="checkbox"> <code>unwrap_or(default: T) -&gt; T</code>: Get the value inside the option if it is <code>Some</code>, otherwise return the default value.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>is_some(this: Option&lt;T&gt;) -&gt; bool</code>: Check if the option is <code>SOME</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>is_none(this: Option&lt;T&gt;) -&gt; bool</code>: Check if the option is <code>NONE</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>unwrap(this: Option&lt;T&gt;) -&gt; T</code>: Get the value inside the option if it is <code>SOME</code>, otherwise panic.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>unwrap_or(this: Option&lt;T&gt;, default: T) -&gt; T</code>: Get the value inside the option if it is <code>SOME</code>, otherwise return the default value.</li>
+<li><input disabled="" type="checkbox"> <code>map&lt;U&gt;(this: Option&lt;T&gt;, f: (T) -&gt; U) -&gt; Option&lt;U&gt;</code>: Apply a function to the value inside the option if it is <code>SOME</code>, otherwise return <code>NONE</code>.</li>
 </ul>
-<h2 id="stdresult"><a class="header" href="#stdresult"><code>std::result</code></a></h2>
+<blockquote>
+<p>Don’t exist yet.</p>
+</blockquote>
+<h2 id="stdresult"><a class="header" href="#stdresult"><code>std/result</code></a></h2>
+<h3 id="structs-5"><a class="header" href="#structs-5">Structs</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>Result&lt;T, E&gt;</code>: A type that represents either a success (<code>Ok(T)</code>) or an error (<code>Err(E)</code>).</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Result&lt;T, E&gt;</code>: A type that represents either a success <code>OK</code> carrying the type <code>T</code> or an error <code>ERR</code> carrying the type <code>E</code>.</li>
 </ul>
-<h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
+<pre><code>private enum ResultTag {
+    OK = 0;
+    ERR = 256;
+}
+
+struct Result&lt;T, E&gt; {
+private:
+    data: T;
+    err: E;
+    tag: ResultTag;
+    Result(data: T, err: E, tag: ResultTag) {
+        this.data = data;
+        this.err = err;
+        this.tag = tag;
+    }
+}
+</code></pre>
+<h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> <code>is_ok() -&gt; bool</code>: Check if the result is <code>Ok</code>.</li>
-<li><input disabled="" type="checkbox"> <code>is_err() -&gt; bool</code>: Check if the result is <code>Err</code>.</li>
-<li><input disabled="" type="checkbox"> <code>unwrap() -&gt; T</code>: Get the value inside the result if it is <code>Ok</code>, otherwise panic.</li>
-<li><input disabled="" type="checkbox"> <code>unwrap_err() -&gt; E</code>: Get the error inside the result if it is <code>Err</code>, otherwise panic.</li>
-<li><input disabled="" type="checkbox"> <code>unwrap_or(default: T) -&gt; T</code>: Get the value inside the result if it is <code>Ok</code>, otherwise return the default value.</li>
-<li><input disabled="" type="checkbox"> <code>unwrap_err_or(default: E) -&gt; E</code>: Get the error inside the result if it is <code>Err</code>, otherwise return the default error.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Result::&lt;T, E&gt;::ok(value: T) -&gt; Result&lt;T, E&gt;</code>: Create a new <code>OK</code> result.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Result::&lt;T, E&gt;::err(error: E) -&gt; Result&lt;T, E&gt;</code>: Create a new <code>ERR</code> result.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>is_ok(this: Result&lt;T, E&gt;) -&gt; bool</code>: Check if the result is <code>OK</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>is_err(this: Result&lt;T, E&gt;) -&gt; bool</code>: Check if the result is <code>ERR</code>.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>unwrap(this: Result&lt;T, E&gt;) -&gt; T</code>: Get the value inside the result if it is <code>OK</code>, otherwise panic.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>unwrap_err(this: Result&lt;T, E&gt;) -&gt; E</code>: Get the error inside the result if it is <code>ERR</code>, otherwise panic.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>unwrap_or(this: Result&lt;T, E&gt;, default: T) -&gt; T</code>: Get the value inside the result if it is <code>OK</code>, otherwise return the default value.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>unwrap_err_or(this: Result&lt;T, E&gt;, default: E) -&gt; E</code>: Get the error inside the result if it is <code>ERR</code>, otherwise return the default error.</li>
+<li><input disabled="" type="checkbox"> <code>map&lt;U&gt;(this: Result&lt;T, E&gt;, f: (T) -&gt; U) -&gt; Result&lt;U, E&gt;</code>: Apply a function to the value inside the result if it is <code>OK</code>, otherwise return the <code>ERR</code>.</li>
+</ul>
+<blockquote>
+<p>Don’t exist yet.</p>
+</blockquote>
+<ul>
+<li><input disabled="" type="checkbox"> <code>map_err&lt;F&gt;(this: Result&lt;T, E&gt;, f: (E) -&gt; F) -&gt; Result&lt;T, F&gt;</code>: Apply a function to the error inside the result if it is <code>ERR</code>, otherwise return the <code>OK</code>.</li>
+</ul>
+<blockquote>
+<p>Don’t exist yet.</p>
+</blockquote>
+<h2 id="stdbox"><a class="header" href="#stdbox"><code>std/box</code></a></h2>
+<h3 id="structs-6"><a class="header" href="#structs-6">Structs</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>Box&lt;T&gt;</code>: A type that represents a heap-allocated value of type <code>T</code>.</li>
+</ul>
+<pre><code>struct Box&lt;T&gt; {
+private:
+    data: T;
+public:
+    Box(data: T) {
+        this.data = data;
+    }
+}
+</code></pre>
+<h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>get(this: Box&lt;T&gt;) -&gt; T</code>: Get the value inside the box.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>set(this: Box&lt;T&gt;, value: T) -&gt; unit</code>: Set the value inside the box.</li>
+</ul>
+<h2 id="stditer"><a class="header" href="#stditer"><code>std/iter</code></a></h2>
+<h3 id="structs-7"><a class="header" href="#structs-7">Structs</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>Iter&lt;T&gt;</code>: An iterator type that can be used to iterate over a collection of type <code>T</code>. (as of now it only iters over a <code>Vector&lt;T&gt;</code>.)</li>
+</ul>
+<pre><code>struct Iter&lt;T&gt; {
+private:
+    data: Vector&lt;T&gt;;
+    index: uint64;
+public:
+    Iter(data: Vector&lt;T&gt;) {
+        this.data = data;
+        this.index = 0_uint64;
+    }
+}
+</code></pre>
+<h3 id="methods-7"><a class="header" href="#methods-7">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>next(this: Iter&lt;T&gt;) -&gt; Option&lt;T&gt;</code>: Get the next element in the iterator.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>peek(this: Iter&lt;T&gt;) -&gt; Option&lt;&amp;const T&gt;</code>: Peek at the next element in the iterator without advancing it.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code>: Create a new iterator from an array.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_string(data: string) -&gt; Iter&lt;char&gt;</code>: Create a new iterator from a primitive string.</li>
+</ul>
+<h2 id="stdmap"><a class="header" href="#stdmap"><code>std/map</code></a></h2>
+<h3 id="structs-8"><a class="header" href="#structs-8">Structs</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>Map&lt;K, V&gt;</code>: A type that represents a key-value store.</li>
+</ul>
+<pre><code>struct Map&lt;K, V&gt; {
+private:
+    keys: Vector&lt;K&gt;;
+    values: Vector&lt;V&gt;;
+public:
+    Map() {
+        this.keys = new Vector&lt;K&gt;(new [K; 0]);
+        this.values = new Vector&lt;V&gt;(new [V; 0]);
+    }
+}
+</code></pre>
+<h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
+<ul>
+<li><input disabled="" type="checkbox" checked=""> <code>insert(this: Map&lt;K, V&gt;, key: K, value: V) -&gt; unit</code>: Insert a key-value pair into the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>get(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Get the value associated with a key.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>remove(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Remove a key-value pair from the map.</li>
 </ul>
 
                     </main>

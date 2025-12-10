@@ -5,7 +5,7 @@ language = "en"
 src = "./src"
 
 [build]
-build-dir = "../../docs/docs/latest"
+build-dir = "../../../docs/docs/latest"
 
 [output.html]
 git-repository-url = "https://github.com/atlas77-lang/Atlas77"
