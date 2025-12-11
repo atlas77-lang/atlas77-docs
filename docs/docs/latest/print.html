@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4d90fe75.js";
+            window.path_to_searchindex_js = "searchindex-087741d2.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-2a46b18d.js"></script>
+        <script src="toc-50da4d0a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -204,64 +204,62 @@ I hope to be able to use it for future projects. Don’t expect it to be product
 <li>It should work 😁</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<blockquote>
-<p>NB: This is a work in progress document. The syntax is subject to change.</p>
-</blockquote>
-<h1 id="current-syntax-of-atlas77"><a class="header" href="#current-syntax-of-atlas77">Current Syntax of Atlas77</a></h1>
-<h2 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h2>
-<p>Atlas77 is a simple, easy-to-use, and powerful programming language. It is designed to be easy to learn and use, while
-still being powerful enough to handle complex tasks. This document describes the syntax of Atlas77, including the rules
-for writing code in the language (WIP).</p>
-<h2 id="2-hello-world"><a class="header" href="#2-hello-world">2. Hello, World!</a></h2>
-<p>Here is a simple “Hello, World!” program written in Atlas77:</p>
-<pre><code class="language-cpp">import "std/io"
+<h1 id="getting-started-with-atlas-77"><a class="header" href="#getting-started-with-atlas-77">Getting Started with Atlas 77</a></h1>
+<p>Welcome to Atlas 77! This guide will help you install the language and write your first program.</p>
+<h2 id="your-first-program"><a class="header" href="#your-first-program">Your First Program</a></h2>
+<p>Here is a simple “Hello, Atlas!” program:</p>
+<pre><code class="language-cpp">import "std/io";
 
-func main() -&gt; int64 {
-    print("Hello, World!")
+fun main() {
+    println("Hello, Atlas!");
 }
 </code></pre>
-<blockquote>
-<p>Do know that strings are not implemented yet, so this is just an example of how it will look like</p>
-</blockquote>
-<p>Save this code to a <code>.atlas</code> file, then run it directly with <code>atlas run &lt;FILE_PATH&gt;</code></p>
-<h2 id="3-comments"><a class="header" href="#3-comments">3. Comments</a></h2>
-<p>Comments in Atlas77 are similar to comments in other programming languages. There are two types of comments: single-line
-comments and multi-line comments.</p>
-<h1 id="31-single-line-comments"><a class="header" href="#31-single-line-comments">3.1. Single-line Comments</a></h1>
-<p>Single-line comments start with <code>//</code> and continue until the end of the line. For example:</p>
-<pre><code class="language-rs">// This is a single-line comment
-
-let x: i64 = 5; // This is also a single-line comment
+<p>Save this code to a <code>.atlas</code> file, then run it with:</p>
+<pre><code class="language-bash">atlas_77 run &lt;FILE_PATH&gt;
 </code></pre>
-<h1 id="32-multi-line-comments"><a class="header" href="#32-multi-line-comments">3.2. Multi-line Comments</a></h1>
-<p>Multi-line comments start with <code>/*</code> and end with <code>*/</code>. For example:</p>
-<blockquote>
-<p>NB: Multi-line comments aren’t supported yet (you’ll see a lot of WIPs in this document)</p>
-</blockquote>
-<pre><code class="language-rs">/*
-This is a multi-line comment.
-    /*
-        NOTE: Multi-line comments can be nested.
-    */
-
-It can span multiple lines.
-*/
+<p>For example:</p>
+<pre><code class="language-bash">atlas_77 run hello.atlas
+</code></pre>
+<h2 id="creating-a-project"><a class="header" href="#creating-a-project">Creating a Project</a></h2>
+<p>To create a new Atlas 77 project with standard structure:</p>
+<pre><code class="language-bash">atlas_77 init my_project
+cd my_project
+atlas_77 run
+</code></pre>
+<p>This creates a basic project template with all necessary files.</p>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li>Read <a href="#hello-world">Hello, World!</a> for a detailed walkthrough</li>
+<li>Explore <a href="#language-reference">Language Reference</a> for complete syntax documentation</li>
+<li>Try <a href="#programming-a-guessing-game-in-atlas77">Guessing Game</a> for a practical example</li>
+<li>Check <a href="#memory-model">Memory Model</a> to understand ownership and cleanup</li>
+<li>Browse <a href="#standard-library">Standard Library</a> for available modules and functions</li>
+</ul>
+<h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<p>Comments document code and are ignored by the compiler.</p>
+<h3 id="single-line-comments"><a class="header" href="#single-line-comments">Single-line Comments</a></h3>
+<p>Single-line comments start with <code>//</code> and continue to the end of the line:</p>
+<pre><code class="language-cpp">// This is a comment
+let x: int64 = 42;  // Comments can appear at the end of lines too
 </code></pre>
 <blockquote>
-<p>Comments are parsed as tokens by the compiler, to allow future documentation features.</p>
+<p><strong>Note:</strong> Multi-line comments are not yet implemented.</p>
+</blockquote>
+<blockquote>
+<p>In the future I’ll add support for documentation comments, though the syntax is not yet decided.</p>
 </blockquote>
 <h2 id="4-variables"><a class="header" href="#4-variables">4. Variables</a></h2>
 <p>Variables in Atlas77 are either mutable or immutable. The design follows in some sense TypeScript/JavaScript, with the
 <code>const</code> &amp; <code>let</code> keywords. Variables can be declared using the <code>let</code> keyword, which creates a mutable variable, or the
 <code>const</code> keyword, which creates an immutable variable.</p>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func main() -&gt; int64 {
-    let x: i64 = 5;
+fun main() -&gt; int64 {
+    let x: int64 = 5;
     x = 10;
     print(x); // Output: 10
 
-    const y: i64 = 5;
+    const y: int64 = 5;
     y = 10; // Error: Cannot assign to a constant variable
 }
 </code></pre>
@@ -274,52 +272,35 @@ following table lists the built-in data types in Atlas77:</p>
 <tr><th>Data Type</th><th>Description</th><th>State</th></tr>
 </thead>
 <tbody>
-<tr><td><code>i8</code></td><td>8-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>i16</code></td><td>16-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>i32</code></td><td>32-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>i64</code></td><td>64-bit signed integer</td><td>✅</td></tr>
+<tr><td><code>int8</code></td><td>8-bit signed integer</td><td>💤</td></tr>
+<tr><td><code>int16</code></td><td>16-bit signed integer</td><td>💤</td></tr>
+<tr><td><code>int32</code></td><td>32-bit signed integer</td><td>💤</td></tr>
+<tr><td><code>int64</code></td><td>64-bit signed integer</td><td>✅</td></tr>
 <tr><td><code>isize</code></td><td>Platform-dependent signed integer</td><td>💤</td></tr>
-<tr><td><code>u8</code></td><td>8-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>u16</code></td><td>16-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>u32</code></td><td>32-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>u64</code></td><td>64-bit unsigned integer</td><td>✅</td></tr>
+<tr><td><code>uint8</code></td><td>8-bit unsigned integer</td><td>💤</td></tr>
+<tr><td><code>uint16</code></td><td>16-bit unsigned integer</td><td>💤</td></tr>
+<tr><td><code>uint32</code></td><td>32-bit unsigned integer</td><td>💤</td></tr>
+<tr><td><code>uint64</code></td><td>64-bit unsigned integer</td><td>✅</td></tr>
 <tr><td><code>usize</code></td><td>Platform-dependent unsigned integer</td><td>💤</td></tr>
-<tr><td><code>f32</code></td><td>32-bit floating-point number</td><td>💤</td></tr>
-<tr><td><code>f64</code></td><td>64-bit floating-point number</td><td>✅</td></tr>
+<tr><td><code>float32</code></td><td>32-bit floating-point number</td><td>💤</td></tr>
+<tr><td><code>float64</code></td><td>64-bit floating-point number</td><td>✅</td></tr>
 <tr><td><code>bool</code></td><td>Boolean value (<code>true</code> or <code>false</code>)</td><td>✅</td></tr>
-<tr><td><code>char</code></td><td>Unicode character</td><td>💭</td></tr>
-<tr><td><code>str</code></td><td>String</td><td>💭</td></tr>
+<tr><td><code>char</code></td><td>Unicode character</td><td>✅</td></tr>
+<tr><td><code>string</code></td><td>String</td><td>✅</td></tr>
 <tr><td><code>array</code></td><td>Array (syntax: <code>[YourType]</code>)</td><td>💭</td></tr>
 </tbody>
 </table>
 </div>
-<blockquote>
-<p>Note: The <code>str</code> and <code>array</code> types will be mutable and resizable.
-More powerful types for both Strings and Arrays will be implemented in the future (e.g., <code>Vec&lt;YourType&gt;</code> for arrays &amp;
-<code>String</code>).</p>
-</blockquote>
-<blockquote>
-<p>NB: The <code>char</code> type is not implemented yet, but it will be a 32-bit Unicode character.</p>
-</blockquote>
-<blockquote>
-<p>NB 2: Since this is a VM-based language,
-all numeric types smaller than 64 bits (e.g., u8, u16, u32)
-are internally represented as 64-bit values for simplicity and consistency.
-However, they will behave as their original types, respecting their size and overflow semantics.
-In the future, packed types may be introduced to optimize memory usage for arrays
-(e.g., <code>[u8]</code> could be represented as <code>[u8x8]</code>, <code>[u16]</code> as <code>[u16x4]</code>, etc.).
-At present, the minimum memory size for numeric types is 8 bytes.</p>
-</blockquote>
 <h2 id="6-functions"><a class="header" href="#6-functions">6. Functions</a></h2>
 <p>Functions in Atlas77 are defined using the <code>func</code> keyword, followed by the function name, parameters, return type, and
 body. The return type of a function is specified after the <code>-&gt;</code> symbol. For example:</p>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func add(x: int64, y: int64) -&gt; int64{
+fun add(x: int64, y: int64) -&gt; int64{
     return x + y;
 }
 
-func main() -&gt; int64 {
+fun main() -&gt; int64 {
     let result: int64 = add(5, 10);
     print(result); // Output: 15
 }
@@ -340,25 +321,21 @@ loops. The syntax for these control structures is similar to other programming l
 </tbody>
 </table>
 </div>
-<blockquote>
-<p>Note: Nested if-else (i.e. <code>if {} else if {} else {}</code>) isn’t supported yet.</p>
-</blockquote>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func main() -&gt; int64 {
-    let x: int64 = 5;
+fun main() -&gt; int64 {
+    let x = 5;
 
     if x &gt; 0 {
         print("x is positive");
+    } else if x &lt; 0 {
+        print("x is negative");
     } else {
-        if x &lt; 0 {
-            print("x is negative");
-        } else {
-            print("x is zero");
-        }
+        print("x is zero");
     }
+    
 
-    let i: i64 = 0;
+    let i = 0;
     while i &lt; 5 {
         print(i);
         i += 1;
@@ -369,101 +346,136 @@ func main() -&gt; int64 {
 <p>Atlas77 comes with a relatively small standard library, which includes functions &amp; types for input/output, file
 handling, string &amp; list manipulation, time &amp; math functions. The standard library is imported using the <code>import</code>
 keyword, followed by the library name. For example:</p>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func main() {
-    print("Hello, World!");
+fun main() {
+    println("Hello, World!");
 }
 </code></pre>
-<p>As of writing this document, the following standard libraries are available:</p>
-<ul>
-<li><code>std/io</code>: Input/output functions
-<ul>
-<li><code>print_int(i: i64)</code>: Print an integer to the console</li>
-<li><code>print_float(f: f64)</code>: Print a floating-point number to the console</li>
-<li><code>print_uint(u: u64)</code>: Print an unsigned integer to the console</li>
-<li><code>print_bool(b: bool)</code>: Print a boolean value to the console</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Yes it is very limited, but tbh <code>str</code>, <code>array</code> &amp; structs are still not implemented,
-so it’s a bit hard to implement more complex functions.</p>
-</blockquote>
-<h2 id="9-arrays"><a class="header" href="#9-arrays">9 Arrays</a></h2>
+<p>Check out the current state of the <a href="#standard-library">standard library</a>.</p>
+<h2 id="9-arrays"><a class="header" href="#9-arrays">9. Arrays</a></h2>
+<p>Arrays in Atlas77 are used to store multiple values of the same type. They are defined using square brackets <code>[]</code>. For example:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() -&gt; int64 {
+    let numbers: [int64] = [1, 2, 3, 4, 5];
+    let i = 0;
+    while i &lt; 5 {
+        print(numbers[i]);
+        i += 1;
+    }
+}
+</code></pre>
+<p>If you want, you can also allocate an empty array with a specific size:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() -&gt; int64 {
+    let size: int64 = 5;
+    // Allocates an array of 5 int64s initialized to 0
+    let numbers: [int64] = new [int64; size];
+    let i = 0;
+    while i &lt; size {
+        numbers[i] = i * 2; // Assign values
+        print(numbers[i]);
+        i += 1;
+    }
+}
+</code></pre>
 <h2 id="10-enums"><a class="header" href="#10-enums">10. Enums</a></h2>
-<blockquote>
-<p>WIP</p>
-</blockquote>
-<p>Example:</p>
+<p>Enums in Atlas77 are used to define a type that can have a set of named values. They are defined using the <code>enum</code> keyword. For example:</p>
 <pre><code class="language-cpp">public enum Color {
-    Red = 1,
-    Yellow,
-    Green = 3,
-    Purple,
-    Blue = 5,
+    Red = 1;
+    Yellow;
+    Green = 3;
+    Purple;
+    Blue = 5;
 }
 </code></pre>
 <h2 id="11-class--structs"><a class="header" href="#11-class--structs">11. Class &amp; Structs</a></h2>
 <blockquote>
 <p>WIP</p>
 </blockquote>
-<p>Current state of <code>std/fs</code>:</p>
-<pre><code class="language-cpp">extern read_dir(path: str) -&gt; [str]
-extern read_file(path: str) -&gt; str
-extern write_file(path: str, content: str)
-extern remove_file(path: str)
-extern file_exists(path: str) -&gt; bool
+<p>Current state of <code>std/fs</code> would be a good enough example of how classes/structs work in Atlas77:</p>
+<pre><code class="language-cpp">private extern read_dir(path: string) -&gt; [string];
+private extern read_file(path: string) -&gt; string;
+private extern write_file(path: string, content: string);
+private extern remove_file(path: string);
+private extern file_exists(path: string) -&gt; bool;
+private extern close_file(path: string);
 
-public class File {
-    private:
-        flag: i64;
-        content: str;
-        path: str;
-    public:
-        func create() -&gt; File {
-            return new File {
-                flag: 0,
-                content: None,
-                path: "",
-            };
-        }
-        func read(path: str) -&gt; File {
-            let file: Self = File::create();
-            file.path = path;
-            file.content = Some(read_file(path));
-            return file;
-        }
-        func write(&amp;self, content: str) {
-            write_file(self.path, content);
-        }
-        func remove(&amp;self) {
-            remove_file(self.path);
-        }
-        func exists(&amp;self) -&gt; bool {
-            return file_exists(self.path);
-        }
-        func read_dir(path: str) -&gt; [str] {
-            return read_dir(path);
-        }
-        func read_file(path: str) -&gt; str {
-            return read_file(path);
-        }
+//NB: This struct works for now, but because of the lack of move/copy semantics in Atlas,
+// it may lead to unexpected behavior.
+public struct File {
+private:
+    content: string;
+public:
+    path: string;
+public:
+    /// Creates a new File object with the given path
+    /// Note: The file is not opened until the open() method is called
+    File(path: string) {
+        this.content = "";
+        this.path = path;
+    }
+
+    ~File() {
+        //Following the RAII pattern, we close the file when it goes out of scope
+        this.close();
+    }
+
+    fun read(this) -&gt; string {
+        let content = read_file(this.path);
+        this.content = content;
+        return this.content;
+    }
+
+    fun open(this) {
+        this.content = read_file(this.path);
+        return;
+    }
+
+    fun close(this) {
+        close_file(this.path);
+        return;
+    }
+
+    fun write(this, content: string) {
+        write_file(this.path, content);
+        return;
+    }
+
+    fun remove(this) {
+        remove_file(this.path);
+        return;
+    }
+
+    fun exists(this) -&gt; bool {
+        return file_exists(this.path);
+    }
+
+    fun read_dir(this, path: string) -&gt; [string] {
+        return read_dir(path);
+    }
+
+    fun read_file(this, path: string) -&gt; string {
+        return read_file(path);
+    }
 }
 </code></pre>
 <h2 id="12-generics"><a class="header" href="#12-generics">12. Generics</a></h2>
-<p>As of now generics are only implemented for external functions.</p>
-<h3 id="example"><a class="header" href="#example">Example:</a></h3>
-<pre><code class="language-ts">extern generic_func&lt;T&gt;(val: T) -&gt; T
-extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
+<p>As of now you can define generic for external functions &amp; structs. For example:</p>
+<pre><code class="language-cpp">extern identity&lt;T&gt;(value: T) -&gt; T;
+struct Box&lt;T&gt; {
+    value: T;
+    Box(value: T) {
+        self.value = value;
+    }
+    fun get_value(this) -&gt; T {
+        return this.value;
+    }
+}
 </code></pre>
-<blockquote>
-<p>[!NOTE] You can’t return a generic that is not used in any parameter. Type inference is not implemented yet.</p>
-</blockquote>
-<blockquote>
-<p>WIP</p>
-</blockquote>
-<h2 id="13-traits"><a class="header" href="#13-traits">13. Traits</a></h2>
+<h2 id="13-concepts"><a class="header" href="#13-concepts">13. Concepts</a></h2>
 <blockquote>
 <p>The name is still to be decided</p>
 </blockquote>
@@ -522,45 +534,899 @@ cd guessing_game
 <p>Then open the <code>src/main.atlas</code> file in your favorite text editor.</p>
 <h2 id="writing-the-game-code"><a class="header" href="#writing-the-game-code">Writing the Game Code</a></h2>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="example-1"><a href="#example-1" class="header">Example</a></h1>
-<p>List of all of the keywords in the language:</p>
+<h1 id="language-reference"><a class="header" href="#language-reference">Language Reference</a></h1>
+<p>This document provides a comprehensive reference for Atlas 77 syntax, semantics, and language features.</p>
+<h2 id="syntax-overview"><a class="header" href="#syntax-overview">Syntax Overview</a></h2>
+<h3 id="comments-1"><a class="header" href="#comments-1">Comments</a></h3>
+<p>Atlas 77 supports single-line comments only:</p>
+<pre><code class="language-cpp">// This is a single-line comment
+let x: int64 = 42; // Comments can appear at end of line
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Multi-line comments (<code>/* ... */</code>) are not yet implemented.</p>
+</blockquote>
+<h3 id="keywords"><a class="header" href="#keywords">Keywords</a></h3>
+<p>Reserved keywords in Atlas 77 include: <code>let</code>, <code>const</code>, <code>fun</code>, <code>struct</code>, <code>import</code>, <code>return</code>, <code>if</code>, <code>else</code>, <code>while</code>, <code>for</code>, <code>new</code>, <code>delete</code>, <code>public</code>, <code>private</code>, <code>this</code>, and others.</p>
+<p>Refer to <a href="#reserved-keywords">Reserved Keywords</a> for the complete list.</p>
+<h2 id="variables-and-constants"><a class="header" href="#variables-and-constants">Variables and Constants</a></h2>
+<p>Variables are declared with <code>let</code> and constants with <code>const</code>. Type annotations are <strong>mandatory</strong>:</p>
+<pre><code class="language-cpp">let x: int64 = 42;
+let name: string = "Atlas";
+const PI: float64 = 3.14159;
+
+// Type inference is limited; explicit types are required
+let result = 10; // Types can be inferred for initialized variables.
+</code></pre>
+<h2 id="types"><a class="header" href="#types">Types</a></h2>
+<p>Atlas 77 is statically typed and strongly typed. Here are the fundamental types:</p>
+<h3 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Description</th><th>Size</th></tr>
+</thead>
+<tbody>
+<tr><td><code>int8</code></td><td>Signed 8-bit integer</td><td>1 byte</td></tr>
+<tr><td><code>int16</code></td><td>Signed 16-bit integer</td><td>2 bytes</td></tr>
+<tr><td><code>int32</code></td><td>Signed 32-bit integer</td><td>4 bytes</td></tr>
+<tr><td><code>int64</code></td><td>Signed 64-bit integer</td><td>8 bytes</td></tr>
+<tr><td><code>uint8</code></td><td>Unsigned 8-bit integer</td><td>1 byte</td></tr>
+<tr><td><code>uint16</code></td><td>Unsigned 16-bit integer</td><td>2 bytes</td></tr>
+<tr><td><code>uint32</code></td><td>Unsigned 32-bit integer</td><td>4 bytes</td></tr>
+<tr><td><code>uint64</code></td><td>Unsigned 64-bit integer</td><td>8 bytes</td></tr>
+<tr><td><code>float32</code></td><td>32-bit floating point</td><td>4 bytes</td></tr>
+<tr><td><code>float64</code></td><td>64-bit floating point</td><td>8 bytes</td></tr>
+<tr><td><code>bool</code></td><td>Boolean (<code>true</code> / <code>false</code>)</td><td>1 byte</td></tr>
+<tr><td><code>char</code></td><td>Single Unicode character</td><td>4 bytes</td></tr>
+<tr><td><code>string</code></td><td>UTF-8 string (length in bytes)</td><td>Variable</td></tr>
+<tr><td><code>unit</code></td><td>Empty type (like <code>void</code>)</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
+<p>Strings are UTF-8 encoded and their length is measured in <strong>bytes</strong>, not characters:</p>
+<pre><code class="language-cpp">let greeting: string = "Hello, Atlas!";
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>String type is currently temporary and may change in future versions.</p>
+</blockquote>
+<h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
+<p>Arrays have fixed length known at compile-time:</p>
+<pre><code class="language-cpp">let numbers: [int64] = [1, 2, 3, 4, 5];
+let items: [string] = ["apple", "banana", "cherry"];
+</code></pre>
+<h3 id="generics"><a class="header" href="#generics">Generics</a></h3>
+<p>Atlas 77 supports parametric types (generics) with <strong>explicit type parameters</strong> (no type inference):</p>
+<pre><code class="language-cpp">struct Box&lt;T&gt; {
+public:
+    value: T;
+    Box(val: T) {
+        this.value = val;
+    }
+}
+
+fun get_value&lt;T&gt;(box: Box&lt;T&gt;) -&gt; T {
+    return box.value;
+}
+
+let int_box: Box&lt;int64&gt; = new Box&lt;int64&gt;(42);
+let value: int64 = get_value::&lt;int64&gt;(int_box);
+</code></pre>
+<p>Type parameters must be explicitly specified at call sites. For more details, see <a href="generics.html">Generics</a>.</p>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<p>Functions are declared with <code>fun</code> keyword and require explicit return types:</p>
+<pre><code class="language-cpp">fun add(a: int64, b: int64) -&gt; int64 {
+    return a + b;
+}
+
+fun greet(name: string) -&gt; unit {
+    println("Hello, " + name);
+}
+
+// Functions that return nothing use return type 'unit'
+fun perform_action() -&gt; unit {
+    // No return statement needed for unit
+}
+</code></pre>
+<h3 id="return-type-specification"><a class="header" href="#return-type-specification">Return Type Specification</a></h3>
+<p>Return types are mandatory for all functions. Use <code>unit</code> for functions that don’t return a value.</p>
+<h2 id="operators-and-precedence"><a class="header" href="#operators-and-precedence">Operators and Precedence</a></h2>
+<p>Atlas 77 uses operator precedence similar to C/C++.</p>
+<h3 id="operator-precedence-table"><a class="header" href="#operator-precedence-table">Operator Precedence Table</a></h3>
+<p>Listed from highest to lowest precedence:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Precedence</th><th>Operator</th><th>Associativity</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><code>()</code> <code>[]</code> <code>.</code></td><td>Left-to-right</td><td>Function call, array index, member access</td></tr>
+<tr><td>2</td><td><code>!</code> <code>-</code> <code>+</code> <code>~</code></td><td>Right-to-left</td><td>Logical NOT, unary minus, unary plus, bitwise NOT</td></tr>
+<tr><td>3</td><td><code>*</code> <code>/</code> <code>%</code></td><td>Left-to-right</td><td>Multiplication, division, modulo</td></tr>
+<tr><td>4</td><td><code>+</code> <code>-</code></td><td>Left-to-right</td><td>Addition, subtraction</td></tr>
+<tr><td>5</td><td><code>&lt;&lt;</code> <code>&gt;&gt;</code></td><td>Left-to-right</td><td>Bitwise shift left, shift right</td></tr>
+<tr><td>6</td><td><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code></td><td>Left-to-right</td><td>Relational operators</td></tr>
+<tr><td>7</td><td><code>==</code> <code>!=</code></td><td>Left-to-right</td><td>Equality operators</td></tr>
+<tr><td>8</td><td><code>&amp;</code></td><td>Left-to-right</td><td>Bitwise AND</td></tr>
+<tr><td>9</td><td><code>^</code></td><td>Left-to-right</td><td>Bitwise XOR</td></tr>
+<tr><td>10</td><td><code>|</code></td><td>Left-to-right</td><td>Bitwise OR</td></tr>
+<tr><td>11</td><td><code>&amp;&amp;</code></td><td>Left-to-right</td><td>Logical AND</td></tr>
+<tr><td>12</td><td><code>||</code></td><td>Left-to-right</td><td>Logical OR</td></tr>
+<tr><td>13</td><td><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> etc.</td><td>Right-to-left</td><td>Assignment operators</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Operator overloading is <strong>planned</strong> for a future version.
+Some operators have not been implemented yet.</p>
+</blockquote>
+<h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
+<p>Structs are product types that group related data:</p>
+<pre><code class="language-cpp">struct Person {
+private:
+    age: int32;
+public:
+    name: string;
+    email: string;
+    
+    Person(name: string, email: string, age: int32) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+    
+    fun display(this: Person) -&gt; unit {
+        println(this.name);
+    }
+}
+</code></pre>
+<h3 id="visibility-rules"><a class="header" href="#visibility-rules">Visibility Rules</a></h3>
+<p>By default, all struct fields and methods are <strong>private</strong>. To make fields or methods public, precede them with a <code>public:</code> block:</p>
+<pre><code class="language-cpp">struct Config {
+private:
+    internal_state: int64;
+public:
+    api_key: string;
+    timeout: int32;
+}
+</code></pre>
 <ul>
-<li>class</li>
-<li>struct</li>
-<li>enum</li>
-<li>concept</li>
-<li>package</li>
-<li>import</li>
-<li>fun</li>
-<li>let</li>
-<li>const (both for <code>&amp;const T</code> and <code>const t: T</code>, one is constant reference type and the other is constant variable)</li>
-<li>new</li>
-<li>delete</li>
-<li>if/else/while/for</li>
-<li>return</li>
-<li>break/continue</li>
-<li>operator</li>
-<li>extern</li>
-<li>public/private</li>
-<li>as (for casting)</li>
-<li>comptime (for compile-time evaluation)</li>
-<li>self</li>
-<li>int8/int16/int32/int64</li>
-<li>uint8/uint16/uint32/uint64</li>
-<li>float32/float64</li>
-<li>bool</li>
-<li>str</li>
-<li>char</li>
-<li>unit/null</li>
-<li>true/false</li>
+<li>Only <code>api_key</code> and <code>timeout</code> are accessible outside the struct</li>
+<li><code>internal_state</code> is private and only accessible within struct methods</li>
+</ul>
+<h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
+<p>Methods are functions associated with a struct. The receiver (<code>this</code>) is passed explicitly:</p>
+<pre><code class="language-cpp">fun display(this) -&gt; unit {
+    println(this.name);
+}
+</code></pre>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<p>References allow you to work with values without taking ownership. References are <strong>not nullable</strong>.</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>Reference design is still a work in progress. There is no guarantee that the current design will remain stable.</p>
+</blockquote>
+<h3 id="reference-syntax"><a class="header" href="#reference-syntax">Reference Syntax</a></h3>
+<pre><code class="language-cpp">let x: int64 = 42;
+let mutable_ref: &amp;int64 = &amp;x;      // Mutable reference
+let immutable_ref: &amp;const int64 = &amp;const x;  // Immutable reference
+</code></pre>
+<h3 id="reference-behavior"><a class="header" href="#reference-behavior">Reference Behavior</a></h3>
+<ul>
+<li>References are trivially copyable and are copied implicitly</li>
+<li>References are <strong>not rebindable</strong> (may change in future versions)</li>
+<li>References cannot be null; all references point to valid values</li>
+<li>Taking a reference: <code>&amp;my_var</code> (mutable), <code>&amp;const my_var</code> (immutable)</li>
+</ul>
+<h2 id="copy-and-move-semantics"><a class="header" href="#copy-and-move-semantics">Copy and Move Semantics</a></h2>
+<h3 id="copy-semantics-implicit"><a class="header" href="#copy-semantics-implicit">Copy Semantics (Implicit)</a></h3>
+<p>Primitive types and references are <strong>implicitly copyable</strong>:</p>
+<pre><code class="language-cpp">let a: int64 = 10;
+let b: int64 = a;  // 'a' is copied; both 'a' and 'b' exist
+
+let ref_a: &amp;int64 = &amp;a;
+let ref_b: &amp;int64 = ref_a;  // Reference is copied
+</code></pre>
+<h3 id="move-semantics-default-for-custom-types"><a class="header" href="#move-semantics-default-for-custom-types">Move Semantics (Default for Custom Types)</a></h3>
+<p>For custom structs, values are <strong>moved by default</strong> unless the struct implements a <code>Copy</code> constructor:</p>
+<pre><code class="language-cpp">struct Resource {
+public:
+    data: string;
+}
+
+let r1: Resource = Resource("data");
+let r2: Resource = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
+// Using 'r1' here would be a compile error
+</code></pre>
+<h3 id="copy-constructor-opt-in"><a class="header" href="#copy-constructor-opt-in">Copy Constructor (Opt-in)</a></h3>
+<p>To make a custom type copyable, implement a <code>Copy</code> constructor:</p>
+<pre><code class="language-cpp">struct CopyableData {
+public:
+    value: int64;
+    
+    CopyableData(val: int64) {
+        this.value = val;
+    }
+    
+    // Copy constructor (opt-in copyability)
+    fun Copy(this: CopyableData) -&gt; CopyableData {
+        return CopyableData(this.value);
+    }
+}
+
+let d1: CopyableData = CopyableData(100);
+let d2: CopyableData = d1;  // Now 'd1' is copied, both exist
+</code></pre>
+<blockquote>
+<p>[!Warning] The copyability of all standard library types is uncertain. Treat standard library types as potentially non-copyable until verified.</p>
+</blockquote>
+<h2 id="memory-management"><a class="header" href="#memory-management">Memory Management</a></h2>
+<p>Atlas 77 uses <strong>manual memory management</strong> with automatic cleanup at scope boundaries.</p>
+<h3 id="allocation-and-deallocation"><a class="header" href="#allocation-and-deallocation">Allocation and Deallocation</a></h3>
+<pre><code class="language-cpp">// Allocate memory with 'new'
+let ptr: &amp;MyStruct = &amp;new MyStruct(...);
+
+// Deallocate explicitly with 'delete'
+delete ptr;
+</code></pre>
+<h3 id="automatic-deallocation-raii"><a class="header" href="#automatic-deallocation-raii">Automatic Deallocation (RAII)</a></h3>
+<p>The compiler automatically inserts <code>delete</code> instructions at the end of each scope for variables that haven’t been moved:</p>
+<pre><code class="language-cpp">fun example() -&gt; unit {
+    let resource: MyStruct = MyStruct();
+    // ... use resource ...
+} // Compiler automatically calls delete on 'resource' here
+</code></pre>
+<h3 id="destructors"><a class="header" href="#destructors">Destructors</a></h3>
+<p>When a value is deleted, its destructor is called before memory is freed. Destructors clean up resources:</p>
+<pre><code class="language-cpp">struct File {
+    path: string;
+    
+    // Destructor: called by delete
+    fun ~File(this: File) -&gt; unit {
+        // Close file, cleanup resources
+    }
+}
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>The current runtime is marked as deprecated. Precise semantics of destructors and scope-based cleanup may evolve.</p>
+</blockquote>
+<h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
+<p>Atlas 77 provides <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.</p>
+<h3 id="option-type"><a class="header" href="#option-type">Option Type</a></h3>
+<pre><code class="language-cpp">struct Option&lt;T&gt; {
+public:
+    has_value: bool;
+    value: T;  // Only valid if has_value is true
+}
+
+fun find_user(id: int64) -&gt; Option&lt;User&gt; {
+    if id &gt; 0 {
+        return Option(true, User(id));
+    } else {
+        return Option(false, User(0));
+    }
+}
+
+// Using Option
+let user_opt: Option&lt;User&gt; = find_user(1);
+if user_opt.has_value {
+    println("Found user");
+} else {
+    println("User not found");
+}
+</code></pre>
+<h3 id="result-type"><a class="header" href="#result-type">Result Type</a></h3>
+<pre><code class="language-cpp">struct Result&lt;T, E&gt; {
+public:
+    is_ok: bool;
+    ok_value: T;    // Only valid if is_ok is true
+    err_value: E;   // Only valid if is_ok is false
+}
+
+fun parse_int(s: string) -&gt; Result&lt;int64, string&gt; {
+    // Try to parse
+    if success {
+        return Result(true, parsed_value, "");
+    } else {
+        return Result(false, 0, "Failed to parse");
+    }
+}
+
+// Using Result
+let result: Result&lt;int64, string&gt; = parse_int("42");
+if result.is_ok {
+    let number: int64 = result.ok_value;
+    println("Parsed: " + number);
+} else {
+    println("Error: " + result.err_value);
+}
+</code></pre>
+<h3 id="unwrapping"><a class="header" href="#unwrapping">Unwrapping</a></h3>
+<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
+let number: int64 = result.ok_value; // Unwrap: use value directly (risky!)
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>There is no automatic error propagation syntax (<code>try</code> / <code>?</code> operator) by design to maintain explicit control and avoid “hidden magic” in error handling.</p>
+</blockquote>
+<h2 id="modules-and-imports"><a class="header" href="#modules-and-imports">Modules and Imports</a></h2>
+<h3 id="current-import-system"><a class="header" href="#current-import-system">Current Import System</a></h3>
+<p>Use the <code>import</code> statement to include modules:</p>
+<pre><code class="language-cpp">import "std/io";
+import "std/fs";
+import "std/string";
+
+fun main() -&gt; unit {
+    println("Hello, Atlas!");
+}
+</code></pre>
+<p>Imports use file paths (not yet package-based). The compiler locates module files relative to the standard library.</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>Multiple imports of the same module may result in duplication even with guard mechanisms. This is a known limitation of the current system.</p>
+</blockquote>
+<h3 id="future-package-based-imports"><a class="header" href="#future-package-based-imports">Future: Package-Based Imports</a></h3>
+<p>Package-based imports and selective imports are <strong>planned</strong> for after the compiler bootstrap phase. Expected syntax:</p>
+<pre><code class="language-cpp">// Planned (not yet available):
+// import mypackage::io;
+// from mypackage import io, fs;
+</code></pre>
+<h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
+<h3 id="if-else"><a class="header" href="#if-else">If-Else</a></h3>
+<pre><code class="language-cpp">if condition {
+    // ...
+} else if other_condition {
+    // ...
+} else {
+    // ...
+}
+</code></pre>
+<h3 id="while-loops"><a class="header" href="#while-loops">While Loops</a></h3>
+<pre><code class="language-cpp">while x &lt; 10 {
+    x = x + 1;
+}
+</code></pre>
+<h3 id="for-loops-basic"><a class="header" href="#for-loops-basic">For Loops (Basic)</a></h3>
+<p>Basic for loops are currently supported:</p>
+<pre><code class="language-cpp">for i in 0..10 {  // Range iteration is planned
+    println(i);
+}
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Range-based for-loops (<code>for x in range</code>) are <strong>planned</strong> for a future version.</p>
+</blockquote>
+<h2 id="planned-features"><a class="header" href="#planned-features">Planned Features</a></h2>
+<p>The following features are actively developed and planned for future releases:</p>
+<ul>
+<li><strong>Operator Overloading</strong> – Define custom behavior for operators like <code>+</code>, <code>-</code>, <code>*</code>, etc.</li>
+<li><strong>For-loops over Ranges</strong> – Iterate over ranges with syntax like <code>for i in 0..10</code></li>
+<li><strong>Pattern Matching</strong> – Destructure and match values</li>
+<li><strong>First-class Functions and Closures</strong> – Functions as values, anonymous functions, closures</li>
+<li><strong>Async/Await</strong> – Asynchronous programming support</li>
+<li><strong>Traits</strong> (or “Concepts”) – Define shared behavior across types</li>
+<li><strong>Union Types</strong> – Discriminated unions for variant data</li>
+<li><strong>Package System</strong> – Dependency management and package organization</li>
+<li><strong>Package Manager</strong> – Tool for downloading and managing packages</li>
+<li><strong>Copy &amp; Move Semantics Refinement</strong> – Better documentation and ergonomics</li>
+<li><strong>Dead Code Elimination</strong> – Optimization pass to remove unused code</li>
+<li><strong>Cranelift Backend</strong> – Native code generation (in addition to VM execution)</li>
+<li><strong>Compiler Error Recovery</strong> – Better error messages and recovery from multiple errors</li>
+</ul>
+<h2 id="known-limitations-and-footguns"><a class="header" href="#known-limitations-and-footguns">Known Limitations and Footguns</a></h2>
+<ul>
+<li><strong>No multiline comments</strong> – Only single-line comments with <code>//</code></li>
+<li><strong>No pattern matching</strong> – Cannot destructure values into patterns</li>
+<li><strong>No break/continue</strong> – Loop control statements not yet implemented</li>
+<li><strong>No variadics</strong> – Variable argument functions not supported</li>
+<li><strong>No named parameters</strong> – All parameters are positional</li>
+<li><strong>No inheritance</strong> – Structs use composition instead of inheritance</li>
+<li><strong>No type inference</strong> – All type annotations must be explicit</li>
+<li><strong>String type is temporary</strong> – May change in future versions</li>
+<li><strong>stdlib copyability uncertain</strong> – Assume standard library types are non-copyable</li>
+</ul>
+<hr>
+<p>For detailed examples and tutorials, see:</p>
+<ul>
+<li><a href="#hello-world">Hello, World!</a></li>
+<li><a href="#programming-a-guessing-game-in-atlas77">Guessing Game</a></li>
+<li><a href="#standard-library">Standard Library</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="memory-model"><a class="header" href="#memory-model">Memory Model</a></h1>
+<p>Atlas 77 employs <strong>manual memory management</strong> with <strong>automatic scope-based cleanup</strong>. This document explains how memory allocation, deallocation, and ownership work.</p>
+<h2 id="allocation-with-new"><a class="header" href="#allocation-with-new">Allocation with <code>new</code></a></h2>
+<p>Memory is allocated using the <code>new</code> keyword:</p>
+<pre><code class="language-cpp">struct Person {
+public:
+    name: string;
+    age: int32;
+    
+    Person(name: string, age: int32) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+let person: &amp;Person = &amp;new Person("Alice", 30);
+</code></pre>
+<h2 id="deallocation-with-delete"><a class="header" href="#deallocation-with-delete">Deallocation with <code>delete</code></a></h2>
+<p>Memory is freed using the <code>delete</code> keyword:</p>
+<pre><code class="language-cpp">delete person;  // Free memory and call destructor
+</code></pre>
+<p>The <code>delete</code> operation:</p>
+<ol>
+<li>Calls the destructor (if one exists)</li>
+<li>Frees the allocated memory</li>
+<li>Invalidates the reference</li>
+</ol>
+<h2 id="automatic-scope-based-cleanup-raii"><a class="header" href="#automatic-scope-based-cleanup-raii">Automatic Scope-Based Cleanup (RAII)</a></h2>
+<p>The compiler automatically inserts <code>delete</code> instructions at the end of each scope for variables that haven’t been moved yet:</p>
+<pre><code class="language-cpp">fun process_file() -&gt; unit {
+    let file: File = File("data.txt");
+    
+    // ... use file ...
+    
+} // Compiler automatically calls: delete file;
+</code></pre>
+<p>This pattern is called <strong>RAII</strong> (Resource Acquisition Is Initialization):</p>
+<ul>
+<li>Resources are acquired during object construction (<code>new</code>)</li>
+<li>Resources are released automatically at scope exit via destructors</li>
+</ul>
+<h3 id="example-file-resource-management"><a class="header" href="#example-file-resource-management">Example: File Resource Management</a></h3>
+<pre><code class="language-cpp">struct File {
+    path: string;
+    is_open: bool;
+    
+    // Constructor acquires resource
+    File(path: string) {
+        this.path = path;
+        this.is_open = true;
+        // Open file
+    }
+    
+    // Destructor releases resource
+    fun ~File(this: File) -&gt; unit {
+        if this.is_open {
+            // Close file
+            this.is_open = false;
+        }
+    }
+}
+
+fun read_and_process() -&gt; unit {
+    let file: File = File("input.txt");
+    let content: string = file.read();
+    
+    // ...
+    
+} // File destructor called here; file is automatically closed
+</code></pre>
+<h2 id="ownership-and-move-semantics"><a class="header" href="#ownership-and-move-semantics">Ownership and Move Semantics</a></h2>
+<p>Atlas 77 uses <strong>move semantics by default</strong> for custom types. When you assign a value, ownership transfers to the new variable:</p>
+<pre><code class="language-cpp">struct Box&lt;T&gt; {
+public:
+    value: T;
+}
+
+let box1: Box&lt;int64&gt; = Box(42);
+let box2: Box&lt;int64&gt; = box1;  // Ownership moves from box1 to box2
+
+// box1 is no longer accessible; moved values cannot be used
+// println(box1.value);  // ERROR: box1 has been moved
+</code></pre>
+<p>Once a value is moved, the original variable becomes inaccessible. This prevents use-after-free bugs:</p>
+<pre><code class="language-cpp">fun take_ownership(b: Box&lt;int64&gt;) -&gt; unit {
+    println(b.value);
+    // b is deleted at end of scope
+}
+
+let box: Box&lt;int64&gt; = Box(100);
+take_ownership(box);  // Ownership transfers to function
+// println(box.value);  // ERROR: box has been moved
+</code></pre>
+<h2 id="copy-semantics"><a class="header" href="#copy-semantics">Copy Semantics</a></h2>
+<h3 id="implicit-copy-primitive-types-and-references"><a class="header" href="#implicit-copy-primitive-types-and-references">Implicit Copy (Primitive Types and References)</a></h3>
+<p>Primitive types and references are implicitly copyable:</p>
+<pre><code class="language-cpp">let x: int64 = 42;
+let y: int64 = x;  // 'x' is copied; both x and y exist
+
+let ref_x: &amp;int64 = &amp;x;
+let ref_y: &amp;int64 = ref_x;  // Reference is copied
+</code></pre>
+<h3 id="opt-in-copy-custom-types"><a class="header" href="#opt-in-copy-custom-types">Opt-In Copy (Custom Types)</a></h3>
+<p>To make a custom type copyable, implement a <strong>Copy constructor</strong>:</p>
+<pre><code class="language-cpp">struct MyData {
+public:
+    value: int64;
+    
+    MyData(val: int64) {
+        this.value = val;
+    }
+    
+    // Copy constructor
+    fun Copy(this: MyData) -&gt; MyData {
+        return MyData(this.value);
+    }
+}
+
+let data1: MyData = MyData(100);
+let data2: MyData = data1;  // Now data1 is copied; both data1 and data2 exist
+</code></pre>
+<p>Without the Copy constructor, assignment moves instead of copying.</p>
+<h2 id="references-1"><a class="header" href="#references-1">References</a></h2>
+<p>References allow borrowing values without transferring ownership. References in Atlas 77 are:</p>
+<ul>
+<li><strong>Not nullable</strong> – always point to valid values</li>
+<li><strong>Trivially copyable</strong> – copying is implicit and cheap</li>
+<li><strong>Not rebindable</strong> – may change in future versions</li>
+</ul>
+<h3 id="reference-syntax-1"><a class="header" href="#reference-syntax-1">Reference Syntax</a></h3>
+<pre><code class="language-cpp">let value: int64 = 42;
+
+// Mutable reference
+let mutable_ref: &amp;int64 = &amp;value;
+
+// Immutable reference
+let immutable_ref: &amp;const int64 = &amp;const value;
+</code></pre>
+<h3 id="using-references"><a class="header" href="#using-references">Using References</a></h3>
+<pre><code class="language-cpp">fun modify_value(ref: &amp;int64) -&gt; unit {
+    *ref = 100;  // Dereference and modify
+}
+
+let x: int64 = 42;
+modify_value(&amp;x);
+println(x);  // 100
+</code></pre>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>Reference design is still evolving and heavily inspired by Rust. Current behavior and semantics may change.</p>
+</blockquote>
+<h2 id="destructors-1"><a class="header" href="#destructors-1">Destructors</a></h2>
+<p>Destructors are special methods that clean up resources when an object is deleted:</p>
+<pre><code class="language-cpp">struct Resource {
+public:
+    ptr: int64;  // Some resource pointer
+    
+    Resource() {
+        // Acquire resource
+        this.ptr = allocate();
+    }
+    
+    // Destructor: called by delete
+    fun ~Resource(this: Resource) -&gt; unit {
+        if this.ptr != 0 {
+            deallocate(this.ptr);
+            this.ptr = 0;
+        }
+    }
+}
+</code></pre>
+<p>Destructors are called:</p>
+<ol>
+<li>When <code>delete</code> is explicitly called</li>
+<li>When scope exits (automatic cleanup)</li>
+<li>In the correct order for nested scopes</li>
+</ol>
+<h3 id="destructor-execution-order"><a class="header" href="#destructor-execution-order">Destructor Execution Order</a></h3>
+<p>For scoped values, destructors are called in <strong>reverse order of construction</strong> (LIFO):</p>
+<pre><code class="language-cpp">fun example() -&gt; unit {
+    let a: Resource = Resource();  // Constructed first
+    let b: Resource = Resource();  // Constructed second
+    
+    // ...
+    
+} // Destructors called: ~b, then ~a (reverse order)
+</code></pre>
+<h2 id="scope-based-cleanup-rules"><a class="header" href="#scope-based-cleanup-rules">Scope-Based Cleanup Rules</a></h2>
+<ol>
+<li><strong>Single scope:</strong> Variables deleted at end of scope</li>
+<li><strong>Early returns:</strong> Variables deleted before returning</li>
+<li><strong>Moved values:</strong> Not deleted (ownership transferred)</li>
+<li><strong>Conditional scopes:</strong> Variables deleted when block exits</li>
+</ol>
+<pre><code class="language-cpp">fun conditional_cleanup(flag: bool) -&gt; unit {
+    let resource1: Resource = Resource();
+    
+    if flag {
+        let resource2: Resource = Resource();
+        // resource2 deleted here
+    }
+    
+    // resource1 deleted here
+}
+</code></pre>
+<h2 id="lifetime-and-validity"><a class="header" href="#lifetime-and-validity">Lifetime and Validity</a></h2>
+<p>References must remain valid for their entire lifetime:</p>
+<pre><code class="language-cpp">fun create_ref() -&gt; &amp;int64 {
+    let x: int64 = 42;
+    return &amp;x;  // ERROR: x will be deleted at end of scope
+}
+</code></pre>
+<p>This is a common pitfall. Values cannot outlive their owners:</p>
+<pre><code class="language-cpp">fun valid_reference(x: &amp;int64) -&gt; &amp;int64 {
+    return x;  // OK: reference comes from parameter, guaranteed to be valid
+}
+</code></pre>
+<h2 id="current-limitations"><a class="header" href="#current-limitations">Current Limitations</a></h2>
+<ul>
+<li><strong>Runtime is deprecated</strong> – Precise semantics may evolve</li>
+<li><strong>Destructor semantics uncertain</strong> – Copy/move interaction with destructors being refined</li>
+<li><strong>stdlib copyability uncertain</strong> – Assume standard library types are non-copyable unless documented</li>
+</ul>
+<h2 id="future-improvements"><a class="header" href="#future-improvements">Future Improvements</a></h2>
+<ul>
+<li><strong>Smart Pointers</strong> (<code>rc_ptr&lt;T&gt;</code>) – Reference-counted pointers for shared ownership</li>
+<li><strong>Guaranteed Copy Constructor Optimization</strong> – Automatic elision of unnecessary copies</li>
+<li><strong>Move Semantics Refinement</strong> – Clearer rules for implicit copying vs. moving</li>
+</ul>
+<hr>
+<p>See <a href="#language-reference">Language Reference</a> for details on copy/move semantics.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="error-handling-in-atlas-77"><a class="header" href="#error-handling-in-atlas-77">Error Handling in Atlas 77</a></h1>
+<p>Atlas 77 provides explicit error handling through <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> types. There is <strong>no implicit error propagation</strong>; errors must be handled explicitly to avoid “hidden magic.”</p>
+<h2 id="philosophy"><a class="header" href="#philosophy">Philosophy</a></h2>
+<p>Error handling in Atlas 77 is <strong>explicit and intentional</strong>:</p>
+<ul>
+<li>No automatic exception throwing or catching</li>
+<li>No implicit <code>try</code>/<code>?</code> operator for error propagation</li>
+<li>Errors must be checked and handled at the point they occur</li>
+<li>This gives you <strong>maximum control</strong> over error recovery</li>
+</ul>
+<h2 id="option-type-1"><a class="header" href="#option-type-1">Option Type</a></h2>
+<p>The <code>Option&lt;T&gt;</code> type represents a value that may or may not exist:</p>
+<pre><code class="language-cpp">struct Option&lt;T&gt; {
+public:
+    has_value: bool;
+    value: T;  // Only valid when has_value is true
+}
+</code></pre>
+<p>Use <code>Option&lt;T&gt;</code> for fallible operations that don’t need error details:</p>
+<pre><code class="language-cpp">fun find_user(id: int64) -&gt; Option&lt;User&gt; {
+    if id &gt; 0 {
+        // Found user
+        let user: User = User(id);
+        return Option(true, user);
+    } else {
+        // Not found
+        return Option(false, User(0));  // Default user
+    }
+}
+</code></pre>
+<h3 id="checking-option-values"><a class="header" href="#checking-option-values">Checking Option Values</a></h3>
+<pre><code class="language-cpp">let user_opt: Option&lt;User&gt; = find_user(42);
+
+// Check if value exists
+if user_opt.is_some() {
+    let user: User = user_opt.unwrap();
+    println("Found user: " + user.name);
+} else {
+    println("User not found");
+}
+</code></pre>
+<h2 id="result-type-1"><a class="header" href="#result-type-1">Result Type</a></h2>
+<p>The <code>Result&lt;T, E&gt;</code> type represents either a success with a value, or a failure with an error:</p>
+<pre><code class="language-cpp">enum ResultTag {
+    ERR = 0;
+    OK = 256;
+}
+struct Result&lt;T, E&gt; {
+private:
+    tag: ResultTag;
+    ok_value: T;
+    err_value: E;
+}
+</code></pre>
+<p>Use <code>Result&lt;T, E&gt;</code> when operations can fail and you need to communicate why:</p>
+<pre><code class="language-cpp">fun parse_int(s: string) -&gt; Result&lt;int64, string&gt; {
+    // Try to parse string to integer
+    if is_valid_number(s) {
+        let number: int64 = convert_to_int(s);
+        return Result::&lt;int64, string&gt;::ok(number);
+    } else {
+        return Result::&lt;int64, string&gt;::err("Invalid number format");
+    }
+}
+</code></pre>
+<h3 id="checking-result-values"><a class="header" href="#checking-result-values">Checking Result Values</a></h3>
+<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
+
+// Explicit check with is_ok
+if result.is_ok() {
+    let number: int64 = result.unwrap();
+    println("Parsed: " + number);
+} else {
+    let error: string = result.unwrap_err();
+    println("Error: " + error);
+}
+</code></pre>
+<h3 id="unwrapping-results"><a class="header" href="#unwrapping-results">Unwrapping Results</a></h3>
+<p>If you’re confident a <code>Result</code> is <code>Ok</code>, you can unwrap directly (at your own risk):</p>
+<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
+let number: int64 = result.unwrap();  // Unwrap without check (risky!)
+
+// If is_ok is false, you'll get a default/undefined value
+// Use only when you're certain the operation succeeded
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> Unwrapping without checking can lead to using garbage values if the operation failed. Always check <code>is_ok</code> first unless you have a strong reason not to.</p>
+</blockquote>
+<h2 id="panic"><a class="header" href="#panic">Panic</a></h2>
+<p>For unrecoverable errors, use <code>panic()</code> to abort the program:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun critical_operation() {
+    if invalid_state {
+        panic("Critical error: invalid state detected!");
+    }
+}
+</code></pre>
+<p><code>panic()</code> will:</p>
+<ol>
+<li>Print the error message</li>
+<li>Terminate the program immediately</li>
+<li>Bypass normal cleanup (use sparingly)</li>
+</ol>
+<h2 id="pattern-examples"><a class="header" href="#pattern-examples">Pattern Examples</a></h2>
+<h3 id="option-handling"><a class="header" href="#option-handling">Option Handling</a></h3>
+<pre><code class="language-cpp">struct User {
+public:
+    id: int64;
+    name: string;
+}
+
+fun get_user_name(id: int64) -&gt; Option&lt;string&gt; {
+    let user: Option&lt;User&gt; = find_user(id);
+    
+    if user.is_some() {
+        return Option::&lt;string&gt;::ok(user.unwrap().name);
+    } else {
+        return Option::&lt;string&gt;::none();
+    }
+}
+
+// Usage
+let name_opt: Option&lt;string&gt; = get_user_name(1);
+if name_opt.is_some() {
+    print("User: ");
+    println(name_opt.unwrap().value);
+} else {
+    println("User not found");
+}
+</code></pre>
+<h3 id="result-chaining"><a class="header" href="#result-chaining">Result Chaining</a></h3>
+<p>When multiple fallible operations depend on each other:</p>
+<pre><code class="language-cpp">fun read_and_parse() -&gt; Result&lt;int64, string&gt; {
+    // First operation
+    let content: Result&lt;string, string&gt; = read_file("numbers.txt");
+    if !content.is_ok() {
+        return Result::&lt;int64, string&gt;::err(content.unwrap_err());
+    }
+    
+    // Second operation (depends on first)
+    let number: Result&lt;int64, string&gt; = parse_int(content.ok_value);
+    if !number.is_ok() {
+        return Result::&lt;int64, string&gt;::err(number.unwrap_err());
+    }
+    
+    // Success
+    return Result::&lt;int64, string&gt;::ok(number.unwrap());
+}
+</code></pre>
+<h3 id="nested-results-with-meaningful-errors"><a class="header" href="#nested-results-with-meaningful-errors">Nested Results with Meaningful Errors</a></h3>
+<pre><code class="language-cpp">struct ParseError {
+public:
+    line: int64;
+    column: int64;
+    message: string;
+}
+
+fun parse_config(path: string) -&gt; Result&lt;Config, ParseError&gt; {
+    // Try to read file
+    let content: Result&lt;string, string&gt; = read_file(path);
+    if !content.is_ok() {
+        let error: ParseError = new ParseError(0, 0, content.unwrap_err());
+        return Result::&lt;Config, ParseError&gt;::err(error);
+    }
+    
+    // Try to parse content
+    let config: Result&lt;Config, ParseError&gt; = parse_config_text(content.unwrap());
+    return config;
+}
+</code></pre>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<ol>
+<li><strong>Check explicitly</strong> – Always use <code>is_ok()</code>/<code>is_err()</code> checks before accessing values</li>
+<li><strong>Provide context</strong> – Include helpful error information in <code>Result&lt;T, E&gt;</code></li>
+<li><strong>Fail fast</strong> – Return errors early rather than propagating invalid states</li>
+<li><strong>Use Option for simple cases</strong> – When you only need to know if something exists</li>
+<li><strong>Use Result for complex cases</strong> – When you need to communicate failure reasons</li>
+<li><strong>Avoid panics in libraries</strong> – Let caller decide how to handle errors</li>
+<li><strong>Document error cases</strong> – Explain what errors an operation can produce</li>
+</ol>
+<h2 id="future-improvements-1"><a class="header" href="#future-improvements-1">Future Improvements</a></h2>
+<p>In the future, Atlas 77 may introduce:</p>
+<ul>
+<li>Discriminated unions for more flexible error types</li>
+<li>Error traits for better composability</li>
+</ul>
+<p>However, the core design will remain <strong>explicit and visible</strong>, avoiding hidden control flow.</p>
+<hr>
+<p>See also:</p>
+<ul>
+<li><a href="#language-reference">Language Reference</a> – Error handling in context</li>
+<li><a href="#memory-model">Memory Model</a> – Resource safety</li>
+<li><a href="#standard-library">Standard Library</a> – Available error types</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="reserved-keywords"><a href="#reserved-keywords" class="header">Reserved Keywords</a></h1>
+<p>List of all of the reserved keywords in the language:</p>
+<h2 id="branching-and-control-flow"><a class="header" href="#branching-and-control-flow">Branching and control flow</a></h2>
+<ul>
+<li><code>if</code>/<code>else</code></li>
+<li><code>while</code>/<code>for</code></li>
+<li><code>break</code>/<code>continue</code></li>
+<li><code>return</code></li>
+</ul>
+<h2 id="declarations"><a class="header" href="#declarations">Declarations</a></h2>
+<ul>
+<li><code>public</code>/<code>private</code> (access modifiers for declarations)</li>
+<li><code>import</code> (for importing modules/packages)</li>
+<li><code>package</code> (for defining packages/modules)</li>
+<li><code>fun</code> (for defining functions)</li>
+<li><code>let</code>/<code>const</code> (for defining variables)</li>
+<li><code>struct</code> (for defining structures)</li>
+<li><code>enum</code> (for defining enumerations)</li>
+<li><code>class</code> (for defining classes)</li>
 </ul>
 <blockquote>
-<p>Primitive types are considered as keywords, but I do plan to change that, because it risks to bloat the keyword list.</p>
+<p>Not used yet, but reserved in case of future use.</p>
 </blockquote>
-<pre><code class="language-c">// Nothing to see here yet, just a placeholder for now.
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="generics"><a href="#generics" class="header">Generics</a></h1>
+<ul>
+<li><code>concept</code> (for defining concepts which are like interfaces)</li>
+</ul>
+<blockquote>
+<p>Not used yet, but reserved because it’s a feature planned for the future</p>
+</blockquote>
+<ul>
+<li><code>extern</code> (for defining external functions/variables)</li>
+</ul>
+<h2 id="primitives-and-types"><a class="header" href="#primitives-and-types">Primitives and types</a></h2>
+<blockquote>
+<p>Primitives types are considered to be keywords in Atlas 77, though this might change in the future.</p>
+</blockquote>
+<ul>
+<li><code>string</code> (for string type)</li>
+<li><code>char</code> (for character type)</li>
+<li><code>int8</code>/<code>int16</code>/<code>int32</code>/<code>int64</code> (for signed integer types)</li>
+<li><code>uint8</code>/<code>uint16</code>/<code>uint32</code>/<code>uint64</code> (for unsigned integer types)</li>
+<li><code>float32</code>/<code>float64</code> (for floating-point types)</li>
+<li><code>bool</code> (for boolean type)</li>
+<li><code>unit</code> (for unit type)</li>
+<li><code>true</code>/<code>false</code> (for boolean literals)</li>
+<li><code>This</code>/<code>this</code> (for referring to the current instance in classes/structs)</li>
+</ul>
+<h2 id="other-keywords"><a class="header" href="#other-keywords">Other keywords</a></h2>
+<ul>
+<li><code>new</code>/<code>delete</code> (for memory management)</li>
+<li><code>as</code> (for type casting)</li>
+<li><code>comptime</code> (for compile-time evaluation)</li>
+</ul>
+<blockquote>
+<p>Not used yet, but reserved in case of future use.</p>
+</blockquote>
+<ul>
+<li><code>operator</code> (for operator overloading)</li>
+</ul>
+<blockquote>
+<p>Not used yet, but reserved in case of future use.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h1>
 <blockquote class="blockquote-tag blockquote-tag-note">
@@ -591,13 +1457,13 @@ Most of the modules aren’t implement or finished yet. The documentation is her
 <p>You can see what is implemented with the checkboxes below.</p>
 <h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a value to the standard output.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a value to the standard output followed by a newline.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>input() -&gt; str</code>: Read a line from the standard input.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>panic(msg: string) -&gt; !</code>: Abort the program with an error message.</li>
 </ul>
 <h2 id="stdfs"><a class="header" href="#stdfs"><code>std/fs</code></a></h2>
-<h3 id="structs"><a class="header" href="#structs">Structs</a></h3>
+<h3 id="structs-1"><a class="header" href="#structs-1">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>File</code>: A file type that can be used to read and write files.</li>
 </ul>
@@ -616,7 +1482,7 @@ public:
     }
 }
 </code></pre>
-<h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
+<h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>read(this: File) -&gt; string</code>: Read the entire content of the file.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>open(path: string) -&gt; File</code>: Open a file for reading and writing.</li>
@@ -635,7 +1501,7 @@ public:
 <li><input disabled="" type="checkbox" checked=""> <code>read_dir(this: File) -&gt; [string]</code>: Read the contents of a directory.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>read_file(this: File) -&gt; string</code>: Read the entire content of the file and returns it to you. It does not set <code>File.content</code> to the content of the file.</li>
 </ul>
-<h3 id="functions"><a class="header" href="#functions">Functions</a></h3>
+<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>read_dir(path: string) -&gt; [string]</code>: Read the contents of a directory.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>read_file(path: string) -&gt; string</code>: Read the entire content of a file.</li>
@@ -645,7 +1511,7 @@ public:
 <li><input disabled="" type="checkbox" checked=""> <code>close_file(path: string) -&gt; unit</code>: Close a file.</li>
 </ul>
 <h2 id="stdstring"><a class="header" href="#stdstring"><code>std/string</code></a></h2>
-<h3 id="structs-1"><a class="header" href="#structs-1">Structs</a></h3>
+<h3 id="structs-1-1"><a class="header" href="#structs-1-1">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>String</code>: A string type that can be used to manipulate strings.</li>
 </ul>
@@ -658,7 +1524,7 @@ public:
     }
 }
 </code></pre>
-<h4 id="methods-1"><a class="header" href="#methods-1">Methods</a></h4>
+<h4 id="methods-1-1"><a class="header" href="#methods-1-1">Methods</a></h4>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>String::from_chars(chars: [char]) -&gt; String</code>: Create a new <code>String</code> struct from a list of characters.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>String::str_len(s: string) -&gt; uint64</code>: Get the length of a string primitive.</li>
@@ -683,7 +1549,7 @@ public:
 <li><input disabled="" type="checkbox" checked=""> <code>split(this: String, sep: string) -&gt; [String]</code>: Split the String by a separator.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>into_iter(this: String) -&gt; Iter&lt;char&gt;</code>: Create an iterator (from <code>std/iter</code>) over the characters of the String.</li>
 </ul>
-<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
+<h3 id="functions-1-1"><a class="header" href="#functions-1-1">Functions</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>str_len(s: string) -&gt; uint64</code>: Get the length of a string primitive.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>trim(s: string) -&gt; string</code>: Trim whitespace from both ends of a string.</li>
@@ -899,6 +1765,7 @@ public:
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>next(this: Iter&lt;T&gt;) -&gt; Option&lt;T&gt;</code>: Get the next element in the iterator.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>peek(this: Iter&lt;T&gt;) -&gt; Option&lt;&amp;const T&gt;</code>: Peek at the next element in the iterator without advancing it.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>has_next(this: Iter&lt;T&gt;) -&gt; bool</code>: Check if the iterator has more elements.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code>: Create a new iterator from an array.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_string(data: string) -&gt; Iter&lt;char&gt;</code>: Create a new iterator from a primitive string.</li>
 </ul>
@@ -921,8 +1788,34 @@ public:
 <h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>insert(this: Map&lt;K, V&gt;, key: K, value: V) -&gt; unit</code>: Insert a key-value pair into the map.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>get(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Get the value associated with a key.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>remove(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Remove a key-value pair from the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>get(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Get a value from the map by key.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>remove(this: Map&lt;K, V&gt;, key: K) -&gt; unit</code>: Remove a key-value pair from the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>contains(this: Map&lt;K, V&gt;, key: K) -&gt; bool</code>: Check if a key exists in the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>size(this: Map&lt;K, V&gt;) -&gt; uint64</code>: Get the number of key-value pairs in the map.</li>
+</ul>
+<h2 id="experimental-modules-not-yet-included"><a class="header" href="#experimental-modules-not-yet-included">Experimental Modules (Not Yet Included)</a></h2>
+<p>The following modules are under active development and are <strong>not included</strong> in the current standard library:</p>
+<h3 id="stdrc_ptr"><a class="header" href="#stdrc_ptr"><code>std/rc_ptr</code></a></h3>
+<p><strong>Status:</strong> Experimental, work in progress</p>
+<p>Reference-counted smart pointers for shared ownership:</p>
+<pre><code class="language-cpp">// Planned usage (not yet available):
+// let ptr: rc_ptr&lt;Data&gt; = rc_ptr::new(Data());
+// let cloned: rc_ptr&lt;Data&gt; = ptr.clone();  // Reference count increases
+</code></pre>
+<h3 id="stdcast"><a class="header" href="#stdcast"><code>std/cast</code></a></h3>
+<p><strong>Status:</strong> Experimental, work in progress</p>
+<p>Type casting and conversion utilities:</p>
+<pre><code class="language-cpp">// Planned usage (not yet available):
+// let num: int64 = 42;
+// let as_float: float64 = cast&lt;float64&gt;(num);
+</code></pre>
+<hr>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li>All modules are works in progress and subject to change.</li>
+<li>Most modules are not yet fully implemented or finalized.</li>
+<li>For experimental modules listed above, expect significant API changes.</li>
+<li>Standard library types may not be copyable; assume move semantics unless documented otherwise.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="blue-engine-library"><a class="header" href="#blue-engine-library">Blue Engine Library</a></h1>
@@ -954,331 +1847,293 @@ features may remain incomplete, and stability is not guaranteed.</p>
 <p>Current scope: a safe Atlas77 wrapper layer built entirely on extern_ptr and extern_fn, exposing Rust engine components
 without unsafe surface area in Atlas77.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="the-atlas77-vm-instruction-set"><a class="header" href="#the-atlas77-vm-instruction-set">The Atlas77 VM instruction set</a></h1>
-<p>The Atlas77 VM is a stack-based typed virtual machine that executes bytecode instructions, its design is similar to the Java Virtual Machine (JVM) and the .NET Common Language Runtime (CLR). It handles memory management with reference counting, and values don’t carry additional data about their type. Instead, the type information is stored in the instruction set.</p>
-<h2 id="types"><a class="header" href="#types">Types</a></h2>
-<p>The Atlas77 VM supports the following types:</p>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Type</th><th>Description</th><th style="text-align: center">Status</th></tr>
-</thead>
-<tbody>
-<tr><td><code>int8</code></td><td>8-bit signed integer</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>int16</code></td><td>16-bit signed integer</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>int32</code></td><td>32-bit signed integer</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>int64</code></td><td>64-bit signed integer</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>uint8</code></td><td>8-bit unsigned integer</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>uint16</code></td><td>16-bit unsigned integer</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>uint32</code></td><td>32-bit unsigned integer</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>uint64</code></td><td>64-bit unsigned integer</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>float32</code></td><td>32-bit floating point number</td><td style="text-align: center">🔧</td></tr>
-<tr><td><code>float64</code></td><td>64-bit floating point number</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>[T]</code></td><td>Array of type T</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>bool</code></td><td>Boolean value (true or false)</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>string</code></td><td>UTF-8 encoded string</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>struct</code></td><td>Composite data type with fields</td><td style="text-align: center">✅</td></tr>
-<tr><td><code>extern_ptr</code></td><td>Pointer to external resource</td><td style="text-align: center">❌</td></tr>
-<tr><td><code>&amp;T</code></td><td>Reference to type T</td><td style="text-align: center">❌</td></tr>
-<tr><td><code>function</code></td><td>Function pointer</td><td style="text-align: center">❌</td></tr>
-</tbody>
-</table>
-</div>
+<h1 id="atlas-77-language-roadmap"><a class="header" href="#atlas-77-language-roadmap">Atlas 77 Language Roadmap</a></h1>
+<p>This document outlines the planned features and improvements for Atlas 77. Features are organized by category and development status.</p>
+<h2 id="current-version"><a class="header" href="#current-version">Current Version</a></h2>
+<p>Atlas 77 is currently in <strong>early development</strong> (v0.6). The compiler and runtime are functional but not production-ready. Expect breaking changes and API modifications.</p>
+<h2 id="language-features"><a class="header" href="#language-features">Language Features</a></h2>
+<h3 id="implemented-"><a class="header" href="#implemented-">Implemented ✅</a></h3>
+<ul>
+<li><strong>Static typing</strong> – All variables require explicit type annotations</li>
+<li><strong>Structs</strong> – Product types with fields and methods</li>
+<li><strong>Functions</strong> – First-class declaration with explicit return types</li>
+<li><strong>Generics</strong> – Parametric types with explicit type parameters</li>
+<li><strong>Control flow</strong> – <code>if</code>/<code>else</code>, <code>while</code> loops</li>
+<li><strong>Memory management</strong> – <code>new</code>/<code>delete</code> with RAII cleanup</li>
+<li><strong>References</strong> – Borrowing without ownership transfer</li>
+<li><strong>Copy/Move semantics</strong> – Copy implicit for primitives, move for custom types</li>
+<li><strong>Error types</strong> – <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> for error handling</li>
+<li><strong>Comments</strong> – Single-line comments with <code>//</code></li>
+</ul>
+<h3 id="planned-"><a class="header" href="#planned-">Planned 🎯</a></h3>
+<h4 id="high-priority"><a class="header" href="#high-priority">High Priority</a></h4>
+<ol>
+<li>
+<p><strong>Operator Overloading</strong></p>
+<ul>
+<li>Allow custom implementations of <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>==</code>, <code>&lt;</code>, etc.</li>
+<li>Enable ergonomic syntax for user-defined types</li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+<li>
+<p><strong>For-loops over Ranges</strong></p>
+<ul>
+<li>Syntax: <code>for i in 0..10 { ... }</code></li>
+<li>Support inclusive ranges: <code>0..=10</code></li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+<li>
+<p><strong>Pattern Matching</strong></p>
+<ul>
+<li>Match expressions</li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+<li>
+<p><strong>Copy &amp; Move Semantics Refinement</strong></p>
+<ul>
+<li>Better ergonomics for ownership patterns</li>
+<li>Improved compiler diagnostics</li>
+<li>Status: In progress</li>
+</ul>
+</li>
+<li>
+<p><strong>Dead Code Elimination</strong></p>
+<ul>
+<li>Optimization pass to remove unused variables, functions, and code</li>
+<li>Status: Planned</li>
+</ul>
+</li>
+<li>
+<p><strong>Compiler Improvements</strong></p>
+<ul>
+<li><strong>Error Recovery</strong> – Report multiple errors instead of stopping at first</li>
+<li><strong>Better diagnostics</strong> – More helpful error messages with suggestions</li>
+<li><strong>Optimization passes</strong> – Constant folding, inlining, etc.</li>
+<li>Status: Ongoing</li>
+</ul>
+</li>
+<li>
+<p><strong>Code Generation Backends</strong></p>
+<ul>
+<li><strong>Cranelift Backend</strong> – Native code generation (in addition to VM)</li>
+<li>Status: Cranelift in progress</li>
+</ul>
+</li>
+</ol>
+<h4 id="medium-priority"><a class="header" href="#medium-priority">Medium Priority</a></h4>
+<ol start="8">
+<li>
+<p><strong>First-class Functions and Closures</strong></p>
+<ul>
+<li>Functions as values: <code>fun_ptr: fun(int64) -&gt; int64</code></li>
+<li>Anonymous functions: <code>fun (x: int64) -&gt; int64 { x * 2 }</code></li>
+<li>Closures that capture variables</li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+<li>
+<p><strong>Concepts</strong></p>
+<ul>
+<li>Define shared behavior and interfaces</li>
+<li>Generic constraints on type parameters</li>
+<li>Default implementations</li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+<li>
+<p><strong>Union Types</strong></p>
+</li>
+</ol>
+<ul>
+<li>Discriminated unions for variant data</li>
+<li>Similar to Rust enums with pattern matching</li>
+<li>Status: Design phase</li>
+</ul>
+<ol start="11">
+<li>
+<p><strong>Smart Pointers</strong></p>
+<ul>
+<li><code>rc_ptr&lt;T&gt;</code> – Reference-counted pointers for shared ownership</li>
+<li>Status: Experimental (std/rc_ptr, WIP)</li>
+</ul>
+</li>
+<li>
+<p><strong>Type Casting</strong></p>
+<ul>
+<li>Explicit casting utilities in <code>std/cast</code></li>
+<li>Support for numeric and structural conversions</li>
+<li>Status: Experimental (std/cast, WIP)</li>
+</ul>
+</li>
+</ol>
+<h4 id="lower-priority"><a class="header" href="#lower-priority">Lower Priority</a></h4>
+<ol start="13">
+<li><strong>Async/Await</strong></li>
+</ol>
+<ul>
+<li>Non-blocking I/O support</li>
+<li><code>async</code> functions and <code>await</code> expressions</li>
+<li>Status: Design phase</li>
+</ul>
+<ol start="14">
+<li>
+<p><strong>Package System</strong></p>
+<ul>
+<li>Organize code into packages</li>
+<li>Namespace support for avoiding name collisions</li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+<li>
+<p><strong>Package Manager</strong></p>
+<ul>
+<li>Dependency resolution and management</li>
+<li>Binary distribution via crates.io</li>
+<li>Status: Design phase</li>
+</ul>
+</li>
+</ol>
+<h2 id="standard-library-roadmap"><a class="header" href="#standard-library-roadmap">Standard Library Roadmap</a></h2>
+<h3 id="core-modules-v10"><a class="header" href="#core-modules-v10">Core Modules (v1.0)</a></h3>
+<ul>
+<li>✅ <code>std/io</code> – Input/output (print, input, panic) <em>note: println WIP</em></li>
+<li>✅ <code>std/fs</code> – File system operations</li>
+<li>✅ <code>std/string</code> – String manipulation</li>
+<li>✅ <code>std/vector</code> – Dynamic arrays</li>
+<li>✅ <code>std/option</code> – Optional values</li>
+<li>✅ <code>std/result</code> – Error handling with results</li>
+<li>✅ <code>std/box</code> – Heap-allocated values</li>
+<li>✅ <code>std/iter</code> – Iterators and iteration</li>
+<li>✅ <code>std/map</code> – Key-value collections</li>
+<li>✅ <code>std/time</code> – Time and duration</li>
+<li>✅ <code>std/math</code> – Mathematical functions</li>
+</ul>
+<h3 id="experimental-modules-v06"><a class="header" href="#experimental-modules-v06">Experimental Modules (v0.6)</a></h3>
+<ul>
+<li>🔧 <code>std/rc_ptr</code> – Reference-counted smart pointers (WIP)</li>
+<li>🔧 <code>std/cast</code> – Type conversion utilities (WIP)</li>
+</ul>
+<h3 id="future-modules-v20"><a class="header" href="#future-modules-v20">Future Modules (v2.0+)</a></h3>
+<ul>
+<li>📋 <code>std/sync</code> – Threads and synchronization</li>
+<li>📋 <code>std/net</code> – Network I/O and TCP/UDP sockets</li>
+<li>📋 <code>std/json</code> – JSON serialization/deserialization</li>
+<li>📋 <code>std/regex</code> – Regular expressions</li>
+<li>📋 <code>std/hash</code> – Cryptographic and hash functions</li>
+<li>📋 <code>core/graphics</code> – Graphics rendering (Vulkan/OpenGL/DirectX)</li>
+<li>📋 <code>core/sdl</code> – SDL 2.0 bindings</li>
+<li>📋 <code>core/ffi</code> – C FFI (foreign function interface)</li>
+<li>📋 <code>core/ffi_rust</code> – Rust FFI</li>
+</ul>
+<h2 id="runtime--vm"><a class="header" href="#runtime--vm">Runtime &amp; VM</a></h2>
+<h3 id="current-status"><a class="header" href="#current-status">Current Status</a></h3>
+<ul>
+<li>VM-based interpreter (deprecated, to be replaced)</li>
+<li>Basic execution model for testing and learning</li>
+<li>Not optimized for performance</li>
+</ul>
+<h3 id="planned-improvements"><a class="header" href="#planned-improvements">Planned Improvements</a></h3>
+<ol>
+<li><strong>Cranelift Backend</strong> – Compile to native code for performance</li>
+<li><strong>Optimizations</strong> – Constant folding, dead code elimination, inlining</li>
+<li><strong>Error Recovery</strong> – Report multiple compilation errors</li>
+<li><strong>Better Diagnostics</strong> – Improving the context and suggestions in error messages</li>
+</ol>
+<h2 id="tooling"><a class="header" href="#tooling">Tooling</a></h2>
+<h3 id="atlas_77-cli"><a class="header" href="#atlas_77-cli"><code>atlas_77</code> CLI</a></h3>
+<h4 id="implemented--1"><a class="header" href="#implemented--1">Implemented ✅</a></h4>
+<ul>
+<li><code>atlas_77 init &lt;project&gt;</code> – Create new project</li>
+<li><code>atlas_77 build &lt;file&gt;</code> – Compile project</li>
+<li><code>atlas_77 run &lt;file&gt;</code> – Execute file or project</li>
+<li><code>atlas_77 help</code> – Show help</li>
+</ul>
+<h4 id="planned--1"><a class="header" href="#planned--1">Planned 🎯</a></h4>
+<ul>
+<li><code>atlas_77 test</code> – Run tests</li>
+<li><code>atlas_77 doc</code> – Generate documentation</li>
+</ul>
+<h3 id="build-artifacts"><a class="header" href="#build-artifacts">Build Artifacts</a></h3>
+<ul>
+<li>Default location: <code>./builds/&lt;project_name&gt;/</code></li>
+<li>Binary format: VM bytecode (temporary)</li>
+<li>Native code (future)</li>
+</ul>
+<h2 id="compiler-features"><a class="header" href="#compiler-features">Compiler Features</a></h2>
+<h3 id="optimizations"><a class="header" href="#optimizations">Optimizations</a></h3>
+<ul>
+<li>📋 Dead code elimination</li>
+<li>📋 Constant folding</li>
+<li>📋 Function inlining</li>
+<li>📋 Loop unrolling</li>
+<li>📋 Register allocation (with native backend)</li>
+</ul>
+<h2 id="milestone-timeline"><a class="header" href="#milestone-timeline">Milestone Timeline</a></h2>
+<ul>
+<li>
+<p><strong>v0.3.x</strong>:</p>
+<ul>
+<li>Initial language design</li>
+<li>Basic parser implementation</li>
+<li>Basic AST visitor runtime</li>
+</ul>
+</li>
+<li>
+<p><strong>v0.4.x</strong>:</p>
+<ul>
+<li>Prototype language design</li>
+<li>Basic parser and AST</li>
+</ul>
+</li>
+<li>
+<p><strong>v0.5.x (completed)</strong>:</p>
+<ul>
+<li>Proof of concept compiler</li>
+<li>Basic syntax and semantics</li>
+</ul>
+</li>
+<li>
+<p><strong>vO.6.x (current)</strong>:</p>
+<ul>
+<li>Core language features</li>
+<li>Basic standard library</li>
+<li>Move &amp; copy semantics</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>Types marked as “✅” are fully supported by the compiler and have dedicated instructions in the VM instruction set.</p>
-<p>The types marked as “🔧” are currently technically working, but the compiler doesn’t support them yet, and no instructions are specifically made to interact with them. So don’t try to use them yet.</p>
-<p>Types marked as “❌” are not implemented yet. They are planned for future releases.</p>
-</blockquote>
-<h2 id="memory-model"><a class="header" href="#memory-model">Memory Model</a></h2>
-<p>The Atlas77 VM uses a stack-based memory model. Each function call creates a new stack frame that contains local variables and the operand stack. The VM also maintains a heap for dynamic memory allocation, where objects and arrays are stored.</p>
-<h3 id="stack-frames"><a class="header" href="#stack-frames">Stack Frames</a></h3>
-<p>Each stack frame consists of:</p>
-<ul>
-<li><strong>Previous Program Counter (PC)</strong>: The return address for the function call.</li>
-<li><strong>Previous Base Pointer (BP)</strong>: Points to the base of the previous stack frame.</li>
-<li><strong>Arguments</strong>: The parameters passed to the function, though arguments are considered to just be local variables.</li>
-<li><strong>Local Variables</strong>: Space allocated for local variables.</li>
-<li><strong>Operand Stack</strong>: Used for evaluating expressions and storing intermediate results.</li>
-</ul>
-<p>You can visualize the stack frame layout as follows:</p>
-<pre><code>|-----------------------|
-|   Previous PC         |
-|-----------------------|
-|   Previous BP         |
-|-----------------------|
-|   Arguments           |
-|-----------------------|
-|   Local Variables     |
-|-----------------------|
-|   Operand Stack       |
-|-----------------------|
-</code></pre>
-<h3 id="heap"><a class="header" href="#heap">Heap</a></h3>
-<p>The heap is used for dynamic memory allocation. Objects and arrays are allocated on the heap, and the VM uses reference counting to manage memory. When an object or array is no longer referenced, it is automatically deallocated. As for the cyclic references, the current implementation does not handle them, and they may lead to memory leaks. Though, there is a <code>delete</code> instruction that can be used to manually free memory.</p>
-<h3 id="constant-pool"><a class="header" href="#constant-pool">Constant Pool</a></h3>
-<p>The Atlas77 VM uses a constant pool to store literals and other constant values used in the bytecode. The constant pool is indexed, and instructions can reference constants by their index in the pool. The constant pool can contain:</p>
-<ul>
-<li>Integer literals</li>
-<li>Unsigned integer literals</li>
-<li>Floating-point literals</li>
-<li>String literals</li>
-<li>Function references</li>
-<li>Lists of constants (for arrays)</li>
-</ul>
-<blockquote>
-<p>NB: The constant pool will be refactored in future versions to allow better organization and separation of different constant types. To do so, we might introduce multiple constant pools (e.g., one for literals, one for function references, etc.) as well as more specific instructions to interact with them (e.g. <code>LOAD_INT_CONST</code>, <code>LOAD_STRING_CONST</code>, …).</p>
-</blockquote>
-<h2 id="instruction-set"><a class="header" href="#instruction-set">Instruction Set</a></h2>
-<p>The Atlas77 instruction set is encoded in a 32-bit format, with each instruction consisting of an opcode followed by zero or more operands (at most three 8bit operands).</p>
-<h3 id="constant-loading"><a class="header" href="#constant-loading">Constant loading</a></h3>
-<ul>
-<li><code>LOAD_CONST &lt;constant_pool_idx&gt;</code>: Loads a constant from the constant pool onto the stack.</li>
-</ul>
-<blockquote>
-<p>As mentionned, this will be refactored soon.</p>
-</blockquote>
-<h3 id="stack-manipulation"><a class="header" href="#stack-manipulation">Stack manipulation</a></h3>
-<ul>
-<li><code>POP</code>: Removes the top value from the stack.</li>
-<li><code>DUP</code>: Duplicates the top value on the stack.</li>
-<li><code>SWAP</code>: Swaps the top two values on the stack.</li>
-</ul>
-<h3 id="variable-operations"><a class="header" href="#variable-operations">Variable operations</a></h3>
-<ul>
-<li><code>STORE_VAR &lt;local_slot_idx&gt;</code>: Stores the top value from the stack into a local variable slot.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value_to_store</code></p>
+<p>[!Note] Nothing is set in stone; timelines may shift based on what I want to work on and community feedback.</p>
 </blockquote>
 <ul>
-<li><code>LOAD_VAR &lt;local_slot_idx&gt;</code>: Loads a value from a local variable slot onto the stack.</li>
-</ul>
-<h3 id="collections--indexing"><a class="header" href="#collections--indexing">Collections &amp; Indexing</a></h3>
+<li><strong>v0.7.x</strong>:
 <ul>
-<li><code>INDEX_LOAD</code>: Loads a value from an array at the index specified on the stack.</li>
+<li>Cranelift backend MVP</li>
 </ul>
-<blockquote>
-<p>Top of the stack state: <code>... | index | array_ptr</code></p>
+</li>
+<li><strong>Future versions</strong>:
+<ul>
+<li>Operator overloading</li>
+<li>Pattern matching</li>
+<li>First-class functions &amp; closures</li>
+<li>Concepts</li>
+</ul>
+</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Timeline is aspirational and subject to change based on development priorities and community feedback.</p>
 </blockquote>
+<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
+<p>The language is actively developed. Feature requests, bug reports, and discussions are welcome. Development happens in the compiler repository.</p>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
 <ul>
-<li><code>INDEX_STORE</code>: Stores a value into an array at the index specified on the stack.</li>
+<li><a href="#language-reference">Language Reference</a></li>
+<li><a href="#memory-model">Memory Model</a></li>
+<li><a href="#standard-library">Standard Library</a></li>
 </ul>
-<blockquote>
-<p>Top of the stack state: <code>... | index | array_ptr | value_to_store</code></p>
-</blockquote>
-<ul>
-<li><code>STRING_LOAD</code>: Loads a character from a string at the index specified on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | index | string_ptr</code></p>
-</blockquote>
-<ul>
-<li><code>STRING_STORE</code>: Stores a character into a string at the index specified on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | index | string_ptr | char_to_store</code></p>
-</blockquote>
-<ul>
-<li><code>NEW_ARRAY</code>: Creates a new array with the size specified on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | size</code></p>
-<p>NB: The type of the array is still not specified in the instruction set. This will be added in future versions.</p>
-</blockquote>
-<h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
-<ul>
-<li><code>INT_ADD</code>, <code>FLOAT_ADD</code>, <code>UINT_ADD</code>: Adds the top two values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 + value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_SUB</code>, <code>FLOAT_SUB</code>, <code>UINT_SUB</code>: Subtracts the top two values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 - value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_MUL</code>, <code>FLOAT_MUL</code>, <code>UINT_MUL</code>: Multiplies the top two values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 * value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_DIV</code>, <code>FLOAT_DIV</code>, <code>UINT_DIV</code>: Divides the top two values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 / value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_MOD</code>, <code>UINT_MOD</code>, <code>FLOAT_MOD</code>: Computes the modulus of the top two values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 % value2)</code></p>
-</blockquote>
-<h3 id="comparisons"><a class="header" href="#comparisons">Comparisons</a></h3>
-<ul>
-<li><code>INT_EQUAL</code>, <code>UINT_EQUAL</code>, <code>FLOAT_EQUAL</code>, <code>BOOL_EQUAL</code>: Compares the top two values on the stack for equality.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 == value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_NOT_EQUAL</code>, <code>UINT_NOT_EQUAL</code>, <code>FLOAT_NOT_EQUAL</code>, <code>BOOL_NOT_EQUAL</code>: Compares the top two values on the stack for inequality.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 != value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_GREATER_THAN</code>, <code>UINT_GREATER_THAN</code>, <code>FLOAT_GREATER_THAN</code>: Compares if the second value is greater than the top value on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 &gt; value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_GREATER_THAN_EQUAL</code>, <code>UINT_GREATER_THAN_EQUAL</code>, <code>FLOAT_GREATER_THAN_EQUAL</code>: Compares if the second value is greater than or equal to the top value on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 &gt;= value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_LESS_THAN</code>, <code>UINT_LESS_THAN</code>, <code>FLOAT_LESS_THAN</code>: Compares if the second value is less than the top value on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 &lt; value2)</code></p>
-</blockquote>
-<ul>
-<li><code>INT_LESS_THAN_EQUAL</code>, <code>UINT_LESS_THAN_EQUAL</code>, <code>FLOAT_LESS_THAN_EQUAL</code>: Compares if the second value is less than or equal to the top value on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value1 | value2</code> becomes <code>... | (value1 &lt;= value2)</code></p>
-</blockquote>
-<ul>
-<li><code>BOOL_AND</code>: Performs a logical AND on the top two boolean values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | bool1 | bool2</code> becomes <code>... | (bool1 &amp;&amp; bool2)</code></p>
-<p>NB: Short-circuit evaluation is not implemented yet, so this instruction is only temporary.</p>
-</blockquote>
-<ul>
-<li><code>BOOL_OR</code>: Performs a logical OR on the top two boolean values on the stack.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | bool1 | bool2</code> becomes <code>... | (bool1 || bool2)</code></p>
-<p>NB: Short-circuit evaluation is not implemented yet, so this instruction is only temporary.</p>
-</blockquote>
-<h3 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h3>
-<ul>
-<li><code>JMP &lt;where_to&gt;</code>: Relative unconditional jump to the specified instruction offset.</li>
-<li><code>JMP_Z &lt;where_to&gt;</code>: Relative jump to the specified instruction offset if the top value on the stack is zero (false).</li>
-</ul>
-<h3 id="functions-5"><a class="header" href="#functions-5">Functions</a></h3>
-<ul>
-<li><code>LOCAL_SPACE &lt;local_space_size&gt;</code>: Allocates space for local variables in the current stack frame.</li>
-<li><code>CALL &lt;func_id&gt;</code>: Calls a function by its ID.</li>
-<li><code>EXTERN_CALL &lt;func_name_idx&gt;</code>: Calls an external function by its name index in the constant pool.</li>
-<li><code>RETURN</code>: Returns from the current function, restoring the previous stack frame.</li>
-</ul>
-<h3 id="objects"><a class="header" href="#objects">Objects</a></h3>
-<ul>
-<li><code>NEW_OBJ &lt;obj_descriptor_id&gt;</code>: Creates a new zeroed object based on the provided object descriptor ID.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | </code> becomes <code>... | obj_ptr</code></p>
-</blockquote>
-<ul>
-<li><code>GET_FIELD &lt;obj_field_idx&gt;</code>: Retrieves a field from an object.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | obj_ptr</code> becomes `… | field_value</p>
-</blockquote>
-<ul>
-<li><code>SET_FIELD &lt;obj_field_idx&gt;</code>: Sets a field in an object.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | obj_ptr | field_value</code> becomes `…</p>
-</blockquote>
-<ul>
-<li><code>DELETE_OBJ</code>: Deletes an object, decrementing its reference count and freeing memory if necessary.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | obj_ptr</code> becomes <code>...</code></p>
-<p>NB: This does not call the object’s destructor. You must manually call the destructor to handle any RAII that you want before using this instruction.</p>
-</blockquote>
-<h3 id="type-operations"><a class="header" href="#type-operations">Type Operations</a></h3>
-<ul>
-<li><code>CAST_TO &lt;type&gt;</code>: Casts the top value on the stack to the specified type.</li>
-</ul>
-<blockquote>
-<p>Top of the stack state: <code>... | value</code> becomes <code>... | casted_value</code></p>
-</blockquote>
-<h3 id="miscellaneous"><a class="header" href="#miscellaneous">Miscellaneous</a></h3>
-<ul>
-<li><code>NoOp</code>: Does nothing. Can be used for padding or alignment.</li>
-<li><code>Halt</code>: Stops the execution of the VM.</li>
-</ul>
-<h2 id="example-bytecode"><a class="header" href="#example-bytecode">Example Bytecode</a></h2>
-<p>Here is a simple example of Atlas77 VM bytecode for this fibonacci function:</p>
-<pre><code class="language-ts">import "std/io";
-
-fun main() {
-    println(fib(40));
-}
-
-fun fib(n: int64) -&gt; int64 {
-    if n &lt;= 1 {
-        return n;
-    } else {
-        return fib(n - 1) + fib(n - 2);
-    }
-}
-</code></pre>
-<pre><code class="language-ts">section .config
-	USE_STANDARD_LIB: true  // Use the standard library
-
-section .data
-	0000 = int64 : 1            // Constant pool first entry (int64 1)
-	0001 = int64 : 2            // Constant pool second entry (int64 2)
-	0002 = int64 : 40           // Constant pool third entry (int64 40)
-	0003 = string : "println"   // Constant pool fourth entry (string "println")
-
-section .structs
-    ; No structs used in this example
-
-section .functions
-	fib @0000           // Function ID 0: fib
-    // function main does not need to be declared here as its the entry point
-
-section .text
-fib:
-	LOCAL_SPACE #1      // Allocate space for 1 local variable (n)
-	LOAD_VAR @0         // Load n
-	LOAD_CONST &amp;0000    // Load constant 1
-	INT_LESS_THAN_EQUAL // Check if n &lt;= 1
-	JMP_Z 3             // If false, jump to else branch
-if_branch:
-	LOAD_VAR @0         // Load n
-	RETURN              // Return n
-	JMP 11              // Jump to the end
-else_branch:
-	LOAD_VAR @0         // Load n
-	LOAD_CONST &amp;0000    // Load constant 1
-	INT_SUB             // n - 1
-	CALL @0000          // Call fib(n - 1)
-	LOAD_VAR @0         // Load n
-	LOAD_CONST &amp;0001    // Load constant 2
-	INT_SUB             // n - 2   
-	CALL @0000          // Call fib(n - 2)
-	INT_ADD             // Add the two results
-	RETURN              // Return the result
-main:
-	LOAD_CONST &amp;0002    // Load constant 40
-	CALL @0000          // Call fib(40)
-	EXTERN_CALL &amp;0003   // Call println
-	POP                 // Pop the return value of println as its a unit function
-	HALT                // Halt the program
-
-</code></pre>
 
                     </main>
 

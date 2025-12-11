@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4d90fe75.js";
+            window.path_to_searchindex_js = "searchindex-087741d2.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-2a46b18d.js"></script>
+        <script src="toc-50da4d0a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -209,8 +209,8 @@ Most of the modules aren’t implement or finished yet. The documentation is her
 <p>You can see what is implemented with the checkboxes below.</p>
 <h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
 <ul>
-<li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a string to the standard output followed by a newline.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a value to the standard output.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a value to the standard output followed by a newline.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>input() -&gt; str</code>: Read a line from the standard input.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>panic(msg: string) -&gt; !</code>: Abort the program with an error message.</li>
 </ul>
@@ -517,6 +517,7 @@ public:
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>next(this: Iter&lt;T&gt;) -&gt; Option&lt;T&gt;</code>: Get the next element in the iterator.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>peek(this: Iter&lt;T&gt;) -&gt; Option&lt;&amp;const T&gt;</code>: Peek at the next element in the iterator without advancing it.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>has_next(this: Iter&lt;T&gt;) -&gt; bool</code>: Check if the iterator has more elements.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code>: Create a new iterator from an array.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_string(data: string) -&gt; Iter&lt;char&gt;</code>: Create a new iterator from a primitive string.</li>
 </ul>
@@ -539,15 +540,41 @@ public:
 <h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>insert(this: Map&lt;K, V&gt;, key: K, value: V) -&gt; unit</code>: Insert a key-value pair into the map.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>get(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Get the value associated with a key.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>remove(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Remove a key-value pair from the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>get(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Get a value from the map by key.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>remove(this: Map&lt;K, V&gt;, key: K) -&gt; unit</code>: Remove a key-value pair from the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>contains(this: Map&lt;K, V&gt;, key: K) -&gt; bool</code>: Check if a key exists in the map.</li>
+<li><input disabled="" type="checkbox" checked=""> <code>size(this: Map&lt;K, V&gt;) -&gt; uint64</code>: Get the number of key-value pairs in the map.</li>
+</ul>
+<h2 id="experimental-modules-not-yet-included"><a class="header" href="#experimental-modules-not-yet-included">Experimental Modules (Not Yet Included)</a></h2>
+<p>The following modules are under active development and are <strong>not included</strong> in the current standard library:</p>
+<h3 id="stdrc_ptr"><a class="header" href="#stdrc_ptr"><code>std/rc_ptr</code></a></h3>
+<p><strong>Status:</strong> Experimental, work in progress</p>
+<p>Reference-counted smart pointers for shared ownership:</p>
+<pre><code class="language-cpp">// Planned usage (not yet available):
+// let ptr: rc_ptr&lt;Data&gt; = rc_ptr::new(Data());
+// let cloned: rc_ptr&lt;Data&gt; = ptr.clone();  // Reference count increases
+</code></pre>
+<h3 id="stdcast"><a class="header" href="#stdcast"><code>std/cast</code></a></h3>
+<p><strong>Status:</strong> Experimental, work in progress</p>
+<p>Type casting and conversion utilities:</p>
+<pre><code class="language-cpp">// Planned usage (not yet available):
+// let num: int64 = 42;
+// let as_float: float64 = cast&lt;float64&gt;(num);
+</code></pre>
+<hr>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li>All modules are works in progress and subject to change.</li>
+<li>Most modules are not yet fully implemented or finalized.</li>
+<li>For experimental modules listed above, expect significant API changes.</li>
+<li>Standard library types may not be copyable; assume move semantics unless documented otherwise.</li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="generics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="reserved_keywords.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
@@ -561,7 +588,7 @@ public:
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="generics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="reserved_keywords.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 

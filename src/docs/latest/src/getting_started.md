@@ -1,61 +1,66 @@
-> NB: This is a work in progress document. The syntax is subject to change.
+# Getting Started with Atlas 77
 
-# Current Syntax of Atlas77
+Welcome to Atlas 77! This guide will help you install the language and write your first program.
 
-## 1. Introduction
+## Your First Program
 
-Atlas77 is a simple, easy-to-use, and powerful programming language. It is designed to be easy to learn and use, while
-still being powerful enough to handle complex tasks. This document describes the syntax of Atlas77, including the rules
-for writing code in the language (WIP).
-
-## 2. Hello, World!
-
-Here is a simple "Hello, World!" program written in Atlas77:
+Here is a simple "Hello, Atlas!" program:
 
 ```cpp
-import "std/io"
+import "std/io";
 
-func main() -> int64 {
-    print("Hello, World!")
+fun main() {
+    println("Hello, Atlas!");
 }
 ```
 
-> Do know that strings are not implemented yet, so this is just an example of how it will look like
+Save this code to a `.atlas` file, then run it with:
 
-Save this code to a `.atlas` file, then run it directly with `atlas run <FILE_PATH>`
-
-## 3. Comments
-
-Comments in Atlas77 are similar to comments in other programming languages. There are two types of comments: single-line
-comments and multi-line comments.
-
-# 3.1. Single-line Comments
-
-Single-line comments start with `//` and continue until the end of the line. For example:
-
-```rs
-// This is a single-line comment
-
-let x: i64 = 5; // This is also a single-line comment
+```bash
+atlas_77 run <FILE_PATH>
 ```
 
-# 3.2. Multi-line Comments
-
-Multi-line comments start with `/*` and end with `*/`. For example:
-> NB: Multi-line comments aren't supported yet (you'll see a lot of WIPs in this document)
-
-```rs
-/*
-This is a multi-line comment.
-    /*
-        NOTE: Multi-line comments can be nested.
-    */
-
-It can span multiple lines.
-*/
+For example:
+```bash
+atlas_77 run hello.atlas
 ```
 
-> Comments are parsed as tokens by the compiler, to allow future documentation features.
+## Creating a Project
+
+To create a new Atlas 77 project with standard structure:
+
+```bash
+atlas_77 init my_project
+cd my_project
+atlas_77 run
+```
+
+This creates a basic project template with all necessary files.
+
+## Next Steps
+
+- Read [Hello, World!](./hello_world.md) for a detailed walkthrough
+- Explore [Language Reference](./language-reference.md) for complete syntax documentation
+- Try [Guessing Game](./guessing_game.md) for a practical example
+- Check [Memory Model](./memory-model.md) to understand ownership and cleanup
+- Browse [Standard Library](./std.md) for available modules and functions
+
+## Comments
+
+Comments document code and are ignored by the compiler.
+
+### Single-line Comments
+
+Single-line comments start with `//` and continue to the end of the line:
+
+```cpp
+// This is a comment
+let x: int64 = 42;  // Comments can appear at the end of lines too
+```
+
+> **Note:** Multi-line comments are not yet implemented.
+
+> In the future I'll add support for documentation comments, though the syntax is not yet decided.
 
 ## 4. Variables
 
@@ -64,14 +69,14 @@ Variables in Atlas77 are either mutable or immutable. The design follows in some
 `const` keyword, which creates an immutable variable.
 
 ```cpp
-import "std/io"
+import "std/io";
 
-func main() -> int64 {
-    let x: i64 = 5;
+fun main() -> int64 {
+    let x: int64 = 5;
     x = 10;
     print(x); // Output: 10
 
-    const y: i64 = 5;
+    const y: int64 = 5;
     y = 10; // Error: Cannot assign to a constant variable
 }
 ```
@@ -83,36 +88,22 @@ following table lists the built-in data types in Atlas77:
 
 | Data Type | Description                         | State |
 |-----------|-------------------------------------|-------|
-| `i8`      | 8-bit signed integer                | 💤    |
-| `i16`     | 16-bit signed integer               | 💤    |
-| `i32`     | 32-bit signed integer               | 💤    |
-| `i64`     | 64-bit signed integer               | ✅     |
+| `int8`      | 8-bit signed integer                | 💤    |
+| `int16`     | 16-bit signed integer               | 💤    |
+| `int32`     | 32-bit signed integer               | 💤    |
+| `int64`     | 64-bit signed integer               | ✅     |
 | `isize`   | Platform-dependent signed integer   | 💤    |
-| `u8`      | 8-bit unsigned integer              | 💤    |
-| `u16`     | 16-bit unsigned integer             | 💤    |
-| `u32`     | 32-bit unsigned integer             | 💤    |
-| `u64`     | 64-bit unsigned integer             | ✅     |
+| `uint8`      | 8-bit unsigned integer              | 💤    |
+| `uint16`     | 16-bit unsigned integer             | 💤    |
+| `uint32`     | 32-bit unsigned integer             | 💤    |
+| `uint64`     | 64-bit unsigned integer             | ✅     |
 | `usize`   | Platform-dependent unsigned integer | 💤    |
-| `f32`     | 32-bit floating-point number        | 💤    |
-| `f64`     | 64-bit floating-point number        | ✅     |
+| `float32`     | 32-bit floating-point number        | 💤    |
+| `float64`     | 64-bit floating-point number        | ✅     |
 | `bool`    | Boolean value (`true` or `false`)   | ✅     |
-| `char`    | Unicode character                   | 💭    |
-| `str`     | String                              | 💭    |
+| `char`    | Unicode character                   | ✅    |
+| `string`     | String                              | ✅    |
 | `array`   | Array (syntax: `[YourType]`)        | 💭    |
-
-> Note: The `str` and `array` types will be mutable and resizable.
-> More powerful types for both Strings and Arrays will be implemented in the future (e.g., `Vec<YourType>` for arrays &
-`String`).
-
-> NB: The `char` type is not implemented yet, but it will be a 32-bit Unicode character.
-
-> NB 2: Since this is a VM-based language,
-> all numeric types smaller than 64 bits (e.g., u8, u16, u32)
-> are internally represented as 64-bit values for simplicity and consistency.
-> However, they will behave as their original types, respecting their size and overflow semantics.
-> In the future, packed types may be introduced to optimize memory usage for arrays
-> (e.g., ``[u8]`` could be represented as ``[u8x8]``, ``[u16]`` as ``[u16x4]``, etc.).
-> At present, the minimum memory size for numeric types is 8 bytes.
 
 ## 6. Functions
 
@@ -120,13 +111,13 @@ Functions in Atlas77 are defined using the `func` keyword, followed by the funct
 body. The return type of a function is specified after the `->` symbol. For example:
 
 ```cpp
-import "std/io"
+import "std/io";
 
-func add(x: int64, y: int64) -> int64{
+fun add(x: int64, y: int64) -> int64{
     return x + y;
 }
 
-func main() -> int64 {
+fun main() -> int64 {
     let result: int64 = add(5, 10);
     print(result); // Output: 15
 }
@@ -144,25 +135,23 @@ loops. The syntax for these control structures is similar to other programming l
 | `while` loop       | Loop with a condition           | ✅     |
 | `for` loop         | Loop over a range or collection | 💤    |
 
-> Note: Nested if-else (i.e. `if {} else if {} else {}`) isn't supported yet.
 
 ```cpp
-import "std/io"
+import "std/io";
 
-func main() -> int64 {
-    let x: int64 = 5;
+fun main() -> int64 {
+    let x = 5;
 
     if x > 0 {
         print("x is positive");
+    } else if x < 0 {
+        print("x is negative");
     } else {
-        if x < 0 {
-            print("x is negative");
-        } else {
-            print("x is zero");
-        }
+        print("x is zero");
     }
+    
 
-    let i: i64 = 0;
+    let i = 0;
     while i < 5 {
         print(i);
         i += 1;
@@ -177,41 +166,61 @@ handling, string & list manipulation, time & math functions. The standard librar
 keyword, followed by the library name. For example:
 
 ```cpp
-import "std/io"
+import "std/io";
 
-func main() {
-    print("Hello, World!");
+fun main() {
+    println("Hello, World!");
 }
 ```
 
-As of writing this document, the following standard libraries are available:
+Check out the current state of the [standard library](./std.md).
 
-- `std/io`: Input/output functions
-    - `print_int(i: i64)`: Print an integer to the console
-    - `print_float(f: f64)`: Print a floating-point number to the console
-    - `print_uint(u: u64)`: Print an unsigned integer to the console
-    - `print_bool(b: bool)`: Print a boolean value to the console
+## 9. Arrays
 
-> Yes it is very limited, but tbh `str`, `array` & structs are still not implemented,
-> so it's a bit hard to implement more complex functions.
+Arrays in Atlas77 are used to store multiple values of the same type. They are defined using square brackets `[]`. For example:
+```cpp
+import "std/io";
 
-## 9 Arrays
+fun main() -> int64 {
+    let numbers: [int64] = [1, 2, 3, 4, 5];
+    let i = 0;
+    while i < 5 {
+        print(numbers[i]);
+        i += 1;
+    }
+}
+```
 
+If you want, you can also allocate an empty array with a specific size:
+
+```cpp
+import "std/io";
+
+fun main() -> int64 {
+    let size: int64 = 5;
+    // Allocates an array of 5 int64s initialized to 0
+    let numbers: [int64] = new [int64; size];
+    let i = 0;
+    while i < size {
+        numbers[i] = i * 2; // Assign values
+        print(numbers[i]);
+        i += 1;
+    }
+}
+```
 
 
 ## 10. Enums
 
-> WIP
-
-Example:
+Enums in Atlas77 are used to define a type that can have a set of named values. They are defined using the `enum` keyword. For example:
 
 ```cpp
 public enum Color {
-    Red = 1,
-    Yellow,
-    Green = 3,
-    Purple,
-    Blue = 5,
+    Red = 1;
+    Yellow;
+    Green = 3;
+    Purple;
+    Blue = 5;
 }
 ```
 
@@ -219,68 +228,94 @@ public enum Color {
 
 > WIP
 
-Current state of `std/fs`:
+Current state of `std/fs` would be a good enough example of how classes/structs work in Atlas77:
 
 ```cpp
-extern read_dir(path: str) -> [str]
-extern read_file(path: str) -> str
-extern write_file(path: str, content: str)
-extern remove_file(path: str)
-extern file_exists(path: str) -> bool
+private extern read_dir(path: string) -> [string];
+private extern read_file(path: string) -> string;
+private extern write_file(path: string, content: string);
+private extern remove_file(path: string);
+private extern file_exists(path: string) -> bool;
+private extern close_file(path: string);
 
-public class File {
-    private:
-        flag: i64;
-        content: str;
-        path: str;
-    public:
-        func create() -> File {
-            return new File {
-                flag: 0,
-                content: None,
-                path: "",
-            };
-        }
-        func read(path: str) -> File {
-            let file: Self = File::create();
-            file.path = path;
-            file.content = Some(read_file(path));
-            return file;
-        }
-        func write(&self, content: str) {
-            write_file(self.path, content);
-        }
-        func remove(&self) {
-            remove_file(self.path);
-        }
-        func exists(&self) -> bool {
-            return file_exists(self.path);
-        }
-        func read_dir(path: str) -> [str] {
-            return read_dir(path);
-        }
-        func read_file(path: str) -> str {
-            return read_file(path);
-        }
+//NB: This struct works for now, but because of the lack of move/copy semantics in Atlas,
+// it may lead to unexpected behavior.
+public struct File {
+private:
+    content: string;
+public:
+    path: string;
+public:
+    /// Creates a new File object with the given path
+    /// Note: The file is not opened until the open() method is called
+    File(path: string) {
+        this.content = "";
+        this.path = path;
+    }
+
+    ~File() {
+        //Following the RAII pattern, we close the file when it goes out of scope
+        this.close();
+    }
+
+    fun read(this) -> string {
+        let content = read_file(this.path);
+        this.content = content;
+        return this.content;
+    }
+
+    fun open(this) {
+        this.content = read_file(this.path);
+        return;
+    }
+
+    fun close(this) {
+        close_file(this.path);
+        return;
+    }
+
+    fun write(this, content: string) {
+        write_file(this.path, content);
+        return;
+    }
+
+    fun remove(this) {
+        remove_file(this.path);
+        return;
+    }
+
+    fun exists(this) -> bool {
+        return file_exists(this.path);
+    }
+
+    fun read_dir(this, path: string) -> [string] {
+        return read_dir(path);
+    }
+
+    fun read_file(this, path: string) -> string {
+        return read_file(path);
+    }
 }
 ```
 
 ## 12. Generics
 
-As of now generics are only implemented for external functions.
+As of now you can define generic for external functions & structs. For example:
 
-### Example:
-```ts
-extern generic_func<T>(val: T) -> T
-extern other_generic_func<T, G>(t: [T], g: [G]) -> [T]
+```cpp
+extern identity<T>(value: T) -> T;
+struct Box<T> {
+    value: T;
+    Box(value: T) {
+        self.value = value;
+    }
+    fun get_value(this) -> T {
+        return this.value;
+    }
+}
 ```
 
-> [!NOTE] You can't return a generic that is not used in any parameter. Type inference is not implemented yet.
-
-
-> WIP
-
-## 13. Traits
+## 13. Concepts
 
 > The name is still to be decided
 

@@ -5,12 +5,17 @@
     - [Installation](./installation.md)
     - [Hello, World!](./hello_world.md)
 - [Programming a Guessing Game](./guessing_game.md)
-- [Example](./example.md)
 
-# Basic Usage
+# Language Reference
 
-- [Syntax]()
-- [Generics](./generics.md)
+- [Language Reference](./language-reference.md)
+- [Memory Model](./memory-model.md)
+- [Error Handling](./error-handling.md)
+- [Reserved Keywords](./reserved_keywords.md)
+
+# Type System
+
+- [Generics]()
 
 # Standard Library
 
@@ -20,5 +25,6 @@
 
 - [Blue Engine](./blue_engine.md)
 
-# VM Instructions
-- [Instructions](./vm_instructions.md)
+# Roadmap & Planning
+
+- [Roadmap](./roadmap.md)

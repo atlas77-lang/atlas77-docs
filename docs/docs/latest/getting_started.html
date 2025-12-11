@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4d90fe75.js";
+            window.path_to_searchindex_js = "searchindex-087741d2.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-2a46b18d.js"></script>
+        <script src="toc-50da4d0a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -180,64 +180,62 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <blockquote>
-<p>NB: This is a work in progress document. The syntax is subject to change.</p>
-</blockquote>
-<h1 id="current-syntax-of-atlas77"><a class="header" href="#current-syntax-of-atlas77">Current Syntax of Atlas77</a></h1>
-<h2 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h2>
-<p>Atlas77 is a simple, easy-to-use, and powerful programming language. It is designed to be easy to learn and use, while
-still being powerful enough to handle complex tasks. This document describes the syntax of Atlas77, including the rules
-for writing code in the language (WIP).</p>
-<h2 id="2-hello-world"><a class="header" href="#2-hello-world">2. Hello, World!</a></h2>
-<p>Here is a simple “Hello, World!” program written in Atlas77:</p>
-<pre><code class="language-cpp">import "std/io"
+                        <h1 id="getting-started-with-atlas-77"><a class="header" href="#getting-started-with-atlas-77">Getting Started with Atlas 77</a></h1>
+<p>Welcome to Atlas 77! This guide will help you install the language and write your first program.</p>
+<h2 id="your-first-program"><a class="header" href="#your-first-program">Your First Program</a></h2>
+<p>Here is a simple “Hello, Atlas!” program:</p>
+<pre><code class="language-cpp">import "std/io";
 
-func main() -&gt; int64 {
-    print("Hello, World!")
+fun main() {
+    println("Hello, Atlas!");
 }
 </code></pre>
-<blockquote>
-<p>Do know that strings are not implemented yet, so this is just an example of how it will look like</p>
-</blockquote>
-<p>Save this code to a <code>.atlas</code> file, then run it directly with <code>atlas run &lt;FILE_PATH&gt;</code></p>
-<h2 id="3-comments"><a class="header" href="#3-comments">3. Comments</a></h2>
-<p>Comments in Atlas77 are similar to comments in other programming languages. There are two types of comments: single-line
-comments and multi-line comments.</p>
-<h1 id="31-single-line-comments"><a class="header" href="#31-single-line-comments">3.1. Single-line Comments</a></h1>
-<p>Single-line comments start with <code>//</code> and continue until the end of the line. For example:</p>
-<pre><code class="language-rs">// This is a single-line comment
-
-let x: i64 = 5; // This is also a single-line comment
+<p>Save this code to a <code>.atlas</code> file, then run it with:</p>
+<pre><code class="language-bash">atlas_77 run &lt;FILE_PATH&gt;
 </code></pre>
-<h1 id="32-multi-line-comments"><a class="header" href="#32-multi-line-comments">3.2. Multi-line Comments</a></h1>
-<p>Multi-line comments start with <code>/*</code> and end with <code>*/</code>. For example:</p>
-<blockquote>
-<p>NB: Multi-line comments aren’t supported yet (you’ll see a lot of WIPs in this document)</p>
-</blockquote>
-<pre><code class="language-rs">/*
-This is a multi-line comment.
-    /*
-        NOTE: Multi-line comments can be nested.
-    */
-
-It can span multiple lines.
-*/
+<p>For example:</p>
+<pre><code class="language-bash">atlas_77 run hello.atlas
+</code></pre>
+<h2 id="creating-a-project"><a class="header" href="#creating-a-project">Creating a Project</a></h2>
+<p>To create a new Atlas 77 project with standard structure:</p>
+<pre><code class="language-bash">atlas_77 init my_project
+cd my_project
+atlas_77 run
+</code></pre>
+<p>This creates a basic project template with all necessary files.</p>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li>Read <a href="./hello_world.html">Hello, World!</a> for a detailed walkthrough</li>
+<li>Explore <a href="./language-reference.html">Language Reference</a> for complete syntax documentation</li>
+<li>Try <a href="./guessing_game.html">Guessing Game</a> for a practical example</li>
+<li>Check <a href="./memory-model.html">Memory Model</a> to understand ownership and cleanup</li>
+<li>Browse <a href="./std.html">Standard Library</a> for available modules and functions</li>
+</ul>
+<h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<p>Comments document code and are ignored by the compiler.</p>
+<h3 id="single-line-comments"><a class="header" href="#single-line-comments">Single-line Comments</a></h3>
+<p>Single-line comments start with <code>//</code> and continue to the end of the line:</p>
+<pre><code class="language-cpp">// This is a comment
+let x: int64 = 42;  // Comments can appear at the end of lines too
 </code></pre>
 <blockquote>
-<p>Comments are parsed as tokens by the compiler, to allow future documentation features.</p>
+<p><strong>Note:</strong> Multi-line comments are not yet implemented.</p>
+</blockquote>
+<blockquote>
+<p>In the future I’ll add support for documentation comments, though the syntax is not yet decided.</p>
 </blockquote>
 <h2 id="4-variables"><a class="header" href="#4-variables">4. Variables</a></h2>
 <p>Variables in Atlas77 are either mutable or immutable. The design follows in some sense TypeScript/JavaScript, with the
 <code>const</code> &amp; <code>let</code> keywords. Variables can be declared using the <code>let</code> keyword, which creates a mutable variable, or the
 <code>const</code> keyword, which creates an immutable variable.</p>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func main() -&gt; int64 {
-    let x: i64 = 5;
+fun main() -&gt; int64 {
+    let x: int64 = 5;
     x = 10;
     print(x); // Output: 10
 
-    const y: i64 = 5;
+    const y: int64 = 5;
     y = 10; // Error: Cannot assign to a constant variable
 }
 </code></pre>
@@ -250,52 +248,35 @@ following table lists the built-in data types in Atlas77:</p>
 <tr><th>Data Type</th><th>Description</th><th>State</th></tr>
 </thead>
 <tbody>
-<tr><td><code>i8</code></td><td>8-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>i16</code></td><td>16-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>i32</code></td><td>32-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>i64</code></td><td>64-bit signed integer</td><td>✅</td></tr>
+<tr><td><code>int8</code></td><td>8-bit signed integer</td><td>💤</td></tr>
+<tr><td><code>int16</code></td><td>16-bit signed integer</td><td>💤</td></tr>
+<tr><td><code>int32</code></td><td>32-bit signed integer</td><td>💤</td></tr>
+<tr><td><code>int64</code></td><td>64-bit signed integer</td><td>✅</td></tr>
 <tr><td><code>isize</code></td><td>Platform-dependent signed integer</td><td>💤</td></tr>
-<tr><td><code>u8</code></td><td>8-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>u16</code></td><td>16-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>u32</code></td><td>32-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>u64</code></td><td>64-bit unsigned integer</td><td>✅</td></tr>
+<tr><td><code>uint8</code></td><td>8-bit unsigned integer</td><td>💤</td></tr>
+<tr><td><code>uint16</code></td><td>16-bit unsigned integer</td><td>💤</td></tr>
+<tr><td><code>uint32</code></td><td>32-bit unsigned integer</td><td>💤</td></tr>
+<tr><td><code>uint64</code></td><td>64-bit unsigned integer</td><td>✅</td></tr>
 <tr><td><code>usize</code></td><td>Platform-dependent unsigned integer</td><td>💤</td></tr>
-<tr><td><code>f32</code></td><td>32-bit floating-point number</td><td>💤</td></tr>
-<tr><td><code>f64</code></td><td>64-bit floating-point number</td><td>✅</td></tr>
+<tr><td><code>float32</code></td><td>32-bit floating-point number</td><td>💤</td></tr>
+<tr><td><code>float64</code></td><td>64-bit floating-point number</td><td>✅</td></tr>
 <tr><td><code>bool</code></td><td>Boolean value (<code>true</code> or <code>false</code>)</td><td>✅</td></tr>
-<tr><td><code>char</code></td><td>Unicode character</td><td>💭</td></tr>
-<tr><td><code>str</code></td><td>String</td><td>💭</td></tr>
+<tr><td><code>char</code></td><td>Unicode character</td><td>✅</td></tr>
+<tr><td><code>string</code></td><td>String</td><td>✅</td></tr>
 <tr><td><code>array</code></td><td>Array (syntax: <code>[YourType]</code>)</td><td>💭</td></tr>
 </tbody>
 </table>
 </div>
-<blockquote>
-<p>Note: The <code>str</code> and <code>array</code> types will be mutable and resizable.
-More powerful types for both Strings and Arrays will be implemented in the future (e.g., <code>Vec&lt;YourType&gt;</code> for arrays &amp;
-<code>String</code>).</p>
-</blockquote>
-<blockquote>
-<p>NB: The <code>char</code> type is not implemented yet, but it will be a 32-bit Unicode character.</p>
-</blockquote>
-<blockquote>
-<p>NB 2: Since this is a VM-based language,
-all numeric types smaller than 64 bits (e.g., u8, u16, u32)
-are internally represented as 64-bit values for simplicity and consistency.
-However, they will behave as their original types, respecting their size and overflow semantics.
-In the future, packed types may be introduced to optimize memory usage for arrays
-(e.g., <code>[u8]</code> could be represented as <code>[u8x8]</code>, <code>[u16]</code> as <code>[u16x4]</code>, etc.).
-At present, the minimum memory size for numeric types is 8 bytes.</p>
-</blockquote>
 <h2 id="6-functions"><a class="header" href="#6-functions">6. Functions</a></h2>
 <p>Functions in Atlas77 are defined using the <code>func</code> keyword, followed by the function name, parameters, return type, and
 body. The return type of a function is specified after the <code>-&gt;</code> symbol. For example:</p>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func add(x: int64, y: int64) -&gt; int64{
+fun add(x: int64, y: int64) -&gt; int64{
     return x + y;
 }
 
-func main() -&gt; int64 {
+fun main() -&gt; int64 {
     let result: int64 = add(5, 10);
     print(result); // Output: 15
 }
@@ -316,25 +297,21 @@ loops. The syntax for these control structures is similar to other programming l
 </tbody>
 </table>
 </div>
-<blockquote>
-<p>Note: Nested if-else (i.e. <code>if {} else if {} else {}</code>) isn’t supported yet.</p>
-</blockquote>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func main() -&gt; int64 {
-    let x: int64 = 5;
+fun main() -&gt; int64 {
+    let x = 5;
 
     if x &gt; 0 {
         print("x is positive");
+    } else if x &lt; 0 {
+        print("x is negative");
     } else {
-        if x &lt; 0 {
-            print("x is negative");
-        } else {
-            print("x is zero");
-        }
+        print("x is zero");
     }
+    
 
-    let i: i64 = 0;
+    let i = 0;
     while i &lt; 5 {
         print(i);
         i += 1;
@@ -345,101 +322,136 @@ func main() -&gt; int64 {
 <p>Atlas77 comes with a relatively small standard library, which includes functions &amp; types for input/output, file
 handling, string &amp; list manipulation, time &amp; math functions. The standard library is imported using the <code>import</code>
 keyword, followed by the library name. For example:</p>
-<pre><code class="language-cpp">import "std/io"
+<pre><code class="language-cpp">import "std/io";
 
-func main() {
-    print("Hello, World!");
+fun main() {
+    println("Hello, World!");
 }
 </code></pre>
-<p>As of writing this document, the following standard libraries are available:</p>
-<ul>
-<li><code>std/io</code>: Input/output functions
-<ul>
-<li><code>print_int(i: i64)</code>: Print an integer to the console</li>
-<li><code>print_float(f: f64)</code>: Print a floating-point number to the console</li>
-<li><code>print_uint(u: u64)</code>: Print an unsigned integer to the console</li>
-<li><code>print_bool(b: bool)</code>: Print a boolean value to the console</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>Yes it is very limited, but tbh <code>str</code>, <code>array</code> &amp; structs are still not implemented,
-so it’s a bit hard to implement more complex functions.</p>
-</blockquote>
-<h2 id="9-arrays"><a class="header" href="#9-arrays">9 Arrays</a></h2>
+<p>Check out the current state of the <a href="./std.html">standard library</a>.</p>
+<h2 id="9-arrays"><a class="header" href="#9-arrays">9. Arrays</a></h2>
+<p>Arrays in Atlas77 are used to store multiple values of the same type. They are defined using square brackets <code>[]</code>. For example:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() -&gt; int64 {
+    let numbers: [int64] = [1, 2, 3, 4, 5];
+    let i = 0;
+    while i &lt; 5 {
+        print(numbers[i]);
+        i += 1;
+    }
+}
+</code></pre>
+<p>If you want, you can also allocate an empty array with a specific size:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() -&gt; int64 {
+    let size: int64 = 5;
+    // Allocates an array of 5 int64s initialized to 0
+    let numbers: [int64] = new [int64; size];
+    let i = 0;
+    while i &lt; size {
+        numbers[i] = i * 2; // Assign values
+        print(numbers[i]);
+        i += 1;
+    }
+}
+</code></pre>
 <h2 id="10-enums"><a class="header" href="#10-enums">10. Enums</a></h2>
-<blockquote>
-<p>WIP</p>
-</blockquote>
-<p>Example:</p>
+<p>Enums in Atlas77 are used to define a type that can have a set of named values. They are defined using the <code>enum</code> keyword. For example:</p>
 <pre><code class="language-cpp">public enum Color {
-    Red = 1,
-    Yellow,
-    Green = 3,
-    Purple,
-    Blue = 5,
+    Red = 1;
+    Yellow;
+    Green = 3;
+    Purple;
+    Blue = 5;
 }
 </code></pre>
 <h2 id="11-class--structs"><a class="header" href="#11-class--structs">11. Class &amp; Structs</a></h2>
 <blockquote>
 <p>WIP</p>
 </blockquote>
-<p>Current state of <code>std/fs</code>:</p>
-<pre><code class="language-cpp">extern read_dir(path: str) -&gt; [str]
-extern read_file(path: str) -&gt; str
-extern write_file(path: str, content: str)
-extern remove_file(path: str)
-extern file_exists(path: str) -&gt; bool
+<p>Current state of <code>std/fs</code> would be a good enough example of how classes/structs work in Atlas77:</p>
+<pre><code class="language-cpp">private extern read_dir(path: string) -&gt; [string];
+private extern read_file(path: string) -&gt; string;
+private extern write_file(path: string, content: string);
+private extern remove_file(path: string);
+private extern file_exists(path: string) -&gt; bool;
+private extern close_file(path: string);
 
-public class File {
-    private:
-        flag: i64;
-        content: str;
-        path: str;
-    public:
-        func create() -&gt; File {
-            return new File {
-                flag: 0,
-                content: None,
-                path: "",
-            };
-        }
-        func read(path: str) -&gt; File {
-            let file: Self = File::create();
-            file.path = path;
-            file.content = Some(read_file(path));
-            return file;
-        }
-        func write(&amp;self, content: str) {
-            write_file(self.path, content);
-        }
-        func remove(&amp;self) {
-            remove_file(self.path);
-        }
-        func exists(&amp;self) -&gt; bool {
-            return file_exists(self.path);
-        }
-        func read_dir(path: str) -&gt; [str] {
-            return read_dir(path);
-        }
-        func read_file(path: str) -&gt; str {
-            return read_file(path);
-        }
+//NB: This struct works for now, but because of the lack of move/copy semantics in Atlas,
+// it may lead to unexpected behavior.
+public struct File {
+private:
+    content: string;
+public:
+    path: string;
+public:
+    /// Creates a new File object with the given path
+    /// Note: The file is not opened until the open() method is called
+    File(path: string) {
+        this.content = "";
+        this.path = path;
+    }
+
+    ~File() {
+        //Following the RAII pattern, we close the file when it goes out of scope
+        this.close();
+    }
+
+    fun read(this) -&gt; string {
+        let content = read_file(this.path);
+        this.content = content;
+        return this.content;
+    }
+
+    fun open(this) {
+        this.content = read_file(this.path);
+        return;
+    }
+
+    fun close(this) {
+        close_file(this.path);
+        return;
+    }
+
+    fun write(this, content: string) {
+        write_file(this.path, content);
+        return;
+    }
+
+    fun remove(this) {
+        remove_file(this.path);
+        return;
+    }
+
+    fun exists(this) -&gt; bool {
+        return file_exists(this.path);
+    }
+
+    fun read_dir(this, path: string) -&gt; [string] {
+        return read_dir(path);
+    }
+
+    fun read_file(this, path: string) -&gt; string {
+        return read_file(path);
+    }
 }
 </code></pre>
 <h2 id="12-generics"><a class="header" href="#12-generics">12. Generics</a></h2>
-<p>As of now generics are only implemented for external functions.</p>
-<h3 id="example"><a class="header" href="#example">Example:</a></h3>
-<pre><code class="language-ts">extern generic_func&lt;T&gt;(val: T) -&gt; T
-extern other_generic_func&lt;T, G&gt;(t: [T], g: [G]) -&gt; [T]
+<p>As of now you can define generic for external functions &amp; structs. For example:</p>
+<pre><code class="language-cpp">extern identity&lt;T&gt;(value: T) -&gt; T;
+struct Box&lt;T&gt; {
+    value: T;
+    Box(value: T) {
+        self.value = value;
+    }
+    fun get_value(this) -&gt; T {
+        return this.value;
+    }
+}
 </code></pre>
-<blockquote>
-<p>[!NOTE] You can’t return a generic that is not used in any parameter. Type inference is not implemented yet.</p>
-</blockquote>
-<blockquote>
-<p>WIP</p>
-</blockquote>
-<h2 id="13-traits"><a class="header" href="#13-traits">13. Traits</a></h2>
+<h2 id="13-concepts"><a class="header" href="#13-concepts">13. Concepts</a></h2>
 <blockquote>
 <p>The name is still to be decided</p>
 </blockquote>

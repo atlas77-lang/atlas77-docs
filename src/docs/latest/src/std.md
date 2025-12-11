@@ -22,8 +22,8 @@ You can see what is implemented with the checkboxes below.
 
 ## `std/io`
 
-- [x] `print<T>(val: T) -> unit`: Print a string to the standard output.
-- [x] `println<T>(val: T) -> unit`: Print a string to the standard output followed by a newline.
+- [x] `print<T>(val: T) -> unit`: Print a value to the standard output.
+- [x] `println<T>(val: T) -> unit`: Print a value to the standard output followed by a newline.
 - [x] `input() -> str`: Read a line from the standard input.
 - [x] `panic(msg: string) -> !`: Abort the program with an error message.
 
@@ -303,8 +303,10 @@ public:
 ### Methods
 - [x] `next(this: Iter<T>) -> Option<T>`: Get the next element in the iterator.
 - [x] `peek(this: Iter<T>) -> Option<&const T>`: Peek at the next element in the iterator without advancing it.
+- [x] `has_next(this: Iter<T>) -> bool`: Check if the iterator has more elements.
 - [x] `Iter::<T>::from_array(data: [T]) -> Iter<T>`: Create a new iterator from an array.
 - [x] `Iter::<T>::from_string(data: string) -> Iter<char>`: Create a new iterator from a primitive string.
+
 
 ## `std/map`
 
@@ -325,5 +327,44 @@ public:
 
 ### Methods
 - [x] `insert(this: Map<K, V>, key: K, value: V) -> unit`: Insert a key-value pair into the map.
-- [x] `get(this: Map<K, V>, key: K) -> Option<V>`: Get the value associated with a key.
-- [x] `remove(this: Map<K, V>, key: K) -> Option<V>`: Remove a key-value pair from the map.
+- [x] `get(this: Map<K, V>, key: K) -> Option<V>`: Get a value from the map by key.
+- [x] `remove(this: Map<K, V>, key: K) -> unit`: Remove a key-value pair from the map.
+- [x] `contains(this: Map<K, V>, key: K) -> bool`: Check if a key exists in the map.
+- [x] `size(this: Map<K, V>) -> uint64`: Get the number of key-value pairs in the map.
+
+## Experimental Modules (Not Yet Included)
+
+The following modules are under active development and are **not included** in the current standard library:
+
+### `std/rc_ptr`
+
+**Status:** Experimental, work in progress
+
+Reference-counted smart pointers for shared ownership:
+
+```cpp
+// Planned usage (not yet available):
+// let ptr: rc_ptr<Data> = rc_ptr::new(Data());
+// let cloned: rc_ptr<Data> = ptr.clone();  // Reference count increases
+```
+
+### `std/cast`
+
+**Status:** Experimental, work in progress
+
+Type casting and conversion utilities:
+
+```cpp
+// Planned usage (not yet available):
+// let num: int64 = 42;
+// let as_float: float64 = cast<float64>(num);
+```
+
+---
+
+## Notes
+
+- All modules are works in progress and subject to change.
+- Most modules are not yet fully implemented or finalized.
+- For experimental modules listed above, expect significant API changes.
+- Standard library types may not be copyable; assume move semantics unless documented otherwise.
