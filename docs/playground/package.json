@@ -1,0 +1,15 @@
+{
+  "name": "atlas77-wasm",
+  "type": "module",
+  "version": "0.6.0",
+  "files": [
+    "atlas77_wasm_bg.wasm",
+    "atlas77_wasm.js",
+    "atlas77_wasm.d.ts"
+  ],
+  "main": "atlas77_wasm.js",
+  "types": "atlas77_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
