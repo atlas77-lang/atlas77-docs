@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Getting Started - Atlas77</title>
+        <title>std/fs - Atlas77</title>
 
 
         <!-- Custom HTML head -->
@@ -146,7 +146,7 @@
                         <a href="https://github.com/atlas77-lang/Atlas77" title="Git repository" aria-label="Git repository">
                             <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
-                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/getting_started.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/std-fs.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
                         </a>
 
@@ -180,327 +180,122 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="getting-started-with-atlas-77"><a class="header" href="#getting-started-with-atlas-77">Getting Started with Atlas 77</a></h1>
-<p>Welcome to Atlas 77! This guide will help you understand the basics of the language and write your first programs.</p>
-<h2 id="your-first-program"><a class="header" href="#your-first-program">Your First Program</a></h2>
-<p>Here is a simple “Hello, Atlas!” program:</p>
-<pre><code class="language-cpp">import "std/io";
+                        <h1 id="stdfs"><a class="header" href="#stdfs">std/fs</a></h1>
+<p>File system operations for reading, writing, and managing files.</p>
+<h2 id="struct-file"><a class="header" href="#struct-file">Struct: <code>File</code></a></h2>
+<p>Represents a file in the file system.</p>
+<pre><code class="language-cpp">struct File {
+private:
+    content: string;
+public:
+    path: string;
+}
+</code></pre>
+<h2 id="constructor"><a class="header" href="#constructor">Constructor</a></h2>
+<pre><code class="language-cpp">import "std/fs";
+
+let file = new File("data.txt");
+</code></pre>
+<p>Creates a File object. The file is not opened until <code>read()</code> or <code>open()</code> is called.</p>
+<h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<h3 id="readthis---string"><a class="header" href="#readthis---string"><code>read(&amp;this) -&gt; string</code></a></h3>
+<p>Read the entire content of the file and store it internally.</p>
+<pre><code class="language-cpp">let file = new File("data.txt");
+let content = file.read();
+println(content);
+</code></pre>
+<h3 id="openthis"><a class="header" href="#openthis"><code>open(&amp;this)</code></a></h3>
+<p>Open and read the file, storing content internally.</p>
+<pre><code class="language-cpp">let file = new File("data.txt");
+file.open();
+// File content is now loaded
+</code></pre>
+<h3 id="writethis-content-string"><a class="header" href="#writethis-content-string"><code>write(&amp;this, content: string)</code></a></h3>
+<p>Write content to the file.</p>
+<pre><code class="language-cpp">let file = new File("output.txt");
+file.write("Hello, World!");
+</code></pre>
+<h3 id="closethis"><a class="header" href="#closethis"><code>close(this)</code></a></h3>
+<p>Close the file (consumes the File object).</p>
+<pre><code class="language-cpp">let file = new File("data.txt");
+file.read();
+file.close();  // File is consumed
+</code></pre>
+<h3 id="existsthis---bool"><a class="header" href="#existsthis---bool"><code>exists(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if the file exists.</p>
+<pre><code class="language-cpp">let file = new File("config.json");
+if file.exists() {
+    println("File found");
+}
+</code></pre>
+<h3 id="removethis"><a class="header" href="#removethis"><code>remove(&amp;this)</code></a></h3>
+<p>Delete the file from the file system.</p>
+<pre><code class="language-cpp">let file = new File("temp.txt");
+file.remove();
+</code></pre>
+<h3 id="read_dirthis-path-string---string"><a class="header" href="#read_dirthis-path-string---string"><code>read_dir(&amp;this, path: string) -&gt; [string]</code></a></h3>
+<p>Read the contents of a directory (instance method).</p>
+<pre><code class="language-cpp">let file = new File(".");
+let entries = file.read_dir("./src");
+</code></pre>
+<h3 id="read_filethis-path-string---string"><a class="header" href="#read_filethis-path-string---string"><code>read_file(&amp;this, path: string) -&gt; string</code></a></h3>
+<p>Read a file without modifying the File instance’s content.</p>
+<pre><code class="language-cpp">let file = new File("dummy");
+let content = file.read_file("actual.txt");
+</code></pre>
+<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
+<h3 id="reading-a-file"><a class="header" href="#reading-a-file">Reading a File</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
 
 fun main() {
-    println("Hello, Atlas!");
-}
-</code></pre>
-<p>Save this code to a <code>.atlas</code> file, then run it with:</p>
-<pre><code class="language-bash">atlas_77 run &lt;FILE_PATH&gt;
-</code></pre>
-<p>For example:</p>
-<pre><code class="language-bash">atlas_77 run hello.atlas
-</code></pre>
-<h2 id="creating-a-project"><a class="header" href="#creating-a-project">Creating a Project</a></h2>
-<p>To create a new Atlas 77 project with standard structure:</p>
-<pre><code class="language-bash">atlas_77 init my_project
-cd my_project
-atlas_77 run
-</code></pre>
-<p>This creates a basic project template with all necessary files.</p>
-<h2 id="core-concepts"><a class="header" href="#core-concepts">Core Concepts</a></h2>
-<h3 id="1-comments"><a class="header" href="#1-comments">1. Comments</a></h3>
-<p>Comments document code and are ignored by the compiler.</p>
-<pre><code class="language-cpp">// This is a single-line comment
-let x: int64 = 42;  // Comments can appear at the end of lines
-</code></pre>
-<blockquote>
-<p><strong>Note:</strong> Multi-line comments are not yet implemented.</p>
-</blockquote>
-<h3 id="2-variables-and-constants"><a class="header" href="#2-variables-and-constants">2. Variables and Constants</a></h3>
-<p>Variables are declared with <code>let</code> (mutable) or <code>const</code> (immutable):</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() {
-    let x: int64 = 5;
-    x = 10;  // OK - mutable variable
-    println(x);  // Output: 10
-
-    const y: int64 = 5;
-    // y = 10;  // Error: Cannot assign to a constant
-}
-</code></pre>
-<p>Type annotations are mandatory for constants, the compiler can infer types for mutable variables. It’s mandatory for the sake of readability.</p>
-<h3 id="3-data-types"><a class="header" href="#3-data-types">3. Data Types</a></h3>
-<p>Atlas77 is statically and strongly typed.</p>
-<h4 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h4>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Type</th><th>Description</th><th>Status</th></tr>
-</thead>
-<tbody>
-<tr><td><code>int64</code></td><td>64-bit signed integer</td><td>✅</td></tr>
-<tr><td><code>uint64</code></td><td>64-bit unsigned integer</td><td>✅</td></tr>
-<tr><td><code>float64</code></td><td>64-bit floating point</td><td>✅</td></tr>
-<tr><td><code>bool</code></td><td>Boolean (<code>true</code>/<code>false</code>)</td><td>✅</td></tr>
-<tr><td><code>char</code></td><td>Unicode character</td><td>✅</td></tr>
-<tr><td><code>string</code></td><td>UTF-8 string</td><td>✅</td></tr>
-</tbody>
-</table>
-</div>
-<p>Other integer and float sizes (<code>int8</code>, <code>int16</code>, <code>int32</code>, <code>float32</code>, etc.) are planned but not yet fully implemented.</p>
-<h4 id="strings"><a class="header" href="#strings">Strings</a></h4>
-<p>Strings are UTF-8 encoded. Length is measured in bytes, not characters:</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() {
-    let greeting: string = "Hello, Atlas!";
-    println(greeting);
-}
-</code></pre>
-<h3 id="4-functions"><a class="header" href="#4-functions">4. Functions</a></h3>
-<p>Functions are defined with the <code>fun</code> keyword and require explicit return types:</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun add(x: int64, y: int64) -&gt; int64 {
-    return x + y;
-}
-
-fun greet(name: string) -&gt; unit {
-    println("Hello, " + name);
-}
-
-fun main() {
-    let result = add(5, 10);
-    println(result);  // Output: 15
+    let file = new File("config.txt");
     
-    greet("Atlas");  // Output: Hello, Atlas
-}
-</code></pre>
-<p>Use <code>unit</code> as the return type for functions that don’t return a value.</p>
-<h3 id="5-control-flow"><a class="header" href="#5-control-flow">5. Control Flow</a></h3>
-<h4 id="if-else-statements"><a class="header" href="#if-else-statements">If-Else Statements</a></h4>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() {
-    let x = 5;
-
-    if x &gt; 0 {
-        println("x is positive");
-    } else if x &lt; 0 {
-        println("x is negative");
+    if file.exists() {
+        let content = file.read();
+        println(content);
     } else {
-        println("x is zero");
+        println("File not found");
     }
 }
 </code></pre>
-<h4 id="while-loops"><a class="header" href="#while-loops">While Loops</a></h4>
-<pre><code class="language-cpp">import "std/io";
+<h3 id="writing-to-a-file"><a class="header" href="#writing-to-a-file">Writing to a File</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
 
 fun main() {
-    let i = 0;
-    while i &lt; 5 {
-        println(i);
-        i = i + 1;
-    }
+    let file = new File("output.txt");
+    file.write("Hello from Atlas77!");
+    println("File written successfully");
 }
 </code></pre>
-<blockquote>
-<p><strong>Note:</strong> For-loops and pattern matching are planned but not yet implemented.</p>
-</blockquote>
-<h3 id="6-arrays"><a class="header" href="#6-arrays">6. Arrays</a></h3>
-<p>Arrays store multiple values of the same type with fixed size:</p>
-<pre><code class="language-cpp">import "std/io";
+<h3 id="managing-files-with-raii"><a class="header" href="#managing-files-with-raii">Managing Files with RAII</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
 
-fun main() {
-    let numbers: [int64] = [1, 2, 3, 4, 5];
-    let i = 0;
-    while i &lt; 5 {
-        println(numbers[i]);
-        i = i + 1;
-    }
+fun process_file() {
+    let file = new File("data.txt");
+    let content = file.read();
+    println(content);
+    // File automatically closed when it goes out of scope
 }
 </code></pre>
-<p>You can also allocate arrays with specific sizes:</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() {
-    // Allocate an array of 5 int64s
-    let numbers = new [int64; 5];
-    let i = 0;
-    while i &lt; 5 {
-        numbers[i] = i * 2;
-        println(numbers[i]);
-        i = i + 1;
-    }
-}
-</code></pre>
-<h3 id="7-structs"><a class="header" href="#7-structs">7. Structs</a></h3>
-<p>Structs group related data together:</p>
-<pre><code class="language-cpp">import "std/io";
-
-struct Person {
-public:
-    name: string;
-    age: int64;
-    
-    Person(name: string, age: int64) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    fun greet(&amp;this) {
-        println("Hello, my name is " + this.name);
-    }
-}
-
-fun main() {
-    let person = new Person("Alice", 30);
-    person.greet();  // Output: Hello, my name is Alice
-}
-</code></pre>
-<p>Fields are private by default. Use <code>public:</code> to make them accessible outside the struct.</p>
-<h3 id="8-enums"><a class="header" href="#8-enums">8. Enums</a></h3>
-<p>Enums define types with a set of named values:</p>
-<pre><code class="language-cpp">import "std/io";
-
-public enum Color {
-    Red = 1;
-    Yellow;      // Auto-assigned: 2
-    Green = 3;
-    Purple;      // Auto-assigned: 4
-    Blue = 5;
-}
-
-fun main() {
-    let color = Color::Red;
-    println(color);  // Output: 1
-}
-</code></pre>
-<h3 id="9-generics"><a class="header" href="#9-generics">9. Generics</a></h3>
-<p>Define generic structs and functions with type parameters:</p>
-<pre><code class="language-cpp">import "std/io";
-
-struct Box&lt;T&gt; {
-public:
-    value: T;
-    
-    Box(value: T) {
-        this.value = value;
-    }
-    
-    fun get(&amp;this) -&gt; &amp;const T {
-        return &amp;(this.value);
-    }
-}
-
-fun main() {
-    let int_box = new Box&lt;int64&gt;(42);
-    let val = int_box.get();
-    println(*val);  // Output: 42
-}
-</code></pre>
-<p>Type parameters must be explicitly specified at call sites.</p>
-<h3 id="10-memory-management-and-ownership"><a class="header" href="#10-memory-management-and-ownership">10. Memory Management and Ownership</a></h3>
-<p>Atlas77 uses an ownership system for safe memory management:</p>
-<pre><code class="language-cpp">import "std/io";
-
-struct Resource {
-public:
-    id: int64;
-    
-    Resource(id: int64) {
-        this.id = id;
-        println("Resource created");
-    }
-    
-    ~Resource() {
-        println("Resource destroyed");
-    }
-}
-
-fun main() {
-    let r = new Resource(1);
-    // Resource automatically destroyed at end of scope
-}
-// Output:
-// Resource created
-// Resource destroyed
-</code></pre>
-<p><strong>Key Points:</strong></p>
+<hr>
+<p><strong>See also:</strong></p>
 <ul>
-<li>Use <code>new</code> to allocate memory</li>
-<li>Memory is automatically freed at end of scope (RAII)</li>
-<li>Values are moved by default (source becomes invalid)</li>
-<li>Values can be copied if they have a <code>_copy</code> method</li>
+<li><a href="./std.html">Standard Library Overview</a></li>
+<li><a href="./memory-model.html">Memory Model</a> - RAII and automatic cleanup</li>
 </ul>
-<p>See <a href="./memory-model.html">Memory Model</a> for complete details.</p>
-<h3 id="11-error-handling"><a class="header" href="#11-error-handling">11. Error Handling</a></h3>
-<p>Atlas77 provides <code>optional&lt;T&gt;</code> and <code>expected&lt;T, E&gt;</code> for explicit error handling:</p>
-<pre><code class="language-cpp">import "std/io";
-import "std/optional";
-
-fun divide(a: int64, b: int64) -&gt; optional&lt;int64&gt; {
-    if b == 0 {
-        return optional&lt;int64&gt;::empty();
-    }
-    return optional&lt;int64&gt;::of(a / b);
-}
-
-fun main() {
-    let result = divide(10, 2);
-    if result.has_value() {
-        println(result.value());  // Output: 5
-    } else {
-        println("Division by zero!");
-    }
-}
-</code></pre>
-<p>See <a href="./error-handling.html">Error Handling</a> for comprehensive examples.</p>
-<h3 id="12-the-standard-library"><a class="header" href="#12-the-standard-library">12. The Standard Library</a></h3>
-<p>Atlas77 includes a standard library with essential functionality:</p>
-<pre><code class="language-cpp">import "std/io";        // Input/output
-import "std/fs";        // File system
-import "std/string";    // String utilities
-import "std/vector";    // Dynamic arrays
-import "std/optional";  // Optional values
-import "std/expected";  // Error handling
-import "std/math";      // Math functions
-import "std/time";      // Time operations
-
-fun main() {
-    println("Hello, World!");
-}
-</code></pre>
-<p>Check out the <a href="./std.html">Standard Library</a> for complete documentation.</p>
-<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
-<p>Now that you understand the basics, explore these topics:</p>
-<ul>
-<li><strong><a href="./hello_world.html">Hello, World!</a></strong> – Detailed walkthrough of your first program</li>
-<li><strong><a href="./guessing_game.html">Guessing Game</a></strong> – Build a fun interactive program</li>
-<li><strong><a href="./language-reference.html">Language Reference</a></strong> – Complete language syntax</li>
-<li><strong><a href="./memory-model.html">Memory Model</a></strong> – Understand ownership and copy semantics</li>
-<li><strong><a href="./error-handling.html">Error Handling</a></strong> – Master optional and expected types</li>
-<li><strong><a href="./std.html">Standard Library</a></strong> – Explore available modules</li>
-</ul>
-<h2 id="current-limitations"><a class="header" href="#current-limitations">Current Limitations</a></h2>
-<p>Atlas77 is actively developed. Some features are not yet available:</p>
-<ul>
-<li>❌ Multi-line comments</li>
-<li>❌ For-loops (range-based iteration)</li>
-<li>❌ Pattern matching</li>
-<li>❌ Break/continue statements</li>
-<li>❌ First-class functions and closures</li>
-<li>❌ Async/await</li>
-<li>❌ Traits/interfaces</li>
-</ul>
-<p>These features are planned for future releases. Check the <a href="./roadmap.html">Roadmap</a> for more details.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="std-io.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="installation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="std-string.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -510,11 +305,11 @@ fun main() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="std-io.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="installation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="std-string.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

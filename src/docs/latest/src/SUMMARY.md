@@ -20,6 +20,19 @@
 # Standard Library
 
 - [std](./std.md)
+    - [std/io](./std-io.md)
+    - [std/fs](./std-fs.md)
+    - [std/string](./std-string.md)
+    - [std/vector](./std-vector.md)
+    - [std/map](./std-map.md)
+    - [std/queue](./std-queue.md)
+    - [std/iter](./std-iter.md)
+    - [std/optional](./std-optional.md)
+    - [std/expected](./std-expected.md)
+    - [std/math](./std-math.md)
+    - [std/time](./std-time.md)
+    - [std/mem](./std-mem.md)
+    - [std/box](./std-box.md)
 
 # Libraries and Modules
 

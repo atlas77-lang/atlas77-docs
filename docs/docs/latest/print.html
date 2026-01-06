@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-1b3fb120.js";
+            window.path_to_searchindex_js = "searchindex-d4f47cce.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-60effeac.js"></script>
+        <script src="toc-1e53146e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -496,7 +496,7 @@ fun main() {
 <h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
 <p>Now that you understand the basics, explore these topics:</p>
 <ul>
-<li><strong><a href="#hello-world">Hello, World!</a></strong> – Detailed walkthrough of your first program</li>
+<li><strong><a href="#hello-world-1">Hello, World!</a></strong> – Detailed walkthrough of your first program</li>
 <li><strong><a href="#programming-a-guessing-game-in-atlas77">Guessing Game</a></strong> – Build a fun interactive program</li>
 <li><strong><a href="#language-reference">Language Reference</a></strong> – Complete language syntax</li>
 <li><strong><a href="#memory-model-and-ownership">Memory Model</a></strong> – Understand ownership and copy semantics</li>
@@ -559,7 +559,7 @@ fun main() {
 </li>
 </ol>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="hello-world"><a href="#hello-world" class="header">Hello, World!</a></h1>
+<h1 id="hello-world-1"><a href="#hello-world-1" class="header">Hello, World!</a></h1>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="programming-a-guessing-game-in-atlas77"><a class="header" href="#programming-a-guessing-game-in-atlas77">Programming a Guessing Game in Atlas77</a></h1>
 <h2 id="setting-up"><a class="header" href="#setting-up">Setting up</a></h2>
@@ -1004,7 +1004,7 @@ fun main() -&gt; unit {
 <hr>
 <p>For detailed examples and tutorials, see:</p>
 <ul>
-<li><a href="#hello-world">Hello, World!</a></li>
+<li><a href="#hello-world-1">Hello, World!</a></li>
 <li><a href="#programming-a-guessing-game-in-atlas77">Guessing Game</a></li>
 <li><a href="#standard-library">Standard Library</a></li>
 </ul>
@@ -2243,32 +2243,264 @@ let box = new Box&lt;int64&gt;(42);
 </blockquote>
 <h2 id="overview-2"><a class="header" href="#overview-2">Overview</a></h2>
 <p>The Atlas77 standard library provides essential data structures, utilities, and I/O functions. The library is organized into modules that can be imported individually.</p>
+<p><strong>Each module is now documented on its own page with complete API reference, usage examples, and best practices.</strong></p>
+<h2 id="module-index"><a class="header" href="#module-index">Module Index</a></h2>
+<h3 id="core-utilities"><a class="header" href="#core-utilities">Core Utilities</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Module</th><th>Description</th><th>Status</th></tr>
 </thead>
 <tbody>
-<tr><td><code>std/io</code></td><td>Input/output and panic functions</td><td>✅ Stable</td></tr>
-<tr><td><code>std/fs</code></td><td>File system operations</td><td>✅ Stable</td></tr>
-<tr><td><code>std/string</code></td><td>String manipulation and the String struct</td><td>✅ Stable</td></tr>
-<tr><td><code>std/vector</code></td><td>Dynamic array (Vector<t>)</t></td><td>✅ Stable</td></tr>
-<tr><td><code>std/optional</code></td><td>optional<t> type for nullable values</t></td><td>✅ Stable</td></tr>
-<tr><td><code>std/expected</code></td><td>expected&lt;T, E&gt; for error handling</td><td>✅ Stable</td></tr>
-<tr><td><code>std/iter</code></td><td>Iterator utilities</td><td>✅ Stable</td></tr>
-<tr><td><code>std/time</code></td><td>Time operations and formatting</td><td>✅ Stable</td></tr>
-<tr><td><code>std/math</code></td><td>Mathematical functions</td><td>✅ Stable</td></tr>
-<tr><td><code>std/map</code></td><td>Map&lt;K, V&gt; key-value container</td><td>✅ Stable</td></tr>
-<tr><td><code>std/queue</code></td><td>Queue<t> FIFO data structure</t></td><td>✅ Stable</td></tr>
-<tr><td><code>std/box</code></td><td>Box<t> container (deprecated)</t></td><td>⚠️ Deprecated</td></tr>
-<tr><td><code>std/mem</code></td><td>Memory utilities</td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdio">std/io</a></td><td>Input/output operations (print, println, input, panic)</td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdstring">std/string</a></td><td>String manipulation and text processing</td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdmem">std/mem</a></td><td>Memory management utilities (swap, drop, size_of)</td><td>✅ Stable</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
+<h3 id="collections"><a class="header" href="#collections">Collections</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#stdvector">std/vector</a></td><td>Dynamic arrays with Vector<t></t></td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdmap">std/map</a></td><td>Hash maps for key-value storage with Map&lt;K,V&gt;</td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdqueue">std/queue</a></td><td>FIFO queue data structure with Queue<t></t></td><td>✅ Stable</td></tr>
+<tr><td><a href="#stditer">std/iter</a></td><td>Iterator utilities with Iter<t></t></td><td>✅ Stable</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="error-handling-1"><a class="header" href="#error-handling-1">Error Handling</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#stdoptional">std/optional</a></td><td>Nullable values with optional<t></t></td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdexpected">std/expected</a></td><td>Result types for error handling with expected&lt;T,E&gt;</td><td>✅ Stable</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="file-system"><a class="header" href="#file-system">File System</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#stdfs">std/fs</a></td><td>File operations (read, write, exists, remove)</td><td>✅ Stable</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="math--time"><a class="header" href="#math--time">Math &amp; Time</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#stdmath">std/math</a></td><td>Mathematical functions (abs, min, max, pow, trigonometry, random)</td><td>✅ Stable</td></tr>
+<tr><td><a href="#stdtime">std/time</a></td><td>Time operations and formatting</td><td>✅ Stable</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="deprecated-modules"><a class="header" href="#deprecated-modules">Deprecated Modules</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#stdbox">std/box</a></td><td>Heap-allocated values - use direct allocation instead</td><td>⚠️ Deprecated</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="quick-start-examples"><a class="header" href="#quick-start-examples">Quick Start Examples</a></h2>
+<h3 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h3>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() {
+    println("Hello, Atlas77!");
+}
+</code></pre>
+<h3 id="working-with-collections"><a class="header" href="#working-with-collections">Working with Collections</a></h3>
+<pre><code class="language-cpp">import "std/vector";
+import "std/io";
+
+fun main() {
+    let numbers = new Vector&lt;int64&gt;([1, 2, 3, 4, 5]);
+    
+    numbers.push(6);
+    
+    let iter = numbers.into_iter();
+    while iter.has_next() {
+        let num = iter.next().value();
+        println(num);
+    }
+}
+</code></pre>
+<h3 id="error-handling-1-1"><a class="header" href="#error-handling-1-1">Error Handling</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/io";
+
+fun divide(a: int64, b: int64) -&gt; optional&lt;int64&gt; {
+    if b == 0 {
+        return optional&lt;int64&gt;::empty();
+    }
+    return optional&lt;int64&gt;::of(a / b);
+}
+
+fun main() {
+    let result = divide(10, 2);
+    
+    if result.has_value() {
+        println("Result: " + result.value());
+    } else {
+        println("Division by zero!");
+    }
+}
+</code></pre>
+<h3 id="file-operations"><a class="header" href="#file-operations">File Operations</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
+
+fun main() {
+    let file = File::open("data.txt");
+    let content = file.read();
+    
+    println("File contents:");
+    println(content);
+    
+    file.close();
+}
+</code></pre>
+<h3 id="using-maps"><a class="header" href="#using-maps">Using Maps</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let scores = new Map&lt;string, int64&gt;();
+    
+    scores.insert("Alice", 95);
+    scores.insert("Bob", 87);
+    scores.insert("Charlie", 92);
+    
+    let alice_score = scores.get("Alice");
+    if alice_score.has_value() {
+        println("Alice's score: " + *alice_score.value());
+    }
+}
+</code></pre>
+<h2 id="common-patterns-2"><a class="header" href="#common-patterns-2">Common Patterns</a></h2>
+<h3 id="iterator-pattern"><a class="header" href="#iterator-pattern">Iterator Pattern</a></h3>
+<p>Most collections provide an <code>into_iter()</code> method that consumes the collection and returns an iterator:</p>
+<pre><code class="language-cpp">import "std/vector";
+import "std/iter";
+
+let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let iter = vec.into_iter();
+
+while iter.has_next() {
+    let item = iter.next().value();
+    // Process item
+}
+</code></pre>
+<h3 id="error-handling-with-optional"><a class="header" href="#error-handling-with-optional">Error Handling with optional</a></h3>
+<p>Use <code>optional&lt;T&gt;</code> for values that might not exist:</p>
+<pre><code class="language-cpp">import "std/optional";
+
+// Function that might not return a value
+fun find_item(items: [int64], target: int64) -&gt; optional&lt;int64&gt; {
+    let i = 0;
+    while i &lt; len(&amp;items) {
+        if items[i] == target {
+            return optional&lt;int64&gt;::of(i);
+        }
+        i = i + 1;
+    }
+    return optional&lt;int64&gt;::empty();
+}
+
+// Usage
+let result = find_item([1, 2, 3], 2);
+if result.has_value() {
+    println("Found at index: " + result.value());
+}
+</code></pre>
+<h3 id="error-handling-with-expected"><a class="header" href="#error-handling-with-expected">Error Handling with expected</a></h3>
+<p>Use <code>expected&lt;T, E&gt;</code> for operations that can fail with error information:</p>
+<pre><code class="language-cpp">import "std/expected";
+import "std/fs";
+
+fun safe_read_file(path: string) -&gt; expected&lt;string, string&gt; {
+    if !File::exists(path) {
+        return expected&lt;string, string&gt;::unexpected("File not found");
+    }
+    
+    let file = File::open(path);
+    let content = file.read();
+    file.close();
+    
+    return expected&lt;string, string&gt;::expect(content);
+}
+
+// Usage
+let result = safe_read_file("data.txt");
+if result.is_expected() {
+    println(result.expected_value());
+} else {
+    println("Error: " + result.unexpected_value());
+}
+</code></pre>
+<h2 id="module-import"><a class="header" href="#module-import">Module Import</a></h2>
+<p>To use any standard library module, import it at the top of your file:</p>
+<pre><code class="language-cpp">import "std/io";
+import "std/vector";
+import "std/map";
+</code></pre>
+<p>You can import multiple modules as needed. The import system loads the module once and makes all its public functions, structs, and methods available.</p>
+<h2 id="conventions"><a class="header" href="#conventions">Conventions</a></h2>
+<h3 id="naming"><a class="header" href="#naming">Naming</a></h3>
+<ul>
+<li><strong>Functions</strong>: <code>snake_case</code> (e.g., <code>to_upper</code>, <code>split_lines</code>)</li>
+<li><strong>Structs</strong>: <code>PascalCase</code> (e.g., <code>Vector</code>, <code>File</code>, <code>Time</code>)</li>
+<li><strong>Methods</strong>: <code>snake_case</code> (e.g., <code>has_value</code>, <code>is_empty</code>)</li>
+<li><strong>Constants</strong>: <code>SCREAMING_SNAKE_CASE</code> (e.g., <code>MAX_SIZE</code>)</li>
+</ul>
+<h3 id="error-handling-2"><a class="header" href="#error-handling-2">Error Handling</a></h3>
+<ul>
+<li>Functions that might fail return <code>optional&lt;T&gt;</code> (no error info) or <code>expected&lt;T,E&gt;</code> (with error info)</li>
+<li>Use <code>panic()</code> only for unrecoverable errors</li>
+</ul>
+<h3 id="memory-management-1"><a class="header" href="#memory-management-1">Memory Management</a></h3>
+<ul>
+<li>Types follow move-by-default semantics</li>
+<li>Copyable types must implement a <code>_copy()</code> method</li>
+<li>Use references (<code>&amp;T</code>, <code>&amp;T</code>) to borrow without moving</li>
+</ul>
+<h2 id="performance-considerations"><a class="header" href="#performance-considerations">Performance Considerations</a></h2>
+<ul>
+<li><strong>Vector</strong>: O(1) append (amortized), O(1) indexed access, O(n) insert/remove in middle</li>
+<li><strong>Map</strong>: O(1) average case insert/get/remove, O(n) worst case</li>
+<li><strong>Queue</strong>: O(1) enqueue/dequeue</li>
+<li><strong>Iterator</strong>: Zero-cost abstractions, compiled away</li>
+</ul>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="#getting-started-with-atlas-77">Getting Started</a> - Complete guide for new users</li>
+<li><a href="#memory-model-and-ownership">Memory Model</a> - Understanding ownership and move semantics</li>
+<li><a href="#error-handling-in-atlas-77">Error Handling</a> - Detailed error handling patterns</li>
+<li><a href="#generics-1">Generics</a> - Using generic types and constraints</li>
+<li><a href="#language-reference">Language Reference</a> - Complete language syntax</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdio"><a class="header" href="#stdio">std/io</a></h1>
 <p>Basic input/output and program control functions.</p>
-<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
-<h4 id="printts-t"><a class="header" href="#printts-t"><code>print&lt;T&gt;(s: T)</code></a></h4>
+<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
+<h3 id="printts-t"><a class="header" href="#printts-t"><code>print&lt;T&gt;(s: T)</code></a></h3>
 <p>Print a value to standard output without a newline.</p>
 <pre><code class="language-cpp">import "std/io";
 
@@ -2276,7 +2508,7 @@ print("Hello");
 print(" World!");
 // Output: Hello World!
 </code></pre>
-<h4 id="printlnts-t"><a class="header" href="#printlnts-t"><code>println&lt;T&gt;(s: T)</code></a></h4>
+<h3 id="printlnts-t"><a class="header" href="#printlnts-t"><code>println&lt;T&gt;(s: T)</code></a></h3>
 <p>Print a value to standard output followed by a newline.</p>
 <pre><code class="language-cpp">import "std/io";
 
@@ -2284,7 +2516,7 @@ println("Hello, Atlas!");
 // Output: Hello, Atlas!
 //         (newline)
 </code></pre>
-<h4 id="input---string"><a class="header" href="#input---string"><code>input() -&gt; string</code></a></h4>
+<h3 id="input---string"><a class="header" href="#input---string"><code>input() -&gt; string</code></a></h3>
 <p>Read a line from standard input.</p>
 <pre><code class="language-cpp">import "std/io";
 
@@ -2292,7 +2524,7 @@ println("Enter your name:");
 let name = input();
 println("Hello, " + name);
 </code></pre>
-<h4 id="panicts-t"><a class="header" href="#panicts-t"><code>panic&lt;T&gt;(s: T)</code></a></h4>
+<h3 id="panicts-t"><a class="header" href="#panicts-t"><code>panic&lt;T&gt;(s: T)</code></a></h3>
 <p>Abort the program with an error message.</p>
 <pre><code class="language-cpp">import "std/io";
 
@@ -2303,9 +2535,50 @@ fun divide(a: int64, b: int64) -&gt; int64 {
     return a / b;
 }
 </code></pre>
-<h2 id="stdfs"><a class="header" href="#stdfs"><code>std/fs</code></a></h2>
+<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
+<h3 id="basic-output"><a class="header" href="#basic-output">Basic Output</a></h3>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() {
+    println("Welcome to Atlas77!");
+    print("Your score: ");
+    println(42);
+}
+</code></pre>
+<h3 id="reading-user-input"><a class="header" href="#reading-user-input">Reading User Input</a></h3>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() {
+    println("What is your name?");
+    let name = input();
+    println("Hello, " + name + "!");
+}
+</code></pre>
+<h3 id="error-handling-with-panic"><a class="header" href="#error-handling-with-panic">Error Handling with panic</a></h3>
+<pre><code class="language-cpp">import "std/io";
+
+fun safe_divide(a: int64, b: int64) -&gt; int64 {
+    if b == 0 {
+        panic("Cannot divide by zero");
+    }
+    return a / b;
+}
+
+fun main() {
+    let result = safe_divide(10, 2);
+    println(result);  // Output: 5
+}
+</code></pre>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+<li><a href="#error-handling-in-atlas-77">Error Handling</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdfs"><a class="header" href="#stdfs">std/fs</a></h1>
 <p>File system operations for reading, writing, and managing files.</p>
-<h3 id="struct-file"><a class="header" href="#struct-file">Struct: <code>File</code></a></h3>
+<h2 id="struct-file"><a class="header" href="#struct-file">Struct: <code>File</code></a></h2>
 <p>Represents a file in the file system.</p>
 <pre><code class="language-cpp">struct File {
 private:
@@ -2314,104 +2587,149 @@ public:
     path: string;
 }
 </code></pre>
-<h4 id="constructor"><a class="header" href="#constructor">Constructor</a></h4>
+<h2 id="constructor"><a class="header" href="#constructor">Constructor</a></h2>
 <pre><code class="language-cpp">import "std/fs";
 
 let file = new File("data.txt");
 </code></pre>
 <p>Creates a File object. The file is not opened until <code>read()</code> or <code>open()</code> is called.</p>
-<h4 id="methods-1"><a class="header" href="#methods-1">Methods</a></h4>
-<h5 id="readthis---string"><a class="header" href="#readthis---string"><code>read(&amp;this) -&gt; string</code></a></h5>
+<h2 id="methods-1"><a class="header" href="#methods-1">Methods</a></h2>
+<h3 id="readthis---string"><a class="header" href="#readthis---string"><code>read(&amp;this) -&gt; string</code></a></h3>
 <p>Read the entire content of the file and store it internally.</p>
 <pre><code class="language-cpp">let file = new File("data.txt");
 let content = file.read();
 println(content);
 </code></pre>
-<h5 id="openthis"><a class="header" href="#openthis"><code>open(&amp;this)</code></a></h5>
+<h3 id="openthis"><a class="header" href="#openthis"><code>open(&amp;this)</code></a></h3>
 <p>Open and read the file, storing content internally.</p>
 <pre><code class="language-cpp">let file = new File("data.txt");
 file.open();
 // File content is now loaded
 </code></pre>
-<h5 id="writethis-content-string"><a class="header" href="#writethis-content-string"><code>write(&amp;this, content: string)</code></a></h5>
+<h3 id="writethis-content-string"><a class="header" href="#writethis-content-string"><code>write(&amp;this, content: string)</code></a></h3>
 <p>Write content to the file.</p>
 <pre><code class="language-cpp">let file = new File("output.txt");
 file.write("Hello, World!");
 </code></pre>
-<h5 id="closethis"><a class="header" href="#closethis"><code>close(this)</code></a></h5>
+<h3 id="closethis"><a class="header" href="#closethis"><code>close(this)</code></a></h3>
 <p>Close the file (consumes the File object).</p>
 <pre><code class="language-cpp">let file = new File("data.txt");
 file.read();
 file.close();  // File is consumed
 </code></pre>
-<h5 id="existsthis---bool"><a class="header" href="#existsthis---bool"><code>exists(&amp;this) -&gt; bool</code></a></h5>
+<h3 id="existsthis---bool"><a class="header" href="#existsthis---bool"><code>exists(&amp;this) -&gt; bool</code></a></h3>
 <p>Check if the file exists.</p>
 <pre><code class="language-cpp">let file = new File("config.json");
 if file.exists() {
     println("File found");
 }
 </code></pre>
-<h5 id="removethis"><a class="header" href="#removethis"><code>remove(&amp;this)</code></a></h5>
+<h3 id="removethis"><a class="header" href="#removethis"><code>remove(&amp;this)</code></a></h3>
 <p>Delete the file from the file system.</p>
 <pre><code class="language-cpp">let file = new File("temp.txt");
 file.remove();
 </code></pre>
-<h5 id="read_dirthis-path-string---string"><a class="header" href="#read_dirthis-path-string---string"><code>read_dir(&amp;this, path: string) -&gt; [string]</code></a></h5>
+<h3 id="read_dirthis-path-string---string"><a class="header" href="#read_dirthis-path-string---string"><code>read_dir(&amp;this, path: string) -&gt; [string]</code></a></h3>
 <p>Read the contents of a directory (instance method).</p>
 <pre><code class="language-cpp">let file = new File(".");
 let entries = file.read_dir("./src");
 </code></pre>
-<h5 id="read_filethis-path-string---string"><a class="header" href="#read_filethis-path-string---string"><code>read_file(&amp;this, path: string) -&gt; string</code></a></h5>
+<h3 id="read_filethis-path-string---string"><a class="header" href="#read_filethis-path-string---string"><code>read_file(&amp;this, path: string) -&gt; string</code></a></h3>
 <p>Read a file without modifying the File instance’s content.</p>
 <pre><code class="language-cpp">let file = new File("dummy");
 let content = file.read_file("actual.txt");
 </code></pre>
-<h2 id="stdstring"><a class="header" href="#stdstring"><code>std/string</code></a></h2>
+<h2 id="usage-examples-1"><a class="header" href="#usage-examples-1">Usage Examples</a></h2>
+<h3 id="reading-a-file"><a class="header" href="#reading-a-file">Reading a File</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
+
+fun main() {
+    let file = new File("config.txt");
+    
+    if file.exists() {
+        let content = file.read();
+        println(content);
+    } else {
+        println("File not found");
+    }
+}
+</code></pre>
+<h3 id="writing-to-a-file"><a class="header" href="#writing-to-a-file">Writing to a File</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
+
+fun main() {
+    let file = new File("output.txt");
+    file.write("Hello from Atlas77!");
+    println("File written successfully");
+}
+</code></pre>
+<h3 id="managing-files-with-raii"><a class="header" href="#managing-files-with-raii">Managing Files with RAII</a></h3>
+<pre><code class="language-cpp">import "std/fs";
+import "std/io";
+
+fun process_file() {
+    let file = new File("data.txt");
+    let content = file.read();
+    println(content);
+    // File automatically closed when it goes out of scope
+}
+</code></pre>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+<li><a href="#memory-model-and-ownership">Memory Model</a> - RAII and automatic cleanup</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdstring"><a class="header" href="#stdstring">std/string</a></h1>
 <p>String manipulation functions and the String struct.</p>
-<h3 id="external-functions"><a class="header" href="#external-functions">External Functions</a></h3>
-<h4 id="str_lens-const-string---uint64"><a class="header" href="#str_lens-const-string---uint64"><code>str_len(s: &amp;const string) -&gt; uint64</code></a></h4>
+<h2 id="external-functions"><a class="header" href="#external-functions">External Functions</a></h2>
+<p>These functions work with the primitive <code>string</code> type.</p>
+<h3 id="str_lens-const-string---uint64"><a class="header" href="#str_lens-const-string---uint64"><code>str_len(s: &amp;const string) -&gt; uint64</code></a></h3>
 <p>Get the length of a string primitive (in bytes).</p>
 <pre><code class="language-cpp">import "std/string";
 
 let text = "Hello";
 let length = str_len(&amp;text);  // 5
 </code></pre>
-<h4 id="trims-string---string"><a class="header" href="#trims-string---string"><code>trim(s: string) -&gt; string</code></a></h4>
+<h3 id="trims-string---string"><a class="header" href="#trims-string---string"><code>trim(s: string) -&gt; string</code></a></h3>
 <p>Remove leading and trailing whitespace.</p>
 <pre><code class="language-cpp">let text = "  hello  ";
 let trimmed = trim(text);  // "hello"
 </code></pre>
-<h4 id="to_uppers-string---string"><a class="header" href="#to_uppers-string---string"><code>to_upper(s: string) -&gt; string</code></a></h4>
+<h3 id="to_uppers-string---string"><a class="header" href="#to_uppers-string---string"><code>to_upper(s: string) -&gt; string</code></a></h3>
 <p>Convert a string to uppercase.</p>
 <pre><code class="language-cpp">let text = "hello";
 let upper = to_upper(text);  // "HELLO"
 </code></pre>
-<h4 id="to_lowers-string---string"><a class="header" href="#to_lowers-string---string"><code>to_lower(s: string) -&gt; string</code></a></h4>
+<h3 id="to_lowers-string---string"><a class="header" href="#to_lowers-string---string"><code>to_lower(s: string) -&gt; string</code></a></h3>
 <p>Convert a string to lowercase.</p>
 <pre><code class="language-cpp">let text = "HELLO";
 let lower = to_lower(text);  // "hello"
 </code></pre>
-<h4 id="splits-string-sep-string---string"><a class="header" href="#splits-string-sep-string---string"><code>split(s: &amp;string, sep: &amp;string) -&gt; [string]</code></a></h4>
+<h3 id="splits-string-sep-string---string"><a class="header" href="#splits-string-sep-string---string"><code>split(s: &amp;string, sep: &amp;string) -&gt; [string]</code></a></h3>
 <p>Split a string by a separator.</p>
 <pre><code class="language-cpp">let text = "apple,banana,cherry";
 let parts = split(&amp;text, &amp;",");
 // ["apple", "banana", "cherry"]
 </code></pre>
-<h4 id="str_cmps1-const-string-s2-const-string---uint64"><a class="header" href="#str_cmps1-const-string-s2-const-string---uint64"><code>str_cmp(s1: &amp;const string, s2: &amp;const string) -&gt; uint64</code></a></h4>
+<h3 id="str_cmps1-const-string-s2-const-string---uint64"><a class="header" href="#str_cmps1-const-string-s2-const-string---uint64"><code>str_cmp(s1: &amp;const string, s2: &amp;const string) -&gt; uint64</code></a></h3>
 <p>Compare two strings lexicographically.</p>
 <pre><code class="language-cpp">let result = str_cmp(&amp;"apple", &amp;"banana");
 </code></pre>
-<h4 id="to_charss-const-string---char"><a class="header" href="#to_charss-const-string---char"><code>to_chars(s: &amp;const string) -&gt; [char]</code></a></h4>
+<h3 id="to_charss-const-string---char"><a class="header" href="#to_charss-const-string---char"><code>to_chars(s: &amp;const string) -&gt; [char]</code></a></h3>
 <p>Convert a string to an array of characters.</p>
 <pre><code class="language-cpp">let text = "Hi";
 let chars = to_chars(&amp;text);  // ['H', 'i']
 </code></pre>
-<h4 id="from_charss-char---string"><a class="header" href="#from_charss-char---string"><code>from_chars(s: [char]) -&gt; string</code></a></h4>
+<h3 id="from_charss-char---string"><a class="header" href="#from_charss-char---string"><code>from_chars(s: [char]) -&gt; string</code></a></h3>
 <p>Convert an array of characters to a string.</p>
 <pre><code class="language-cpp">let chars = ['H', 'i'];
 let text = from_chars(chars);  // "Hi"
 </code></pre>
-<h3 id="struct-string"><a class="header" href="#struct-string">Struct: <code>String</code></a></h3>
+<h2 id="struct-string"><a class="header" href="#struct-string">Struct: <code>String</code></a></h2>
 <p>A struct wrapper around the primitive string type with additional methods.</p>
 <pre><code class="language-cpp">struct String {
 public:
@@ -2419,112 +2737,158 @@ public:
     len: uint64;
 }
 </code></pre>
-<h4 id="constructor-1"><a class="header" href="#constructor-1">Constructor</a></h4>
+<h3 id="constructor-1"><a class="header" href="#constructor-1">Constructor</a></h3>
 <pre><code class="language-cpp">import "std/string";
 
 let str = new String("Hello");
 </code></pre>
-<h4 id="static-methods"><a class="header" href="#static-methods">Static Methods</a></h4>
-<h5 id="stringfrom_charss-char---string"><a class="header" href="#stringfrom_charss-char---string"><code>String::from_chars(s: [char]) -&gt; String</code></a></h5>
+<h2 id="static-methods"><a class="header" href="#static-methods">Static Methods</a></h2>
+<h3 id="stringfrom_charss-char---string"><a class="header" href="#stringfrom_charss-char---string"><code>String::from_chars(s: [char]) -&gt; String</code></a></h3>
 <p>Create a String from an array of characters.</p>
 <pre><code class="language-cpp">let chars = ['H', 'i'];
 let str = String::from_chars(chars);
 </code></pre>
-<h5 id="stringstr_lens-const-string---uint64"><a class="header" href="#stringstr_lens-const-string---uint64"><code>String::str_len(s: &amp;const string) -&gt; uint64</code></a></h5>
+<h3 id="stringstr_lens-const-string---uint64"><a class="header" href="#stringstr_lens-const-string---uint64"><code>String::str_len(s: &amp;const string) -&gt; uint64</code></a></h3>
 <p>Get the length of a string primitive.</p>
 <pre><code class="language-cpp">let length = String::str_len(&amp;"Hello");  // 5
 </code></pre>
-<h4 id="instance-methods"><a class="header" href="#instance-methods">Instance Methods</a></h4>
-<h5 id="lenthis---uint64"><a class="header" href="#lenthis---uint64"><code>len(&amp;this) -&gt; uint64</code></a></h5>
+<h2 id="instance-methods"><a class="header" href="#instance-methods">Instance Methods</a></h2>
+<h3 id="lenthis---uint64"><a class="header" href="#lenthis---uint64"><code>len(&amp;this) -&gt; uint64</code></a></h3>
 <p>Get the length of the String.</p>
 <pre><code class="language-cpp">let str = new String("Hello");
 println(str.len());  // 5
 </code></pre>
-<h5 id="is_emptythis---bool"><a class="header" href="#is_emptythis---bool"><code>is_empty(&amp;this) -&gt; bool</code></a></h5>
+<h3 id="is_emptythis---bool"><a class="header" href="#is_emptythis---bool"><code>is_empty(&amp;this) -&gt; bool</code></a></h3>
 <p>Check if the String is empty.</p>
 <pre><code class="language-cpp">let str = new String("");
 if str.is_empty() {
     println("String is empty");
 }
 </code></pre>
-<h5 id="concatthis-other-string---string"><a class="header" href="#concatthis-other-string---string"><code>concat(&amp;this, other: String) -&gt; String</code></a></h5>
+<h3 id="concatthis-other-string---string"><a class="header" href="#concatthis-other-string---string"><code>concat(&amp;this, other: String) -&gt; String</code></a></h3>
 <p>Concatenate two Strings.</p>
 <pre><code class="language-cpp">let str1 = new String("Hello");
 let str2 = new String(" World");
 let result = str1.concat(str2);
 </code></pre>
-<h5 id="pushthis-c-char"><a class="header" href="#pushthis-c-char"><code>push(&amp;this, c: char)</code></a></h5>
+<h3 id="pushthis-c-char"><a class="header" href="#pushthis-c-char"><code>push(&amp;this, c: char)</code></a></h3>
 <p>Append a character to the String.</p>
 <pre><code class="language-cpp">let str = new String("Hello");
 str.push('!');
 </code></pre>
-<h5 id="push_strthis-s-string"><a class="header" href="#push_strthis-s-string"><code>push_str(&amp;this, s: String)</code></a></h5>
+<h3 id="push_strthis-s-string"><a class="header" href="#push_strthis-s-string"><code>push_str(&amp;this, s: String)</code></a></h3>
 <p>Append another String.</p>
 <pre><code class="language-cpp">let str1 = new String("Hello");
 let str2 = new String(" World");
 str1.push_str(str2);
 </code></pre>
-<h5 id="getthis-index-uint64---char"><a class="header" href="#getthis-index-uint64---char"><code>get(&amp;this, index: uint64) -&gt; char</code></a></h5>
+<h3 id="getthis-index-uint64---char"><a class="header" href="#getthis-index-uint64---char"><code>get(&amp;this, index: uint64) -&gt; char</code></a></h3>
 <p>Get a character at a specific index.</p>
 <pre><code class="language-cpp">let str = new String("Hello");
 let ch = str.get(0u);  // 'H'
 </code></pre>
-<h5 id="setthis-index-uint64-c-char"><a class="header" href="#setthis-index-uint64-c-char"><code>set(&amp;this, index: uint64, c: char)</code></a></h5>
+<h3 id="setthis-index-uint64-c-char"><a class="header" href="#setthis-index-uint64-c-char"><code>set(&amp;this, index: uint64, c: char)</code></a></h3>
 <p>Set a character at a specific index.</p>
 <pre><code class="language-cpp">let str = new String("Hello");
 str.set(0u, 'h');  // "hello"
 </code></pre>
-<h5 id="to_strthis---string"><a class="header" href="#to_strthis---string"><code>to_str(&amp;this) -&gt; string</code></a></h5>
+<h3 id="to_strthis---string"><a class="header" href="#to_strthis---string"><code>to_str(&amp;this) -&gt; string</code></a></h3>
 <p>Convert the String struct to a string primitive.</p>
 <pre><code class="language-cpp">let str = new String("Hello");
 let s = str.to_str();
 </code></pre>
-<h5 id="to_charsthis---char"><a class="header" href="#to_charsthis---char"><code>to_chars(&amp;this) -&gt; [char]</code></a></h5>
+<h3 id="to_charsthis---char"><a class="header" href="#to_charsthis---char"><code>to_chars(&amp;this) -&gt; [char]</code></a></h3>
 <p>Convert the String to an array of characters.</p>
 <pre><code class="language-cpp">let str = new String("Hi");
 let chars = str.to_chars();
 </code></pre>
-<h5 id="to_upperthis---string"><a class="header" href="#to_upperthis---string"><code>to_upper(&amp;this) -&gt; String</code></a></h5>
+<h3 id="to_upperthis---string"><a class="header" href="#to_upperthis---string"><code>to_upper(&amp;this) -&gt; String</code></a></h3>
 <p>Convert to uppercase.</p>
 <pre><code class="language-cpp">let str = new String("hello");
 let upper = str.to_upper();  // "HELLO"
 </code></pre>
-<h5 id="to_lowerthis---string"><a class="header" href="#to_lowerthis---string"><code>to_lower(&amp;this) -&gt; String</code></a></h5>
+<h3 id="to_lowerthis---string"><a class="header" href="#to_lowerthis---string"><code>to_lower(&amp;this) -&gt; String</code></a></h3>
 <p>Convert to lowercase.</p>
 <pre><code class="language-cpp">let str = new String("HELLO");
 let lower = str.to_lower();  // "hello"
 </code></pre>
-<h5 id="trimthis---string"><a class="header" href="#trimthis---string"><code>trim(&amp;this) -&gt; String</code></a></h5>
+<h3 id="trimthis---string"><a class="header" href="#trimthis---string"><code>trim(&amp;this) -&gt; String</code></a></h3>
 <p>Remove leading and trailing whitespace.</p>
 <pre><code class="language-cpp">let str = new String("  hello  ");
 let trimmed = str.trim();  // "hello"
 </code></pre>
-<h5 id="splitthis-sep-string---string"><a class="header" href="#splitthis-sep-string---string"><code>split(&amp;this, sep: string) -&gt; [String]</code></a></h5>
+<h3 id="splitthis-sep-string---string"><a class="header" href="#splitthis-sep-string---string"><code>split(&amp;this, sep: string) -&gt; [String]</code></a></h3>
 <p>Split the String by a separator.</p>
 <pre><code class="language-cpp">let str = new String("a,b,c");
 let parts = str.split(",");
 </code></pre>
-<h5 id="into_iterthis---iterchar"><a class="header" href="#into_iterthis---iterchar"><code>into_iter(this) -&gt; Iter&lt;char&gt;</code></a></h5>
+<h3 id="into_iterthis---iterchar"><a class="header" href="#into_iterthis---iterchar"><code>into_iter(this) -&gt; Iter&lt;char&gt;</code></a></h3>
 <p>Consume the String and create an iterator over its characters.</p>
 <pre><code class="language-cpp">let str = new String("Hi");
 let iter = str.into_iter();
 </code></pre>
-<h2 id="stdvector"><a class="header" href="#stdvector"><code>std/vector</code></a></h2>
+<h2 id="usage-examples-2"><a class="header" href="#usage-examples-2">Usage Examples</a></h2>
+<h3 id="string-manipulation"><a class="header" href="#string-manipulation">String Manipulation</a></h3>
+<pre><code class="language-cpp">import "std/string";
+import "std/io";
+
+fun main() {
+    let text = new String("  Hello, World!  ");
+    let trimmed = text.trim();
+    let upper = trimmed.to_upper();
+    println(upper.to_str());  // "HELLO, WORLD!"
+}
+</code></pre>
+<h3 id="splitting-strings"><a class="header" href="#splitting-strings">Splitting Strings</a></h3>
+<pre><code class="language-cpp">import "std/string";
+import "std/io";
+
+fun main() {
+    let csv = new String("apple,banana,cherry");
+    let fruits = csv.split(",");
+    
+    let i = 0u;
+    while i &lt; len(&amp;fruits) {
+        println(fruits[i].to_str());
+        i = i + 1u;
+    }
+}
+</code></pre>
+<h3 id="building-strings"><a class="header" href="#building-strings">Building Strings</a></h3>
+<pre><code class="language-cpp">import "std/string";
+import "std/io";
+
+fun main() {
+    let str = new String("Hello");
+    str.push(' ');
+    str.push_str(new String("World"));
+    str.push('!');
+    println(str.to_str());  // "Hello World!"
+}
+</code></pre>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+<li><a href="#stditer">std/iter</a> - String iteration</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdvector"><a class="header" href="#stdvector">std/vector</a></h1>
 <p>Dynamic array with resizable capacity.</p>
-<h3 id="external-functions-1"><a class="header" href="#external-functions-1">External Functions</a></h3>
-<h4 id="lentdata-const-t---uint64"><a class="header" href="#lentdata-const-t---uint64"><code>len&lt;T&gt;(data: &amp;const [T]) -&gt; uint64</code></a></h4>
+<h2 id="external-functions-1"><a class="header" href="#external-functions-1">External Functions</a></h2>
+<h3 id="lentdata-const-t---uint64"><a class="header" href="#lentdata-const-t---uint64"><code>len&lt;T&gt;(data: &amp;const [T]) -&gt; uint64</code></a></h3>
 <p>Get the length of an array.</p>
 <pre><code class="language-cpp">import "std/vector";
 
 let arr = [1, 2, 3];
 let length = len(&amp;arr);  // 3
 </code></pre>
-<h4 id="slicetdata-const-t-start-uint64-end-uint64---t"><a class="header" href="#slicetdata-const-t-start-uint64-end-uint64---t"><code>slice&lt;T&gt;(data: &amp;const [T], start: uint64, end: uint64) -&gt; [T]</code></a></h4>
+<h3 id="slicetdata-const-t-start-uint64-end-uint64---t"><a class="header" href="#slicetdata-const-t-start-uint64-end-uint64---t"><code>slice&lt;T&gt;(data: &amp;const [T], start: uint64, end: uint64) -&gt; [T]</code></a></h3>
 <p>Extract a slice from an array.</p>
 <pre><code class="language-cpp">let arr = [1, 2, 3, 4, 5];
 let sub = slice(&amp;arr, 1u, 4u);  // [2, 3, 4]
 </code></pre>
-<h3 id="struct-vectort"><a class="header" href="#struct-vectort">Struct: <code>Vector&lt;T&gt;</code></a></h3>
+<h2 id="struct-vectort"><a class="header" href="#struct-vectort">Struct: <code>Vector&lt;T&gt;</code></a></h2>
 <p>A generic dynamic array.</p>
 <pre><code class="language-cpp">struct Vector&lt;T&gt; {
 public:
@@ -2533,130 +2897,685 @@ public:
     capacity: uint64;
 }
 </code></pre>
-<h4 id="constructor-2"><a class="header" href="#constructor-2">Constructor</a></h4>
+<h2 id="constructor-2"><a class="header" href="#constructor-2">Constructor</a></h2>
 <pre><code class="language-cpp">import "std/vector";
 
 let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 </code></pre>
-<h4 id="static-methods-1"><a class="header" href="#static-methods-1">Static Methods</a></h4>
-<h5 id="vectortwith_capacitycapacity-uint64---vectort"><a class="header" href="#vectortwith_capacitycapacity-uint64---vectort"><code>Vector::&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code></a></h5>
+<h2 id="static-methods-1"><a class="header" href="#static-methods-1">Static Methods</a></h2>
+<h3 id="vectortwith_capacitycapacity-uint64---vectort"><a class="header" href="#vectortwith_capacitycapacity-uint64---vectort"><code>Vector::&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code></a></h3>
 <p>Create a vector with a specific initial capacity.</p>
 <pre><code class="language-cpp">let vec = Vector&lt;int64&gt;::with_capacity(10u);
 </code></pre>
-<h4 id="instance-methods-1"><a class="header" href="#instance-methods-1">Instance Methods</a></h4>
-<h5 id="getthis-index-uint64---const-t"><a class="header" href="#getthis-index-uint64---const-t"><code>get(&amp;this, index: uint64) -&gt; &amp;const T</code></a></h5>
+<h2 id="instance-methods-1"><a class="header" href="#instance-methods-1">Instance Methods</a></h2>
+<h3 id="getthis-index-uint64---const-t"><a class="header" href="#getthis-index-uint64---const-t"><code>get(&amp;this, index: uint64) -&gt; &amp;const T</code></a></h3>
 <p>Get a const reference to an element.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let val = vec.get(1u);  // &amp;2
 </code></pre>
-<h5 id="get_mutthis-index-uint64---t"><a class="header" href="#get_mutthis-index-uint64---t"><code>get_mut(&amp;this, index: uint64) -&gt; &amp;T</code></a></h5>
+<h3 id="get_mutthis-index-uint64---t"><a class="header" href="#get_mutthis-index-uint64---t"><code>get_mut(&amp;this, index: uint64) -&gt; &amp;T</code></a></h3>
 <p>Get a mutable reference to an element.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let val = vec.get_mut(1u);
 *val = 10;
 </code></pre>
-<h5 id="setthis-index-uint64-val-t"><a class="header" href="#setthis-index-uint64-val-t"><code>set(&amp;this, index: uint64, val: T)</code></a></h5>
+<h3 id="setthis-index-uint64-val-t"><a class="header" href="#setthis-index-uint64-val-t"><code>set(&amp;this, index: uint64, val: T)</code></a></h3>
 <p>Set an element at a specific index.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 vec.set(1u, 10);
 </code></pre>
-<h5 id="pushthis-val-t"><a class="header" href="#pushthis-val-t"><code>push(&amp;this, val: T)</code></a></h5>
+<h3 id="pushthis-val-t"><a class="header" href="#pushthis-val-t"><code>push(&amp;this, val: T)</code></a></h3>
 <p>Add an element to the end of the vector.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2]);
 vec.push(3);
 </code></pre>
-<h5 id="popthis---t"><a class="header" href="#popthis---t"><code>pop(&amp;this) -&gt; T</code></a></h5>
+<h3 id="popthis---t"><a class="header" href="#popthis---t"><code>pop(&amp;this) -&gt; T</code></a></h3>
 <p>Remove and return the last element.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let last = vec.pop();  // 3
 </code></pre>
-<h5 id="into_iterthis---itert"><a class="header" href="#into_iterthis---itert"><code>into_iter(this) -&gt; Iter&lt;T&gt;</code></a></h5>
+<h3 id="into_iterthis---itert"><a class="header" href="#into_iterthis---itert"><code>into_iter(this) -&gt; Iter&lt;T&gt;</code></a></h3>
 <p>Consume the vector and create an iterator.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let iter = vec.into_iter();
 </code></pre>
-<h2 id="stdoptional"><a class="header" href="#stdoptional"><code>std/optional</code></a></h2>
-<p>Type-safe nullable values.</p>
-<h3 id="struct-optionalt"><a class="header" href="#struct-optionalt">Struct: <code>optional&lt;T&gt;</code></a></h3>
-<p>Represents a value that may or may not be present.</p>
-<h4 id="static-methods-2"><a class="header" href="#static-methods-2">Static Methods</a></h4>
-<h5 id="optionaltofdata-t---optionalt"><a class="header" href="#optionaltofdata-t---optionalt"><code>optional&lt;T&gt;::of(data: T) -&gt; optional&lt;T&gt;</code></a></h5>
-<p>Create an optional containing a value.</p>
-<pre><code class="language-cpp">import "std/optional";
+<h3 id="takethis-idx-uint64---t"><a class="header" href="#takethis-idx-uint64---t"><code>take(&amp;this, idx: uint64) -&gt; T</code></a></h3>
+<p>Remove and return the element at the specified index.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let val = vec.take(1u);  // 2
+</code></pre>
+<h2 id="usage-examples-3"><a class="header" href="#usage-examples-3">Usage Examples</a></h2>
+<h3 id="creating-and-using-vectors"><a class="header" href="#creating-and-using-vectors">Creating and Using Vectors</a></h3>
+<pre><code class="language-cpp">import "std/vector";
+import "std/io";
 
-let opt = optional&lt;int64&gt;::of(42);
-</code></pre>
-<h5 id="optionaltempty---optionalt"><a class="header" href="#optionaltempty---optionalt"><code>optional&lt;T&gt;::empty() -&gt; optional&lt;T&gt;</code></a></h5>
-<p>Create an empty optional.</p>
-<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
-</code></pre>
-<h4 id="instance-methods-2"><a class="header" href="#instance-methods-2">Instance Methods</a></h4>
-<h5 id="has_valuethis---bool"><a class="header" href="#has_valuethis---bool"><code>has_value(&amp;this) -&gt; bool</code></a></h5>
-<p>Check if the optional contains a value.</p>
-<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
-if opt.has_value() {
-    println("Has value");
+fun main() {
+    let numbers = new Vector&lt;int64&gt;([1, 2, 3]);
+    
+    // Add elements
+    numbers.push(4);
+    numbers.push(5);
+    
+    // Access elements
+    println(*numbers.get(0u));  // 1
+    
+    // Modify elements
+    numbers.set(0u, 10);
+    println(*numbers.get(0u));  // 10
 }
 </code></pre>
-<h5 id="valuethis---t"><a class="header" href="#valuethis---t"><code>value(this) -&gt; T</code></a></h5>
-<p>Consume the optional and return the value (panics if empty).</p>
-<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
-let val = opt.value();  // 42
-</code></pre>
-<h5 id="value_orthis-default-t---t"><a class="header" href="#value_orthis-default-t---t"><code>value_or(this, default: T) -&gt; T</code></a></h5>
-<p>Consume the optional and return the value or a default.</p>
-<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
-let val = opt.value_or(0);  // 0
-</code></pre>
-<p>See <a href="#error-handling-in-atlas-77">Error Handling</a> for more examples.</p>
-<h2 id="stdexpected"><a class="header" href="#stdexpected"><code>std/expected</code></a></h2>
-<p>Result type for operations that can fail.</p>
-<h3 id="struct-expectedt-e"><a class="header" href="#struct-expectedt-e">Struct: <code>expected&lt;T, E&gt;</code></a></h3>
-<p>Represents either a success value or an error.</p>
-<h4 id="static-methods-3"><a class="header" href="#static-methods-3">Static Methods</a></h4>
-<h5 id="expectedt-eexpectdata-t---expectedt-e"><a class="header" href="#expectedt-eexpectdata-t---expectedt-e"><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code></a></h5>
-<p>Create a successful expected.</p>
-<pre><code class="language-cpp">import "std/expected";
+<h3 id="growing-a-vector"><a class="header" href="#growing-a-vector">Growing a Vector</a></h3>
+<pre><code class="language-cpp">import "std/vector";
+import "std/io";
 
-let result = expected&lt;int64, string&gt;::expect(42);
-</code></pre>
-<h5 id="expectedt-eunexpectederror-e---expectedt-e"><a class="header" href="#expectedt-eunexpectederror-e---expectedt-e"><code>expected&lt;T, E&gt;::unexpected(error: E) -&gt; expected&lt;T, E&gt;</code></a></h5>
-<p>Create a failed expected.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
-</code></pre>
-<h4 id="instance-methods-3"><a class="header" href="#instance-methods-3">Instance Methods</a></h4>
-<h5 id="is_expectedthis---bool"><a class="header" href="#is_expectedthis---bool"><code>is_expected(&amp;this) -&gt; bool</code></a></h5>
-<p>Check if this contains a value.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
-if result.is_expected() {
-    println("Success");
+fun main() {
+    let vec = Vector&lt;int64&gt;::with_capacity(5u);
+    
+    let i = 0;
+    while i &lt; 10 {
+        vec.push(i);
+        i = i + 1;
+    }
+    
+    println(vec.length);   // 10
+    println(vec.capacity); // &gt;= 10 (resized automatically)
 }
 </code></pre>
-<h5 id="is_unexpectedthis---bool"><a class="header" href="#is_unexpectedthis---bool"><code>is_unexpected(&amp;this) -&gt; bool</code></a></h5>
-<p>Check if this contains an error.</p>
-<pre><code class="language-cpp">if result.is_unexpected() {
-    println("Error occurred");
+<h3 id="iterating-over-a-vector"><a class="header" href="#iterating-over-a-vector">Iterating Over a Vector</a></h3>
+<pre><code class="language-cpp">import "std/vector";
+import "std/io";
+
+fun main() {
+    let numbers = new Vector&lt;int64&gt;([1, 2, 3, 4, 5]);
+    let iter = numbers.into_iter();
+    
+    while iter.has_next() {
+        let num = iter.next().value();
+        println(num);
+    }
 }
 </code></pre>
-<h5 id="expected_valuethis---t"><a class="header" href="#expected_valuethis---t"><code>expected_value(this) -&gt; T</code></a></h5>
-<p>Consume and return the value (panics if error).</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
-let val = result.expected_value();  // 42
+<h3 id="working-with-strings"><a class="header" href="#working-with-strings">Working with Strings</a></h3>
+<pre><code class="language-cpp">import "std/vector";
+import "std/string";
+import "std/io";
+
+fun main() {
+    let names = new Vector&lt;String&gt;([]);
+    names.push(new String("Alice"));
+    names.push(new String("Bob"));
+    names.push(new String("Charlie"));
+    
+    let i = 0u;
+    while i &lt; names.length {
+        println(names.get(i).to_str());
+        i = i + 1u;
+    }
+}
 </code></pre>
-<h5 id="unexpected_valuethis---e"><a class="header" href="#unexpected_valuethis---e"><code>unexpected_value(this) -&gt; E</code></a></h5>
-<p>Consume and return the error (panics if value).</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
-let err = result.unexpected_value();  // "Error"
+<h2 id="performance-notes"><a class="header" href="#performance-notes">Performance Notes</a></h2>
+<ul>
+<li><strong>Initial capacity</strong>: Use <code>with_capacity()</code> when you know the size ahead of time to avoid reallocations</li>
+<li><strong>Growth strategy</strong>: The vector doubles its capacity when full</li>
+<li><strong>Memory overhead</strong>: The vector allocates more space than needed for efficient growth</li>
+</ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+<li><a href="#stditer">std/iter</a> - Iterating over vectors</li>
+<li><a href="#generics-1">Generics</a> - Understanding Vector<t></t></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdmap"><a class="header" href="#stdmap">std/map</a></h1>
+<p>Key-value hash map for associating keys with values.</p>
+<h2 id="struct-mapk-v"><a class="header" href="#struct-mapk-v">Struct: <code>Map&lt;K, V&gt;</code></a></h2>
+<p>Generic hash map that associates keys of type K with values of type V.</p>
+<pre><code class="language-cpp">struct Map&lt;K, V&gt; {
+public:
+    buckets: Vector&lt;Vector&lt;MapEntry&lt;K, V&gt;&gt;&gt;;
+    size: uint64;
+}
 </code></pre>
-<h5 id="expected_value_orthis-default-t---t"><a class="header" href="#expected_value_orthis-default-t---t"><code>expected_value_or(this, default: T) -&gt; T</code></a></h5>
-<p>Consume and return the value or a default.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
-let val = result.expected_value_or(0);  // 0
+<h2 id="constructor-3"><a class="header" href="#constructor-3">Constructor</a></h2>
+<pre><code class="language-cpp">import "std/map";
+
+let map = new Map&lt;string, int64&gt;();
 </code></pre>
-<p>See <a href="#error-handling-in-atlas-77">Error Handling</a> for more examples.</p>
-<h2 id="stditer"><a class="header" href="#stditer"><code>std/iter</code></a></h2>
+<p>Creates an empty map.</p>
+<h2 id="instance-methods-2"><a class="header" href="#instance-methods-2">Instance Methods</a></h2>
+<h3 id="insertthis-key-k-value-v"><a class="header" href="#insertthis-key-k-value-v"><code>insert(&amp;this, key: K, value: V)</code></a></h3>
+<p>Insert or update a key-value pair.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("age", 25);
+map.insert("score", 100);
+map.insert("age", 26);  // Updates existing value
+</code></pre>
+<h3 id="getthis-key-k---optionalconst-v"><a class="header" href="#getthis-key-k---optionalconst-v"><code>get(&amp;this, key: K) -&gt; optional&lt;&amp;const V&gt;</code></a></h3>
+<p>Get a reference to the value for a key.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("age", 25);
+
+let age_opt = map.get("age");
+if age_opt.has_value() {
+    let age_ref = age_opt.value();
+    println(*age_ref);  // 25
+}
+</code></pre>
+<p>Returns <code>optional::empty()</code> if the key doesn’t exist.</p>
+<h3 id="get_mutthis-key-k---optional-v"><a class="header" href="#get_mutthis-key-k---optional-v"><code>get_mut(&amp;this, key: K) -&gt; optional&lt;&amp; V&gt;</code></a></h3>
+<p>Get a mutable reference to the value for a key.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("score", 100);
+
+let score_opt = map.get_mut("score");
+if score_opt.has_value() {
+    let score_ref = score_opt.value();
+    *score_ref = *score_ref + 10;  // Increment by 10
+}
+
+let final_score = map.get("score").value();
+println(*final_score);  // 110
+</code></pre>
+<h3 id="removethis-key-k---optionalv"><a class="header" href="#removethis-key-k---optionalv"><code>remove(&amp;this, key: K) -&gt; optional&lt;V&gt;</code></a></h3>
+<p>Remove a key-value pair, returning the value if it existed.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("age", 25);
+
+let removed = map.remove("age");
+if removed.has_value() {
+    println("Removed: " + removed.value());
+}
+
+let not_found = map.remove("age");  // Returns optional::empty()
+</code></pre>
+<h3 id="containsthis-key-k---bool"><a class="header" href="#containsthis-key-k---bool"><code>contains(&amp;this, key: K) -&gt; bool</code></a></h3>
+<p>Check if a key exists.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("age", 25);
+
+if map.contains("age") {
+    println("Age is present");
+}
+
+if !map.contains("name") {
+    println("Name is not present");
+}
+</code></pre>
+<h3 id="lengththis---uint64"><a class="header" href="#lengththis---uint64"><code>length(&amp;this) -&gt; uint64</code></a></h3>
+<p>Get the number of key-value pairs.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("a", 1);
+map.insert("b", 2);
+
+println(map.length());  // 2
+</code></pre>
+<h3 id="is_emptythis---bool-1"><a class="header" href="#is_emptythis---bool-1"><code>is_empty(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if the map is empty.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+println(map.is_empty());  // true
+
+map.insert("key", 42);
+println(map.is_empty());  // false
+</code></pre>
+<h3 id="clearthis"><a class="header" href="#clearthis"><code>clear(&amp;this)</code></a></h3>
+<p>Remove all key-value pairs.</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("a", 1);
+map.insert("b", 2);
+
+map.clear();
+println(map.is_empty());  // true
+</code></pre>
+<h2 id="usage-examples-4"><a class="header" href="#usage-examples-4">Usage Examples</a></h2>
+<h3 id="basic-map-operations"><a class="header" href="#basic-map-operations">Basic Map Operations</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let scores = new Map&lt;string, int64&gt;();
+    
+    // Insert values
+    scores.insert("Alice", 95);
+    scores.insert("Bob", 87);
+    scores.insert("Charlie", 92);
+    
+    // Get value
+    let alice_score = scores.get("Alice");
+    if alice_score.has_value() {
+        println("Alice's score: " + *alice_score.value());
+    }
+    
+    // Check existence
+    if scores.contains("Bob") {
+        println("Bob is in the map");
+    }
+    
+    // Update value
+    scores.insert("Alice", 98);  // Update
+    
+    println("Total students: " + scores.length());
+}
+</code></pre>
+<h3 id="counting-occurrences"><a class="header" href="#counting-occurrences">Counting Occurrences</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let words = ["apple", "banana", "apple", "orange", "banana", "apple"];
+    let counts = new Map&lt;string, int64&gt;();
+    
+    let i = 0;
+    while i &lt; len(&amp;words) {
+        let word = words[i];
+        let count_opt = counts.get(word);
+        
+        if count_opt.has_value() {
+            let current = *count_opt.value();
+            counts.insert(word, current + 1);
+        } else {
+            counts.insert(word, 1);
+        }
+        
+        i = i + 1;
+    }
+    
+    // Print counts
+    println("apple: " + *counts.get("apple").value());     // 3
+    println("banana: " + *counts.get("banana").value());   // 2
+    println("orange: " + *counts.get("orange").value());   // 1
+}
+</code></pre>
+<h3 id="configuration-storage"><a class="header" href="#configuration-storage">Configuration Storage</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/string";
+import "std/io";
+
+fun main() {
+    let config = new Map&lt;string, string&gt;();
+    
+    config.insert("host", "localhost");
+    config.insert("port", "8080");
+    config.insert("debug", "true");
+    
+    // Retrieve configuration
+    let host = config.get("host");
+    let port = config.get("port");
+    
+    if host.has_value() &amp;&amp; port.has_value() {
+        println("Server: " + *host.value() + ":" + *port.value());
+    }
+}
+</code></pre>
+<h3 id="user-database"><a class="header" href="#user-database">User Database</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let user_ids = new Map&lt;string, int64&gt;();
+    
+    // Add users
+    user_ids.insert("alice@example.com", 1001);
+    user_ids.insert("bob@example.com", 1002);
+    user_ids.insert("charlie@example.com", 1003);
+    
+    // Lookup user
+    let email = "bob@example.com";
+    let id_opt = user_ids.get(email);
+    
+    if id_opt.has_value() {
+        println("User ID: " + *id_opt.value());
+    } else {
+        println("User not found");
+    }
+}
+</code></pre>
+<h3 id="removing-entries"><a class="header" href="#removing-entries">Removing Entries</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let inventory = new Map&lt;string, int64&gt;();
+    
+    inventory.insert("apples", 50);
+    inventory.insert("oranges", 30);
+    inventory.insert("bananas", 40);
+    
+    println("Initial count: " + inventory.length());  // 3
+    
+    // Remove an item
+    let removed = inventory.remove("oranges");
+    if removed.has_value() {
+        println("Removed oranges: " + removed.value());
+    }
+    
+    println("Final count: " + inventory.length());  // 2
+}
+</code></pre>
+<h3 id="mutating-values"><a class="header" href="#mutating-values">Mutating Values</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let balances = new Map&lt;string, int64&gt;();
+    
+    balances.insert("Alice", 100);
+    balances.insert("Bob", 50);
+    
+    // Add to Alice's balance
+    let alice_opt = balances.get_mut("Alice");
+    if alice_opt.has_value() {
+        let balance_ref = alice_opt.value();
+        *balance_ref = *balance_ref + 50;
+    }
+    
+    println("Alice's balance: " + *balances.get("Alice").value());  // 150
+}
+</code></pre>
+<h3 id="clearing-a-map"><a class="header" href="#clearing-a-map">Clearing a Map</a></h3>
+<pre><code class="language-cpp">import "std/map";
+import "std/io";
+
+fun main() {
+    let cache = new Map&lt;string, int64&gt;();
+    
+    cache.insert("key1", 1);
+    cache.insert("key2", 2);
+    cache.insert("key3", 3);
+    
+    println("Cache size: " + cache.length());  // 3
+    
+    // Clear all entries
+    cache.clear();
+    
+    println("After clear: " + cache.length());  // 0
+    println("Is empty: " + cache.is_empty());   // true
+}
+</code></pre>
+<h2 id="performance-characteristics"><a class="header" href="#performance-characteristics">Performance Characteristics</a></h2>
+<ul>
+<li><strong>Insert</strong>: Average O(1), worst case O(n)</li>
+<li><strong>Get</strong>: Average O(1), worst case O(n)</li>
+<li><strong>Remove</strong>: Average O(1), worst case O(n)</li>
+<li><strong>Contains</strong>: Average O(1), worst case O(n)</li>
+</ul>
+<p>The map uses hash buckets internally. Performance degrades if many keys have hash collisions.</p>
+<h2 id="memory-management-2"><a class="header" href="#memory-management-2">Memory Management</a></h2>
+<p>Maps use dynamic allocation and grow as needed. The map owns its keys and values:</p>
+<pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
+map.insert("key", 42);
+// Map owns both the string and the int64
+// They are freed when the map is freed
+</code></pre>
+<h2 id="best-practices-2"><a class="header" href="#best-practices-2">Best Practices</a></h2>
+<ol>
+<li><strong>Check before unwrapping</strong>: Always use <code>has_value()</code> before calling <code>value()</code> on optional returns</li>
+<li><strong>Use contains()</strong>: For existence checks, <code>contains()</code> is clearer than checking <code>get()</code></li>
+<li><strong>Prefer get_mut()</strong>: When modifying values, use <code>get_mut()</code> instead of remove + insert</li>
+<li><strong>Handle missing keys</strong>: Always handle the case where a key doesn’t exist</li>
+<li><strong>Clear when done</strong>: Use <code>clear()</code> to free memory if reusing a map</li>
+</ol>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdoptional">std/optional</a> - Map methods return optional values</li>
+<li><a href="#stdvector">std/vector</a> - Maps are implemented using vectors</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdqueue"><a class="header" href="#stdqueue">std/queue</a></h1>
+<p>Queue (FIFO) data structure for ordered element processing.</p>
+<h2 id="struct-queuet"><a class="header" href="#struct-queuet">Struct: <code>Queue&lt;T&gt;</code></a></h2>
+<p>Generic queue (first-in, first-out) for elements of type T.</p>
+<pre><code class="language-cpp">struct Queue&lt;T&gt; {
+public:
+    data: Vector&lt;T&gt;;
+    front_index: uint64;
+}
+</code></pre>
+<h2 id="constructor-4"><a class="header" href="#constructor-4">Constructor</a></h2>
+<pre><code class="language-cpp">import "std/queue";
+
+let queue = new Queue&lt;int64&gt;();
+</code></pre>
+<p>Creates an empty queue.</p>
+<h2 id="instance-methods-3"><a class="header" href="#instance-methods-3">Instance Methods</a></h2>
+<h3 id="enqueuethis-item-t"><a class="header" href="#enqueuethis-item-t"><code>enqueue(&amp;this, item: T)</code></a></h3>
+<p>Add an item to the back of the queue.</p>
+<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+// Queue: [1, 2, 3] (front to back)
+</code></pre>
+<h3 id="dequeuethis---t"><a class="header" href="#dequeuethis---t"><code>dequeue(&amp;this) -&gt; T</code></a></h3>
+<p>Remove and return the front item.</p>
+<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
+queue.enqueue(1);
+queue.enqueue(2);
+
+let first = queue.dequeue();   // 1
+let second = queue.dequeue();  // 2
+let third = queue.dequeue();   // panic: Queue is empty
+</code></pre>
+<p>Returns <code>optional::empty()</code> if the queue is empty.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>In the future, <code>Queue&lt;T&gt;.dequeue</code> may return <code>optional&lt;T&gt;</code> to handle empty queues without panicking.</p>
+</blockquote>
+<h3 id="is_emptythis---bool-2"><a class="header" href="#is_emptythis---bool-2"><code>is_empty(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if the queue is empty.</p>
+<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
+println(queue.is_empty());  // true
+
+queue.enqueue(1);
+println(queue.is_empty());  // false
+</code></pre>
+<h3 id="is_fullthis---bool"><a class="header" href="#is_fullthis---bool"><code>is_full(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if the queue is full.</p>
+<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
+println(queue.is_full());  // false
+
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+println(queue.is_full());  // true
+</code></pre>
+<h2 id="usage-examples-5"><a class="header" href="#usage-examples-5">Usage Examples</a></h2>
+<h3 id="basic-queue-operations"><a class="header" href="#basic-queue-operations">Basic Queue Operations</a></h3>
+<pre><code class="language-cpp">import "std/queue";
+import "std/io";
+
+fun main() {
+    let queue = new Queue&lt;int64&gt;();
+    
+    // Add items
+    queue.enqueue(10);
+    queue.enqueue(20);
+    queue.enqueue(30);
+    
+    println("Queue length: " + queue.size);  // 3
+    
+    // Remove items (FIFO order)
+    while !queue.is_empty() {
+        let item = queue.dequeue();
+        println(item);
+    }
+    // Output: 10, 20, 30
+}
+</code></pre>
+<h3 id="task-queue"><a class="header" href="#task-queue">Task Queue</a></h3>
+<pre><code class="language-cpp">import "std/queue";
+import "std/string";
+import "std/io";
+
+fun main() {
+    let tasks = new Queue&lt;string&gt;();
+    
+    // Add tasks
+    tasks.enqueue("Process data");
+    tasks.enqueue("Send email");
+    tasks.enqueue("Update database");
+    
+    // Process tasks
+    println("Processing tasks...");
+    while !tasks.is_empty() {
+        let task = tasks.dequeue();
+        println("Doing: " + task);
+    }
+}
+</code></pre>
+<h3 id="message-queue"><a class="header" href="#message-queue">Message Queue</a></h3>
+<pre><code class="language-cpp">import "std/queue";
+import "std/string";
+import "std/io";
+
+fun main() {
+    let messages = new Queue&lt;string&gt;();
+    
+    // Simulate receiving messages
+    messages.enqueue("Hello");
+    messages.enqueue("How are you?");
+    messages.enqueue("Goodbye");
+    
+    // Process messages in order
+    println("Messages:");
+    let i = 1;
+    while !messages.is_empty() {
+        let msg = messages.dequeue();
+        println(i + ". " + msg);
+        i = i + 1;
+    }
+}
+</code></pre>
+<h3 id="job-scheduler"><a class="header" href="#job-scheduler">Job Scheduler</a></h3>
+<pre><code class="language-cpp">import "std/queue";
+import "std/io";
+
+fun process_job(job_id: int64) {
+    println("Processing job " + job_id);
+}
+
+fun main() {
+    let job_queue = new Queue&lt;int64&gt;();
+    
+    // Add jobs
+    job_queue.enqueue(101);
+    job_queue.enqueue(102);
+    job_queue.enqueue(103);
+    
+    println("Starting job processor...");
+    
+    while !job_queue.is_empty() {
+        let job = job_queue.dequeue();
+        process_job(job);
+    }
+    
+    println("All jobs completed");
+}
+</code></pre>
+<h3 id="breadth-first-traversal"><a class="header" href="#breadth-first-traversal">Breadth-First Traversal</a></h3>
+<pre><code class="language-cpp">import "std/queue";
+import "std/io";
+
+fun main() {
+    // Simulate a tree level-order traversal
+    let queue = new Queue&lt;int64&gt;();
+    
+    // Add root level
+    queue.enqueue(1);
+    
+    // Process levels
+    let level = 1;
+    while !queue.is_empty() &amp;&amp; level &lt;= 3 {
+        let size = queue.size;
+        println("Level " + level + ":");
+        
+        let i = 0u;
+        while i &lt; size {
+            let node = queue.dequeue();
+            println("  Node: " + node);
+            
+            // Add children (simulated)
+            if level &lt; 3 {
+                queue.enqueue(node * 2);
+                queue.enqueue(node * 2 + 1);
+            }
+            
+            i = i + 1u;
+        }
+        
+        level = level + 1;
+    }
+}
+</code></pre>
+<h3 id="request-queue-with-limit"><a class="header" href="#request-queue-with-limit">Request Queue with Limit</a></h3>
+<pre><code class="language-cpp">import "std/queue";
+import "std/io";
+
+const MAX_QUEUE_SIZE: uint64 = 5u;
+
+fun main() {
+    let requests = new Queue&lt;int64&gt;();
+    
+    // Try to add requests
+    let i = 1;
+    while i &lt;= 10 {
+        if requests.size &lt; MAX_QUEUE_SIZE {
+            requests.enqueue(i);
+            println("Added request " + i);
+        } else {
+            println("Queue full! Dropping request " + i);
+        }
+        i = i + 1;
+    }
+    
+    // Process requests
+    println("\nProcessing requests:");
+    while !requests.is_empty() {
+        let req = requests.dequeue();
+        println("Processing request " + req);
+    }
+}
+</code></pre>
+<h2 id="performance-characteristics-1"><a class="header" href="#performance-characteristics-1">Performance Characteristics</a></h2>
+<ul>
+<li><strong>enqueue</strong>: O(1) amortized (O(n) when vector resizes)</li>
+<li><strong>dequeue</strong>: O(1)</li>
+<li><strong>is_empty</strong>: O(1)</li>
+</ul>
+<h2 id="best-practices-3"><a class="header" href="#best-practices-3">Best Practices</a></h2>
+<ol>
+<li><strong>Check emptiness</strong>: Always check <code>is_empty()</code> before calling <code>dequeue()</code></li>
+<li><strong>Bounded queues</strong>: Consider implementing size limits to prevent unbounded growth</li>
+<li><strong>Clear when done</strong>: Call <code>clear()</code> to free memory when finished with a queue</li>
+</ol>
+<h2 id="common-patterns-3"><a class="header" href="#common-patterns-3">Common Patterns</a></h2>
+<h3 id="producer-consumer"><a class="header" href="#producer-consumer">Producer-Consumer</a></h3>
+<pre><code class="language-cpp">fun producer(queue: &amp;Queue&lt;int64&gt;) {
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+}
+
+fun consumer(queue: &amp;Queue&lt;int64&gt;) {
+    while !queue.is_empty() {
+        let item = queue.dequeue();
+        // Process item
+    }
+}
+</code></pre>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdvector">std/vector</a> - Queue is implemented using Vector</li>
+<li><a href="#stdoptional">std/optional</a> - Queue methods return optional values</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stditer"><a class="header" href="#stditer">std/iter</a></h1>
 <p>Iterator utilities for traversing collections.</p>
-<h3 id="struct-itert"><a class="header" href="#struct-itert">Struct: <code>Iter&lt;T&gt;</code></a></h3>
+<h2 id="struct-itert"><a class="header" href="#struct-itert">Struct: <code>Iter&lt;T&gt;</code></a></h2>
 <p>Generic iterator over elements of type T.</p>
 <pre><code class="language-cpp">struct Iter&lt;T&gt; {
 public:
@@ -2664,352 +3583,1330 @@ public:
     index: uint64;
 }
 </code></pre>
-<h4 id="constructor-3"><a class="header" href="#constructor-3">Constructor</a></h4>
+<h2 id="constructor-5"><a class="header" href="#constructor-5">Constructor</a></h2>
 <pre><code class="language-cpp">import "std/iter";
 import "std/vector";
 
 let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let iter = new Iter&lt;int64&gt;(vec);
 </code></pre>
-<h4 id="static-methods-4"><a class="header" href="#static-methods-4">Static Methods</a></h4>
-<h5 id="itertfrom_arraydata-t---itert"><a class="header" href="#itertfrom_arraydata-t---itert"><code>Iter&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code></a></h5>
+<h2 id="static-methods-2"><a class="header" href="#static-methods-2">Static Methods</a></h2>
+<h3 id="itertfrom_arraydata-t---itert"><a class="header" href="#itertfrom_arraydata-t---itert"><code>Iter&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code></a></h3>
 <p>Create an iterator from an array.</p>
 <pre><code class="language-cpp">let arr = [1, 2, 3];
 let iter = Iter&lt;int64&gt;::from_array(arr);
 </code></pre>
-<h5 id="itercharfrom_stringdata-string---iterchar"><a class="header" href="#itercharfrom_stringdata-string---iterchar"><code>Iter&lt;char&gt;::from_string(data: String) -&gt; Iter&lt;char&gt;</code></a></h5>
+<h3 id="itercharfrom_stringdata-string---iterchar"><a class="header" href="#itercharfrom_stringdata-string---iterchar"><code>Iter&lt;char&gt;::from_string(data: String) -&gt; Iter&lt;char&gt;</code></a></h3>
 <p>Create an iterator from a String.</p>
-<pre><code class="language-cpp">let str = new String("Hi");
+<pre><code class="language-cpp">import "std/string";
+
+let str = new String("Hi");
 let iter = Iter&lt;char&gt;::from_string(str);
 </code></pre>
-<h5 id="itercharfrom_strdata-const-string---iterchar"><a class="header" href="#itercharfrom_strdata-const-string---iterchar"><code>Iter&lt;char&gt;::from_str(data: &amp;const string) -&gt; Iter&lt;char&gt;</code></a></h5>
+<h3 id="itercharfrom_strdata-const-string---iterchar"><a class="header" href="#itercharfrom_strdata-const-string---iterchar"><code>Iter&lt;char&gt;::from_str(data: &amp;const string) -&gt; Iter&lt;char&gt;</code></a></h3>
 <p>Create an iterator from a string primitive.</p>
 <pre><code class="language-cpp">let text = "Hi";
 let iter = Iter&lt;char&gt;::from_str(&amp;text);
 </code></pre>
-<h4 id="instance-methods-4"><a class="header" href="#instance-methods-4">Instance Methods</a></h4>
-<h5 id="nextthis---optionalt"><a class="header" href="#nextthis---optionalt"><code>next(&amp;this) -&gt; optional&lt;T&gt;</code></a></h5>
+<h2 id="instance-methods-4"><a class="header" href="#instance-methods-4">Instance Methods</a></h2>
+<h3 id="nextthis---optionalt"><a class="header" href="#nextthis---optionalt"><code>next(&amp;this) -&gt; optional&lt;T&gt;</code></a></h3>
 <p>Get the next item (returns empty if exhausted).</p>
 <pre><code class="language-cpp">let iter = Iter&lt;int64&gt;::from_array([1, 2]);
-let first = iter.next();  // optional::of(1)
+let first = iter.next();   // optional::of(1)
 let second = iter.next();  // optional::of(2)
-let third = iter.next();  // optional::empty()
+let third = iter.next();   // optional::empty()
 </code></pre>
-<h5 id="peekthis---optionalconst-t"><a class="header" href="#peekthis---optionalconst-t"><code>peek(&amp;this) -&gt; optional&lt;&amp;const T&gt;</code></a></h5>
+<h3 id="peekthis---optionalconst-t"><a class="header" href="#peekthis---optionalconst-t"><code>peek(&amp;this) -&gt; optional&lt;&amp;const T&gt;</code></a></h3>
 <p>Peek at the next item without advancing.</p>
 <pre><code class="language-cpp">let iter = Iter&lt;int64&gt;::from_array([1, 2]);
 let peeked = iter.peek();  // optional::of(&amp;1)
 let next = iter.next();     // optional::of(1)
 </code></pre>
-<h5 id="has_nextthis---bool"><a class="header" href="#has_nextthis---bool"><code>has_next(&amp;this) -&gt; bool</code></a></h5>
+<h3 id="has_nextthis---bool"><a class="header" href="#has_nextthis---bool"><code>has_next(&amp;this) -&gt; bool</code></a></h3>
 <p>Check if there are more items.</p>
 <pre><code class="language-cpp">while iter.has_next() {
     let item = iter.next().value();
     println(item);
 }
 </code></pre>
-<h2 id="stdtime"><a class="header" href="#stdtime"><code>std/time</code></a></h2>
+<h2 id="usage-examples-6"><a class="header" href="#usage-examples-6">Usage Examples</a></h2>
+<h3 id="iterating-over-an-array"><a class="header" href="#iterating-over-an-array">Iterating Over an Array</a></h3>
+<pre><code class="language-cpp">import "std/iter";
+import "std/io";
+
+fun main() {
+    let numbers = [1, 2, 3, 4, 5];
+    let iter = Iter&lt;int64&gt;::from_array(numbers);
+    
+    while iter.has_next() {
+        let num = iter.next().value();
+        println(num);
+    }
+}
+</code></pre>
+<h3 id="iterating-over-a-string"><a class="header" href="#iterating-over-a-string">Iterating Over a String</a></h3>
+<pre><code class="language-cpp">import "std/iter";
+import "std/string";
+import "std/io";
+
+fun main() {
+    let text = "Hello";
+    let iter = Iter&lt;char&gt;::from_str(&amp;text);
+    
+    while iter.has_next() {
+        let ch = iter.next().value();
+        println(ch);
+    }
+}
+</code></pre>
+<h3 id="using-peek"><a class="header" href="#using-peek">Using peek()</a></h3>
+<pre><code class="language-cpp">import "std/iter";
+import "std/io";
+
+fun main() {
+    let numbers = [1, 2, 3];
+    let iter = Iter&lt;int64&gt;::from_array(numbers);
+    
+    while iter.has_next() {
+        let peeked = iter.peek();
+        if peeked.has_value() {
+            let val = *peeked.value();
+            if val &gt; 1 {
+                println("Found number &gt; 1");
+            }
+        }
+        iter.next();
+    }
+}
+</code></pre>
+<h3 id="consuming-a-vector"><a class="header" href="#consuming-a-vector">Consuming a Vector</a></h3>
+<pre><code class="language-cpp">import "std/vector";
+import "std/iter";
+import "std/io";
+
+fun main() {
+    let vec = new Vector&lt;int64&gt;([10, 20, 30]);
+    let iter = vec.into_iter();  // Consumes the vector
+    
+    while iter.has_next() {
+        let num = iter.next().value();
+        println(num * 2);
+    }
+    // vec is no longer accessible here
+}
+</code></pre>
+<h3 id="filtering-with-iterators"><a class="header" href="#filtering-with-iterators">Filtering with Iterators</a></h3>
+<pre><code class="language-cpp">import "std/iter";
+import "std/io";
+
+fun main() {
+    let numbers = [1, 2, 3, 4, 5, 6];
+    let iter = Iter&lt;int64&gt;::from_array(numbers);
+    
+    // Print only even numbers
+    while iter.has_next() {
+        let num = iter.next().value();
+        if num % 2 == 0 {
+            println(num);
+        }
+    }
+}
+</code></pre>
+<h3 id="collecting-from-iterator"><a class="header" href="#collecting-from-iterator">Collecting from Iterator</a></h3>
+<pre><code class="language-cpp">import "std/iter";
+import "std/vector";
+import "std/io";
+
+fun main() {
+    let source = [1, 2, 3, 4, 5];
+    let iter = Iter&lt;int64&gt;::from_array(source);
+    
+    let result = Vector&lt;int64&gt;::with_capacity(5u);
+    
+    while iter.has_next() {
+        let num = iter.next().value();
+        if num % 2 == 0 {
+            result.push(num);
+        }
+    }
+    
+    // result now contains [2, 4]
+    println(result.length);  // 2
+}
+</code></pre>
+<h2 id="performance-considerations-1"><a class="header" href="#performance-considerations-1">Performance Considerations</a></h2>
+<ul>
+<li><strong>Memory ownership</strong>: Iterators created with <code>into_iter()</code> take ownership of the collection</li>
+<li><strong>Reference iterators</strong>: <code>from_array()</code> and <code>from_str()</code> create iterators that reference existing data</li>
+<li><strong>Peek overhead</strong>: <code>peek()</code> is efficient as it doesn’t advance the iterator</li>
+</ul>
+<h2 id="best-practices-4"><a class="header" href="#best-practices-4">Best Practices</a></h2>
+<ol>
+<li><strong>Use has_next()</strong>: Always check <code>has_next()</code> before calling <code>next()</code> in loops</li>
+<li><strong>Handle optional returns</strong>: Remember that <code>next()</code> returns <code>optional&lt;T&gt;</code></li>
+<li><strong>Understand ownership</strong>: Know when iterators consume their source</li>
+<li><strong>Prefer iterators</strong>: Use iterators over manual indexing for cleaner code</li>
+</ol>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdvector">std/vector</a> - Vector’s <code>into_iter()</code> method</li>
+<li><a href="#stdstring">std/string</a> - String’s <code>into_iter()</code> method</li>
+<li><a href="#stdoptional">std/optional</a> - Iterator returns optional values</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdoptional"><a class="header" href="#stdoptional">std/optional</a></h1>
+<p>Type-safe nullable values.</p>
+<h2 id="struct-optionalt"><a class="header" href="#struct-optionalt">Struct: <code>optional&lt;T&gt;</code></a></h2>
+<p>Represents a value that may or may not be present.</p>
+<pre><code class="language-cpp">union optional_storage&lt;T&gt; { 
+    value: T;
+    empty: unit;
+}
+
+struct optional&lt;T&gt; {
+private:
+    data: optional_storage&lt;T&gt;;
+    has_value: bool;
+}
+</code></pre>
+<h2 id="static-methods-3"><a class="header" href="#static-methods-3">Static Methods</a></h2>
+<h3 id="optionaltofdata-t---optionalt"><a class="header" href="#optionaltofdata-t---optionalt"><code>optional&lt;T&gt;::of(data: T) -&gt; optional&lt;T&gt;</code></a></h3>
+<p>Create an optional containing a value.</p>
+<pre><code class="language-cpp">import "std/optional";
+
+let opt = optional&lt;int64&gt;::of(42);
+</code></pre>
+<h3 id="optionaltempty---optionalt"><a class="header" href="#optionaltempty---optionalt"><code>optional&lt;T&gt;::empty() -&gt; optional&lt;T&gt;</code></a></h3>
+<p>Create an empty optional.</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
+</code></pre>
+<h2 id="instance-methods-5"><a class="header" href="#instance-methods-5">Instance Methods</a></h2>
+<h3 id="has_valuethis---bool"><a class="header" href="#has_valuethis---bool"><code>has_value(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if the optional contains a value.</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
+if opt.has_value() {
+    println("Has value");
+}
+</code></pre>
+<h3 id="valuethis---t"><a class="header" href="#valuethis---t"><code>value(this) -&gt; T</code></a></h3>
+<p>Consume the optional and return the value (panics if empty).</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
+let val = opt.value();  // 42
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> This method panics if the optional is empty. Always check with <code>has_value()</code> first or use <code>value_or()</code>.</p>
+</blockquote>
+<h3 id="value_orthis-default-t---t"><a class="header" href="#value_orthis-default-t---t"><code>value_or(this, default: T) -&gt; T</code></a></h3>
+<p>Consume the optional and return the value or a default.</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
+let val = opt.value_or(0);  // 0
+</code></pre>
+<h2 id="usage-examples-7"><a class="header" href="#usage-examples-7">Usage Examples</a></h2>
+<h3 id="basic-optional-usage"><a class="header" href="#basic-optional-usage">Basic Optional Usage</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/io";
+
+fun find_user(id: int64) -&gt; optional&lt;string&gt; {
+    if id &gt; 0 {
+        return optional&lt;string&gt;::of("Alice");
+    }
+    return optional&lt;string&gt;::empty();
+}
+
+fun main() {
+    let user = find_user(1);
+    
+    if user.has_value() {
+        println(user.value());
+    } else {
+        println("User not found");
+    }
+}
+</code></pre>
+<h3 id="using-value_or-for-defaults-1"><a class="header" href="#using-value_or-for-defaults-1">Using value_or for Defaults</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/io";
+
+fun get_config_timeout() -&gt; optional&lt;int64&gt; {
+    return optional&lt;int64&gt;::empty();
+}
+
+fun main() {
+    let timeout = get_config_timeout().value_or(30);
+    println(timeout);  // 30
+}
+</code></pre>
+<h3 id="optional-with-structs"><a class="header" href="#optional-with-structs">Optional with Structs</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/io";
+
+struct User {
+public:
+    id: int64;
+    name: string;
+    
+    User(id: int64, name: string) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+fun find_user(id: int64) -&gt; optional&lt;User&gt; {
+    if id == 1 {
+        return optional&lt;User&gt;::of(new User(1, "Alice"));
+    }
+    return optional&lt;User&gt;::empty();
+}
+
+fun main() {
+    let user_opt = find_user(1);
+    
+    if user_opt.has_value() {
+        let user = user_opt.value();
+        println(user.name);
+    }
+}
+</code></pre>
+<h3 id="chaining-optional-operations"><a class="header" href="#chaining-optional-operations">Chaining Optional Operations</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/io";
+
+fun parse_number(s: string) -&gt; optional&lt;int64&gt; {
+    if s == "42" {
+        return optional&lt;int64&gt;::of(42);
+    }
+    return optional&lt;int64&gt;::empty();
+}
+
+fun double_if_even(n: int64) -&gt; optional&lt;int64&gt; {
+    if n % 2 == 0 {
+        return optional&lt;int64&gt;::of(n * 2);
+    }
+    return optional&lt;int64&gt;::empty();
+}
+
+fun main() {
+    let num_opt = parse_number("42");
+    
+    if num_opt.has_value() {
+        let num = num_opt.value();
+        let doubled_opt = double_if_even(num);
+        
+        if doubled_opt.has_value() {
+            println(doubled_opt.value());  // 84
+        }
+    }
+}
+</code></pre>
+<h2 id="when-to-use-optional"><a class="header" href="#when-to-use-optional">When to Use optional</a></h2>
+<p>Use <code>optional&lt;T&gt;</code> when:</p>
+<ul>
+<li>A value might not exist (like finding an item in a collection)</li>
+<li>You want to explicitly handle the “no value” case</li>
+<li>The absence of a value is not an error condition</li>
+<li>You don’t need to communicate <em>why</em> there’s no value</li>
+</ul>
+<p>For operations that can fail with meaningful error information, use <a href="#stdexpected"><code>expected&lt;T, E&gt;</code></a> instead.</p>
+<h2 id="best-practices-5"><a class="header" href="#best-practices-5">Best Practices</a></h2>
+<ol>
+<li><strong>Always check before unwrapping</strong>: Use <code>has_value()</code> before calling <code>value()</code></li>
+<li><strong>Prefer value_or()</strong>: When you have a sensible default, use <code>value_or()</code> instead of manual checking</li>
+<li><strong>Document return types</strong>: Make it clear in comments when a function might return empty</li>
+<li><strong>Consider expected</strong>: If you need error context, use <code>expected&lt;T, E&gt;</code> instead</li>
+</ol>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdexpected">std/expected</a> - For operations that can fail with error information</li>
+<li><a href="#error-handling-in-atlas-77">Error Handling</a> - Complete error handling guide</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdexpected"><a class="header" href="#stdexpected">std/expected</a></h1>
+<p>Result type for operations that can fail with error information.</p>
+<h2 id="struct-expectedt-e"><a class="header" href="#struct-expectedt-e">Struct: <code>expected&lt;T, E&gt;</code></a></h2>
+<p>Represents either a success value or an error.</p>
+<pre><code class="language-cpp">union expected_storage&lt;T, E&gt; { 
+    expected_value: T;
+    unexpected_value: E;
+}
+
+struct expected&lt;T, E&gt; {
+private:
+    data: expected_storage&lt;T, E&gt;;
+    has_expected_value: bool;
+}
+</code></pre>
+<h2 id="static-methods-4"><a class="header" href="#static-methods-4">Static Methods</a></h2>
+<h3 id="expectedt-eexpectdata-t---expectedt-e"><a class="header" href="#expectedt-eexpectdata-t---expectedt-e"><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code></a></h3>
+<p>Create a successful expected.</p>
+<pre><code class="language-cpp">import "std/expected";
+
+let result = expected&lt;int64, string&gt;::expect(42);
+</code></pre>
+<h3 id="expectedt-eunexpectederror-e---expectedt-e"><a class="header" href="#expectedt-eunexpectederror-e---expectedt-e"><code>expected&lt;T, E&gt;::unexpected(error: E) -&gt; expected&lt;T, E&gt;</code></a></h3>
+<p>Create a failed expected.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error occurred");
+</code></pre>
+<h2 id="instance-methods-6"><a class="header" href="#instance-methods-6">Instance Methods</a></h2>
+<h3 id="is_expectedthis---bool"><a class="header" href="#is_expectedthis---bool"><code>is_expected(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if this contains a value.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
+if result.is_expected() {
+    println("Success");
+}
+</code></pre>
+<h3 id="is_unexpectedthis---bool"><a class="header" href="#is_unexpectedthis---bool"><code>is_unexpected(&amp;this) -&gt; bool</code></a></h3>
+<p>Check if this contains an error.</p>
+<pre><code class="language-cpp">if result.is_unexpected() {
+    println("Error occurred");
+}
+</code></pre>
+<h3 id="expected_valuethis---t"><a class="header" href="#expected_valuethis---t"><code>expected_value(this) -&gt; T</code></a></h3>
+<p>Consume and return the value (panics if error).</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
+let val = result.expected_value();  // 42
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> This method panics if the expected contains an error. Always check with <code>is_expected()</code> first or use <code>expected_value_or()</code>.</p>
+</blockquote>
+<h3 id="unexpected_valuethis---e"><a class="header" href="#unexpected_valuethis---e"><code>unexpected_value(this) -&gt; E</code></a></h3>
+<p>Consume and return the error (panics if value).</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
+let err = result.unexpected_value();  // "Error"
+</code></pre>
+<h3 id="expected_value_orthis-default-t---t"><a class="header" href="#expected_value_orthis-default-t---t"><code>expected_value_or(this, default: T) -&gt; T</code></a></h3>
+<p>Consume and return the value or a default.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
+let val = result.expected_value_or(0);  // 0
+</code></pre>
+<h3 id="unexpected_value_orthis-default-e---e"><a class="header" href="#unexpected_value_orthis-default-e---e"><code>unexpected_value_or(this, default: E) -&gt; E</code></a></h3>
+<p>Consume and return the error or a default.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
+let err = result.unexpected_value_or("No error");  // "No error"
+</code></pre>
+<h2 id="usage-examples-8"><a class="header" href="#usage-examples-8">Usage Examples</a></h2>
+<h3 id="basic-error-handling"><a class="header" href="#basic-error-handling">Basic Error Handling</a></h3>
+<pre><code class="language-cpp">import "std/expected";
+import "std/io";
+
+fun divide(a: int64, b: int64) -&gt; expected&lt;int64, string&gt; {
+    if b == 0 {
+        return expected&lt;int64, string&gt;::unexpected("Division by zero");
+    }
+    return expected&lt;int64, string&gt;::expect(a / b);
+}
+
+fun main() {
+    let result = divide(10, 2);
+    
+    if result.is_expected() {
+        println(result.expected_value());  // 5
+    } else {
+        println(result.unexpected_value());
+    }
+}
+</code></pre>
+<h3 id="file-operations-with-error-context"><a class="header" href="#file-operations-with-error-context">File Operations with Error Context</a></h3>
+<pre><code class="language-cpp">import "std/expected";
+import "std/fs";
+import "std/io";
+
+fun read_config() -&gt; expected&lt;string, string&gt; {
+    let file = new File("config.txt");
+    
+    if !file.exists() {
+        return expected&lt;string, string&gt;::unexpected("Config file not found");
+    }
+    
+    let content = file.read();
+    return expected&lt;string, string&gt;::expect(content);
+}
+
+fun main() {
+    let result = read_config();
+    
+    if result.is_expected() {
+        let config = result.expected_value();
+        println("Config loaded");
+    } else {
+        let error = result.unexpected_value();
+        println("Error: " + error);
+    }
+}
+</code></pre>
+<h3 id="custom-error-types"><a class="header" href="#custom-error-types">Custom Error Types</a></h3>
+<pre><code class="language-cpp">import "std/expected";
+import "std/io";
+
+struct ParseError {
+public:
+    line: int64;
+    message: string;
+    
+    ParseError(line: int64, message: string) {
+        this.line = line;
+        this.message = message;
+    }
+}
+
+fun parse_number(s: string, line: int64) -&gt; expected&lt;int64, ParseError&gt; {
+    if s == "42" {
+        return expected&lt;int64, ParseError&gt;::expect(42);
+    }
+    
+    let error = new ParseError(line, "Invalid number format");
+    return expected&lt;int64, ParseError&gt;::unexpected(error);
+}
+
+fun main() {
+    let result = parse_number("abc", 10);
+    
+    if result.is_unexpected() {
+        let error = result.unexpected_value();
+        println("Error at line " + error.line + ": " + error.message);
+    }
+}
+</code></pre>
+<h3 id="chaining-operations"><a class="header" href="#chaining-operations">Chaining Operations</a></h3>
+<pre><code class="language-cpp">import "std/expected";
+import "std/io";
+
+fun parse_int(s: string) -&gt; expected&lt;int64, string&gt; {
+    if s == "42" {
+        return expected&lt;int64, string&gt;::expect(42);
+    }
+    return expected&lt;int64, string&gt;::unexpected("Parse failed");
+}
+
+fun validate_positive(n: int64) -&gt; expected&lt;int64, string&gt; {
+    if n &gt; 0 {
+        return expected&lt;int64, string&gt;::expect(n);
+    }
+    return expected&lt;int64, string&gt;::unexpected("Number must be positive");
+}
+
+fun main() {
+    let parse_result = parse_int("42");
+    
+    if parse_result.is_expected() {
+        let num = parse_result.expected_value();
+        let validate_result = validate_positive(num);
+        
+        if validate_result.is_expected() {
+            println("Valid number: " + validate_result.expected_value());
+        } else {
+            println("Validation error: " + validate_result.unexpected_value());
+        }
+    } else {
+        println("Parse error: " + parse_result.unexpected_value());
+    }
+}
+</code></pre>
+<h3 id="using-defaults"><a class="header" href="#using-defaults">Using Defaults</a></h3>
+<pre><code class="language-cpp">import "std/expected";
+import "std/io";
+
+fun get_port() -&gt; expected&lt;int64, string&gt; {
+    return expected&lt;int64, string&gt;::unexpected("Port not configured");
+}
+
+fun main() {
+    let port = get_port().expected_value_or(8080);
+    println(port);  // 8080
+}
+</code></pre>
+<h2 id="when-to-use-expected"><a class="header" href="#when-to-use-expected">When to Use expected</a></h2>
+<p>Use <code>expected&lt;T, E&gt;</code> when:</p>
+<ul>
+<li>An operation can fail and you need to communicate why</li>
+<li>You want to propagate error information up the call stack</li>
+<li>Different failure modes need to be distinguished</li>
+<li>Error recovery depends on the type of error</li>
+</ul>
+<p>For simple presence/absence checks without error context, use <a href="#stdoptional"><code>optional&lt;T&gt;</code></a> instead.</p>
+<h2 id="best-practices-6"><a class="header" href="#best-practices-6">Best Practices</a></h2>
+<ol>
+<li><strong>Check before unwrapping</strong>: Always use <code>is_expected()</code> or <code>is_unexpected()</code> before extracting values</li>
+<li><strong>Use meaningful error types</strong>: Create custom error structs when simple strings aren’t enough</li>
+<li><strong>Fail early</strong>: Return errors as soon as they’re detected</li>
+<li><strong>Document error cases</strong>: Clearly document what errors a function can return</li>
+<li><strong>Prefer expected_value_or()</strong>: When you have a sensible fallback, use <code>expected_value_or()</code></li>
+</ol>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdoptional">std/optional</a> - For simple nullable values</li>
+<li><a href="#error-handling-in-atlas-77">Error Handling</a> - Complete error handling guide</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdmath"><a class="header" href="#stdmath">std/math</a></h1>
+<p>Mathematical functions for numerical operations.</p>
+<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
+<h3 id="integer-functions"><a class="header" href="#integer-functions">Integer Functions</a></h3>
+<h4 id="absx-int64---int64"><a class="header" href="#absx-int64---int64"><code>abs(x: int64) -&gt; int64</code></a></h4>
+<p>Absolute value of an integer.</p>
+<pre><code class="language-cpp">import "std/math";
+
+let result = abs(-5);   // 5
+let result2 = abs(10);  // 10
+</code></pre>
+<h4 id="minx-int64-y-int64---int64"><a class="header" href="#minx-int64-y-int64---int64"><code>min(x: int64, y: int64) -&gt; int64</code></a></h4>
+<p>Minimum of two integers.</p>
+<pre><code class="language-cpp">let result = min(5, 10);   // 5
+let result2 = min(-3, 2);  // -3
+</code></pre>
+<h4 id="maxx-int64-y-int64---int64"><a class="header" href="#maxx-int64-y-int64---int64"><code>max(x: int64, y: int64) -&gt; int64</code></a></h4>
+<p>Maximum of two integers.</p>
+<pre><code class="language-cpp">let result = max(5, 10);   // 10
+let result2 = max(-3, 2);  // 2
+</code></pre>
+<h4 id="powx-int64-y-int64---int64"><a class="header" href="#powx-int64-y-int64---int64"><code>pow(x: int64, y: int64) -&gt; int64</code></a></h4>
+<p>Raise x to the power of y (integers).</p>
+<pre><code class="language-cpp">let result = pow(2, 10);  // 1024
+let result2 = pow(5, 3);  // 125
+</code></pre>
+<h3 id="floating-point-functions"><a class="header" href="#floating-point-functions">Floating-Point Functions</a></h3>
+<h4 id="abs_fx-float64---float64"><a class="header" href="#abs_fx-float64---float64"><code>abs_f(x: float64) -&gt; float64</code></a></h4>
+<p>Absolute value of a float.</p>
+<pre><code class="language-cpp">let result = abs_f(-3.14);  // 3.14
+let result2 = abs_f(2.5);   // 2.5
+</code></pre>
+<h4 id="min_fx-float64-y-float64---float64"><a class="header" href="#min_fx-float64-y-float64---float64"><code>min_f(x: float64, y: float64) -&gt; float64</code></a></h4>
+<p>Minimum of two floats.</p>
+<pre><code class="language-cpp">let result = min_f(3.5, 2.1);    // 2.1
+let result2 = min_f(-1.5, 0.0);  // -1.5
+</code></pre>
+<h4 id="max_fx-float64-y-float64---float64"><a class="header" href="#max_fx-float64-y-float64---float64"><code>max_f(x: float64, y: float64) -&gt; float64</code></a></h4>
+<p>Maximum of two floats.</p>
+<pre><code class="language-cpp">let result = max_f(3.5, 2.1);    // 3.5
+let result2 = max_f(-1.5, 0.0);  // 0.0
+</code></pre>
+<h4 id="pow_fx-float64-y-int64---float64"><a class="header" href="#pow_fx-float64-y-int64---float64"><code>pow_f(x: float64, y: int64) -&gt; float64</code></a></h4>
+<p>Raise x to the power of y (float base, integer exponent).</p>
+<pre><code class="language-cpp">let result = pow_f(2.0, 3);   // 8.0
+let result2 = pow_f(1.5, 2);  // 2.25
+</code></pre>
+<h4 id="roundx-float64---int64"><a class="header" href="#roundx-float64---int64"><code>round(x: float64) -&gt; int64</code></a></h4>
+<p>Round a float to the nearest integer.</p>
+<pre><code class="language-cpp">let result = round(3.7);   // 4
+let result2 = round(3.2);  // 3
+let result3 = round(3.5);  // 4
+</code></pre>
+<h3 id="trigonometric-functions"><a class="header" href="#trigonometric-functions">Trigonometric Functions</a></h3>
+<h4 id="sin_fx-float64---float64"><a class="header" href="#sin_fx-float64---float64"><code>sin_f(x: float64) -&gt; float64</code></a></h4>
+<p>Sine of x (in radians).</p>
+<pre><code class="language-cpp">let result = sin_f(0.0);              // 0.0
+let result2 = sin_f(3.14159 / 2.0);   // ~1.0
+</code></pre>
+<h4 id="cos_fx-float64---float64"><a class="header" href="#cos_fx-float64---float64"><code>cos_f(x: float64) -&gt; float64</code></a></h4>
+<p>Cosine of x (in radians).</p>
+<pre><code class="language-cpp">let result = cos_f(0.0);       // 1.0
+let result2 = cos_f(3.14159);  // ~-1.0
+</code></pre>
+<h3 id="random-number-generation"><a class="header" href="#random-number-generation">Random Number Generation</a></h3>
+<h4 id="randommin-int64-max-int64---int64"><a class="header" href="#randommin-int64-max-int64---int64"><code>random(min: int64, max: int64) -&gt; int64</code></a></h4>
+<p>Generate a random integer in the range [min, max] (inclusive).</p>
+<pre><code class="language-cpp">let num = random(1, 10);    // Random number between 1 and 10
+let dice = random(1, 6);    // Simulate a dice roll
+</code></pre>
+<h2 id="usage-examples-9"><a class="header" href="#usage-examples-9">Usage Examples</a></h2>
+<h3 id="basic-arithmetic"><a class="header" href="#basic-arithmetic">Basic Arithmetic</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun main() {
+    let a = -42;
+    let b = 17;
+    
+    println(abs(a));        // 42
+    println(min(a, b));     // -42
+    println(max(a, b));     // 17
+    println(pow(2, 8));     // 256
+}
+</code></pre>
+<h3 id="working-with-floats"><a class="header" href="#working-with-floats">Working with Floats</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun main() {
+    let x = -3.14;
+    let y = 2.5;
+    
+    println(abs_f(x));       // 3.14
+    println(min_f(x, y));    // -3.14
+    println(max_f(x, y));    // 2.5
+    println(pow_f(2.0, 10)); // 1024.0
+    println(round(3.7));     // 4
+}
+</code></pre>
+<h3 id="trigonometry"><a class="header" href="#trigonometry">Trigonometry</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun main() {
+    let pi = 3.14159265359;
+    
+    // Calculate sine and cosine
+    let sin_val = sin_f(pi / 2.0);  // ~1.0
+    let cos_val = cos_f(0.0);        // 1.0
+    
+    println(sin_val);
+    println(cos_val);
+}
+</code></pre>
+<h3 id="random-numbers"><a class="header" href="#random-numbers">Random Numbers</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun main() {
+    // Generate 10 random numbers
+    let i = 0;
+    while i &lt; 10 {
+        let num = random(1, 100);
+        println(num);
+        i = i + 1;
+    }
+}
+</code></pre>
+<h3 id="dice-rolling-game"><a class="header" href="#dice-rolling-game">Dice Rolling Game</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun roll_dice() -&gt; int64 {
+    return random(1, 6);
+}
+
+fun main() {
+    println("Rolling two dice...");
+    
+    let dice1 = roll_dice();
+    let dice2 = roll_dice();
+    let total = dice1 + dice2;
+    
+    println("Dice 1: " + dice1);
+    println("Dice 2: " + dice2);
+    println("Total: " + total);
+    
+    if total == 7 {
+        println("Lucky seven!");
+    }
+}
+</code></pre>
+<h3 id="finding-maximum-in-array"><a class="header" href="#finding-maximum-in-array">Finding Maximum in Array</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun find_max(arr: [int64]) -&gt; int64 {
+    let max_val = arr[0];
+    let i = 1;
+    
+    while i &lt; len(&amp;arr) {
+        max_val = max(max_val, arr[i]);
+        i = i + 1;
+    }
+    
+    return max_val;
+}
+
+fun main() {
+    let numbers = [3, 7, 2, 9, 1, 5];
+    let maximum = find_max(numbers);
+    println("Maximum: " + maximum);  // 9
+}
+</code></pre>
+<h3 id="distance-calculation"><a class="header" href="#distance-calculation">Distance Calculation</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun distance(x1: float64, y1: float64, x2: float64, y2: float64) -&gt; float64 {
+    let dx = abs_f(x2 - x1);
+    let dy = abs_f(y2 - y1);
+    
+    // Simplified distance (without sqrt)
+    let dist_squared = pow_f(dx, 2) + pow_f(dy, 2);
+    return dist_squared;
+}
+
+fun main() {
+    let dist = distance(0.0, 0.0, 3.0, 4.0);
+    println(dist);  // 25.0 (actual distance would be 5.0 after sqrt)
+}
+</code></pre>
+<h3 id="rounding-numbers"><a class="header" href="#rounding-numbers">Rounding Numbers</a></h3>
+<pre><code class="language-cpp">import "std/math";
+import "std/io";
+
+fun main() {
+    let prices = [3.14, 7.89, 2.51, 9.99];
+    
+    let i = 0;
+    while i &lt; len(&amp;prices) {
+        let rounded = round(prices[i]);
+        println(rounded);
+        i = i + 1;
+    }
+    // Output: 3, 8, 3, 10
+}
+</code></pre>
+<h2 id="constants"><a class="header" href="#constants">Constants</a></h2>
+<p>You can define mathematical constants in your code:</p>
+<pre><code class="language-cpp">import "std/math";
+
+const PI: float64 = 3.14159265359;
+const E: float64 = 2.71828182846;
+
+fun main() {
+    let circle_area = PI * pow_f(5.0, 2);  // Area of circle with radius 5
+    println(circle_area);
+}
+</code></pre>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li><strong>Angles in radians</strong>: Trigonometric functions use radians, not degrees</li>
+<li><strong>Integer overflow</strong>: <code>pow()</code> can overflow for large exponents</li>
+<li><strong>Random seed</strong>: The random number generator is automatically seeded</li>
+<li><strong>Float precision</strong>: Floating-point operations have limited precision</li>
+</ul>
+<h2 id="best-practices-7"><a class="header" href="#best-practices-7">Best Practices</a></h2>
+<ol>
+<li><strong>Use appropriate types</strong>: Use integer functions for integers, float functions for floats</li>
+<li><strong>Check ranges</strong>: Ensure inputs are within valid ranges (e.g., avoid overflow in <code>pow()</code>)</li>
+<li><strong>Cache constants</strong>: Define mathematical constants as const values</li>
+<li><strong>Consider precision</strong>: Be aware of floating-point precision limitations</li>
+</ol>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+<li><a href="#language-reference">Language Reference</a> - Operators and types</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdtime"><a class="header" href="#stdtime">std/time</a></h1>
 <p>Time operations and formatting.</p>
-<h3 id="struct-time"><a class="header" href="#struct-time">Struct: <code>Time</code></a></h3>
-<p>Represents a point in time.</p>
+<h2 id="struct-time"><a class="header" href="#struct-time">Struct: <code>Time</code></a></h2>
+<p>Represents a point in time or duration.</p>
 <pre><code class="language-cpp">struct Time {
 public:
     sec: int64;
     nsec: int64;
 }
 </code></pre>
-<h4 id="constructor-4"><a class="header" href="#constructor-4">Constructor</a></h4>
+<h2 id="constructor-6"><a class="header" href="#constructor-6">Constructor</a></h2>
 <pre><code class="language-cpp">import "std/time";
 
 let time = new Time(1234567890, 0);
 </code></pre>
-<h4 id="static-methods-5"><a class="header" href="#static-methods-5">Static Methods</a></h4>
-<h5 id="timenow---time"><a class="header" href="#timenow---time"><code>Time::now() -&gt; Time</code></a></h5>
+<p>Creates a Time with the specified seconds and nanoseconds.</p>
+<h2 id="static-methods-5"><a class="header" href="#static-methods-5">Static Methods</a></h2>
+<h3 id="timenow---time"><a class="header" href="#timenow---time"><code>Time::now() -&gt; Time</code></a></h3>
 <p>Get the current time.</p>
 <pre><code class="language-cpp">let now = Time::now();
+println(now.sec);
 </code></pre>
-<h4 id="instance-methods-5"><a class="header" href="#instance-methods-5">Instance Methods</a></h4>
-<h5 id="formatthis-fmt-string---string"><a class="header" href="#formatthis-fmt-string---string"><code>format(&amp;this, fmt: string) -&gt; string</code></a></h5>
-<p>Format the time as a string.</p>
+<h2 id="instance-methods-7"><a class="header" href="#instance-methods-7">Instance Methods</a></h2>
+<h3 id="formatthis-fmt-string---string"><a class="header" href="#formatthis-fmt-string---string"><code>format(&amp;this, fmt: string) -&gt; string</code></a></h3>
+<p>Format the time as a string using format specifiers.</p>
 <pre><code class="language-cpp">let time = Time::now();
 let formatted = time.format("%Y-%m-%d %H:%M:%S");
+println(formatted);  // e.g., "2026-01-06 14:30:45"
 </code></pre>
-<h5 id="to_iso_stringthis---string"><a class="header" href="#to_iso_stringthis---string"><code>to_iso_string(&amp;this) -&gt; string</code></a></h5>
+<p><strong>Format Specifiers:</strong></p>
+<ul>
+<li><code>%Y</code> - Year (e.g., 2026)</li>
+<li><code>%m</code> - Month (01-12)</li>
+<li><code>%d</code> - Day (01-31)</li>
+<li><code>%H</code> - Hour (00-23)</li>
+<li><code>%M</code> - Minute (00-59)</li>
+<li><code>%S</code> - Second (00-59)</li>
+</ul>
+<h3 id="to_iso_stringthis---string"><a class="header" href="#to_iso_stringthis---string"><code>to_iso_string(&amp;this) -&gt; string</code></a></h3>
 <p>Convert to ISO 8601 format.</p>
 <pre><code class="language-cpp">let time = Time::now();
 let iso = time.to_iso_string();
+println(iso);  // e.g., "2026-01-06T14:30:45"
 </code></pre>
-<h5 id="sleepthis"><a class="header" href="#sleepthis"><code>sleep(&amp;this)</code></a></h5>
+<h3 id="sleepthis"><a class="header" href="#sleepthis"><code>sleep(&amp;this)</code></a></h3>
 <p>Sleep for the duration represented by this Time.</p>
 <pre><code class="language-cpp">let duration = new Time(2, 0);  // 2 seconds
 duration.sleep();
+println("2 seconds passed");
 </code></pre>
-<h5 id="elapsedthis-since-time---time"><a class="header" href="#elapsedthis-since-time---time"><code>elapsed(&amp;this, since: Time) -&gt; Time</code></a></h5>
+<blockquote>
+<p><strong>Note:</strong> This is a blocking sleep operation.</p>
+</blockquote>
+<h3 id="elapsedthis-since-time---time"><a class="header" href="#elapsedthis-since-time---time"><code>elapsed(&amp;this, since: Time) -&gt; Time</code></a></h3>
 <p>Calculate elapsed time since another time.</p>
 <pre><code class="language-cpp">let start = Time::now();
 // ... do work ...
 let end = Time::now();
 let duration = end.elapsed(start);
+println(duration.sec);  // Seconds elapsed
 </code></pre>
-<h2 id="stdmath"><a class="header" href="#stdmath"><code>std/math</code></a></h2>
-<p>Mathematical functions.</p>
-<h3 id="functions-1-1"><a class="header" href="#functions-1-1">Functions</a></h3>
-<h4 id="absx-int64---int64"><a class="header" href="#absx-int64---int64"><code>abs(x: int64) -&gt; int64</code></a></h4>
-<p>Absolute value of an integer.</p>
-<pre><code class="language-cpp">import "std/math";
+<h2 id="usage-examples-10"><a class="header" href="#usage-examples-10">Usage Examples</a></h2>
+<h3 id="measuring-execution-time"><a class="header" href="#measuring-execution-time">Measuring Execution Time</a></h3>
+<pre><code class="language-cpp">import "std/time";
+import "std/io";
 
-let result = abs(-5);  // 5
-</code></pre>
-<h4 id="abs_fx-float64---float64"><a class="header" href="#abs_fx-float64---float64"><code>abs_f(x: float64) -&gt; float64</code></a></h4>
-<p>Absolute value of a float.</p>
-<pre><code class="language-cpp">let result = abs_f(-3.14);  // 3.14
-</code></pre>
-<h4 id="roundx-float64---int64"><a class="header" href="#roundx-float64---int64"><code>round(x: float64) -&gt; int64</code></a></h4>
-<p>Round a float to the nearest integer.</p>
-<pre><code class="language-cpp">let result = round(3.7);  // 4
-</code></pre>
-<h4 id="randommin-int64-max-int64---int64"><a class="header" href="#randommin-int64-max-int64---int64"><code>random(min: int64, max: int64) -&gt; int64</code></a></h4>
-<p>Generate a random integer in the range [min, max].</p>
-<pre><code class="language-cpp">let num = random(1, 10);
-</code></pre>
-<h4 id="sin_fx-float64---float64"><a class="header" href="#sin_fx-float64---float64"><code>sin_f(x: float64) -&gt; float64</code></a></h4>
-<p>Sine of x (radians).</p>
-<pre><code class="language-cpp">let result = sin_f(3.14159 / 2.0);  // ~1.0
-</code></pre>
-<h4 id="cos_fx-float64---float64"><a class="header" href="#cos_fx-float64---float64"><code>cos_f(x: float64) -&gt; float64</code></a></h4>
-<p>Cosine of x (radians).</p>
-<pre><code class="language-cpp">let result = cos_f(0.0);  // 1.0
-</code></pre>
-<h4 id="minx-int64-y-int64---int64"><a class="header" href="#minx-int64-y-int64---int64"><code>min(x: int64, y: int64) -&gt; int64</code></a></h4>
-<p>Minimum of two integers.</p>
-<pre><code class="language-cpp">let result = min(5, 10);  // 5
-</code></pre>
-<h4 id="min_fx-float64-y-float64---float64"><a class="header" href="#min_fx-float64-y-float64---float64"><code>min_f(x: float64, y: float64) -&gt; float64</code></a></h4>
-<p>Minimum of two floats.</p>
-<pre><code class="language-cpp">let result = min_f(3.5, 2.1);  // 2.1
-</code></pre>
-<h4 id="maxx-int64-y-int64---int64"><a class="header" href="#maxx-int64-y-int64---int64"><code>max(x: int64, y: int64) -&gt; int64</code></a></h4>
-<p>Maximum of two integers.</p>
-<pre><code class="language-cpp">let result = max(5, 10);  // 10
-</code></pre>
-<h4 id="max_fx-float64-y-float64---float64"><a class="header" href="#max_fx-float64-y-float64---float64"><code>max_f(x: float64, y: float64) -&gt; float64</code></a></h4>
-<p>Maximum of two floats.</p>
-<pre><code class="language-cpp">let result = max_f(3.5, 2.1);  // 3.5
-</code></pre>
-<h4 id="powx-int64-y-int64---int64"><a class="header" href="#powx-int64-y-int64---int64"><code>pow(x: int64, y: int64) -&gt; int64</code></a></h4>
-<p>Raise x to the power of y (integers).</p>
-<pre><code class="language-cpp">let result = pow(2, 10);  // 1024
-</code></pre>
-<h4 id="pow_fx-float64-y-int64---float64"><a class="header" href="#pow_fx-float64-y-int64---float64"><code>pow_f(x: float64, y: int64) -&gt; float64</code></a></h4>
-<p>Raise x to the power of y (float base).</p>
-<pre><code class="language-cpp">let result = pow_f(2.0, 3);  // 8.0
-</code></pre>
-<h2 id="stdmap"><a class="header" href="#stdmap"><code>std/map</code></a></h2>
-<p>Key-value map data structure.</p>
-<h3 id="struct-pairk-v"><a class="header" href="#struct-pairk-v">Struct: <code>Pair&lt;K, V&gt;</code></a></h3>
-<p>A key-value pair.</p>
-<pre><code class="language-cpp">struct Pair&lt;K, V&gt; {
-public:
-    key: K;
-    value: V;
+fun expensive_operation() {
+    let i = 0;
+    while i &lt; 1000000 {
+        i = i + 1;
+    }
 }
-</code></pre>
-<h4 id="constructor-5"><a class="header" href="#constructor-5">Constructor</a></h4>
-<pre><code class="language-cpp">import "std/map";
 
-let pair = new Pair&lt;int64, string&gt;(1, "one");
-</code></pre>
-<h4 id="instance-methods-6"><a class="header" href="#instance-methods-6">Instance Methods</a></h4>
-<h5 id="get_firstconst-this---k"><a class="header" href="#get_firstconst-this---k"><code>get_first(&amp;const this) -&gt; K</code></a></h5>
-<p>Get the key (requires K to be copyable).</p>
-<pre><code class="language-cpp">let pair = new Pair&lt;int64, string&gt;(1, "one");
-let key = pair.get_first();  // 1
-</code></pre>
-<h5 id="get_secondconst-this---v"><a class="header" href="#get_secondconst-this---v"><code>get_second(&amp;const this) -&gt; V</code></a></h5>
-<p>Get the value (requires V to be copyable).</p>
-<pre><code class="language-cpp">let value = pair.get_second();  // "one"
-</code></pre>
-<h5 id="swapthis---pairv-k"><a class="header" href="#swapthis---pairv-k"><code>swap(this) -&gt; Pair&lt;V, K&gt;</code></a></h5>
-<p>Consume the pair and return a new pair with swapped key and value.</p>
-<pre><code class="language-cpp">let pair = new Pair&lt;int64, string&gt;(1, "one");
-let swapped = pair.swap();  // Pair&lt;string, int64&gt;
-</code></pre>
-<h3 id="struct-mapk-v"><a class="header" href="#struct-mapk-v">Struct: <code>Map&lt;K, V&gt;</code></a></h3>
-<p>A simple key-value map.</p>
-<pre><code class="language-cpp">struct Map&lt;K, V&gt; {
-private:
-    keys: Vector&lt;K&gt;;
-    values: Vector&lt;V&gt;;
+fun main() {
+    let start = Time::now();
+    expensive_operation();
+    let end = Time::now();
+    
+    let elapsed = end.elapsed(start);
+    println("Operation took " + elapsed.sec + " seconds");
 }
 </code></pre>
-<h4 id="constructor-6"><a class="header" href="#constructor-6">Constructor</a></h4>
-<pre><code class="language-cpp">let map = new Map&lt;int64, string&gt;();
-</code></pre>
-<h4 id="instance-methods-7"><a class="header" href="#instance-methods-7">Instance Methods</a></h4>
-<h5 id="getthis-key-k---optionalconst-v"><a class="header" href="#getthis-key-k---optionalconst-v"><code>get(&amp;this, key: K) -&gt; optional&lt;&amp;const V&gt;</code></a></h5>
-<p>Get a const reference to the value for a key.</p>
-<pre><code class="language-cpp">let map = new Map&lt;int64, string&gt;();
-map.insert(1, "one");
+<h3 id="formatting-timestamps"><a class="header" href="#formatting-timestamps">Formatting Timestamps</a></h3>
+<pre><code class="language-cpp">import "std/time";
+import "std/io";
 
-let value_opt = map.get(1);
-if value_opt.has_value() {
-    let value_ref = value_opt.value();
-    println(*value_ref);
+fun main() {
+    let now = Time::now();
+    
+    // Different formats
+    let date = now.format("%Y-%m-%d");
+    let time = now.format("%H:%M:%S");
+    let full = now.format("%Y-%m-%d %H:%M:%S");
+    
+    println("Date: " + date);
+    println("Time: " + time);
+    println("Full: " + full);
 }
 </code></pre>
-<h5 id="get_mutthis-key-k---optionalv"><a class="header" href="#get_mutthis-key-k---optionalv"><code>get_mut(&amp;this, key: K) -&gt; optional&lt;&amp;V&gt;</code></a></h5>
-<p>Get a mutable reference to the value for a key.</p>
-<pre><code class="language-cpp">let value_ref = map.get_mut(1);
-if value_ref.has_value() {
-    let val = value_ref.value();
-    *val = "ONE";
-}
-</code></pre>
-<h5 id="insertthis-key-k-value-v"><a class="header" href="#insertthis-key-k-value-v"><code>insert(&amp;this, key: K, value: V)</code></a></h5>
-<p>Insert or update a key-value pair.</p>
-<pre><code class="language-cpp">map.insert(1, "one");
-map.insert(1, "ONE");  // Updates existing
-</code></pre>
-<h5 id="contains_keythis-key-k---bool"><a class="header" href="#contains_keythis-key-k---bool"><code>contains_key(&amp;this, key: K) -&gt; bool</code></a></h5>
-<p>Check if a key exists.</p>
-<pre><code class="language-cpp">if map.contains_key(1) {
-    println("Key found");
-}
-</code></pre>
-<h5 id="removethis-key-k---optionalv"><a class="header" href="#removethis-key-k---optionalv"><code>remove(&amp;this, key: K) -&gt; optional&lt;V&gt;</code></a></h5>
-<p>Remove and return the value for a key.</p>
-<pre><code class="language-cpp">let value = map.remove(1);
-</code></pre>
-<h5 id="lenthis---uint64-1"><a class="header" href="#lenthis---uint64-1"><code>len(&amp;this) -&gt; uint64</code></a></h5>
-<p>Get the number of entries.</p>
-<pre><code class="language-cpp">let count = map.len();
-</code></pre>
-<h5 id="is_emptythis---bool-1"><a class="header" href="#is_emptythis---bool-1"><code>is_empty(&amp;this) -&gt; bool</code></a></h5>
-<p>Check if the map is empty.</p>
-<pre><code class="language-cpp">if map.is_empty() {
-    println("Map is empty");
-}
-</code></pre>
-<h2 id="stdqueue"><a class="header" href="#stdqueue"><code>std/queue</code></a></h2>
-<p>FIFO queue data structure.</p>
-<h3 id="struct-queuet"><a class="header" href="#struct-queuet">Struct: <code>Queue&lt;T&gt;</code></a></h3>
-<p>A first-in-first-out queue.</p>
-<pre><code class="language-cpp">struct Queue&lt;T&gt; {
-private:
-    items: [T];
-public:
-    head: uint64;
-    tail: uint64;
-    size: uint64;
-    count: uint64;
-}
-</code></pre>
-<h4 id="static-methods-6"><a class="header" href="#static-methods-6">Static Methods</a></h4>
-<h5 id="queuetwith_sizesize-uint64---queuet"><a class="header" href="#queuetwith_sizesize-uint64---queuet"><code>Queue::&lt;T&gt;::with_size(size: uint64) -&gt; Queue&lt;T&gt;</code></a></h5>
-<p>Create a queue with a fixed size.</p>
-<pre><code class="language-cpp">import "std/queue";
+<h3 id="sleeping-between-operations"><a class="header" href="#sleeping-between-operations">Sleeping Between Operations</a></h3>
+<pre><code class="language-cpp">import "std/time";
+import "std/io";
 
-let queue = Queue&lt;int64&gt;::with_size(10u);
-</code></pre>
-<h4 id="instance-methods-8"><a class="header" href="#instance-methods-8">Instance Methods</a></h4>
-<h5 id="enqueuethis-item-t"><a class="header" href="#enqueuethis-item-t"><code>enqueue(&amp;this, item: T)</code></a></h5>
-<p>Add an item to the back of the queue.</p>
-<pre><code class="language-cpp">queue.enqueue(1);
-queue.enqueue(2);
-</code></pre>
-<h5 id="dequeuethis---t"><a class="header" href="#dequeuethis---t"><code>dequeue(&amp;this) -&gt; T</code></a></h5>
-<p>Remove and return the item at the front.</p>
-<pre><code class="language-cpp">let first = queue.dequeue();  // 1
-</code></pre>
-<h5 id="is_fullthis---bool"><a class="header" href="#is_fullthis---bool"><code>is_full(&amp;this) -&gt; bool</code></a></h5>
-<p>Check if the queue is full.</p>
-<pre><code class="language-cpp">if queue.is_full() {
-    println("Queue is full");
+fun main() {
+    let delay = new Time(1, 0);  // 1 second
+    
+    println("Starting...");
+    delay.sleep();
+    println("1 second later...");
+    delay.sleep();
+    println("2 seconds later...");
 }
 </code></pre>
-<h5 id="is_emptythis---bool-2"><a class="header" href="#is_emptythis---bool-2"><code>is_empty(&amp;this) -&gt; bool</code></a></h5>
-<p>Check if the queue is empty.</p>
-<pre><code class="language-cpp">if queue.is_empty() {
-    println("Queue is empty");
+<h3 id="creating-timers"><a class="header" href="#creating-timers">Creating Timers</a></h3>
+<pre><code class="language-cpp">import "std/time";
+import "std/io";
+
+fun main() {
+    let timeout = new Time(5, 0);  // 5 second timeout
+    let start = Time::now();
+    
+    let counter = 0;
+    let running = true;
+    
+    while running {
+        let now = Time::now();
+        let elapsed = now.elapsed(start);
+        
+        if elapsed.sec &gt;= timeout.sec {
+            running = false;
+            println("Timeout!");
+        } else {
+            counter = counter + 1;
+        }
+    }
+    
+    println("Counter reached: " + counter);
 }
 </code></pre>
-<h2 id="stdbox"><a class="header" href="#stdbox"><code>std/box</code></a></h2>
-<blockquote>
-<p><strong>⚠️ Deprecated:</strong> This module is deprecated and will be replaced by <code>std/experimental/smart_ptr</code> in the future.</p>
+<h3 id="logging-with-timestamps"><a class="header" href="#logging-with-timestamps">Logging with Timestamps</a></h3>
+<pre><code class="language-cpp">import "std/time";
+import "std/io";
+
+fun log(message: string) {
+    let now = Time::now();
+    let timestamp = now.format("%H:%M:%S");
+    println("[" + timestamp + "] " + message);
+}
+
+fun main() {
+    log("Application started");
+    
+    let delay = new Time(1, 0);
+    delay.sleep();
+    
+    log("Processing data");
+    delay.sleep();
+    
+    log("Application finished");
+}
+</code></pre>
+<h2 id="time-arithmetic"><a class="header" href="#time-arithmetic">Time Arithmetic</a></h2>
+<p>You can perform basic time arithmetic using the Time struct:</p>
+<pre><code class="language-cpp">import "std/time";
+import "std/io";
+
+fun main() {
+    let time1 = new Time(10, 500000000);  // 10.5 seconds
+    let time2 = new Time(5, 250000000);   // 5.25 seconds
+    
+    // Manual addition
+    let total_sec = time1.sec + time2.sec;
+    let total_nsec = time1.nsec + time2.nsec;
+    
+    // Handle nanosecond overflow
+    if total_nsec &gt;= 1000000000 {
+        total_sec = total_sec + 1;
+        total_nsec = total_nsec - 1000000000;
+    }
+    
+    let result = new Time(total_sec, total_nsec);
+    println(result.sec);   // 15
+    println(result.nsec);  // 750000000
+}
+</code></pre>
+<h2 id="performance-notes-1"><a class="header" href="#performance-notes-1">Performance Notes</a></h2>
+<ul>
+<li><strong>Blocking operations</strong>: <code>sleep()</code> is a blocking operation that pauses execution</li>
+<li><strong>System calls</strong>: <code>now()</code> makes a system call and has some overhead</li>
+<li><strong>Precision</strong>: Nanosecond precision depends on the underlying system</li>
+</ul>
+<h2 id="best-practices-8"><a class="header" href="#best-practices-8">Best Practices</a></h2>
+<ol>
+<li><strong>Cache Time::now()</strong>: Don’t call <code>now()</code> repeatedly in tight loops</li>
+<li><strong>Use elapsed()</strong>: For measuring durations, use <code>elapsed()</code> instead of manual arithmetic</li>
+<li><strong>Format once</strong>: Format time strings once and reuse them when possible</li>
+<li><strong>Handle overflow</strong>: Be careful when doing manual time arithmetic with nanoseconds</li>
+</ol>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+<li><a href="#getting-started-with-atlas-77">Getting Started</a> - Basic examples</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdmem"><a class="header" href="#stdmem">std/mem</a></h1>
+<p>Memory management utilities and low-level operations.</p>
+<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
+<h3 id="size_oft---uint64"><a class="header" href="#size_oft---uint64"><code>size_of&lt;T&gt;() -&gt; uint64</code></a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Not yet implemented.</p>
 </blockquote>
-<h3 id="struct-boxt"><a class="header" href="#struct-boxt">Struct: <code>Box&lt;T&gt;</code></a></h3>
-<p>A simple container for a single value.</p>
-<pre><code class="language-cpp">struct Box&lt;T&gt; {
-private:
-    data: T;
+<p>Get the size in bytes of type T.</p>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun main() {
+    println(size_of&lt;int64&gt;());    // 8
+    println(size_of&lt;float64&gt;());  // 8
+    println(size_of&lt;bool&gt;());     // 1
+    println(size_of&lt;char&gt;());     // 1
 }
 </code></pre>
-<h4 id="constructor-7"><a class="header" href="#constructor-7">Constructor</a></h4>
-<pre><code class="language-cpp">import "std/box";
+<h3 id="align_oft---uint64"><a class="header" href="#align_oft---uint64"><code>align_of&lt;T&gt;() -&gt; uint64</code></a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Not yet implemented.</p>
+</blockquote>
+<p>Get the alignment requirement in bytes of type T.</p>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
 
-let box = new Box&lt;int64&gt;(42);
+fun main() {
+    println(align_of&lt;int64&gt;());   // 8
+    println(align_of&lt;float64&gt;()); // 8
+    println(align_of&lt;bool&gt;());    // 1
+}
 </code></pre>
-<h4 id="instance-methods-9"><a class="header" href="#instance-methods-9">Instance Methods</a></h4>
-<h5 id="getthis---t"><a class="header" href="#getthis---t"><code>get(&amp;this) -&gt; T</code></a></h5>
-<p>Get the contained value.</p>
-<pre><code class="language-cpp">let value = box.get();
-</code></pre>
-<h5 id="setthis-data-t"><a class="header" href="#setthis-data-t"><code>set(&amp;this, data: T)</code></a></h5>
-<p>Set the contained value.</p>
-<pre><code class="language-cpp">box.set(100);
-</code></pre>
-<h2 id="stdmem"><a class="header" href="#stdmem"><code>std/mem</code></a></h2>
-<p>Memory utilities.</p>
-<h3 id="functions-2"><a class="header" href="#functions-2">Functions</a></h3>
-<h4 id="memcpytdata-const-t---t"><a class="header" href="#memcpytdata-const-t---t"><code>memcpy&lt;T&gt;(data: &amp;const T) -&gt; T</code></a></h4>
-<p>Create a shallow copy of a value.</p>
+<h3 id="forgettvalue-t"><a class="header" href="#forgettvalue-t"><code>forget&lt;T&gt;(value: T)</code></a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Not yet implemented. And it will probably have another name.</p>
+</blockquote>
+<p>Prevent a value from being dropped, leaking its memory.</p>
 <pre><code class="language-cpp">import "std/mem";
 
-let x = 42;
-let y = memcpy(&amp;x);
+fun main() {
+    let data = new Vector&lt;int64&gt;([1, 2, 3]);
+    
+    forget(data);  // Memory is leaked!
+    // data's destructor will never run
+}
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong> This performs a shallow copy. For deep copies, implement <code>_copy</code> on type T.</p>
+<p><strong>Warning:</strong> This leaks memory! Only use this in very specific scenarios.</p>
 </blockquote>
-<h4 id="delete_from_reftdata-const-t"><a class="header" href="#delete_from_reftdata-const-t"><code>delete_from_ref&lt;T&gt;(data: &amp;const T)</code></a></h4>
-<p>Delete memory referenced by a pointer.</p>
-<pre><code class="language-cpp">// Use with extreme caution - can lead to undefined behavior
-delete_from_ref(&amp;some_value);
+<h3 id="swapta-t-b-t"><a class="header" href="#swapta-t-b-t"><code>swap&lt;T&gt;(a: &amp;T, b: &amp;T)</code></a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Not yet implemented.</p>
+</blockquote>
+<p>Swap the values of two variables.</p>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun main() {
+    let x = 10;
+    let y = 20;
+    
+    swap(&amp;x, &amp;y);
+    
+    println(x);  // 20
+    println(y);  // 10
+}
 </code></pre>
+<h3 id="replacetdest-t-src-t---t"><a class="header" href="#replacetdest-t-src-t---t"><code>replace&lt;T&gt;(dest: &amp;T, src: T) -&gt; T</code></a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Not yet implemented.</p>
+</blockquote>
+<p>Replace the value at dest with src, returning the old value.</p>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun main() {
+    let x = 10;
+    let old = replace(&amp;x, 20);
+    
+    println(old);  // 10
+    println(x);    // 20
+}
+</code></pre>
+<h3 id="memcpytvalue-const-t---t"><a class="header" href="#memcpytvalue-const-t---t"><code>memcpy&lt;T&gt;(value: &amp;const T) -&gt; T</code></a></h3>
+<p>Create a shallow copy of a value from a reference.</p>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun main() {
+    let x = 42;
+    let y = memcpy(&amp;x);
+    
+    println(x);  // 42
+    println(y);  // 42
+}
+</code></pre>
+<h2 id="usage-examples-11"><a class="header" href="#usage-examples-11">Usage Examples</a></h2>
+<h3 id="getting-type-sizes"><a class="header" href="#getting-type-sizes">Getting Type Sizes</a></h3>
+<pre><code class="language-cpp">import "std/mem";
+import "std/string";
+import "std/io";
+
+struct Point {
+public:
+    x: int64;
+    y: int64;
+}
+
+fun main() {
+    println("int64: " + size_of&lt;int64&gt;() + " bytes");
+    println("float64: " + size_of&lt;float64&gt;() + " bytes");
+    println("bool: " + size_of&lt;bool&gt;() + " bytes");
+    println("Point: " + size_of&lt;Point&gt;() + " bytes");
+}
+</code></pre>
+<h3 id="swapping-values"><a class="header" href="#swapping-values">Swapping Values</a></h3>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun main() {
+    let first = "Alice";
+    let second = "Bob";
+    
+    println("Before: " + first + ", " + second);
+    
+    swap(&amp;first, &amp;second);
+    
+    println("After: " + first + ", " + second);
+    // Output: "After: Bob, Alice"
+}
+</code></pre>
+<h3 id="replacing-values"><a class="header" href="#replacing-values">Replacing Values</a></h3>
+<pre><code class="language-cpp">import "std/mem";
+import "std/vector";
+import "std/io";
+
+fun main() {
+    let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+    let new_vec = new Vector&lt;int64&gt;([4, 5, 6]);
+    
+    let old_vec = replace(&amp;vec, new_vec);
+    
+    // old_vec now contains [1, 2, 3]
+    // vec now contains [4, 5, 6]
+    
+    println(vec.length);      // 3
+    println(old_vec.length);  // 3
+}
+</code></pre>
+<h3 id="memory-leak-forget"><a class="header" href="#memory-leak-forget">Memory Leak (Forget)</a></h3>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun main() {
+    let data = new Vector&lt;int64&gt;([1, 2, 3]);
+    
+    // This is intentional memory leak!
+    // Use only when you need to pass ownership to external code
+    // or keep data alive beyond program scope
+    forget(data);
+    
+    println("Data memory leaked");
+}
+</code></pre>
+<h3 id="sorting-with-swap"><a class="header" href="#sorting-with-swap">Sorting with Swap</a></h3>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+fun bubble_sort(arr: &amp;[int64]) {
+    let n = len(arr);
+    let i = 0;
+    
+    while i &lt; n {
+        let j = 0;
+        while j &lt; n - 1 {
+            if arr[j] &gt; arr[j + 1] {
+                swap(&amp;arr[j], &amp;arr[j + 1]);
+            }
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+}
+
+fun main() {
+    let numbers = [5, 2, 8, 1, 9];
+    bubble_sort(&amp;numbers);
+    
+    let i = 0;
+    while i &lt; len(&amp;numbers) {
+        println(numbers[i]);
+        i = i + 1;
+    }
+    // Output: 1, 2, 5, 8, 9
+}
+</code></pre>
+<h3 id="ring-buffer-with-replace"><a class="header" href="#ring-buffer-with-replace">Ring Buffer with Replace</a></h3>
+<pre><code class="language-cpp">import "std/mem";
+import "std/io";
+
+const BUFFER_SIZE: int64 = 5;
+
+fun main() {
+    let buffer = [0, 0, 0, 0, 0];
+    let index = 0;
+    
+    // Add values to ring buffer
+    let values = [1, 2, 3, 4, 5, 6, 7, 8];
+    let i = 0;
+    
+    while i &lt; len(&amp;values) {
+        let old_value = replace(&amp;buffer[index], values[i]);
+        println("Replaced " + old_value + " with " + values[i]);
+        
+        index = (index + 1) % BUFFER_SIZE;
+        i = i + 1;
+    }
+    
+    // Print final buffer
+    println("Final buffer:");
+    let j = 0;
+    while j &lt; BUFFER_SIZE {
+        println(buffer[j]);
+        j = j + 1;
+    }
+}
+</code></pre>
+<h2 id="low-level-operations"><a class="header" href="#low-level-operations">Low-Level Operations</a></h2>
+<p>The mem module provides low-level memory operations. Use these carefully:</p>
+<h3 id="size-and-alignment"><a class="header" href="#size-and-alignment">Size and Alignment</a></h3>
+<p>Understanding type sizes and alignment is important for:</p>
+<ul>
+<li><strong>FFI (Foreign Function Interface)</strong>: When interfacing with C code</li>
+<li><strong>Manual memory layout</strong>: When you need precise control over memory</li>
+<li><strong>Performance optimization</strong>: Understanding memory layout for cache efficiency</li>
+</ul>
+<h3 id="forget-and-memory-leaks"><a class="header" href="#forget-and-memory-leaks">Forget and Memory Leaks</a></h3>
+<p><code>forget()</code> prevents automatic cleanup. Valid use cases:</p>
+<ul>
+<li>Transferring ownership to external systems</li>
+<li>Implementing custom smart pointers</li>
+<li>FFI where external code takes ownership</li>
+</ul>
+<p><strong>Never use forget() unless you have a specific reason!</strong></p>
+<h2 id="performance-notes-2"><a class="header" href="#performance-notes-2">Performance Notes</a></h2>
+<ul>
+<li><strong>size_of</strong> and <strong>align_of</strong>: Compile-time constants, zero runtime cost</li>
+<li><strong>swap</strong>: Efficient, moves values without copies</li>
+<li><strong>replace</strong>: Efficient, returns old value without extra allocations</li>
+<li><strong>copy</strong>: Creates a full copy, potentially expensive for large types</li>
+<li><strong>drop</strong> and <strong>forget</strong>: Minimal runtime overhead</li>
+</ul>
+<h2 id="best-practices-9"><a class="header" href="#best-practices-9">Best Practices</a></h2>
+<ol>
+<li><strong>Prefer automatic drops</strong>: Let Atlas77 handle cleanup automatically</li>
+<li><strong>Use swap for exchanges</strong>: More efficient than temporary variables</li>
+<li><strong>Understand ownership</strong>: Know when values are moved vs. copied</li>
+<li><strong>Avoid forget</strong>: Only use when absolutely necessary</li>
+<li><strong>Check copyability</strong>: Use <code>copy()</code> only on types that are copyable</li>
+</ol>
+<h2 id="safety-considerations"><a class="header" href="#safety-considerations">Safety Considerations</a></h2>
+<p>The mem module contains potentially unsafe operations:</p>
+<ul>
+<li><strong>forget()</strong>: Leaks memory, breaks RAII</li>
+<li><strong>drop()</strong>: Using a value after drop causes undefined behavior</li>
+<li><strong>replace()</strong>: Ensure the replaced value is handled correctly</li>
+</ul>
+<p>Always prefer high-level abstractions when possible.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#memory-model-and-ownership">Memory Model</a> - Ownership and move semantics</li>
+<li><a href="#generics-1">Generics</a> - std::copyable constraint</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="stdbox"><a class="header" href="#stdbox">std/box</a></h1>
 <blockquote>
-<p><strong>⚠️ Warning:</strong> This function can lead to undefined behavior. Use with caution.</p>
+<p><strong>Deprecated</strong>: The box module is deprecated and should not be used in new code. Use stack allocation or Vector<t> instead.</t></p>
 </blockquote>
-<hr>
-<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
-<ul>
-<li><a href="#error-handling-in-atlas-77">Error Handling</a> – Using optional and expected</li>
-<li><a href="#memory-model-and-ownership">Memory Model</a> – Ownership and copy semantics</li>
-<li><a href="#language-reference">Language Reference</a> – Language syntax and features</li>
-</ul>
-<h2 id="experimental-modules-not-yet-included"><a class="header" href="#experimental-modules-not-yet-included">Experimental Modules (Not Yet Included)</a></h2>
-<p>The following modules are under active development and are <strong>not included</strong> in the current standard library:</p>
-<h3 id="stdrc_ptr"><a class="header" href="#stdrc_ptr"><code>std/rc_ptr</code></a></h3>
-<p><strong>Status:</strong> Experimental, work in progress</p>
-<p>Reference-counted smart pointers for shared ownership:</p>
-<pre><code class="language-cpp">// Planned usage (not yet available):
-// let ptr: rc_ptr&lt;Data&gt; = rc_ptr::new(Data());
-// let cloned: rc_ptr&lt;Data&gt; = ptr.clone();  // Reference count increases
+<h2 id="struct-boxt"><a class="header" href="#struct-boxt">Struct: <code>Box&lt;T&gt;</code></a></h2>
+<p>Heap-allocated single value container.</p>
+<pre><code class="language-cpp">struct Box&lt;T&gt; {
+public:
+    value: T;
+}
 </code></pre>
-<h3 id="stdcast"><a class="header" href="#stdcast"><code>std/cast</code></a></h3>
-<p><strong>Status:</strong> Experimental, work in progress</p>
-<p>Type casting and conversion utilities:</p>
-<pre><code class="language-cpp">// Planned usage (not yet available):
-// let num: int64 = 42;
-// let as_float: float64 = cast&lt;float64&gt;(num);
+<h2 id="constructor-7"><a class="header" href="#constructor-7">Constructor</a></h2>
+<pre><code class="language-cpp">import "std/box";
+
+let boxed = new Box&lt;int64&gt;(42);
 </code></pre>
-<hr>
-<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
-<ul>
-<li>All modules are works in progress and subject to change.</li>
-<li>Most modules are not yet fully implemented or finalized.</li>
-<li>For experimental modules listed above, expect significant API changes.</li>
-<li>Standard library types may not be copyable; assume move semantics unless documented otherwise.</li>
-</ul>
+<h2 id="instance-methods-8"><a class="header" href="#instance-methods-8">Instance Methods</a></h2>
+<h3 id="getthis---const-t"><a class="header" href="#getthis---const-t"><code>get(&amp;this) -&gt; &amp;const T</code></a></h3>
+<p>Get a const reference to the value.</p>
+<pre><code class="language-cpp">let boxed = new Box&lt;int64&gt;(42);
+let value_ref = boxed.get();
+println(*value_ref);  // 42
+</code></pre>
+<h3 id="get_mutthis---t"><a class="header" href="#get_mutthis---t"><code>get_mut(&amp;this) -&gt; &amp;T</code></a></h3>
+<p>Get a mutable reference to the value.</p>
+<pre><code class="language-cpp">let boxed = new Box&lt;int64&gt;(42);
+let value_ref = boxed.get_mut();
+*value_ref = 100;
+println(*boxed.get());  // 100
+</code></pre>
+<h3 id="setthis-new_value-t"><a class="header" href="#setthis-new_value-t"><code>set(&amp;this, new_value: T)</code></a></h3>
+<p>Set the value.</p>
+<pre><code class="language-cpp">let boxed = new Box&lt;int64&gt;(42);
+boxed.set(100);
+println(*boxed.get());  // 100
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="blue-engine-library"><a class="header" href="#blue-engine-library">Blue Engine Library</a></h1>
 <p>Blue Engine is the experimental FFI testbed connecting Atlas77 to Rust.
