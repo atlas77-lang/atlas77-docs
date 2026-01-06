@@ -1,6 +1,6 @@
 # Getting Started with Atlas 77
 
-Welcome to Atlas 77! This guide will help you install the language and write your first program.
+Welcome to Atlas 77! This guide will help you understand the basics of the language and write your first programs.
 
 ## Your First Program
 
@@ -37,287 +37,353 @@ atlas_77 run
 
 This creates a basic project template with all necessary files.
 
-## Next Steps
+## Core Concepts
 
-- Read [Hello, World!](./hello_world.md) for a detailed walkthrough
-- Explore [Language Reference](./language-reference.md) for complete syntax documentation
-- Try [Guessing Game](./guessing_game.md) for a practical example
-- Check [Memory Model](./memory-model.md) to understand ownership and cleanup
-- Browse [Standard Library](./std.md) for available modules and functions
-
-## Comments
+### 1. Comments
 
 Comments document code and are ignored by the compiler.
 
-### Single-line Comments
-
-Single-line comments start with `//` and continue to the end of the line:
-
 ```cpp
-// This is a comment
-let x: int64 = 42;  // Comments can appear at the end of lines too
+// This is a single-line comment
+let x: int64 = 42;  // Comments can appear at the end of lines
 ```
 
 > **Note:** Multi-line comments are not yet implemented.
 
-> In the future I'll add support for documentation comments, though the syntax is not yet decided.
+### 2. Variables and Constants
 
-## 4. Variables
-
-Variables in Atlas77 are either mutable or immutable. The design follows in some sense TypeScript/JavaScript, with the
-`const` & `let` keywords. Variables can be declared using the `let` keyword, which creates a mutable variable, or the
-`const` keyword, which creates an immutable variable.
+Variables are declared with `let` (mutable) or `const` (immutable):
 
 ```cpp
 import "std/io";
 
-fun main() -> int64 {
+fun main() {
     let x: int64 = 5;
-    x = 10;
-    print(x); // Output: 10
+    x = 10;  // OK - mutable variable
+    println(x);  // Output: 10
 
     const y: int64 = 5;
-    y = 10; // Error: Cannot assign to a constant variable
+    // y = 10;  // Error: Cannot assign to a constant
 }
 ```
 
-## 5. Data Types
+Type annotations are mandatory for constants, the compiler can infer types for mutable variables. It's mandatory for the sake of readability.
 
-Atlas77 has several built-in data types, including integers, floating-point numbers, booleans, strings, and arrays. The
-following table lists the built-in data types in Atlas77:
+### 3. Data Types
 
-| Data Type | Description                         | State |
-|-----------|-------------------------------------|-------|
-| `int8`      | 8-bit signed integer                | 💤    |
-| `int16`     | 16-bit signed integer               | 💤    |
-| `int32`     | 32-bit signed integer               | 💤    |
-| `int64`     | 64-bit signed integer               | ✅     |
-| `isize`   | Platform-dependent signed integer   | 💤    |
-| `uint8`      | 8-bit unsigned integer              | 💤    |
-| `uint16`     | 16-bit unsigned integer             | 💤    |
-| `uint32`     | 32-bit unsigned integer             | 💤    |
-| `uint64`     | 64-bit unsigned integer             | ✅     |
-| `usize`   | Platform-dependent unsigned integer | 💤    |
-| `float32`     | 32-bit floating-point number        | 💤    |
-| `float64`     | 64-bit floating-point number        | ✅     |
-| `bool`    | Boolean value (`true` or `false`)   | ✅     |
-| `char`    | Unicode character                   | ✅    |
-| `string`     | String                              | ✅    |
-| `array`   | Array (syntax: `[YourType]`)        | 💭    |
+Atlas77 is statically and strongly typed.
 
-## 6. Functions
+#### Primitive Types
 
-Functions in Atlas77 are defined using the `func` keyword, followed by the function name, parameters, return type, and
-body. The return type of a function is specified after the `->` symbol. For example:
+| Type      | Description               | Status |
+|-----------|---------------------------|--------|
+| `int64`   | 64-bit signed integer     | ✅     |
+| `uint64`  | 64-bit unsigned integer   | ✅     |
+| `float64` | 64-bit floating point     | ✅     |
+| `bool`    | Boolean (`true`/`false`)  | ✅     |
+| `char`    | Unicode character         | ✅     |
+| `string`  | UTF-8 string              | ✅     |
+
+Other integer and float sizes (`int8`, `int16`, `int32`, `float32`, etc.) are planned but not yet fully implemented.
+
+#### Strings
+
+Strings are UTF-8 encoded. Length is measured in bytes, not characters:
 
 ```cpp
 import "std/io";
 
-fun add(x: int64, y: int64) -> int64{
+fun main() {
+    let greeting: string = "Hello, Atlas!";
+    println(greeting);
+}
+```
+
+### 4. Functions
+
+Functions are defined with the `fun` keyword and require explicit return types:
+
+```cpp
+import "std/io";
+
+fun add(x: int64, y: int64) -> int64 {
     return x + y;
 }
 
-fun main() -> int64 {
-    let result: int64 = add(5, 10);
-    print(result); // Output: 15
+fun greet(name: string) -> unit {
+    println("Hello, " + name);
+}
+
+fun main() {
+    let result = add(5, 10);
+    println(result);  // Output: 15
+    
+    greet("Atlas");  // Output: Hello, Atlas
 }
 ```
 
-## 7. Control Structures
+Use `unit` as the return type for functions that don't return a value.
 
-Atlas77 supports several control structures, including `if` statements, `match` expression, `while` loops, and `for`
-loops. The syntax for these control structures is similar to other programming languages. For example:
+### 5. Control Flow
 
-| Control Structure  | Description                     | State |
-|--------------------|---------------------------------|-------|
-| `if` statement     | Conditional statement           | ✅     |
-| `match` expression | Pattern matching expression     | 💤    |
-| `while` loop       | Loop with a condition           | ✅     |
-| `for` loop         | Loop over a range or collection | 💤    |
-
+#### If-Else Statements
 
 ```cpp
 import "std/io";
 
-fun main() -> int64 {
+fun main() {
     let x = 5;
 
     if x > 0 {
-        print("x is positive");
+        println("x is positive");
     } else if x < 0 {
-        print("x is negative");
+        println("x is negative");
     } else {
-        print("x is zero");
-    }
-    
-
-    let i = 0;
-    while i < 5 {
-        print(i);
-        i += 1;
+        println("x is zero");
     }
 }
 ```
 
-## 8. The standard library
-
-Atlas77 comes with a relatively small standard library, which includes functions & types for input/output, file
-handling, string & list manipulation, time & math functions. The standard library is imported using the `import`
-keyword, followed by the library name. For example:
+#### While Loops
 
 ```cpp
 import "std/io";
+
+fun main() {
+    let i = 0;
+    while i < 5 {
+        println(i);
+        i = i + 1;
+    }
+}
+```
+
+> **Note:** For-loops and pattern matching are planned but not yet implemented.
+
+### 6. Arrays
+
+Arrays store multiple values of the same type with fixed size:
+
+```cpp
+import "std/io";
+
+fun main() {
+    let numbers: [int64] = [1, 2, 3, 4, 5];
+    let i = 0;
+    while i < 5 {
+        println(numbers[i]);
+        i = i + 1;
+    }
+}
+```
+
+You can also allocate arrays with specific sizes:
+
+```cpp
+import "std/io";
+
+fun main() {
+    // Allocate an array of 5 int64s
+    let numbers = new [int64; 5];
+    let i = 0;
+    while i < 5 {
+        numbers[i] = i * 2;
+        println(numbers[i]);
+        i = i + 1;
+    }
+}
+```
+
+### 7. Structs
+
+Structs group related data together:
+
+```cpp
+import "std/io";
+
+struct Person {
+public:
+    name: string;
+    age: int64;
+    
+    Person(name: string, age: int64) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    fun greet(&this) {
+        println("Hello, my name is " + this.name);
+    }
+}
+
+fun main() {
+    let person = new Person("Alice", 30);
+    person.greet();  // Output: Hello, my name is Alice
+}
+```
+
+Fields are private by default. Use `public:` to make them accessible outside the struct.
+
+### 8. Enums
+
+Enums define types with a set of named values:
+
+```cpp
+import "std/io";
+
+public enum Color {
+    Red = 1;
+    Yellow;      // Auto-assigned: 2
+    Green = 3;
+    Purple;      // Auto-assigned: 4
+    Blue = 5;
+}
+
+fun main() {
+    let color = Color::Red;
+    println(color);  // Output: 1
+}
+```
+
+### 9. Generics
+
+Define generic structs and functions with type parameters:
+
+```cpp
+import "std/io";
+
+struct Box<T> {
+public:
+    value: T;
+    
+    Box(value: T) {
+        this.value = value;
+    }
+    
+    fun get(&this) -> &const T {
+        return &(this.value);
+    }
+}
+
+fun main() {
+    let int_box = new Box<int64>(42);
+    let val = int_box.get();
+    println(*val);  // Output: 42
+}
+```
+
+Type parameters must be explicitly specified at call sites.
+
+### 10. Memory Management and Ownership
+
+Atlas77 uses an ownership system for safe memory management:
+
+```cpp
+import "std/io";
+
+struct Resource {
+public:
+    id: int64;
+    
+    Resource(id: int64) {
+        this.id = id;
+        println("Resource created");
+    }
+    
+    ~Resource() {
+        println("Resource destroyed");
+    }
+}
+
+fun main() {
+    let r = new Resource(1);
+    // Resource automatically destroyed at end of scope
+}
+// Output:
+// Resource created
+// Resource destroyed
+```
+
+**Key Points:**
+- Use `new` to allocate memory
+- Memory is automatically freed at end of scope (RAII)
+- Values are moved by default (source becomes invalid)
+- Values can be copied if they have a `_copy` method
+
+See [Memory Model](./memory-model.md) for complete details.
+
+### 11. Error Handling
+
+Atlas77 provides `optional<T>` and `expected<T, E>` for explicit error handling:
+
+```cpp
+import "std/io";
+import "std/optional";
+
+fun divide(a: int64, b: int64) -> optional<int64> {
+    if b == 0 {
+        return optional<int64>::empty();
+    }
+    return optional<int64>::of(a / b);
+}
+
+fun main() {
+    let result = divide(10, 2);
+    if result.has_value() {
+        println(result.value());  // Output: 5
+    } else {
+        println("Division by zero!");
+    }
+}
+```
+
+See [Error Handling](./error-handling.md) for comprehensive examples.
+
+### 12. The Standard Library
+
+Atlas77 includes a standard library with essential functionality:
+
+```cpp
+import "std/io";        // Input/output
+import "std/fs";        // File system
+import "std/string";    // String utilities
+import "std/vector";    // Dynamic arrays
+import "std/optional";  // Optional values
+import "std/expected";  // Error handling
+import "std/math";      // Math functions
+import "std/time";      // Time operations
 
 fun main() {
     println("Hello, World!");
 }
 ```
 
-Check out the current state of the [standard library](./std.md).
+Check out the [Standard Library](./std.md) for complete documentation.
 
-## 9. Arrays
+## Next Steps
 
-Arrays in Atlas77 are used to store multiple values of the same type. They are defined using square brackets `[]`. For example:
-```cpp
-import "std/io";
+Now that you understand the basics, explore these topics:
 
-fun main() -> int64 {
-    let numbers: [int64] = [1, 2, 3, 4, 5];
-    let i = 0;
-    while i < 5 {
-        print(numbers[i]);
-        i += 1;
-    }
-}
-```
+- **[Hello, World!](./hello_world.md)** – Detailed walkthrough of your first program
+- **[Guessing Game](./guessing_game.md)** – Build a fun interactive program
+- **[Language Reference](./language-reference.md)** – Complete language syntax
+- **[Memory Model](./memory-model.md)** – Understand ownership and copy semantics  
+- **[Error Handling](./error-handling.md)** – Master optional and expected types
+- **[Standard Library](./std.md)** – Explore available modules
 
-If you want, you can also allocate an empty array with a specific size:
+## Current Limitations
 
-```cpp
-import "std/io";
+Atlas77 is actively developed. Some features are not yet available:
 
-fun main() -> int64 {
-    let size: int64 = 5;
-    // Allocates an array of 5 int64s initialized to 0
-    let numbers: [int64] = new [int64; size];
-    let i = 0;
-    while i < size {
-        numbers[i] = i * 2; // Assign values
-        print(numbers[i]);
-        i += 1;
-    }
-}
-```
+- ❌ Multi-line comments
+- ❌ For-loops (range-based iteration)
+- ❌ Pattern matching
+- ❌ Break/continue statements
+- ❌ First-class functions and closures
+- ❌ Async/await
+- ❌ Traits/interfaces
 
-
-## 10. Enums
-
-Enums in Atlas77 are used to define a type that can have a set of named values. They are defined using the `enum` keyword. For example:
-
-```cpp
-public enum Color {
-    Red = 1;
-    Yellow;
-    Green = 3;
-    Purple;
-    Blue = 5;
-}
-```
-
-## 11. Class & Structs
-
-> WIP
-
-Current state of `std/fs` would be a good enough example of how classes/structs work in Atlas77:
-
-```cpp
-private extern read_dir(path: string) -> [string];
-private extern read_file(path: string) -> string;
-private extern write_file(path: string, content: string);
-private extern remove_file(path: string);
-private extern file_exists(path: string) -> bool;
-private extern close_file(path: string);
-
-//NB: This struct works for now, but because of the lack of move/copy semantics in Atlas,
-// it may lead to unexpected behavior.
-public struct File {
-private:
-    content: string;
-public:
-    path: string;
-public:
-    /// Creates a new File object with the given path
-    /// Note: The file is not opened until the open() method is called
-    File(path: string) {
-        this.content = "";
-        this.path = path;
-    }
-
-    ~File() {
-        //Following the RAII pattern, we close the file when it goes out of scope
-        this.close();
-    }
-
-    fun read(this) -> string {
-        let content = read_file(this.path);
-        this.content = content;
-        return this.content;
-    }
-
-    fun open(this) {
-        this.content = read_file(this.path);
-        return;
-    }
-
-    fun close(this) {
-        close_file(this.path);
-        return;
-    }
-
-    fun write(this, content: string) {
-        write_file(this.path, content);
-        return;
-    }
-
-    fun remove(this) {
-        remove_file(this.path);
-        return;
-    }
-
-    fun exists(this) -> bool {
-        return file_exists(this.path);
-    }
-
-    fun read_dir(this, path: string) -> [string] {
-        return read_dir(path);
-    }
-
-    fun read_file(this, path: string) -> string {
-        return read_file(path);
-    }
-}
-```
-
-## 12. Generics
-
-As of now you can define generic for external functions & structs. For example:
-
-```cpp
-extern identity<T>(value: T) -> T;
-struct Box<T> {
-    value: T;
-    Box(value: T) {
-        self.value = value;
-    }
-    fun get_value(this) -> T {
-        return this.value;
-    }
-}
-```
-
-## 13. Concepts
-
-> The name is still to be decided
+These features are planned for future releases. Check the [Roadmap](./roadmap.md) for more details.
 
 
 

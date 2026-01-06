@@ -24,7 +24,7 @@ Refer to [Reserved Keywords](./reserved_keywords.md) for the complete list.
 
 ## Variables and Constants
 
-Variables are declared with `let` and constants with `const`. Type annotations are **mandatory**:
+Variables are declared with `let` and constants with `const`. Type annotations are **mandatory** for constants, while the compiler can infer types for mutable variables. It's mandatory for the sake of readability.
 
 ```cpp
 let x: int64 = 42;
@@ -58,6 +58,9 @@ Atlas 77 is statically typed and strongly typed. Here are the fundamental types:
 | `string`  | UTF-8 string (length in bytes)   | Variable   |
 | `unit`    | Empty type (like `void`)         | —          |
 
+> [!Note]
+> Some primitive types (like `int8`, `int16`, `float32`, etc.) are planned but not yet fully implemented.
+
 ### Strings
 
 Strings are UTF-8 encoded and their length is measured in **bytes**, not characters:
@@ -81,6 +84,10 @@ let items: [string] = ["apple", "banana", "cherry"];
 ### Generics
 
 Atlas 77 supports parametric types (generics) with **explicit type parameters** (no type inference):
+> [!Warning]
+> As of v0.7.0, type inference for generics is not supported. Type parameters must be explicitly specified.
+> 
+> Additionally, generic parameters name can only be a single uppercase letter (e.g., `T`, `U`, `V`). This is only temporary and will be relaxed in future versions.
 
 ```cpp
 struct Box<T> {
@@ -96,7 +103,7 @@ fun get_value<T>(box: Box<T>) -> T {
 }
 
 let int_box: Box<int64> = new Box<int64>(42);
-let value: int64 = get_value::<int64>(int_box);
+let value: int64 = get_value<int64>(int_box);
 ```
 
 Type parameters must be explicitly specified at call sites. For more details, see [Generics](./generics.md).
@@ -110,7 +117,8 @@ fun add(a: int64, b: int64) -> int64 {
     return a + b;
 }
 
-fun greet(name: string) -> unit {
+// Function returning nothing (unit) doesn't require to specify return type
+fun greet(name: string) {
     println("Hello, " + name);
 }
 
@@ -214,25 +222,29 @@ References allow you to work with values without taking ownership. References ar
 ```cpp
 let x: int64 = 42;
 let mutable_ref: &int64 = &x;      // Mutable reference
-let immutable_ref: &const int64 = &const x;  // Immutable reference
+let immutable_ref: &const int64 = &x;  // Immutable reference
 ```
 
 ### Reference Behavior
 
 - References are trivially copyable and are copied implicitly
-- References are **not rebindable** (may change in future versions)
 - References cannot be null; all references point to valid values
-- Taking a reference: `&my_var` (mutable), `&const my_var` (immutable)
+- The mutability or immutability of the reference is determined at declaration time. `&my_var` just creates a reference and based on the context it is assigned to, it can be mutable or immutable.
 
 ## Copy and Move Semantics
 
+Atlas77 uses an ownership system where values can be either copied or moved. See [Memory Model](./memory-model.md) for comprehensive details.
+
 ### Copy Semantics (Implicit)
 
-Primitive types and references are **implicitly copyable**:
+Primitive types, strings, and references are **implicitly copyable**:
 
 ```cpp
 let a: int64 = 10;
 let b: int64 = a;  // 'a' is copied; both 'a' and 'b' exist
+
+let s1: string = "hello";
+let s2: string = s1;  // Strings are copyable
 
 let ref_a: &int64 = &a;
 let ref_b: &int64 = ref_a;  // Reference is copied
@@ -240,22 +252,46 @@ let ref_b: &int64 = ref_a;  // Reference is copied
 
 ### Move Semantics (Default for Custom Types)
 
-For custom structs, values are **moved by default** unless the struct implements a `Copy` constructor:
+For custom structs, values are **moved by default** unless the struct implements a `_copy` method:
 
 ```cpp
 struct Resource {
 public:
     data: string;
+    
+    Resource(data: string) {
+        this.data = data;
+    }
 }
 
-let r1: Resource = Resource("data");
-let r2: Resource = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
+let r1 = new Resource("data");
+let r2 = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
 // Using 'r1' here would be a compile error
 ```
 
-### Copy Constructor (Opt-in)
+### Auto-Generated Copy Constructor
 
-To make a custom type copyable, implement a `Copy` constructor:
+The compiler automatically generates a `_copy` method for structs where the number of fields equals the number of constructor parameters:
+
+```cpp
+struct Point {
+public:
+    x: int64;
+    y: int64;
+    
+    Point(x: int64, y: int64) {  // 2 params, 2 fields - auto-copy!
+        this.x = x;
+        this.y = y;
+    }
+}
+
+let p1 = new Point(10, 20);
+let p2 = p1;  // Copied automatically
+```
+
+### Manual Copy Constructor
+
+To make a custom type copyable or customize copy behavior, implement a `_copy` method:
 
 ```cpp
 struct CopyableData {
@@ -266,17 +302,17 @@ public:
         this.value = val;
     }
     
-    // Copy constructor (opt-in copyability)
-    fun Copy(this: CopyableData) -> CopyableData {
-        return CopyableData(this.value);
+    // Manual copy constructor
+    fun _copy(&const this) -> CopyableData {
+        return new CopyableData(*(this.value));
     }
 }
 
-let d1: CopyableData = CopyableData(100);
-let d2: CopyableData = d1;  // Now 'd1' is copied, both exist
+let d1 = new CopyableData(100);
+let d2 = d1;  // Now 'd1' is copied, both exist
 ```
 
-> [!Warning] The copyability of all standard library types is uncertain. Treat standard library types as potentially non-copyable until verified.
+> **Note:** The compiler automatically generates `_copy` for most simple structs. See [Memory Model](./memory-model.md) for complete rules.
 
 ## Memory Management
 
@@ -323,72 +359,79 @@ struct File {
 
 ## Error Handling
 
-Atlas 77 provides `Option<T>` and `Result<T, E>` types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.
+Atlas 77 provides `optional<T>` and `expected<T, E>` types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.
 
-### Option Type
+### optional Type
+
+The `optional<T>` type represents a value that may or may not exist:
 
 ```cpp
-struct Option<T> {
-public:
-    has_value: bool;
-    value: T;  // Only valid if has_value is true
-}
+import "std/optional";
 
-fun find_user(id: int64) -> Option<User> {
+fun find_user(id: int64) -> optional<User> {
     if id > 0 {
-        return Option(true, User(id));
+        let user = new User(id);
+        return optional<User>::of(user);
     } else {
-        return Option(false, User(0));
+        return optional<User>::empty();
     }
 }
 
-// Using Option
-let user_opt: Option<User> = find_user(1);
-if user_opt.has_value {
+// Using optional
+let user_opt = find_user(1);
+if user_opt.has_value() {
+    let user = user_opt.value();
     println("Found user");
 } else {
     println("User not found");
 }
 ```
 
-### Result Type
+### expected Type
+
+The `expected<T, E>` type represents either a success value or an error:
 
 ```cpp
-struct Result<T, E> {
-public:
-    is_ok: bool;
-    ok_value: T;    // Only valid if is_ok is true
-    err_value: E;   // Only valid if is_ok is false
-}
+import "std/expected";
 
-fun parse_int(s: string) -> Result<int64, string> {
+fun parse_int(s: string) -> expected<int64, string> {
     // Try to parse
-    if success {
-        return Result(true, parsed_value, "");
+    if is_valid_number(s) {
+        let number = convert_to_int(s);
+        return expected<int64, string>::expect(number);
     } else {
-        return Result(false, 0, "Failed to parse");
+        return expected<int64, string>::unexpected("Failed to parse");
     }
 }
 
-// Using Result
-let result: Result<int64, string> = parse_int("42");
-if result.is_ok {
-    let number: int64 = result.ok_value;
-    println("Parsed: " + number);
+// Using expected
+let result = parse_int("42");
+if result.is_expected() {
+    let number = result.expected_value();
+    println(number);
 } else {
-    println("Error: " + result.err_value);
+    let error = result.unexpected_value();
+    println(error);
 }
 ```
 
-### Unwrapping
+### Value Extraction with Defaults
 
 ```cpp
-let result: Result<int64, string> = parse_int("42");
-let number: int64 = result.ok_value; // Unwrap: use value directly (risky!)
+import "std/optional";
+import "std/expected";
+
+// optional with default
+let value = some_optional.value_or(42);
+
+// expected with default
+let value = some_expected.expected_value_or(0);
 ```
 
-> [!Note] 
+> **Note:**  
 > There is no automatic error propagation syntax (`try` / `?` operator) by design to maintain explicit control and avoid "hidden magic" in error handling.
+>
+> See [Error Handling](./error-handling.md) for comprehensive examples and best practices.
 
 ## Modules and Imports
 

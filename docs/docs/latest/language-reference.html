@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-087741d2.js";
+            window.path_to_searchindex_js = "searchindex-a2774121.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-50da4d0a.js"></script>
+        <script src="toc-60effeac.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -196,7 +196,7 @@ let x: int64 = 42; // Comments can appear at end of line
 <p>Reserved keywords in Atlas 77 include: <code>let</code>, <code>const</code>, <code>fun</code>, <code>struct</code>, <code>import</code>, <code>return</code>, <code>if</code>, <code>else</code>, <code>while</code>, <code>for</code>, <code>new</code>, <code>delete</code>, <code>public</code>, <code>private</code>, <code>this</code>, and others.</p>
 <p>Refer to <a href="./reserved_keywords.html">Reserved Keywords</a> for the complete list.</p>
 <h2 id="variables-and-constants"><a class="header" href="#variables-and-constants">Variables and Constants</a></h2>
-<p>Variables are declared with <code>let</code> and constants with <code>const</code>. Type annotations are <strong>mandatory</strong>:</p>
+<p>Variables are declared with <code>let</code> and constants with <code>const</code>. Type annotations are <strong>mandatory</strong> for constants, while the compiler can infer types for mutable variables. It’s mandatory for the sake of readability.</p>
 <pre><code class="language-cpp">let x: int64 = 42;
 let name: string = "Atlas";
 const PI: float64 = 3.14159;
@@ -230,6 +230,10 @@ let result = 10; // Types can be inferred for initialized variables.
 </tbody>
 </table>
 </div>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Some primitive types (like <code>int8</code>, <code>int16</code>, <code>float32</code>, etc.) are planned but not yet fully implemented.</p>
+</blockquote>
 <h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
 <p>Strings are UTF-8 encoded and their length is measured in <strong>bytes</strong>, not characters:</p>
 <pre><code class="language-cpp">let greeting: string = "Hello, Atlas!";
@@ -245,6 +249,11 @@ let items: [string] = ["apple", "banana", "cherry"];
 </code></pre>
 <h3 id="generics"><a class="header" href="#generics">Generics</a></h3>
 <p>Atlas 77 supports parametric types (generics) with <strong>explicit type parameters</strong> (no type inference):</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>As of v0.7.0, type inference for generics is not supported. Type parameters must be explicitly specified.</p>
+<p>Additionally, generic parameters name can only be a single uppercase letter (e.g., <code>T</code>, <code>U</code>, <code>V</code>). This is only temporary and will be relaxed in future versions.</p>
+</blockquote>
 <pre><code class="language-cpp">struct Box&lt;T&gt; {
 public:
     value: T;
@@ -258,7 +267,7 @@ fun get_value&lt;T&gt;(box: Box&lt;T&gt;) -&gt; T {
 }
 
 let int_box: Box&lt;int64&gt; = new Box&lt;int64&gt;(42);
-let value: int64 = get_value::&lt;int64&gt;(int_box);
+let value: int64 = get_value&lt;int64&gt;(int_box);
 </code></pre>
 <p>Type parameters must be explicitly specified at call sites. For more details, see <a href="./generics.html">Generics</a>.</p>
 <h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
@@ -267,7 +276,8 @@ let value: int64 = get_value::&lt;int64&gt;(int_box);
     return a + b;
 }
 
-fun greet(name: string) -&gt; unit {
+// Function returning nothing (unit) doesn't require to specify return type
+fun greet(name: string) {
     println("Hello, " + name);
 }
 
@@ -358,37 +368,60 @@ public:
 <h3 id="reference-syntax"><a class="header" href="#reference-syntax">Reference Syntax</a></h3>
 <pre><code class="language-cpp">let x: int64 = 42;
 let mutable_ref: &amp;int64 = &amp;x;      // Mutable reference
-let immutable_ref: &amp;const int64 = &amp;const x;  // Immutable reference
+let immutable_ref: &amp;const int64 = &amp;x;  // Immutable reference
 </code></pre>
 <h3 id="reference-behavior"><a class="header" href="#reference-behavior">Reference Behavior</a></h3>
 <ul>
 <li>References are trivially copyable and are copied implicitly</li>
-<li>References are <strong>not rebindable</strong> (may change in future versions)</li>
 <li>References cannot be null; all references point to valid values</li>
-<li>Taking a reference: <code>&amp;my_var</code> (mutable), <code>&amp;const my_var</code> (immutable)</li>
+<li>The mutability or immutability of the reference is determined at declaration time. <code>&amp;my_var</code> just creates a reference and based on the context it is assigned to, it can be mutable or immutable.</li>
 </ul>
 <h2 id="copy-and-move-semantics"><a class="header" href="#copy-and-move-semantics">Copy and Move Semantics</a></h2>
+<p>Atlas77 uses an ownership system where values can be either copied or moved. See <a href="./memory-model.html">Memory Model</a> for comprehensive details.</p>
 <h3 id="copy-semantics-implicit"><a class="header" href="#copy-semantics-implicit">Copy Semantics (Implicit)</a></h3>
-<p>Primitive types and references are <strong>implicitly copyable</strong>:</p>
+<p>Primitive types, strings, and references are <strong>implicitly copyable</strong>:</p>
 <pre><code class="language-cpp">let a: int64 = 10;
 let b: int64 = a;  // 'a' is copied; both 'a' and 'b' exist
+
+let s1: string = "hello";
+let s2: string = s1;  // Strings are copyable
 
 let ref_a: &amp;int64 = &amp;a;
 let ref_b: &amp;int64 = ref_a;  // Reference is copied
 </code></pre>
 <h3 id="move-semantics-default-for-custom-types"><a class="header" href="#move-semantics-default-for-custom-types">Move Semantics (Default for Custom Types)</a></h3>
-<p>For custom structs, values are <strong>moved by default</strong> unless the struct implements a <code>Copy</code> constructor:</p>
+<p>For custom structs, values are <strong>moved by default</strong> unless the struct implements a <code>_copy</code> method:</p>
 <pre><code class="language-cpp">struct Resource {
 public:
     data: string;
+    
+    Resource(data: string) {
+        this.data = data;
+    }
 }
 
-let r1: Resource = Resource("data");
-let r2: Resource = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
+let r1 = new Resource("data");
+let r2 = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
 // Using 'r1' here would be a compile error
 </code></pre>
-<h3 id="copy-constructor-opt-in"><a class="header" href="#copy-constructor-opt-in">Copy Constructor (Opt-in)</a></h3>
-<p>To make a custom type copyable, implement a <code>Copy</code> constructor:</p>
+<h3 id="auto-generated-copy-constructor"><a class="header" href="#auto-generated-copy-constructor">Auto-Generated Copy Constructor</a></h3>
+<p>The compiler automatically generates a <code>_copy</code> method for structs where the number of fields equals the number of constructor parameters:</p>
+<pre><code class="language-cpp">struct Point {
+public:
+    x: int64;
+    y: int64;
+    
+    Point(x: int64, y: int64) {  // 2 params, 2 fields - auto-copy!
+        this.x = x;
+        this.y = y;
+    }
+}
+
+let p1 = new Point(10, 20);
+let p2 = p1;  // Copied automatically
+</code></pre>
+<h3 id="manual-copy-constructor"><a class="header" href="#manual-copy-constructor">Manual Copy Constructor</a></h3>
+<p>To make a custom type copyable or customize copy behavior, implement a <code>_copy</code> method:</p>
 <pre><code class="language-cpp">struct CopyableData {
 public:
     value: int64;
@@ -397,17 +430,17 @@ public:
         this.value = val;
     }
     
-    // Copy constructor (opt-in copyability)
-    fun Copy(this: CopyableData) -&gt; CopyableData {
-        return CopyableData(this.value);
+    // Manual copy constructor
+    fun _copy(&amp;const this) -&gt; CopyableData {
+        return new CopyableData(*(this.value));
     }
 }
 
-let d1: CopyableData = CopyableData(100);
-let d2: CopyableData = d1;  // Now 'd1' is copied, both exist
+let d1 = new CopyableData(100);
+let d2 = d1;  // Now 'd1' is copied, both exist
 </code></pre>
 <blockquote>
-<p>[!Warning] The copyability of all standard library types is uncertain. Treat standard library types as potentially non-copyable until verified.</p>
+<p><strong>Note:</strong> The compiler automatically generates <code>_copy</code> for most simple structs. See <a href="./memory-model.html">Memory Model</a> for complete rules.</p>
 </blockquote>
 <h2 id="memory-management"><a class="header" href="#memory-management">Memory Management</a></h2>
 <p>Atlas 77 uses <strong>manual memory management</strong> with automatic cleanup at scope boundaries.</p>
@@ -441,63 +474,66 @@ delete ptr;
 <p>The current runtime is marked as deprecated. Precise semantics of destructors and scope-based cleanup may evolve.</p>
 </blockquote>
 <h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
-<p>Atlas 77 provides <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.</p>
-<h3 id="option-type"><a class="header" href="#option-type">Option Type</a></h3>
-<pre><code class="language-cpp">struct Option&lt;T&gt; {
-public:
-    has_value: bool;
-    value: T;  // Only valid if has_value is true
-}
+<p>Atlas 77 provides <code>optional&lt;T&gt;</code> and <code>expected&lt;T, E&gt;</code> types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.</p>
+<h3 id="optional-type"><a class="header" href="#optional-type">optional Type</a></h3>
+<p>The <code>optional&lt;T&gt;</code> type represents a value that may or may not exist:</p>
+<pre><code class="language-cpp">import "std/optional";
 
-fun find_user(id: int64) -&gt; Option&lt;User&gt; {
+fun find_user(id: int64) -&gt; optional&lt;User&gt; {
     if id &gt; 0 {
-        return Option(true, User(id));
+        let user = new User(id);
+        return optional&lt;User&gt;::of(user);
     } else {
-        return Option(false, User(0));
+        return optional&lt;User&gt;::empty();
     }
 }
 
-// Using Option
-let user_opt: Option&lt;User&gt; = find_user(1);
-if user_opt.has_value {
+// Using optional
+let user_opt = find_user(1);
+if user_opt.has_value() {
+    let user = user_opt.value();
     println("Found user");
 } else {
     println("User not found");
 }
 </code></pre>
-<h3 id="result-type"><a class="header" href="#result-type">Result Type</a></h3>
-<pre><code class="language-cpp">struct Result&lt;T, E&gt; {
-public:
-    is_ok: bool;
-    ok_value: T;    // Only valid if is_ok is true
-    err_value: E;   // Only valid if is_ok is false
-}
+<h3 id="expected-type"><a class="header" href="#expected-type">expected Type</a></h3>
+<p>The <code>expected&lt;T, E&gt;</code> type represents either a success value or an error:</p>
+<pre><code class="language-cpp">import "std/expected";
 
-fun parse_int(s: string) -&gt; Result&lt;int64, string&gt; {
+fun parse_int(s: string) -&gt; expected&lt;int64, string&gt; {
     // Try to parse
-    if success {
-        return Result(true, parsed_value, "");
+    if is_valid_number(s) {
+        let number = convert_to_int(s);
+        return expected&lt;int64, string&gt;::expect(number);
     } else {
-        return Result(false, 0, "Failed to parse");
+        return expected&lt;int64, string&gt;::unexpected("Failed to parse");
     }
 }
 
-// Using Result
-let result: Result&lt;int64, string&gt; = parse_int("42");
-if result.is_ok {
-    let number: int64 = result.ok_value;
-    println("Parsed: " + number);
+// Using expected
+let result = parse_int("42");
+if result.is_expected() {
+    let number = result.expected_value();
+    println(number);
 } else {
-    println("Error: " + result.err_value);
+    let error = result.unexpected_value();
+    println(error);
 }
 </code></pre>
-<h3 id="unwrapping"><a class="header" href="#unwrapping">Unwrapping</a></h3>
-<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
-let number: int64 = result.ok_value; // Unwrap: use value directly (risky!)
+<h3 id="value-extraction-with-defaults"><a class="header" href="#value-extraction-with-defaults">Value Extraction with Defaults</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/expected";
+
+// optional with default
+let value = some_optional.value_or(42);
+
+// expected with default
+let value = some_expected.expected_value_or(0);
 </code></pre>
-<blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>There is no automatic error propagation syntax (<code>try</code> / <code>?</code> operator) by design to maintain explicit control and avoid “hidden magic” in error handling.</p>
+<blockquote>
+<p><strong>Note:</strong><br>There is no automatic error propagation syntax (<code>try</code> / <code>?</code> operator) by design to maintain explicit control and avoid “hidden magic” in error handling.</p>
+<p>See <a href="./error-handling.html">Error Handling</a> for comprehensive examples and best practices.</p>
 </blockquote>
 <h2 id="modules-and-imports"><a class="header" href="#modules-and-imports">Modules and Imports</a></h2>
 <h3 id="current-import-system"><a class="header" href="#current-import-system">Current Import System</a></h3>

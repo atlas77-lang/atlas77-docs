@@ -1,6 +1,15 @@
-# Memory Model
+# Memory Model and Ownership
 
-Atlas 77 employs **manual memory management** with **automatic scope-based cleanup**. This document explains how memory allocation, deallocation, and ownership work.
+Atlas77 uses an **ownership system** similar to Rust to manage memory safely and automatically. This document explains how memory allocation, ownership, move semantics, and copy semantics work in Atlas77.
+
+## Overview
+
+**Key Principles:**
+- Every variable owns its value
+- Ownership can be **moved** (transferred) or **copied** (duplicated)
+- When a value is moved, the original owner becomes invalid
+- When a value is copied, both the original and the copy remain valid
+- Automatic memory management through RAII and destructors
 
 ## Allocation with `new`
 
@@ -10,37 +19,26 @@ Memory is allocated using the `new` keyword:
 struct Person {
 public:
     name: string;
-    age: int32;
+    age: int64;
     
-    Person(name: string, age: int32) {
+    Person(name: string, age: int64) {
         this.name = name;
         this.age = age;
     }
 }
 
-let person: &Person = &new Person("Alice", 30);
+let person = new Person("Alice", 30);
 ```
-
-## Deallocation with `delete`
-
-Memory is freed using the `delete` keyword:
-
-```cpp
-delete person;  // Free memory and call destructor
-```
-
-The `delete` operation:
-1. Calls the destructor (if one exists)
-2. Frees the allocated memory
-3. Invalidates the reference
 
 ## Automatic Scope-Based Cleanup (RAII)
 
-The compiler automatically inserts `delete` instructions at the end of each scope for variables that haven't been moved yet:
+The compiler automatically inserts `delete` instructions at the end of each scope for variables that still own their values:
 
 ```cpp
+import "std/fs";
+
 fun process_file() -> unit {
-    let file: File = File("data.txt");
+    let file = new File("data.txt");
     
     // ... use file ...
     
@@ -54,101 +52,471 @@ This pattern is called **RAII** (Resource Acquisition Is Initialization):
 ### Example: File Resource Management
 
 ```cpp
-struct File {
-    path: string;
-    is_open: bool;
+import "std/fs";
+
+struct FileHandler {
+public:
+    file: File;
     
-    // Constructor acquires resource
-    File(path: string) {
-        this.path = path;
-        this.is_open = true;
-        // Open file
+    FileHandler(path: string) {
+        this.file = new File(path);
+        println("File opened");
     }
     
-    // Destructor releases resource
-    fun ~File(this: File) -> unit {
-        if this.is_open {
-            // Close file
-            this.is_open = false;
-        }
+    ~FileHandler() {
+        println("File closed");
+        delete this.file;
     }
 }
 
 fun read_and_process() -> unit {
-    let file: File = File("input.txt");
-    let content: string = file.read();
+    let handler = new FileHandler("input.txt");
     
-    // ...
+    // ... use handler ...
     
-} // File destructor called here; file is automatically closed
+} // FileHandler destructor called automatically
 ```
 
-## Ownership and Move Semantics
+## Ownership Model
 
-Atlas 77 uses **move semantics by default** for custom types. When you assign a value, ownership transfers to the new variable:
+Every variable in Atlas77 owns its value. When a variable goes out of scope, its destructor is automatically called:
 
 ```cpp
-struct Box<T> {
+fun example() {
+    let x = new MyStruct(42);
+    // x owns the MyStruct instance
+    
+    // ... use x ...
+    
+} // x goes out of scope - destructor called automatically
+```
+
+### Transferring Ownership
+
+When you pass a value to a function or assign it to another variable, ownership can be transferred:
+
+```cpp
+fun consume(obj: MyStruct) {
+    // obj now owns the value
+} // obj destroyed here
+
+fun main() {
+    let x = new MyStruct(42);
+    consume(x);  // Ownership transferred to consume()
+    // x is no longer valid here!
+}
+```
+
+## Copy Eligibility
+
+A type is **copyable** if and only if:
+
+1. **It's a primitive type**: `int64`, `float64`, `uint64`, `bool`, `char`
+2. **It's a reference**: `&T` or `&const T` (references are just pointers)
+3. **It's a string**: Built-in `string` type (copyable but needs freeing)
+4. **It has auto-generated copy**: Structs where the number of fields equals the number of constructor parameters
+5. **It defines a `_copy` method**: Custom structs with an explicit copy constructor
+
+> **Note:** Auto-Generated Copy Constructor (v0.7.0)  
+> The compiler automatically generates a `_copy` method for structs where `#fields == #constructor_args`.
+> This is a simple heuristic that works for most cases but can cause issues with complex types.
+> In v0.7.1, this will be replaced with proper copy constructor generation and better semantics.
+
+### Primitive Types
+
+Primitives are always copied - they're too cheap to move:
+
+```cpp
+let a: int64 = 42;
+let b: int64 = a;  // Copy (a is still valid)
+let c: int64 = a;  // Another copy (a still valid)
+
+println(a);  // ✓ Works - a is still valid
+```
+
+### References
+
+References are lightweight pointers that don't own the data:
+
+```cpp
+fun borrow(obj: &const MyStruct) {
+    // obj is just a reference - doesn't own the data
+    println(obj.value);
+}
+
+fun main() {
+    let x = new MyStruct(42);
+    borrow(&x);  // Pass reference
+    println(x.value);  // ✓ x is still valid
+}
+```
+
+### Strings
+
+Strings are copyable but still need memory management:
+
+```cpp
+let s1 = "hello";
+let s2 = s1;  // Copy (both strings valid)
+println(s1);  // ✓ Works
+println(s2);  // ✓ Works
+// Both destructors will be called
+```
+
+### Auto-Generated Copy (Most Structs)
+
+Most simple structs automatically get a copy constructor:
+
+```cpp
+struct Point {
 public:
-    value: T;
+    x: int64;
+    y: int64;
+
+    Point(x: int64, y: int64) {  // 2 params
+        this.x = x;
+        this.y = y;
+    }
+    // Compiler auto-generates _copy because: 2 fields == 2 params ✓
 }
 
-let box1: Box<int64> = Box(42);
-let box2: Box<int64> = box1;  // Ownership moves from box1 to box2
-
-// box1 is no longer accessible; moved values cannot be used
-// println(box1.value);  // ERROR: box1 has been moved
+fun main() {
+    let p1 = new Point(10, 20);
+    let p2 = p1;  // Copy (auto-generated)
+    
+    println(p1.x);  // ✓ Works
+    println(p2.x);  // ✓ Works
+}
 ```
 
-Once a value is moved, the original variable becomes inaccessible. This prevents use-after-free bugs:
+### Non-Copyable Types
+
+A type is non-copyable when the constructor parameters don't match the field count:
 
 ```cpp
-fun take_ownership(b: Box<int64>) -> unit {
-    println(b.value);
-    // b is deleted at end of scope
+struct Resource {
+public:
+    id: int64;
+    handle: int64;  // 2 fields
+    
+    Resource(id: int64) {  // 1 param - NO auto-copy generated!
+        this.id = id;
+        this.handle = allocate_handle(id);  // Computed field
+        println("Resource acquired");
+    }
+    
+    ~Resource() {
+        println("Resource released");
+    }
+    
+    // No _copy method - this type is NOT copyable
 }
 
-let box: Box<int64> = Box(100);
-take_ownership(box);  // Ownership transfers to function
-// println(box.value);  // ERROR: box has been moved
+fun main() {
+    let r1 = new Resource(1);
+    let r2 = r1;  // MOVE (r1 becomes invalid)
+    
+    // println(r1.id);  // ✗ ERROR: r1 was moved
+    println(r2.id);     // ✓ Works
+    
+} // Only r2's destructor is called
 ```
+
+### Manual Copy Constructors
+
+You can always define `_copy` manually for full control:
+
+```cpp
+struct CustomCopy {
+public:
+    value: int64;
+    
+    CustomCopy(value: int64) {
+        this.value = value;
+    }
+
+    // Manual copy constructor
+    fun _copy(&const this) -> CustomCopy {
+        println("Custom copy!");
+        let result = new CustomCopy(*(this.value) * 2);  // Custom logic
+        return result;
+    }
+}
+
+fun main() {
+    let c1 = new CustomCopy(10);
+    let c2 = c1;  // Uses manual _copy
+    
+    println(c1.value);  // 10
+    println(c2.value);  // 20 (custom logic applied)
+}
+```
+
+## Move Semantics
+
+**Move** transfers ownership from one variable to another. The source becomes invalid:
+
+```cpp
+struct Resource {
+public:
+    id: int64;
+    
+    Resource(id: int64) {
+        this.id = id;
+        println("Resource acquired");
+    }
+    
+    ~Resource() {
+        println("Resource released");
+    }
+}
+
+fun main() {
+    let r1 = new Resource(1);
+    let r2 = r1;  // MOVE (r1 becomes invalid)
+    
+    // println(r1.id);  // ✗ ERROR: r1 was moved
+    println(r2.id);     // ✓ Works
+    
+} // Only r2's destructor is called
+```
+
+### When Moves Happen
+
+Moves occur when:
+- A non-copyable value is used (passed to function, assigned, returned)
+- A copyable value is used for the **last time** (optimization)
 
 ## Copy Semantics
 
-### Implicit Copy (Primitive Types and References)
-
-Primitive types and references are implicitly copyable:
+**Copy** creates a new independent value via the `_copy` method:
 
 ```cpp
-let x: int64 = 42;
-let y: int64 = x;  // 'x' is copied; both x and y exist
+struct Data {
+public:
+    value: int64;
+    
+    Data(value: int64) {
+        this.value = value;
+    }
+    
+    fun _copy(&const this) -> Data {
+        println("Copying!");
+        let result = new Data(*(this.value));
+        return result;
+    }
+}
 
-let ref_x: &int64 = &x;
-let ref_y: &int64 = ref_x;  // Reference is copied
+fun main() {
+    let d1 = new Data(100);
+    
+    let d2 = d1;  // COPY (both valid)
+    d2.value = 200;
+    
+    println(d1.value);  // Prints: 100
+    println(d2.value);  // Prints: 200
+    
+} // Both d1 and d2 destructors are called
 ```
 
-### Opt-In Copy (Custom Types)
+### Copy vs Move for Copyable Types
 
-To make a custom type copyable, implement a **Copy constructor**:
+Even copyable types can be moved if it's the last use (optimization):
+
+```cpp
+fun process(data: Data) {
+    println(data.value);
+}
+
+fun main() {
+    let d = new Data(42);
+    
+    process(d);  // MOVE (last use - no copy needed!)
+    // d is invalid here
+}
+```
+
+But if you use it again, it will copy:
+
+```cpp
+fun main() {
+    let d = new Data(42);
+    
+    process(d);        // COPY (not last use)
+    println(d.value);  // ✓ d is still valid
+    
+} // d's destructor called here
+}
+```
+
+## Common Patterns
+
+### Pattern 1: Borrowing for Reads
+
+```cpp
+fun print_value(obj: &const MyStruct) {
+    println(obj.value);
+}
+
+fun main() {
+    let obj = new MyStruct(42);
+    print_value(&obj);  // Borrow
+    print_value(&obj);  // Borrow again
+    // obj still valid
+}
+```
+
+### Pattern 2: Mutable Borrowing
+
+```cpp
+fun modify(obj: &MyStruct) {
+    obj.value = obj.value + 1;
+}
+
+fun main() {
+    let obj = new MyStruct(42);
+    modify(&obj);  // Mutable borrow
+    println(obj.value);  // 43
+}
+```
+
+### Pattern 3: Return Values Transfer Ownership
+
+```cpp
+import "std/string";
+
+fun create_message(text: string) -> String {
+    let msg = new String(text);
+    return msg;  // Ownership transferred to caller
+}
+
+fun main() {
+    let my_msg = create_message("Test");
+    println(my_msg.s);  // ✓ Works
+}
+```
+
+## Common Pitfalls
+
+### Pitfall 1: Use After Move
+
+```cpp
+fun consume(obj: Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    consume(r);  // r moved
+    
+    println(r.id);  // ✗ ERROR: use after move
+}
+```
+
+**Solution:** Use references if you need to keep the value:
+
+```cpp
+fun consume(obj: &Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    consume(&r);  // Borrow
+    println(r.id);  // ✓ Works
+}
+```
+
+### Pitfall 2: Mismatched Constructor Parameters
 
 ```cpp
 struct MyData {
 public:
     value: int64;
+    cached: bool;  // 2 fields
     
-    MyData(val: int64) {
-        this.value = val;
-    }
-    
-    // Copy constructor
-    fun Copy(this: MyData) -> MyData {
-        return MyData(this.value);
+    MyData(value: int64) {  // 1 param - NO auto-copy!
+        this.value = value;
+        this.cached = false;
     }
 }
 
-let data1: MyData = MyData(100);
-let data2: MyData = data1;  // Now data1 is copied; both data1 and data2 exist
+fun main() {
+    let d = new MyData(42);
+    let d2 = d;  // MOVE (no auto-copy because 1 param ≠ 2 fields)
+    
+    println(d.value);  // ✗ ERROR: d was moved
+}
 ```
+
+**Solution:** Either match parameters to fields, or implement `_copy` manually:
+
+```cpp
+// Option 1: Match constructor to fields
+struct MyData {
+public:
+    value: int64;
+    cached: bool;
+    
+    MyData(value: int64, cached: bool) {  // Now 2 params = 2 fields ✓
+        this.value = value;
+        this.cached = cached;
+    }
+    // Auto-copy works now!
+}
+
+// Option 2: Implement _copy manually
+struct MyData {
+public:
+    value: int64;
+    cached: bool;
+    
+    MyData(value: int64) {
+        this.value = value;
+        this.cached = false;
+    }
+    
+    fun _copy(&const this) -> MyData {
+        let result = new MyData(*(this.value));
+        result.cached = this.cached;
+        return result;
+    }
+}
+```
+
+### Pitfall 3: Double Move
+
+```cpp
+fun process(r: Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    process(r);  // r moved
+    process(r);  // ✗ ERROR: r already moved
+}
+```
+
+**Solution:** Create a new resource or use references:
+
+```cpp
+fun process(r: &Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    process(&r);  // Borrow
+    process(&r);  // ✓ Borrow again
+}
+```
+
+## Summary
+
+- **Ownership**: Every value has exactly one owner
+- **Move**: Transfers ownership (source becomes invalid)
+- **Copy**: Creates duplicate (both remain valid, requires `_copy` method)
+- **Primitives**: Always copied
+- **Strings**: Copyable but still needs memory management
+- **Auto-generated copy**: Structs where `#fields == #constructor_params`
+- **References**: Lightweight borrowing without ownership transfer
+- **Automatic cleanup**: Destructors called when variables go out of scope
+- **Compiler optimization**: Last-use moves even for copyable types
+
+The ownership system ensures memory safety while providing explicit control over when values are copied vs moved.
 
 Without the Copy constructor, assignment moves instead of copying.
 

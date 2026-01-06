@@ -1,0 +1,130 @@
+// An experimental implementation of an optional type in Atlas
+// As of v0.6.3, it is supported & the v0.6.4 supports generic constraints.
+/// Optional type utilities for values that may or may not be present.
+///
+/// This module provides a minimal `optional<T>` with creation helpers,
+/// presence checks, safe accessors, and a destructor that cleans up
+/// the stored value when present.
+
+import "std/io";
+import "std/mem";
+
+
+/// Internal storage for `optional<T>`.
+///
+/// This untagged union holds either a `value: T` when present or
+/// a zero-sized `empty: unit` sentinel when absent. Presence is
+/// tracked by `optional<T>::has_value`.
+private union optional_storage<T> { 
+    value: T;
+    empty: unit;
+}
+
+/// A lightweight container for an optional value of type `T`.
+///
+/// - When `has_value` is true, `data.value` is valid and will be dropped
+///   by the destructor.
+/// - Create instances via `optional::of(value)` or `optional::empty()`.
+public struct optional<T> {
+private:
+    data: optional_storage<T>;
+    has_value: bool;
+    /// Private constructor used by helpers `of` and `empty`.
+    optional(data: optional_storage<T>, has_value: bool) {
+        this.data = data;
+        this.has_value = has_value;
+    }
+public:
+    /// Destructor: drops the contained value if present.
+    ///
+    /// If `has_value` is true, `this.data.value` is deleted. Otherwise,
+    /// nothing is performed.
+    ~optional() {
+        if (this.has_value) {
+            delete this.data.value;
+        }
+    }
+    fun _copy(&const this) -> optional<T> {
+        if (*this.has_value) {
+            // Access through const reference - copy the value from the union
+            let value = this.data.value;
+            return optional<T>::of(value);
+        } else {
+            return optional<T>::empty();
+        }
+    }
+    /// Construct an `optional<T>` containing `data`.
+    ///
+    /// Example:
+    ///     let some = optional<int64>::of(42);
+    fun of(data: T) -> optional<T> {
+        return new optional<T>(
+            optional_storage<T> { 
+                .value = data 
+            }, 
+            true
+        );
+    }
+    /// Construct an empty `optional<T>` with no value.
+    ///
+    /// Example:
+    ///     let none = optional<int64>::empty();
+    fun empty() -> optional<T> {
+        return new optional<T>(
+            optional_storage<T> { 
+                .empty = ()
+            }, 
+            false
+        );
+    }
+    /// Returns true if a value is present.
+    ///
+    /// Example:
+    ///     if (opt.has_value()) { println("has value"); }
+    fun has_value(&this) -> bool {
+        return this.has_value;
+    }
+    /// Consume the optional and return the contained value.
+    ///
+    /// Panics with a descriptive message when `has_value` is false.
+    /// Consider using `value_or(default)` to avoid panics.
+    /// 
+    /// Known Issue: It crashes if it is actually a consuming method and we add a "delete this".
+    /// I'll try to fix it, but we'll see later.
+    fun value(this) -> T {
+        if (!this.has_value) {
+            panic("Called value on a empty optional");
+        }
+        // Move the value out before marking as empty
+        let value = memcpy(&(this.data.value));
+        // Mark as empty before returning to prevent destructor from double-freeing
+        this.has_value = false;
+        // Delete the container structure itself (but not the value we already moved)
+        return value;
+    }
+    /// Consume the optional and return the contained value or `default` if empty.
+    ///
+    /// Example:
+    ///     let opt = optional<int64>::empty();
+    ///     let n = opt.value_or(0);
+    /// Known Issue: Same as optional<T>.value()
+    fun value_or(this, default: T) -> T {
+        if (this.has_value) {
+            let value = this.data.value;
+            // Mark as empty before returning
+            this.has_value = false;
+            return value;
+        } else {
+            delete this;
+            return default;
+        }
+    }
+    // Function pointers are not supported yet, so this is just a placeholder
+    //fun map<U>(this, f: (T) -> U) -> optional<U> {
+    //    if (this.has_value) {
+    //        return optional<U>::of(f(this.data.value));
+    //    } else {
+    //        return optional<U>::empty();
+    //    }
+    //}
+}

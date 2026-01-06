@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-087741d2.js";
+            window.path_to_searchindex_js = "searchindex-a2774121.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-50da4d0a.js"></script>
+        <script src="toc-60effeac.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -205,7 +205,7 @@ I hope to be able to use it for future projects. Don’t expect it to be product
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="getting-started-with-atlas-77"><a class="header" href="#getting-started-with-atlas-77">Getting Started with Atlas 77</a></h1>
-<p>Welcome to Atlas 77! This guide will help you install the language and write your first program.</p>
+<p>Welcome to Atlas 77! This guide will help you understand the basics of the language and write your first programs.</p>
 <h2 id="your-first-program"><a class="header" href="#your-first-program">Your First Program</a></h2>
 <p>Here is a simple “Hello, Atlas!” program:</p>
 <pre><code class="language-cpp">import "std/io";
@@ -227,258 +227,294 @@ cd my_project
 atlas_77 run
 </code></pre>
 <p>This creates a basic project template with all necessary files.</p>
-<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
-<ul>
-<li>Read <a href="#hello-world">Hello, World!</a> for a detailed walkthrough</li>
-<li>Explore <a href="#language-reference">Language Reference</a> for complete syntax documentation</li>
-<li>Try <a href="#programming-a-guessing-game-in-atlas77">Guessing Game</a> for a practical example</li>
-<li>Check <a href="#memory-model">Memory Model</a> to understand ownership and cleanup</li>
-<li>Browse <a href="#standard-library">Standard Library</a> for available modules and functions</li>
-</ul>
-<h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<h2 id="core-concepts"><a class="header" href="#core-concepts">Core Concepts</a></h2>
+<h3 id="1-comments"><a class="header" href="#1-comments">1. Comments</a></h3>
 <p>Comments document code and are ignored by the compiler.</p>
-<h3 id="single-line-comments"><a class="header" href="#single-line-comments">Single-line Comments</a></h3>
-<p>Single-line comments start with <code>//</code> and continue to the end of the line:</p>
-<pre><code class="language-cpp">// This is a comment
-let x: int64 = 42;  // Comments can appear at the end of lines too
+<pre><code class="language-cpp">// This is a single-line comment
+let x: int64 = 42;  // Comments can appear at the end of lines
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> Multi-line comments are not yet implemented.</p>
 </blockquote>
-<blockquote>
-<p>In the future I’ll add support for documentation comments, though the syntax is not yet decided.</p>
-</blockquote>
-<h2 id="4-variables"><a class="header" href="#4-variables">4. Variables</a></h2>
-<p>Variables in Atlas77 are either mutable or immutable. The design follows in some sense TypeScript/JavaScript, with the
-<code>const</code> &amp; <code>let</code> keywords. Variables can be declared using the <code>let</code> keyword, which creates a mutable variable, or the
-<code>const</code> keyword, which creates an immutable variable.</p>
+<h3 id="2-variables-and-constants"><a class="header" href="#2-variables-and-constants">2. Variables and Constants</a></h3>
+<p>Variables are declared with <code>let</code> (mutable) or <code>const</code> (immutable):</p>
 <pre><code class="language-cpp">import "std/io";
 
-fun main() -&gt; int64 {
+fun main() {
     let x: int64 = 5;
-    x = 10;
-    print(x); // Output: 10
+    x = 10;  // OK - mutable variable
+    println(x);  // Output: 10
 
     const y: int64 = 5;
-    y = 10; // Error: Cannot assign to a constant variable
+    // y = 10;  // Error: Cannot assign to a constant
 }
 </code></pre>
-<h2 id="5-data-types"><a class="header" href="#5-data-types">5. Data Types</a></h2>
-<p>Atlas77 has several built-in data types, including integers, floating-point numbers, booleans, strings, and arrays. The
-following table lists the built-in data types in Atlas77:</p>
+<p>Type annotations are mandatory for constants, the compiler can infer types for mutable variables. It’s mandatory for the sake of readability.</p>
+<h3 id="3-data-types"><a class="header" href="#3-data-types">3. Data Types</a></h3>
+<p>Atlas77 is statically and strongly typed.</p>
+<h4 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h4>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Data Type</th><th>Description</th><th>State</th></tr>
+<tr><th>Type</th><th>Description</th><th>Status</th></tr>
 </thead>
 <tbody>
-<tr><td><code>int8</code></td><td>8-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>int16</code></td><td>16-bit signed integer</td><td>💤</td></tr>
-<tr><td><code>int32</code></td><td>32-bit signed integer</td><td>💤</td></tr>
 <tr><td><code>int64</code></td><td>64-bit signed integer</td><td>✅</td></tr>
-<tr><td><code>isize</code></td><td>Platform-dependent signed integer</td><td>💤</td></tr>
-<tr><td><code>uint8</code></td><td>8-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>uint16</code></td><td>16-bit unsigned integer</td><td>💤</td></tr>
-<tr><td><code>uint32</code></td><td>32-bit unsigned integer</td><td>💤</td></tr>
 <tr><td><code>uint64</code></td><td>64-bit unsigned integer</td><td>✅</td></tr>
-<tr><td><code>usize</code></td><td>Platform-dependent unsigned integer</td><td>💤</td></tr>
-<tr><td><code>float32</code></td><td>32-bit floating-point number</td><td>💤</td></tr>
-<tr><td><code>float64</code></td><td>64-bit floating-point number</td><td>✅</td></tr>
-<tr><td><code>bool</code></td><td>Boolean value (<code>true</code> or <code>false</code>)</td><td>✅</td></tr>
+<tr><td><code>float64</code></td><td>64-bit floating point</td><td>✅</td></tr>
+<tr><td><code>bool</code></td><td>Boolean (<code>true</code>/<code>false</code>)</td><td>✅</td></tr>
 <tr><td><code>char</code></td><td>Unicode character</td><td>✅</td></tr>
-<tr><td><code>string</code></td><td>String</td><td>✅</td></tr>
-<tr><td><code>array</code></td><td>Array (syntax: <code>[YourType]</code>)</td><td>💭</td></tr>
+<tr><td><code>string</code></td><td>UTF-8 string</td><td>✅</td></tr>
 </tbody>
 </table>
 </div>
-<h2 id="6-functions"><a class="header" href="#6-functions">6. Functions</a></h2>
-<p>Functions in Atlas77 are defined using the <code>func</code> keyword, followed by the function name, parameters, return type, and
-body. The return type of a function is specified after the <code>-&gt;</code> symbol. For example:</p>
+<p>Other integer and float sizes (<code>int8</code>, <code>int16</code>, <code>int32</code>, <code>float32</code>, etc.) are planned but not yet fully implemented.</p>
+<h4 id="strings"><a class="header" href="#strings">Strings</a></h4>
+<p>Strings are UTF-8 encoded. Length is measured in bytes, not characters:</p>
 <pre><code class="language-cpp">import "std/io";
 
-fun add(x: int64, y: int64) -&gt; int64{
+fun main() {
+    let greeting: string = "Hello, Atlas!";
+    println(greeting);
+}
+</code></pre>
+<h3 id="4-functions"><a class="header" href="#4-functions">4. Functions</a></h3>
+<p>Functions are defined with the <code>fun</code> keyword and require explicit return types:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun add(x: int64, y: int64) -&gt; int64 {
     return x + y;
 }
 
-fun main() -&gt; int64 {
-    let result: int64 = add(5, 10);
-    print(result); // Output: 15
+fun greet(name: string) -&gt; unit {
+    println("Hello, " + name);
+}
+
+fun main() {
+    let result = add(5, 10);
+    println(result);  // Output: 15
+    
+    greet("Atlas");  // Output: Hello, Atlas
 }
 </code></pre>
-<h2 id="7-control-structures"><a class="header" href="#7-control-structures">7. Control Structures</a></h2>
-<p>Atlas77 supports several control structures, including <code>if</code> statements, <code>match</code> expression, <code>while</code> loops, and <code>for</code>
-loops. The syntax for these control structures is similar to other programming languages. For example:</p>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Control Structure</th><th>Description</th><th>State</th></tr>
-</thead>
-<tbody>
-<tr><td><code>if</code> statement</td><td>Conditional statement</td><td>✅</td></tr>
-<tr><td><code>match</code> expression</td><td>Pattern matching expression</td><td>💤</td></tr>
-<tr><td><code>while</code> loop</td><td>Loop with a condition</td><td>✅</td></tr>
-<tr><td><code>for</code> loop</td><td>Loop over a range or collection</td><td>💤</td></tr>
-</tbody>
-</table>
-</div>
+<p>Use <code>unit</code> as the return type for functions that don’t return a value.</p>
+<h3 id="5-control-flow"><a class="header" href="#5-control-flow">5. Control Flow</a></h3>
+<h4 id="if-else-statements"><a class="header" href="#if-else-statements">If-Else Statements</a></h4>
 <pre><code class="language-cpp">import "std/io";
 
-fun main() -&gt; int64 {
+fun main() {
     let x = 5;
 
     if x &gt; 0 {
-        print("x is positive");
+        println("x is positive");
     } else if x &lt; 0 {
-        print("x is negative");
+        println("x is negative");
     } else {
-        print("x is zero");
-    }
-    
-
-    let i = 0;
-    while i &lt; 5 {
-        print(i);
-        i += 1;
+        println("x is zero");
     }
 }
 </code></pre>
-<h2 id="8-the-standard-library"><a class="header" href="#8-the-standard-library">8. The standard library</a></h2>
-<p>Atlas77 comes with a relatively small standard library, which includes functions &amp; types for input/output, file
-handling, string &amp; list manipulation, time &amp; math functions. The standard library is imported using the <code>import</code>
-keyword, followed by the library name. For example:</p>
+<h4 id="while-loops"><a class="header" href="#while-loops">While Loops</a></h4>
 <pre><code class="language-cpp">import "std/io";
+
+fun main() {
+    let i = 0;
+    while i &lt; 5 {
+        println(i);
+        i = i + 1;
+    }
+}
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> For-loops and pattern matching are planned but not yet implemented.</p>
+</blockquote>
+<h3 id="6-arrays"><a class="header" href="#6-arrays">6. Arrays</a></h3>
+<p>Arrays store multiple values of the same type with fixed size:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() {
+    let numbers: [int64] = [1, 2, 3, 4, 5];
+    let i = 0;
+    while i &lt; 5 {
+        println(numbers[i]);
+        i = i + 1;
+    }
+}
+</code></pre>
+<p>You can also allocate arrays with specific sizes:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun main() {
+    // Allocate an array of 5 int64s
+    let numbers = new [int64; 5];
+    let i = 0;
+    while i &lt; 5 {
+        numbers[i] = i * 2;
+        println(numbers[i]);
+        i = i + 1;
+    }
+}
+</code></pre>
+<h3 id="7-structs"><a class="header" href="#7-structs">7. Structs</a></h3>
+<p>Structs group related data together:</p>
+<pre><code class="language-cpp">import "std/io";
+
+struct Person {
+public:
+    name: string;
+    age: int64;
+    
+    Person(name: string, age: int64) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    fun greet(&amp;this) {
+        println("Hello, my name is " + this.name);
+    }
+}
+
+fun main() {
+    let person = new Person("Alice", 30);
+    person.greet();  // Output: Hello, my name is Alice
+}
+</code></pre>
+<p>Fields are private by default. Use <code>public:</code> to make them accessible outside the struct.</p>
+<h3 id="8-enums"><a class="header" href="#8-enums">8. Enums</a></h3>
+<p>Enums define types with a set of named values:</p>
+<pre><code class="language-cpp">import "std/io";
+
+public enum Color {
+    Red = 1;
+    Yellow;      // Auto-assigned: 2
+    Green = 3;
+    Purple;      // Auto-assigned: 4
+    Blue = 5;
+}
+
+fun main() {
+    let color = Color::Red;
+    println(color);  // Output: 1
+}
+</code></pre>
+<h3 id="9-generics"><a class="header" href="#9-generics">9. Generics</a></h3>
+<p>Define generic structs and functions with type parameters:</p>
+<pre><code class="language-cpp">import "std/io";
+
+struct Box&lt;T&gt; {
+public:
+    value: T;
+    
+    Box(value: T) {
+        this.value = value;
+    }
+    
+    fun get(&amp;this) -&gt; &amp;const T {
+        return &amp;(this.value);
+    }
+}
+
+fun main() {
+    let int_box = new Box&lt;int64&gt;(42);
+    let val = int_box.get();
+    println(*val);  // Output: 42
+}
+</code></pre>
+<p>Type parameters must be explicitly specified at call sites.</p>
+<h3 id="10-memory-management-and-ownership"><a class="header" href="#10-memory-management-and-ownership">10. Memory Management and Ownership</a></h3>
+<p>Atlas77 uses an ownership system for safe memory management:</p>
+<pre><code class="language-cpp">import "std/io";
+
+struct Resource {
+public:
+    id: int64;
+    
+    Resource(id: int64) {
+        this.id = id;
+        println("Resource created");
+    }
+    
+    ~Resource() {
+        println("Resource destroyed");
+    }
+}
+
+fun main() {
+    let r = new Resource(1);
+    // Resource automatically destroyed at end of scope
+}
+// Output:
+// Resource created
+// Resource destroyed
+</code></pre>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>Use <code>new</code> to allocate memory</li>
+<li>Memory is automatically freed at end of scope (RAII)</li>
+<li>Values are moved by default (source becomes invalid)</li>
+<li>Values can be copied if they have a <code>_copy</code> method</li>
+</ul>
+<p>See <a href="#memory-model-and-ownership">Memory Model</a> for complete details.</p>
+<h3 id="11-error-handling"><a class="header" href="#11-error-handling">11. Error Handling</a></h3>
+<p>Atlas77 provides <code>optional&lt;T&gt;</code> and <code>expected&lt;T, E&gt;</code> for explicit error handling:</p>
+<pre><code class="language-cpp">import "std/io";
+import "std/optional";
+
+fun divide(a: int64, b: int64) -&gt; optional&lt;int64&gt; {
+    if b == 0 {
+        return optional&lt;int64&gt;::empty();
+    }
+    return optional&lt;int64&gt;::of(a / b);
+}
+
+fun main() {
+    let result = divide(10, 2);
+    if result.has_value() {
+        println(result.value());  // Output: 5
+    } else {
+        println("Division by zero!");
+    }
+}
+</code></pre>
+<p>See <a href="#error-handling-in-atlas-77">Error Handling</a> for comprehensive examples.</p>
+<h3 id="12-the-standard-library"><a class="header" href="#12-the-standard-library">12. The Standard Library</a></h3>
+<p>Atlas77 includes a standard library with essential functionality:</p>
+<pre><code class="language-cpp">import "std/io";        // Input/output
+import "std/fs";        // File system
+import "std/string";    // String utilities
+import "std/vector";    // Dynamic arrays
+import "std/optional";  // Optional values
+import "std/expected";  // Error handling
+import "std/math";      // Math functions
+import "std/time";      // Time operations
 
 fun main() {
     println("Hello, World!");
 }
 </code></pre>
-<p>Check out the current state of the <a href="#standard-library">standard library</a>.</p>
-<h2 id="9-arrays"><a class="header" href="#9-arrays">9. Arrays</a></h2>
-<p>Arrays in Atlas77 are used to store multiple values of the same type. They are defined using square brackets <code>[]</code>. For example:</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() -&gt; int64 {
-    let numbers: [int64] = [1, 2, 3, 4, 5];
-    let i = 0;
-    while i &lt; 5 {
-        print(numbers[i]);
-        i += 1;
-    }
-}
-</code></pre>
-<p>If you want, you can also allocate an empty array with a specific size:</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() -&gt; int64 {
-    let size: int64 = 5;
-    // Allocates an array of 5 int64s initialized to 0
-    let numbers: [int64] = new [int64; size];
-    let i = 0;
-    while i &lt; size {
-        numbers[i] = i * 2; // Assign values
-        print(numbers[i]);
-        i += 1;
-    }
-}
-</code></pre>
-<h2 id="10-enums"><a class="header" href="#10-enums">10. Enums</a></h2>
-<p>Enums in Atlas77 are used to define a type that can have a set of named values. They are defined using the <code>enum</code> keyword. For example:</p>
-<pre><code class="language-cpp">public enum Color {
-    Red = 1;
-    Yellow;
-    Green = 3;
-    Purple;
-    Blue = 5;
-}
-</code></pre>
-<h2 id="11-class--structs"><a class="header" href="#11-class--structs">11. Class &amp; Structs</a></h2>
-<blockquote>
-<p>WIP</p>
-</blockquote>
-<p>Current state of <code>std/fs</code> would be a good enough example of how classes/structs work in Atlas77:</p>
-<pre><code class="language-cpp">private extern read_dir(path: string) -&gt; [string];
-private extern read_file(path: string) -&gt; string;
-private extern write_file(path: string, content: string);
-private extern remove_file(path: string);
-private extern file_exists(path: string) -&gt; bool;
-private extern close_file(path: string);
-
-//NB: This struct works for now, but because of the lack of move/copy semantics in Atlas,
-// it may lead to unexpected behavior.
-public struct File {
-private:
-    content: string;
-public:
-    path: string;
-public:
-    /// Creates a new File object with the given path
-    /// Note: The file is not opened until the open() method is called
-    File(path: string) {
-        this.content = "";
-        this.path = path;
-    }
-
-    ~File() {
-        //Following the RAII pattern, we close the file when it goes out of scope
-        this.close();
-    }
-
-    fun read(this) -&gt; string {
-        let content = read_file(this.path);
-        this.content = content;
-        return this.content;
-    }
-
-    fun open(this) {
-        this.content = read_file(this.path);
-        return;
-    }
-
-    fun close(this) {
-        close_file(this.path);
-        return;
-    }
-
-    fun write(this, content: string) {
-        write_file(this.path, content);
-        return;
-    }
-
-    fun remove(this) {
-        remove_file(this.path);
-        return;
-    }
-
-    fun exists(this) -&gt; bool {
-        return file_exists(this.path);
-    }
-
-    fun read_dir(this, path: string) -&gt; [string] {
-        return read_dir(path);
-    }
-
-    fun read_file(this, path: string) -&gt; string {
-        return read_file(path);
-    }
-}
-</code></pre>
-<h2 id="12-generics"><a class="header" href="#12-generics">12. Generics</a></h2>
-<p>As of now you can define generic for external functions &amp; structs. For example:</p>
-<pre><code class="language-cpp">extern identity&lt;T&gt;(value: T) -&gt; T;
-struct Box&lt;T&gt; {
-    value: T;
-    Box(value: T) {
-        self.value = value;
-    }
-    fun get_value(this) -&gt; T {
-        return this.value;
-    }
-}
-</code></pre>
-<h2 id="13-concepts"><a class="header" href="#13-concepts">13. Concepts</a></h2>
-<blockquote>
-<p>The name is still to be decided</p>
-</blockquote>
+<p>Check out the <a href="#standard-library">Standard Library</a> for complete documentation.</p>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<p>Now that you understand the basics, explore these topics:</p>
+<ul>
+<li><strong><a href="#hello-world">Hello, World!</a></strong> – Detailed walkthrough of your first program</li>
+<li><strong><a href="#programming-a-guessing-game-in-atlas77">Guessing Game</a></strong> – Build a fun interactive program</li>
+<li><strong><a href="#language-reference">Language Reference</a></strong> – Complete language syntax</li>
+<li><strong><a href="#memory-model-and-ownership">Memory Model</a></strong> – Understand ownership and copy semantics</li>
+<li><strong><a href="#error-handling-in-atlas-77">Error Handling</a></strong> – Master optional and expected types</li>
+<li><strong><a href="#standard-library">Standard Library</a></strong> – Explore available modules</li>
+</ul>
+<h2 id="current-limitations"><a class="header" href="#current-limitations">Current Limitations</a></h2>
+<p>Atlas77 is actively developed. Some features are not yet available:</p>
+<ul>
+<li>❌ Multi-line comments</li>
+<li>❌ For-loops (range-based iteration)</li>
+<li>❌ Pattern matching</li>
+<li>❌ Break/continue statements</li>
+<li>❌ First-class functions and closures</li>
+<li>❌ Async/await</li>
+<li>❌ Traits/interfaces</li>
+</ul>
+<p>These features are planned for future releases. Check the <a href="#atlas-77-language-roadmap">Roadmap</a> for more details.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
@@ -537,7 +573,7 @@ cd guessing_game
 <h1 id="language-reference"><a class="header" href="#language-reference">Language Reference</a></h1>
 <p>This document provides a comprehensive reference for Atlas 77 syntax, semantics, and language features.</p>
 <h2 id="syntax-overview"><a class="header" href="#syntax-overview">Syntax Overview</a></h2>
-<h3 id="comments-1"><a class="header" href="#comments-1">Comments</a></h3>
+<h3 id="comments"><a class="header" href="#comments">Comments</a></h3>
 <p>Atlas 77 supports single-line comments only:</p>
 <pre><code class="language-cpp">// This is a single-line comment
 let x: int64 = 42; // Comments can appear at end of line
@@ -550,7 +586,7 @@ let x: int64 = 42; // Comments can appear at end of line
 <p>Reserved keywords in Atlas 77 include: <code>let</code>, <code>const</code>, <code>fun</code>, <code>struct</code>, <code>import</code>, <code>return</code>, <code>if</code>, <code>else</code>, <code>while</code>, <code>for</code>, <code>new</code>, <code>delete</code>, <code>public</code>, <code>private</code>, <code>this</code>, and others.</p>
 <p>Refer to <a href="#reserved-keywords">Reserved Keywords</a> for the complete list.</p>
 <h2 id="variables-and-constants"><a class="header" href="#variables-and-constants">Variables and Constants</a></h2>
-<p>Variables are declared with <code>let</code> and constants with <code>const</code>. Type annotations are <strong>mandatory</strong>:</p>
+<p>Variables are declared with <code>let</code> and constants with <code>const</code>. Type annotations are <strong>mandatory</strong> for constants, while the compiler can infer types for mutable variables. It’s mandatory for the sake of readability.</p>
 <pre><code class="language-cpp">let x: int64 = 42;
 let name: string = "Atlas";
 const PI: float64 = 3.14159;
@@ -560,7 +596,7 @@ let result = 10; // Types can be inferred for initialized variables.
 </code></pre>
 <h2 id="types"><a class="header" href="#types">Types</a></h2>
 <p>Atlas 77 is statically typed and strongly typed. Here are the fundamental types:</p>
-<h3 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h3>
+<h3 id="primitive-types-1"><a class="header" href="#primitive-types-1">Primitive Types</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -584,7 +620,11 @@ let result = 10; // Types can be inferred for initialized variables.
 </tbody>
 </table>
 </div>
-<h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Some primitive types (like <code>int8</code>, <code>int16</code>, <code>float32</code>, etc.) are planned but not yet fully implemented.</p>
+</blockquote>
+<h3 id="strings-1"><a class="header" href="#strings-1">Strings</a></h3>
 <p>Strings are UTF-8 encoded and their length is measured in <strong>bytes</strong>, not characters:</p>
 <pre><code class="language-cpp">let greeting: string = "Hello, Atlas!";
 </code></pre>
@@ -599,6 +639,11 @@ let items: [string] = ["apple", "banana", "cherry"];
 </code></pre>
 <h3 id="generics"><a class="header" href="#generics">Generics</a></h3>
 <p>Atlas 77 supports parametric types (generics) with <strong>explicit type parameters</strong> (no type inference):</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>As of v0.7.0, type inference for generics is not supported. Type parameters must be explicitly specified.</p>
+<p>Additionally, generic parameters name can only be a single uppercase letter (e.g., <code>T</code>, <code>U</code>, <code>V</code>). This is only temporary and will be relaxed in future versions.</p>
+</blockquote>
 <pre><code class="language-cpp">struct Box&lt;T&gt; {
 public:
     value: T;
@@ -612,16 +657,17 @@ fun get_value&lt;T&gt;(box: Box&lt;T&gt;) -&gt; T {
 }
 
 let int_box: Box&lt;int64&gt; = new Box&lt;int64&gt;(42);
-let value: int64 = get_value::&lt;int64&gt;(int_box);
+let value: int64 = get_value&lt;int64&gt;(int_box);
 </code></pre>
-<p>Type parameters must be explicitly specified at call sites. For more details, see <a href="generics.html">Generics</a>.</p>
+<p>Type parameters must be explicitly specified at call sites. For more details, see <a href="#generics-1">Generics</a>.</p>
 <h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
 <p>Functions are declared with <code>fun</code> keyword and require explicit return types:</p>
 <pre><code class="language-cpp">fun add(a: int64, b: int64) -&gt; int64 {
     return a + b;
 }
 
-fun greet(name: string) -&gt; unit {
+// Function returning nothing (unit) doesn't require to specify return type
+fun greet(name: string) {
     println("Hello, " + name);
 }
 
@@ -712,37 +758,60 @@ public:
 <h3 id="reference-syntax"><a class="header" href="#reference-syntax">Reference Syntax</a></h3>
 <pre><code class="language-cpp">let x: int64 = 42;
 let mutable_ref: &amp;int64 = &amp;x;      // Mutable reference
-let immutable_ref: &amp;const int64 = &amp;const x;  // Immutable reference
+let immutable_ref: &amp;const int64 = &amp;x;  // Immutable reference
 </code></pre>
 <h3 id="reference-behavior"><a class="header" href="#reference-behavior">Reference Behavior</a></h3>
 <ul>
 <li>References are trivially copyable and are copied implicitly</li>
-<li>References are <strong>not rebindable</strong> (may change in future versions)</li>
 <li>References cannot be null; all references point to valid values</li>
-<li>Taking a reference: <code>&amp;my_var</code> (mutable), <code>&amp;const my_var</code> (immutable)</li>
+<li>The mutability or immutability of the reference is determined at declaration time. <code>&amp;my_var</code> just creates a reference and based on the context it is assigned to, it can be mutable or immutable.</li>
 </ul>
 <h2 id="copy-and-move-semantics"><a class="header" href="#copy-and-move-semantics">Copy and Move Semantics</a></h2>
+<p>Atlas77 uses an ownership system where values can be either copied or moved. See <a href="#memory-model-and-ownership">Memory Model</a> for comprehensive details.</p>
 <h3 id="copy-semantics-implicit"><a class="header" href="#copy-semantics-implicit">Copy Semantics (Implicit)</a></h3>
-<p>Primitive types and references are <strong>implicitly copyable</strong>:</p>
+<p>Primitive types, strings, and references are <strong>implicitly copyable</strong>:</p>
 <pre><code class="language-cpp">let a: int64 = 10;
 let b: int64 = a;  // 'a' is copied; both 'a' and 'b' exist
+
+let s1: string = "hello";
+let s2: string = s1;  // Strings are copyable
 
 let ref_a: &amp;int64 = &amp;a;
 let ref_b: &amp;int64 = ref_a;  // Reference is copied
 </code></pre>
 <h3 id="move-semantics-default-for-custom-types"><a class="header" href="#move-semantics-default-for-custom-types">Move Semantics (Default for Custom Types)</a></h3>
-<p>For custom structs, values are <strong>moved by default</strong> unless the struct implements a <code>Copy</code> constructor:</p>
+<p>For custom structs, values are <strong>moved by default</strong> unless the struct implements a <code>_copy</code> method:</p>
 <pre><code class="language-cpp">struct Resource {
 public:
     data: string;
+    
+    Resource(data: string) {
+        this.data = data;
+    }
 }
 
-let r1: Resource = Resource("data");
-let r2: Resource = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
+let r1 = new Resource("data");
+let r2 = r1;  // 'r1' is moved to 'r2'; 'r1' no longer accessible
 // Using 'r1' here would be a compile error
 </code></pre>
-<h3 id="copy-constructor-opt-in"><a class="header" href="#copy-constructor-opt-in">Copy Constructor (Opt-in)</a></h3>
-<p>To make a custom type copyable, implement a <code>Copy</code> constructor:</p>
+<h3 id="auto-generated-copy-constructor"><a class="header" href="#auto-generated-copy-constructor">Auto-Generated Copy Constructor</a></h3>
+<p>The compiler automatically generates a <code>_copy</code> method for structs where the number of fields equals the number of constructor parameters:</p>
+<pre><code class="language-cpp">struct Point {
+public:
+    x: int64;
+    y: int64;
+    
+    Point(x: int64, y: int64) {  // 2 params, 2 fields - auto-copy!
+        this.x = x;
+        this.y = y;
+    }
+}
+
+let p1 = new Point(10, 20);
+let p2 = p1;  // Copied automatically
+</code></pre>
+<h3 id="manual-copy-constructor"><a class="header" href="#manual-copy-constructor">Manual Copy Constructor</a></h3>
+<p>To make a custom type copyable or customize copy behavior, implement a <code>_copy</code> method:</p>
 <pre><code class="language-cpp">struct CopyableData {
 public:
     value: int64;
@@ -751,17 +820,17 @@ public:
         this.value = val;
     }
     
-    // Copy constructor (opt-in copyability)
-    fun Copy(this: CopyableData) -&gt; CopyableData {
-        return CopyableData(this.value);
+    // Manual copy constructor
+    fun _copy(&amp;const this) -&gt; CopyableData {
+        return new CopyableData(*(this.value));
     }
 }
 
-let d1: CopyableData = CopyableData(100);
-let d2: CopyableData = d1;  // Now 'd1' is copied, both exist
+let d1 = new CopyableData(100);
+let d2 = d1;  // Now 'd1' is copied, both exist
 </code></pre>
 <blockquote>
-<p>[!Warning] The copyability of all standard library types is uncertain. Treat standard library types as potentially non-copyable until verified.</p>
+<p><strong>Note:</strong> The compiler automatically generates <code>_copy</code> for most simple structs. See <a href="#memory-model-and-ownership">Memory Model</a> for complete rules.</p>
 </blockquote>
 <h2 id="memory-management"><a class="header" href="#memory-management">Memory Management</a></h2>
 <p>Atlas 77 uses <strong>manual memory management</strong> with automatic cleanup at scope boundaries.</p>
@@ -795,63 +864,66 @@ delete ptr;
 <p>The current runtime is marked as deprecated. Precise semantics of destructors and scope-based cleanup may evolve.</p>
 </blockquote>
 <h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
-<p>Atlas 77 provides <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.</p>
-<h3 id="option-type"><a class="header" href="#option-type">Option Type</a></h3>
-<pre><code class="language-cpp">struct Option&lt;T&gt; {
-public:
-    has_value: bool;
-    value: T;  // Only valid if has_value is true
-}
+<p>Atlas 77 provides <code>optional&lt;T&gt;</code> and <code>expected&lt;T, E&gt;</code> types for error handling. There is no implicit error propagation (no try/? operator); handle errors explicitly.</p>
+<h3 id="optional-type"><a class="header" href="#optional-type">optional Type</a></h3>
+<p>The <code>optional&lt;T&gt;</code> type represents a value that may or may not exist:</p>
+<pre><code class="language-cpp">import "std/optional";
 
-fun find_user(id: int64) -&gt; Option&lt;User&gt; {
+fun find_user(id: int64) -&gt; optional&lt;User&gt; {
     if id &gt; 0 {
-        return Option(true, User(id));
+        let user = new User(id);
+        return optional&lt;User&gt;::of(user);
     } else {
-        return Option(false, User(0));
+        return optional&lt;User&gt;::empty();
     }
 }
 
-// Using Option
-let user_opt: Option&lt;User&gt; = find_user(1);
-if user_opt.has_value {
+// Using optional
+let user_opt = find_user(1);
+if user_opt.has_value() {
+    let user = user_opt.value();
     println("Found user");
 } else {
     println("User not found");
 }
 </code></pre>
-<h3 id="result-type"><a class="header" href="#result-type">Result Type</a></h3>
-<pre><code class="language-cpp">struct Result&lt;T, E&gt; {
-public:
-    is_ok: bool;
-    ok_value: T;    // Only valid if is_ok is true
-    err_value: E;   // Only valid if is_ok is false
-}
+<h3 id="expected-type"><a class="header" href="#expected-type">expected Type</a></h3>
+<p>The <code>expected&lt;T, E&gt;</code> type represents either a success value or an error:</p>
+<pre><code class="language-cpp">import "std/expected";
 
-fun parse_int(s: string) -&gt; Result&lt;int64, string&gt; {
+fun parse_int(s: string) -&gt; expected&lt;int64, string&gt; {
     // Try to parse
-    if success {
-        return Result(true, parsed_value, "");
+    if is_valid_number(s) {
+        let number = convert_to_int(s);
+        return expected&lt;int64, string&gt;::expect(number);
     } else {
-        return Result(false, 0, "Failed to parse");
+        return expected&lt;int64, string&gt;::unexpected("Failed to parse");
     }
 }
 
-// Using Result
-let result: Result&lt;int64, string&gt; = parse_int("42");
-if result.is_ok {
-    let number: int64 = result.ok_value;
-    println("Parsed: " + number);
+// Using expected
+let result = parse_int("42");
+if result.is_expected() {
+    let number = result.expected_value();
+    println(number);
 } else {
-    println("Error: " + result.err_value);
+    let error = result.unexpected_value();
+    println(error);
 }
 </code></pre>
-<h3 id="unwrapping"><a class="header" href="#unwrapping">Unwrapping</a></h3>
-<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
-let number: int64 = result.ok_value; // Unwrap: use value directly (risky!)
+<h3 id="value-extraction-with-defaults"><a class="header" href="#value-extraction-with-defaults">Value Extraction with Defaults</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+import "std/expected";
+
+// optional with default
+let value = some_optional.value_or(42);
+
+// expected with default
+let value = some_expected.expected_value_or(0);
 </code></pre>
-<blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>There is no automatic error propagation syntax (<code>try</code> / <code>?</code> operator) by design to maintain explicit control and avoid “hidden magic” in error handling.</p>
+<blockquote>
+<p><strong>Note:</strong><br>There is no automatic error propagation syntax (<code>try</code> / <code>?</code> operator) by design to maintain explicit control and avoid “hidden magic” in error handling.</p>
+<p>See <a href="#error-handling-in-atlas-77">Error Handling</a> for comprehensive examples and best practices.</p>
 </blockquote>
 <h2 id="modules-and-imports"><a class="header" href="#modules-and-imports">Modules and Imports</a></h2>
 <h3 id="current-import-system"><a class="header" href="#current-import-system">Current Import System</a></h3>
@@ -885,7 +957,7 @@ fun main() -&gt; unit {
     // ...
 }
 </code></pre>
-<h3 id="while-loops"><a class="header" href="#while-loops">While Loops</a></h3>
+<h3 id="while-loops-1"><a class="header" href="#while-loops-1">While Loops</a></h3>
 <pre><code class="language-cpp">while x &lt; 10 {
     x = x + 1;
 }
@@ -937,37 +1009,38 @@ fun main() -&gt; unit {
 <li><a href="#standard-library">Standard Library</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="memory-model"><a class="header" href="#memory-model">Memory Model</a></h1>
-<p>Atlas 77 employs <strong>manual memory management</strong> with <strong>automatic scope-based cleanup</strong>. This document explains how memory allocation, deallocation, and ownership work.</p>
+<h1 id="memory-model-and-ownership"><a class="header" href="#memory-model-and-ownership">Memory Model and Ownership</a></h1>
+<p>Atlas77 uses an <strong>ownership system</strong> similar to Rust to manage memory safely and automatically. This document explains how memory allocation, ownership, move semantics, and copy semantics work in Atlas77.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p><strong>Key Principles:</strong></p>
+<ul>
+<li>Every variable owns its value</li>
+<li>Ownership can be <strong>moved</strong> (transferred) or <strong>copied</strong> (duplicated)</li>
+<li>When a value is moved, the original owner becomes invalid</li>
+<li>When a value is copied, both the original and the copy remain valid</li>
+<li>Automatic memory management through RAII and destructors</li>
+</ul>
 <h2 id="allocation-with-new"><a class="header" href="#allocation-with-new">Allocation with <code>new</code></a></h2>
 <p>Memory is allocated using the <code>new</code> keyword:</p>
 <pre><code class="language-cpp">struct Person {
 public:
     name: string;
-    age: int32;
+    age: int64;
     
-    Person(name: string, age: int32) {
+    Person(name: string, age: int64) {
         this.name = name;
         this.age = age;
     }
 }
 
-let person: &amp;Person = &amp;new Person("Alice", 30);
+let person = new Person("Alice", 30);
 </code></pre>
-<h2 id="deallocation-with-delete"><a class="header" href="#deallocation-with-delete">Deallocation with <code>delete</code></a></h2>
-<p>Memory is freed using the <code>delete</code> keyword:</p>
-<pre><code class="language-cpp">delete person;  // Free memory and call destructor
-</code></pre>
-<p>The <code>delete</code> operation:</p>
-<ol>
-<li>Calls the destructor (if one exists)</li>
-<li>Frees the allocated memory</li>
-<li>Invalidates the reference</li>
-</ol>
 <h2 id="automatic-scope-based-cleanup-raii"><a class="header" href="#automatic-scope-based-cleanup-raii">Automatic Scope-Based Cleanup (RAII)</a></h2>
-<p>The compiler automatically inserts <code>delete</code> instructions at the end of each scope for variables that haven’t been moved yet:</p>
-<pre><code class="language-cpp">fun process_file() -&gt; unit {
-    let file: File = File("data.txt");
+<p>The compiler automatically inserts <code>delete</code> instructions at the end of each scope for variables that still own their values:</p>
+<pre><code class="language-cpp">import "std/fs";
+
+fun process_file() -&gt; unit {
+    let file = new File("data.txt");
     
     // ... use file ...
     
@@ -979,87 +1052,395 @@ let person: &amp;Person = &amp;new Person("Alice", 30);
 <li>Resources are released automatically at scope exit via destructors</li>
 </ul>
 <h3 id="example-file-resource-management"><a class="header" href="#example-file-resource-management">Example: File Resource Management</a></h3>
-<pre><code class="language-cpp">struct File {
-    path: string;
-    is_open: bool;
+<pre><code class="language-cpp">import "std/fs";
+
+struct FileHandler {
+public:
+    file: File;
     
-    // Constructor acquires resource
-    File(path: string) {
-        this.path = path;
-        this.is_open = true;
-        // Open file
+    FileHandler(path: string) {
+        this.file = new File(path);
+        println("File opened");
     }
     
-    // Destructor releases resource
-    fun ~File(this: File) -&gt; unit {
-        if this.is_open {
-            // Close file
-            this.is_open = false;
-        }
+    ~FileHandler() {
+        println("File closed");
+        delete this.file;
     }
 }
 
 fun read_and_process() -&gt; unit {
-    let file: File = File("input.txt");
-    let content: string = file.read();
+    let handler = new FileHandler("input.txt");
     
-    // ...
+    // ... use handler ...
     
-} // File destructor called here; file is automatically closed
+} // FileHandler destructor called automatically
 </code></pre>
-<h2 id="ownership-and-move-semantics"><a class="header" href="#ownership-and-move-semantics">Ownership and Move Semantics</a></h2>
-<p>Atlas 77 uses <strong>move semantics by default</strong> for custom types. When you assign a value, ownership transfers to the new variable:</p>
-<pre><code class="language-cpp">struct Box&lt;T&gt; {
+<h2 id="ownership-model"><a class="header" href="#ownership-model">Ownership Model</a></h2>
+<p>Every variable in Atlas77 owns its value. When a variable goes out of scope, its destructor is automatically called:</p>
+<pre><code class="language-cpp">fun example() {
+    let x = new MyStruct(42);
+    // x owns the MyStruct instance
+    
+    // ... use x ...
+    
+} // x goes out of scope - destructor called automatically
+</code></pre>
+<h3 id="transferring-ownership"><a class="header" href="#transferring-ownership">Transferring Ownership</a></h3>
+<p>When you pass a value to a function or assign it to another variable, ownership can be transferred:</p>
+<pre><code class="language-cpp">fun consume(obj: MyStruct) {
+    // obj now owns the value
+} // obj destroyed here
+
+fun main() {
+    let x = new MyStruct(42);
+    consume(x);  // Ownership transferred to consume()
+    // x is no longer valid here!
+}
+</code></pre>
+<h2 id="copy-eligibility"><a class="header" href="#copy-eligibility">Copy Eligibility</a></h2>
+<p>A type is <strong>copyable</strong> if and only if:</p>
+<ol>
+<li><strong>It’s a primitive type</strong>: <code>int64</code>, <code>float64</code>, <code>uint64</code>, <code>bool</code>, <code>char</code></li>
+<li><strong>It’s a reference</strong>: <code>&amp;T</code> or <code>&amp;const T</code> (references are just pointers)</li>
+<li><strong>It’s a string</strong>: Built-in <code>string</code> type (copyable but needs freeing)</li>
+<li><strong>It has auto-generated copy</strong>: Structs where the number of fields equals the number of constructor parameters</li>
+<li><strong>It defines a <code>_copy</code> method</strong>: Custom structs with an explicit copy constructor</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> Auto-Generated Copy Constructor (v0.7.0)<br>The compiler automatically generates a <code>_copy</code> method for structs where <code>#fields == #constructor_args</code>.
+This is a simple heuristic that works for most cases but can cause issues with complex types.
+In v0.7.1, this will be replaced with proper copy constructor generation and better semantics.</p>
+</blockquote>
+<h3 id="primitive-types-2"><a class="header" href="#primitive-types-2">Primitive Types</a></h3>
+<p>Primitives are always copied - they’re too cheap to move:</p>
+<pre><code class="language-cpp">let a: int64 = 42;
+let b: int64 = a;  // Copy (a is still valid)
+let c: int64 = a;  // Another copy (a still valid)
+
+println(a);  // ✓ Works - a is still valid
+</code></pre>
+<h3 id="references-1"><a class="header" href="#references-1">References</a></h3>
+<p>References are lightweight pointers that don’t own the data:</p>
+<pre><code class="language-cpp">fun borrow(obj: &amp;const MyStruct) {
+    // obj is just a reference - doesn't own the data
+    println(obj.value);
+}
+
+fun main() {
+    let x = new MyStruct(42);
+    borrow(&amp;x);  // Pass reference
+    println(x.value);  // ✓ x is still valid
+}
+</code></pre>
+<h3 id="strings-2"><a class="header" href="#strings-2">Strings</a></h3>
+<p>Strings are copyable but still need memory management:</p>
+<pre><code class="language-cpp">let s1 = "hello";
+let s2 = s1;  // Copy (both strings valid)
+println(s1);  // ✓ Works
+println(s2);  // ✓ Works
+// Both destructors will be called
+</code></pre>
+<h3 id="auto-generated-copy-most-structs"><a class="header" href="#auto-generated-copy-most-structs">Auto-Generated Copy (Most Structs)</a></h3>
+<p>Most simple structs automatically get a copy constructor:</p>
+<pre><code class="language-cpp">struct Point {
 public:
-    value: T;
+    x: int64;
+    y: int64;
+
+    Point(x: int64, y: int64) {  // 2 params
+        this.x = x;
+        this.y = y;
+    }
+    // Compiler auto-generates _copy because: 2 fields == 2 params ✓
 }
 
-let box1: Box&lt;int64&gt; = Box(42);
-let box2: Box&lt;int64&gt; = box1;  // Ownership moves from box1 to box2
-
-// box1 is no longer accessible; moved values cannot be used
-// println(box1.value);  // ERROR: box1 has been moved
+fun main() {
+    let p1 = new Point(10, 20);
+    let p2 = p1;  // Copy (auto-generated)
+    
+    println(p1.x);  // ✓ Works
+    println(p2.x);  // ✓ Works
+}
 </code></pre>
-<p>Once a value is moved, the original variable becomes inaccessible. This prevents use-after-free bugs:</p>
-<pre><code class="language-cpp">fun take_ownership(b: Box&lt;int64&gt;) -&gt; unit {
-    println(b.value);
-    // b is deleted at end of scope
+<h3 id="non-copyable-types"><a class="header" href="#non-copyable-types">Non-Copyable Types</a></h3>
+<p>A type is non-copyable when the constructor parameters don’t match the field count:</p>
+<pre><code class="language-cpp">struct Resource {
+public:
+    id: int64;
+    handle: int64;  // 2 fields
+    
+    Resource(id: int64) {  // 1 param - NO auto-copy generated!
+        this.id = id;
+        this.handle = allocate_handle(id);  // Computed field
+        println("Resource acquired");
+    }
+    
+    ~Resource() {
+        println("Resource released");
+    }
+    
+    // No _copy method - this type is NOT copyable
 }
 
-let box: Box&lt;int64&gt; = Box(100);
-take_ownership(box);  // Ownership transfers to function
-// println(box.value);  // ERROR: box has been moved
+fun main() {
+    let r1 = new Resource(1);
+    let r2 = r1;  // MOVE (r1 becomes invalid)
+    
+    // println(r1.id);  // ✗ ERROR: r1 was moved
+    println(r2.id);     // ✓ Works
+    
+} // Only r2's destructor is called
 </code></pre>
-<h2 id="copy-semantics"><a class="header" href="#copy-semantics">Copy Semantics</a></h2>
-<h3 id="implicit-copy-primitive-types-and-references"><a class="header" href="#implicit-copy-primitive-types-and-references">Implicit Copy (Primitive Types and References)</a></h3>
-<p>Primitive types and references are implicitly copyable:</p>
-<pre><code class="language-cpp">let x: int64 = 42;
-let y: int64 = x;  // 'x' is copied; both x and y exist
-
-let ref_x: &amp;int64 = &amp;x;
-let ref_y: &amp;int64 = ref_x;  // Reference is copied
-</code></pre>
-<h3 id="opt-in-copy-custom-types"><a class="header" href="#opt-in-copy-custom-types">Opt-In Copy (Custom Types)</a></h3>
-<p>To make a custom type copyable, implement a <strong>Copy constructor</strong>:</p>
-<pre><code class="language-cpp">struct MyData {
+<h3 id="manual-copy-constructors"><a class="header" href="#manual-copy-constructors">Manual Copy Constructors</a></h3>
+<p>You can always define <code>_copy</code> manually for full control:</p>
+<pre><code class="language-cpp">struct CustomCopy {
 public:
     value: int64;
     
-    MyData(val: int64) {
-        this.value = val;
+    CustomCopy(value: int64) {
+        this.value = value;
     }
-    
-    // Copy constructor
-    fun Copy(this: MyData) -&gt; MyData {
-        return MyData(this.value);
+
+    // Manual copy constructor
+    fun _copy(&amp;const this) -&gt; CustomCopy {
+        println("Custom copy!");
+        let result = new CustomCopy(*(this.value) * 2);  // Custom logic
+        return result;
     }
 }
 
-let data1: MyData = MyData(100);
-let data2: MyData = data1;  // Now data1 is copied; both data1 and data2 exist
+fun main() {
+    let c1 = new CustomCopy(10);
+    let c2 = c1;  // Uses manual _copy
+    
+    println(c1.value);  // 10
+    println(c2.value);  // 20 (custom logic applied)
+}
 </code></pre>
+<h2 id="move-semantics"><a class="header" href="#move-semantics">Move Semantics</a></h2>
+<p><strong>Move</strong> transfers ownership from one variable to another. The source becomes invalid:</p>
+<pre><code class="language-cpp">struct Resource {
+public:
+    id: int64;
+    
+    Resource(id: int64) {
+        this.id = id;
+        println("Resource acquired");
+    }
+    
+    ~Resource() {
+        println("Resource released");
+    }
+}
+
+fun main() {
+    let r1 = new Resource(1);
+    let r2 = r1;  // MOVE (r1 becomes invalid)
+    
+    // println(r1.id);  // ✗ ERROR: r1 was moved
+    println(r2.id);     // ✓ Works
+    
+} // Only r2's destructor is called
+</code></pre>
+<h3 id="when-moves-happen"><a class="header" href="#when-moves-happen">When Moves Happen</a></h3>
+<p>Moves occur when:</p>
+<ul>
+<li>A non-copyable value is used (passed to function, assigned, returned)</li>
+<li>A copyable value is used for the <strong>last time</strong> (optimization)</li>
+</ul>
+<h2 id="copy-semantics"><a class="header" href="#copy-semantics">Copy Semantics</a></h2>
+<p><strong>Copy</strong> creates a new independent value via the <code>_copy</code> method:</p>
+<pre><code class="language-cpp">struct Data {
+public:
+    value: int64;
+    
+    Data(value: int64) {
+        this.value = value;
+    }
+    
+    fun _copy(&amp;const this) -&gt; Data {
+        println("Copying!");
+        let result = new Data(*(this.value));
+        return result;
+    }
+}
+
+fun main() {
+    let d1 = new Data(100);
+    
+    let d2 = d1;  // COPY (both valid)
+    d2.value = 200;
+    
+    println(d1.value);  // Prints: 100
+    println(d2.value);  // Prints: 200
+    
+} // Both d1 and d2 destructors are called
+</code></pre>
+<h3 id="copy-vs-move-for-copyable-types"><a class="header" href="#copy-vs-move-for-copyable-types">Copy vs Move for Copyable Types</a></h3>
+<p>Even copyable types can be moved if it’s the last use (optimization):</p>
+<pre><code class="language-cpp">fun process(data: Data) {
+    println(data.value);
+}
+
+fun main() {
+    let d = new Data(42);
+    
+    process(d);  // MOVE (last use - no copy needed!)
+    // d is invalid here
+}
+</code></pre>
+<p>But if you use it again, it will copy:</p>
+<pre><code class="language-cpp">fun main() {
+    let d = new Data(42);
+    
+    process(d);        // COPY (not last use)
+    println(d.value);  // ✓ d is still valid
+    
+} // d's destructor called here
+}
+</code></pre>
+<h2 id="common-patterns"><a class="header" href="#common-patterns">Common Patterns</a></h2>
+<h3 id="pattern-1-borrowing-for-reads"><a class="header" href="#pattern-1-borrowing-for-reads">Pattern 1: Borrowing for Reads</a></h3>
+<pre><code class="language-cpp">fun print_value(obj: &amp;const MyStruct) {
+    println(obj.value);
+}
+
+fun main() {
+    let obj = new MyStruct(42);
+    print_value(&amp;obj);  // Borrow
+    print_value(&amp;obj);  // Borrow again
+    // obj still valid
+}
+</code></pre>
+<h3 id="pattern-2-mutable-borrowing"><a class="header" href="#pattern-2-mutable-borrowing">Pattern 2: Mutable Borrowing</a></h3>
+<pre><code class="language-cpp">fun modify(obj: &amp;MyStruct) {
+    obj.value = obj.value + 1;
+}
+
+fun main() {
+    let obj = new MyStruct(42);
+    modify(&amp;obj);  // Mutable borrow
+    println(obj.value);  // 43
+}
+</code></pre>
+<h3 id="pattern-3-return-values-transfer-ownership"><a class="header" href="#pattern-3-return-values-transfer-ownership">Pattern 3: Return Values Transfer Ownership</a></h3>
+<pre><code class="language-cpp">import "std/string";
+
+fun create_message(text: string) -&gt; String {
+    let msg = new String(text);
+    return msg;  // Ownership transferred to caller
+}
+
+fun main() {
+    let my_msg = create_message("Test");
+    println(my_msg.s);  // ✓ Works
+}
+</code></pre>
+<h2 id="common-pitfalls"><a class="header" href="#common-pitfalls">Common Pitfalls</a></h2>
+<h3 id="pitfall-1-use-after-move"><a class="header" href="#pitfall-1-use-after-move">Pitfall 1: Use After Move</a></h3>
+<pre><code class="language-cpp">fun consume(obj: Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    consume(r);  // r moved
+    
+    println(r.id);  // ✗ ERROR: use after move
+}
+</code></pre>
+<p><strong>Solution:</strong> Use references if you need to keep the value:</p>
+<pre><code class="language-cpp">fun consume(obj: &amp;Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    consume(&amp;r);  // Borrow
+    println(r.id);  // ✓ Works
+}
+</code></pre>
+<h3 id="pitfall-2-mismatched-constructor-parameters"><a class="header" href="#pitfall-2-mismatched-constructor-parameters">Pitfall 2: Mismatched Constructor Parameters</a></h3>
+<pre><code class="language-cpp">struct MyData {
+public:
+    value: int64;
+    cached: bool;  // 2 fields
+    
+    MyData(value: int64) {  // 1 param - NO auto-copy!
+        this.value = value;
+        this.cached = false;
+    }
+}
+
+fun main() {
+    let d = new MyData(42);
+    let d2 = d;  // MOVE (no auto-copy because 1 param ≠ 2 fields)
+    
+    println(d.value);  // ✗ ERROR: d was moved
+}
+</code></pre>
+<p><strong>Solution:</strong> Either match parameters to fields, or implement <code>_copy</code> manually:</p>
+<pre><code class="language-cpp">// Option 1: Match constructor to fields
+struct MyData {
+public:
+    value: int64;
+    cached: bool;
+    
+    MyData(value: int64, cached: bool) {  // Now 2 params = 2 fields ✓
+        this.value = value;
+        this.cached = cached;
+    }
+    // Auto-copy works now!
+}
+
+// Option 2: Implement _copy manually
+struct MyData {
+public:
+    value: int64;
+    cached: bool;
+    
+    MyData(value: int64) {
+        this.value = value;
+        this.cached = false;
+    }
+    
+    fun _copy(&amp;const this) -&gt; MyData {
+        let result = new MyData(*(this.value));
+        result.cached = this.cached;
+        return result;
+    }
+}
+</code></pre>
+<h3 id="pitfall-3-double-move"><a class="header" href="#pitfall-3-double-move">Pitfall 3: Double Move</a></h3>
+<pre><code class="language-cpp">fun process(r: Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    process(r);  // r moved
+    process(r);  // ✗ ERROR: r already moved
+}
+</code></pre>
+<p><strong>Solution:</strong> Create a new resource or use references:</p>
+<pre><code class="language-cpp">fun process(r: &amp;Resource) { }
+
+fun main() {
+    let r = new Resource(1);
+    process(&amp;r);  // Borrow
+    process(&amp;r);  // ✓ Borrow again
+}
+</code></pre>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<ul>
+<li><strong>Ownership</strong>: Every value has exactly one owner</li>
+<li><strong>Move</strong>: Transfers ownership (source becomes invalid)</li>
+<li><strong>Copy</strong>: Creates duplicate (both remain valid, requires <code>_copy</code> method)</li>
+<li><strong>Primitives</strong>: Always copied</li>
+<li><strong>Strings</strong>: Copyable but still needs memory management</li>
+<li><strong>Auto-generated copy</strong>: Structs where <code>#fields == #constructor_params</code></li>
+<li><strong>References</strong>: Lightweight borrowing without ownership transfer</li>
+<li><strong>Automatic cleanup</strong>: Destructors called when variables go out of scope</li>
+<li><strong>Compiler optimization</strong>: Last-use moves even for copyable types</li>
+</ul>
+<p>The ownership system ensures memory safety while providing explicit control over when values are copied vs moved.</p>
 <p>Without the Copy constructor, assignment moves instead of copying.</p>
-<h2 id="references-1"><a class="header" href="#references-1">References</a></h2>
+<h2 id="references-1-1"><a class="header" href="#references-1-1">References</a></h2>
 <p>References allow borrowing values without transferring ownership. References in Atlas 77 are:</p>
 <ul>
 <li><strong>Not nullable</strong> – always point to valid values</li>
@@ -1154,7 +1535,7 @@ public:
     return x;  // OK: reference comes from parameter, guaranteed to be valid
 }
 </code></pre>
-<h2 id="current-limitations"><a class="header" href="#current-limitations">Current Limitations</a></h2>
+<h2 id="current-limitations-1"><a class="header" href="#current-limitations-1">Current Limitations</a></h2>
 <ul>
 <li><strong>Runtime is deprecated</strong> – Precise semantics may evolve</li>
 <li><strong>Destructor semantics uncertain</strong> – Copy/move interaction with destructors being refined</li>
@@ -1170,7 +1551,7 @@ public:
 <p>See <a href="#language-reference">Language Reference</a> for details on copy/move semantics.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="error-handling-in-atlas-77"><a class="header" href="#error-handling-in-atlas-77">Error Handling in Atlas 77</a></h1>
-<p>Atlas 77 provides explicit error handling through <code>Option&lt;T&gt;</code> and <code>Result&lt;T, E&gt;</code> types. There is <strong>no implicit error propagation</strong>; errors must be handled explicitly to avoid “hidden magic.”</p>
+<p>Atlas 77 provides explicit error handling through <code>optional&lt;T&gt;</code> and <code>expected&lt;T, E&gt;</code> types. There is <strong>no implicit error propagation</strong>; errors must be handled explicitly to avoid “hidden magic.”</p>
 <h2 id="philosophy"><a class="header" href="#philosophy">Philosophy</a></h2>
 <p>Error handling in Atlas 77 is <strong>explicit and intentional</strong>:</p>
 <ul>
@@ -1179,84 +1560,112 @@ public:
 <li>Errors must be checked and handled at the point they occur</li>
 <li>This gives you <strong>maximum control</strong> over error recovery</li>
 </ul>
-<h2 id="option-type-1"><a class="header" href="#option-type-1">Option Type</a></h2>
-<p>The <code>Option&lt;T&gt;</code> type represents a value that may or may not exist:</p>
-<pre><code class="language-cpp">struct Option&lt;T&gt; {
+<h2 id="optional-type-1"><a class="header" href="#optional-type-1">optional Type</a></h2>
+<p>The <code>optional&lt;T&gt;</code> type represents a value that may or may not exist.</p>
+<h3 id="creating-optional-values"><a class="header" href="#creating-optional-values">Creating optional Values</a></h3>
+<p>Use <code>optional&lt;T&gt;</code> for fallible operations that don’t need error details:</p>
+<pre><code class="language-cpp">import "std/optional";
+
+struct User {
 public:
-    has_value: bool;
-    value: T;  // Only valid when has_value is true
+    id: int64;
+    name: string;
+    
+    User(id: int64, name: string) {
+        this.id = id;
+        this.name = name;
+    }
 }
-</code></pre>
-<p>Use <code>Option&lt;T&gt;</code> for fallible operations that don’t need error details:</p>
-<pre><code class="language-cpp">fun find_user(id: int64) -&gt; Option&lt;User&gt; {
+
+fun find_user(id: int64) -&gt; optional&lt;User&gt; {
     if id &gt; 0 {
         // Found user
-        let user: User = User(id);
-        return Option(true, user);
+        let user = new User(id, "Alice");
+        return optional&lt;User&gt;::of(user);
     } else {
         // Not found
-        return Option(false, User(0));  // Default user
+        return optional&lt;User&gt;::empty();
     }
 }
 </code></pre>
-<h3 id="checking-option-values"><a class="header" href="#checking-option-values">Checking Option Values</a></h3>
-<pre><code class="language-cpp">let user_opt: Option&lt;User&gt; = find_user(42);
+<h3 id="checking-optional-values"><a class="header" href="#checking-optional-values">Checking optional Values</a></h3>
+<pre><code class="language-cpp">let user_opt = find_user(42);
 
 // Check if value exists
-if user_opt.is_some() {
-    let user: User = user_opt.unwrap();
-    println("Found user: " + user.name);
+if user_opt.has_value() {
+    let user = user_opt.value();  // Consumes the optional
+    println(user.name);
 } else {
     println("User not found");
 }
 </code></pre>
-<h2 id="result-type-1"><a class="header" href="#result-type-1">Result Type</a></h2>
-<p>The <code>Result&lt;T, E&gt;</code> type represents either a success with a value, or a failure with an error:</p>
-<pre><code class="language-cpp">enum ResultTag {
-    ERR = 0;
-    OK = 256;
+<h3 id="using-value_or-for-defaults"><a class="header" href="#using-value_or-for-defaults">Using value_or for Defaults</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+
+fun get_config_value(key: string) -&gt; optional&lt;string&gt; {
+    // ... lookup logic ...
+    return optional&lt;string&gt;::empty();
 }
-struct Result&lt;T, E&gt; {
-private:
-    tag: ResultTag;
-    ok_value: T;
-    err_value: E;
+
+fun main() {
+    let timeout = get_config_value("timeout").value_or("30");
+    println(timeout);  // Prints: 30
 }
 </code></pre>
-<p>Use <code>Result&lt;T, E&gt;</code> when operations can fail and you need to communicate why:</p>
-<pre><code class="language-cpp">fun parse_int(s: string) -&gt; Result&lt;int64, string&gt; {
+<h2 id="expected-type-1"><a class="header" href="#expected-type-1">expected Type</a></h2>
+<p>The <code>expected&lt;T, E&gt;</code> type represents either a success with a value, or a failure with an error.</p>
+<h3 id="creating-expected-values"><a class="header" href="#creating-expected-values">Creating expected Values</a></h3>
+<p>Use <code>expected&lt;T, E&gt;</code> when operations can fail and you need to communicate why:</p>
+<pre><code class="language-cpp">import "std/expected";
+
+fun parse_int(s: string) -&gt; expected&lt;int64, string&gt; {
     // Try to parse string to integer
     if is_valid_number(s) {
         let number: int64 = convert_to_int(s);
-        return Result::&lt;int64, string&gt;::ok(number);
+        return expected&lt;int64, string&gt;::expect(number);
     } else {
-        return Result::&lt;int64, string&gt;::err("Invalid number format");
+        return expected&lt;int64, string&gt;::unexpected("Invalid number format");
     }
 }
 </code></pre>
-<h3 id="checking-result-values"><a class="header" href="#checking-result-values">Checking Result Values</a></h3>
-<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
+<h3 id="checking-expected-values"><a class="header" href="#checking-expected-values">Checking expected Values</a></h3>
+<pre><code class="language-cpp">let result = parse_int("42");
 
-// Explicit check with is_ok
-if result.is_ok() {
-    let number: int64 = result.unwrap();
-    println("Parsed: " + number);
+// Explicit check with is_expected
+if result.is_expected() {
+    let number = result.expected_value();  // Consumes the expected
+    println(number);
 } else {
-    let error: string = result.unwrap_err();
-    println("Error: " + error);
+    let error = result.unexpected_value();  // Consumes the expected
+    println(error);
 }
 </code></pre>
-<h3 id="unwrapping-results"><a class="header" href="#unwrapping-results">Unwrapping Results</a></h3>
-<p>If you’re confident a <code>Result</code> is <code>Ok</code>, you can unwrap directly (at your own risk):</p>
-<pre><code class="language-cpp">let result: Result&lt;int64, string&gt; = parse_int("42");
-let number: int64 = result.unwrap();  // Unwrap without check (risky!)
+<h3 id="using-expected_value_or-for-defaults"><a class="header" href="#using-expected_value_or-for-defaults">Using expected_value_or for Defaults</a></h3>
+<pre><code class="language-cpp">import "std/expected";
 
-// If is_ok is false, you'll get a default/undefined value
-// Use only when you're certain the operation succeeded
+fun divide(a: int64, b: int64) -&gt; expected&lt;int64, string&gt; {
+    if b == 0 {
+        return expected&lt;int64, string&gt;::unexpected("Division by zero");
+    }
+    return expected&lt;int64, string&gt;::expect(a / b);
+}
+
+fun main() {
+    let result = divide(10, 0).expected_value_or(0);
+    println(result);  // Prints: 0
+}
 </code></pre>
-<blockquote>
-<p><strong>Warning:</strong> Unwrapping without checking can lead to using garbage values if the operation failed. Always check <code>is_ok</code> first unless you have a strong reason not to.</p>
-</blockquote>
+<h3 id="pattern-checking-both-success-and-error"><a class="header" href="#pattern-checking-both-success-and-error">Pattern: Checking Both Success and Error</a></h3>
+<pre><code class="language-cpp">let result = parse_int("invalid");
+
+if result.is_expected() {
+    let value = result.expected_value();
+    println(value);
+} else if result.is_unexpected() {
+    let error = result.unexpected_value();
+    println(error);  // Prints: Invalid number format
+}
+</code></pre>
 <h2 id="panic"><a class="header" href="#panic">Panic</a></h2>
 <p>For unrecoverable errors, use <code>panic()</code> to abort the program:</p>
 <pre><code class="language-cpp">import "std/io";
@@ -1274,95 +1683,149 @@ fun critical_operation() {
 <li>Bypass normal cleanup (use sparingly)</li>
 </ol>
 <h2 id="pattern-examples"><a class="header" href="#pattern-examples">Pattern Examples</a></h2>
-<h3 id="option-handling"><a class="header" href="#option-handling">Option Handling</a></h3>
-<pre><code class="language-cpp">struct User {
+<h3 id="optional-handling"><a class="header" href="#optional-handling">optional Handling</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+
+struct User {
 public:
     id: int64;
     name: string;
+    
+    User(id: int64, name: string) {
+        this.id = id;
+        this.name = name;
+    }
 }
 
-fun get_user_name(id: int64) -&gt; Option&lt;string&gt; {
-    let user: Option&lt;User&gt; = find_user(id);
+fun find_user(id: int64) -&gt; optional&lt;User&gt; {
+    if id &gt; 0 {
+        let user = new User(id, "Alice");
+        return optional&lt;User&gt;::of(user);
+    }
+    return optional&lt;User&gt;::empty();
+}
+
+fun get_user_name(id: int64) -&gt; optional&lt;string&gt; {
+    let user_opt = find_user(id);
     
-    if user.is_some() {
-        return Option::&lt;string&gt;::ok(user.unwrap().name);
+    if user_opt.has_value() {
+        let user = user_opt.value();
+        return optional&lt;string&gt;::of(user.name);
     } else {
-        return Option::&lt;string&gt;::none();
+        return optional&lt;string&gt;::empty();
     }
 }
 
 // Usage
-let name_opt: Option&lt;string&gt; = get_user_name(1);
-if name_opt.is_some() {
-    print("User: ");
-    println(name_opt.unwrap().value);
-} else {
-    println("User not found");
+fun main() {
+    let name_opt = get_user_name(1);
+    if name_opt.has_value() {
+        println(name_opt.value());
+    } else {
+        println("User not found");
+    }
 }
 </code></pre>
-<h3 id="result-chaining"><a class="header" href="#result-chaining">Result Chaining</a></h3>
+<h3 id="expected-chaining"><a class="header" href="#expected-chaining">expected Chaining</a></h3>
 <p>When multiple fallible operations depend on each other:</p>
-<pre><code class="language-cpp">fun read_and_parse() -&gt; Result&lt;int64, string&gt; {
+<pre><code class="language-cpp">import "std/expected";
+import "std/fs";
+
+fun read_and_parse() -&gt; expected&lt;int64, string&gt; {
     // First operation
-    let content: Result&lt;string, string&gt; = read_file("numbers.txt");
-    if !content.is_ok() {
-        return Result::&lt;int64, string&gt;::err(content.unwrap_err());
+    let file = new File("numbers.txt");
+    if !file.exists() {
+        return expected&lt;int64, string&gt;::unexpected("File not found");
     }
     
+    let content = file.read();
+    
     // Second operation (depends on first)
-    let number: Result&lt;int64, string&gt; = parse_int(content.ok_value);
-    if !number.is_ok() {
-        return Result::&lt;int64, string&gt;::err(number.unwrap_err());
+    let number = parse_int(content);
+    if number.is_unexpected() {
+        return expected&lt;int64, string&gt;::unexpected(number.unexpected_value());
     }
     
     // Success
-    return Result::&lt;int64, string&gt;::ok(number.unwrap());
+    return expected&lt;int64, string&gt;::expect(number.expected_value());
 }
 </code></pre>
-<h3 id="nested-results-with-meaningful-errors"><a class="header" href="#nested-results-with-meaningful-errors">Nested Results with Meaningful Errors</a></h3>
-<pre><code class="language-cpp">struct ParseError {
+<h3 id="nested-expected-with-meaningful-errors"><a class="header" href="#nested-expected-with-meaningful-errors">Nested expected with Meaningful Errors</a></h3>
+<pre><code class="language-cpp">import "std/expected";
+
+struct ParseError {
 public:
     line: int64;
     column: int64;
     message: string;
+    
+    ParseError(line: int64, column: int64, message: string) {
+        this.line = line;
+        this.column = column;
+        this.message = message;
+    }
 }
 
-fun parse_config(path: string) -&gt; Result&lt;Config, ParseError&gt; {
+fun parse_config(path: string) -&gt; expected&lt;Config, ParseError&gt; {
     // Try to read file
-    let content: Result&lt;string, string&gt; = read_file(path);
-    if !content.is_ok() {
-        let error: ParseError = new ParseError(0, 0, content.unwrap_err());
-        return Result::&lt;Config, ParseError&gt;::err(error);
+    let file = new File(path);
+    if !file.exists() {
+        let error = new ParseError(0, 0, "File not found");
+        return expected&lt;Config, ParseError&gt;::unexpected(error);
     }
     
+    let content = file.read();
+    
     // Try to parse content
-    let config: Result&lt;Config, ParseError&gt; = parse_config_text(content.unwrap());
+    let config = parse_config_text(content);
     return config;
 }
 </code></pre>
 <h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
 <ol>
-<li><strong>Check explicitly</strong> – Always use <code>is_ok()</code>/<code>is_err()</code> checks before accessing values</li>
-<li><strong>Provide context</strong> – Include helpful error information in <code>Result&lt;T, E&gt;</code></li>
+<li><strong>Check explicitly</strong> – Always use <code>has_value()</code> / <code>is_expected()</code> / <code>is_unexpected()</code> before consuming values</li>
+<li><strong>Provide context</strong> – Include helpful error information in <code>expected&lt;T, E&gt;</code></li>
 <li><strong>Fail fast</strong> – Return errors early rather than propagating invalid states</li>
-<li><strong>Use Option for simple cases</strong> – When you only need to know if something exists</li>
-<li><strong>Use Result for complex cases</strong> – When you need to communicate failure reasons</li>
+<li><strong>Use optional for simple cases</strong> – When you only need to know if something exists</li>
+<li><strong>Use expected for complex cases</strong> – When you need to communicate failure reasons</li>
 <li><strong>Avoid panics in libraries</strong> – Let caller decide how to handle errors</li>
 <li><strong>Document error cases</strong> – Explain what errors an operation can produce</li>
+<li><strong>Remember consuming methods</strong> – <code>value()</code>, <code>expected_value()</code>, and <code>unexpected_value()</code> consume the container</li>
 </ol>
+<h2 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h2>
+<h3 id="optional-methods"><a class="header" href="#optional-methods">optional<t> Methods</t></a></h3>
+<ul>
+<li><code>optional&lt;T&gt;::of(data: T) -&gt; optional&lt;T&gt;</code> – Create an optional containing a value</li>
+<li><code>optional&lt;T&gt;::empty() -&gt; optional&lt;T&gt;</code> – Create an empty optional</li>
+<li><code>has_value(&amp;this) -&gt; bool</code> – Check if a value is present</li>
+<li><code>value(this) -&gt; T</code> – Consume and return the value (panics if empty)</li>
+<li><code>value_or(this, default: T) -&gt; T</code> – Consume and return the value or default</li>
+</ul>
+<h3 id="expectedt-e-methods"><a class="header" href="#expectedt-e-methods">expected&lt;T, E&gt; Methods</a></h3>
+<ul>
+<li><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code> – Create a successful expected</li>
+<li><code>expected&lt;T, E&gt;::unexpected(error: E) -&gt; expected&lt;T, E&gt;</code> – Create a failed expected</li>
+<li><code>is_expected(&amp;this) -&gt; bool</code> – Check if this holds a value</li>
+<li><code>is_unexpected(&amp;this) -&gt; bool</code> – Check if this holds an error</li>
+<li><code>expected_value(this) -&gt; T</code> – Consume and return the value (panics if error)</li>
+<li><code>unexpected_value(this) -&gt; E</code> – Consume and return the error (panics if value)</li>
+<li><code>expected_value_or(this, default: T) -&gt; T</code> – Consume and return the value or default</li>
+<li><code>unexpected_value_or(this, default: E) -&gt; E</code> – Consume and return the error or default</li>
+</ul>
 <h2 id="future-improvements-1"><a class="header" href="#future-improvements-1">Future Improvements</a></h2>
 <p>In the future, Atlas 77 may introduce:</p>
 <ul>
 <li>Discriminated unions for more flexible error types</li>
 <li>Error traits for better composability</li>
+<li>More ergonomic error propagation operators</li>
 </ul>
 <p>However, the core design will remain <strong>explicit and visible</strong>, avoiding hidden control flow.</p>
 <hr>
 <p>See also:</p>
 <ul>
 <li><a href="#language-reference">Language Reference</a> – Error handling in context</li>
-<li><a href="#memory-model">Memory Model</a> – Resource safety</li>
-<li><a href="#standard-library">Standard Library</a> – Available error types</li>
+<li><a href="#memory-model-and-ownership">Memory Model</a> – Resource safety and ownership</li>
+<li><a href="#standard-library">Standard Library</a> – Available error types and utilities</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="reserved-keywords"><a href="#reserved-keywords" class="header">Reserved Keywords</a></h1>
@@ -1428,232 +1891,1102 @@ fun parse_config(path: string) -&gt; Result&lt;Config, ParseError&gt; {
 <p>Not used yet, but reserved in case of future use.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h1>
-<blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>All the standard library is a work in progress.
-Most of the modules aren’t implement or finished yet. The documentation is here to give an idea of what the standard library will look like.</p>
+<h1 id="generics-1"><a class="header" href="#generics-1">Generics</a></h1>
+<p>Generics allow you to write flexible, reusable code by parameterizing types. Atlas77 supports generics for both structs and functions.</p>
+<h2 id="overview-1"><a class="header" href="#overview-1">Overview</a></h2>
+<p>Generics enable you to define data structures and functions that work with multiple types while maintaining type safety. Instead of writing separate implementations for each type, you write one generic implementation.</p>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>Generic parameters must be <strong>explicitly specified</strong> at call sites (no type inference)</li>
+<li>Generic parameter names must be <strong>single uppercase letters</strong> (e.g., <code>T</code>, <code>U</code>, <code>V</code>)</li>
+<li>Constraints can be applied to restrict what types can be used</li>
+<li>Currently, only the <code>std::copyable</code> constraint is available</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The single-letter restriction for generic parameter names is temporary and will be relaxed in future versions.</p>
 </blockquote>
+<h2 id="generic-structs"><a class="header" href="#generic-structs">Generic Structs</a></h2>
+<p>Define a struct with type parameters using angle brackets:</p>
+<pre><code class="language-cpp">import "std/io";
+
+struct Box&lt;T&gt; {
+public:
+    value: T;
+    
+    Box(value: T) {
+        this.value = value;
+    }
+    
+    fun get(&amp;this) -&gt; &amp;const T {
+        return &amp;(this.value);
+    }
+    
+    fun set(&amp;this, value: T) {
+        this.value = value;
+    }
+}
+
+fun main() {
+    // Type parameter must be explicitly specified
+    let int_box = new Box&lt;int64&gt;(42);
+    let str_box = new Box&lt;string&gt;("Hello");
+    
+    println(*int_box.get());  // Output: 42
+    println(*str_box.get());  // Output: Hello
+}
+</code></pre>
+<h3 id="multiple-type-parameters"><a class="header" href="#multiple-type-parameters">Multiple Type Parameters</a></h3>
+<p>Structs can have multiple generic parameters:</p>
+<pre><code class="language-cpp">struct Pair&lt;K, V&gt; {
+public:
+    key: K;
+    value: V;
+    
+    Pair(key: K, value: V) {
+        this.key = key;
+        this.value = value;
+    }
+    
+    fun get_key(&amp;const this) -&gt; K {
+        return *(this.key);
+    }
+    
+    fun get_value(&amp;const this) -&gt; V {
+        return *(this.value);
+    }
+}
+
+fun main() {
+    let pair = new Pair&lt;int64, string&gt;(1, "one");
+    println(pair.get_key());    // Output: 1
+    println(pair.get_value());  // Output: one
+}
+</code></pre>
+<h2 id="generic-functions"><a class="header" href="#generic-functions">Generic Functions</a></h2>
+<p>Functions can also be generic:</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun identity&lt;T&gt;(value: T) -&gt; T {
+    return value;
+}
+
+fun swap&lt;T, U&gt;(a: T, b: U) -&gt; Pair&lt;U, T&gt; {
+    return new Pair&lt;U, T&gt;(b, a);
+}
+
+fun main() {
+    // Explicit type parameters required
+    let x = identity&lt;int64&gt;(42);
+    let s = identity&lt;string&gt;("hello");
+    
+    println(x);  // Output: 42
+    println(s);  // Output: hello
+}
+</code></pre>
+<h3 id="calling-generic-functions"><a class="header" href="#calling-generic-functions">Calling Generic Functions</a></h3>
+<p>Type parameters must be explicitly specified when calling generic functions:</p>
+<pre><code class="language-cpp">// ✓ Correct - explicit type parameter
+let result = identity&lt;int64&gt;(42);
+
+// ✗ Error - type inference not supported
+// let result = identity(42);
+</code></pre>
+<h2 id="generic-constraints"><a class="header" href="#generic-constraints">Generic Constraints</a></h2>
+<p>Constraints restrict which types can be used as generic parameters. They ensure that generic code only works with types that support required operations.</p>
+<h3 id="the-stdcopyable-constraint"><a class="header" href="#the-stdcopyable-constraint">The <code>std::copyable</code> Constraint</a></h3>
+<p>The <code>std::copyable</code> constraint requires that a type can be copied (has a <code>_copy</code> method or is a primitive type).</p>
+<h4 id="syntax"><a class="header" href="#syntax">Syntax</a></h4>
+<p>Apply constraints using a colon (<code>:</code>) after the type parameter name:</p>
+<pre><code class="language-cpp">struct Container&lt;T: std::copyable&gt; {
+public:
+    data: T;
+    
+    Container(data: T) {
+        this.data = data;
+    }
+    
+    // This method requires T to be copyable
+    fun duplicate(&amp;const this) -&gt; T {
+        return *(this.data);  // Copy the data
+    }
+}
+</code></pre>
+<h4 id="multiple-parameters-with-mixed-constraints"><a class="header" href="#multiple-parameters-with-mixed-constraints">Multiple Parameters with Mixed Constraints</a></h4>
+<p>You can have some constrained and some unconstrained parameters:</p>
+<pre><code class="language-cpp">// T and S are copyable, U has no constraint
+struct Mixed&lt;T: std::copyable, S: std::copyable, U&gt; {
+public:
+    first: T;
+    second: S;
+    third: U;
+    
+    Mixed(first: T, second: S, third: U) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+    }
+    
+    // Can copy first and second because they're copyable
+    fun get_first_copy(&amp;const this) -&gt; T {
+        return *(this.first);
+    }
+    
+    fun get_second_copy(&amp;const this) -&gt; S {
+        return *(this.second);
+    }
+    
+    // Can only return reference to third (not copyable)
+    fun get_third_ref(&amp;const this) -&gt; &amp;const U {
+        return &amp;(this.third);
+    }
+}
+</code></pre>
+<h3 id="when-to-use-constraints"><a class="header" href="#when-to-use-constraints">When to Use Constraints</a></h3>
+<p>Use <code>std::copyable</code> when your generic code needs to:</p>
+<ul>
+<li>Return values by copy</li>
+<li>Store multiple copies of the same value</li>
+<li>Pass values to functions that consume them (and you need to keep a copy)</li>
+</ul>
+<pre><code class="language-cpp">import "std/vector";
+
+struct Cache&lt;T: std::copyable&gt; {
+private:
+    items: Vector&lt;T&gt;;
+public:
+    Cache() {
+        this.items = Vector&lt;T&gt;::with_capacity(10u);
+    }
+    
+    fun add(&amp;this, item: T) {
+        this.items.push(item);
+    }
+    
+    // Requires copyable to return a copy
+    fun get(&amp;this, index: uint64) -&gt; T {
+        return *(this.items.get(index));
+    }
+}
+
+fun main() {
+    // Works with copyable types
+    let cache = new Cache&lt;int64&gt;();
+    cache.add(42);
+    let value = cache.get(0u);  // Copy returned
+    println(value);
+}
+</code></pre>
+<h2 id="common-patterns-1"><a class="header" href="#common-patterns-1">Common Patterns</a></h2>
+<h3 id="generic-container-with-methods"><a class="header" href="#generic-container-with-methods">Generic Container with Methods</a></h3>
+<pre><code class="language-cpp">import "std/optional";
+
+struct Option&lt;T&gt; {
+private:
+    has_value: bool;
+    value: T;
+public:
+    Option(has_value: bool, value: T) {
+        this.has_value = has_value;
+        this.value = value;
+    }
+    
+    fun is_some(&amp;this) -&gt; bool {
+        return this.has_value;
+    }
+    
+    fun unwrap(this) -&gt; T {
+        if !this.has_value {
+            panic("Called unwrap on empty Option");
+        }
+        return this.value;
+    }
+}
+</code></pre>
+<h3 id="generic-functions-with-constraints"><a class="header" href="#generic-functions-with-constraints">Generic Functions with Constraints</a></h3>
+<pre><code class="language-cpp">// Only works with copyable types
+fun create_pair&lt;T: std::copyable&gt;(value: T) -&gt; Pair&lt;T, T&gt; {
+    return new Pair&lt;T, T&gt;(value, value);
+}
+
+fun main() {
+    let pair = create_pair&lt;int64&gt;(42);
+    println(pair.get_key());    // 42
+    println(pair.get_value());  // 42
+}
+</code></pre>
+<h3 id="generic-wrapper"><a class="header" href="#generic-wrapper">Generic Wrapper</a></h3>
+<pre><code class="language-cpp">struct Wrapper&lt;T&gt; {
+private:
+    inner: T;
+public:
+    Wrapper(inner: T) {
+        this.inner = inner;
+    }
+    
+    fun get_ref(&amp;const this) -&gt; &amp;const T {
+        return &amp;(this.inner);
+    }
+    
+    fun get_mut(&amp;this) -&gt; &amp;T {
+        return &amp;(this.inner);
+    }
+    
+    fun consume(this) -&gt; T {
+        return this.inner;
+    }
+}
+</code></pre>
+<h2 id="examples-from-standard-library"><a class="header" href="#examples-from-standard-library">Examples from Standard Library</a></h2>
+<h3 id="vector"><a class="header" href="#vector">Vector<t></t></a></h3>
+<p>The standard library’s <code>Vector&lt;T&gt;</code> is a good example of generics in action:</p>
+<pre><code class="language-cpp">import "std/vector";
+
+fun main() {
+    // Generic over int64
+    let numbers = new Vector&lt;int64&gt;([1, 2, 3]);
+    numbers.push(4);
+    
+    // Generic over string
+    let names = new Vector&lt;string&gt;(["Alice", "Bob"]);
+    names.push("Charlie");
+}
+</code></pre>
+<h3 id="optional"><a class="header" href="#optional">optional<t></t></a></h3>
+<p>The <code>optional&lt;T&gt;</code> type uses generics for nullable values:</p>
+<pre><code class="language-cpp">import "std/optional";
+
+fun divide(a: int64, b: int64) -&gt; optional&lt;int64&gt; {
+    if b == 0 {
+        return optional&lt;int64&gt;::empty();
+    }
+    return optional&lt;int64&gt;::of(a / b);
+}
+</code></pre>
+<h3 id="expectedt-e"><a class="header" href="#expectedt-e">expected&lt;T, E&gt;</a></h3>
+<p>The <code>expected&lt;T, E&gt;</code> type uses two generic parameters:</p>
+<pre><code class="language-cpp">import "std/expected";
+
+fun parse_int(s: string) -&gt; expected&lt;int64, string&gt; {
+    if is_valid(s) {
+        return expected&lt;int64, string&gt;::expect(parse(s));
+    }
+    return expected&lt;int64, string&gt;::unexpected("Invalid number");
+}
+</code></pre>
+<h2 id="current-limitations-2"><a class="header" href="#current-limitations-2">Current Limitations</a></h2>
+<ul>
+<li><strong>No type inference</strong> – Type parameters must always be explicitly specified</li>
+<li><strong>Single-letter names only</strong> – Generic parameters must be single uppercase letters (temporary)</li>
+<li><strong>One constraint only</strong> – Only <code>std::copyable</code> is currently available</li>
+<li><strong>No default type parameters</strong> – Cannot specify default types for generic parameters</li>
+<li><strong>No variance annotations</strong> – No covariance or contravariance support</li>
+</ul>
+<h2 id="future-enhancements"><a class="header" href="#future-enhancements">Future Enhancements</a></h2>
+<p>Planned improvements for the generics system include:</p>
+<ul>
+<li><strong>Multi-character generic parameter names</strong> – Allow names like <code>Key</code>, <code>Value</code>, <code>Element</code></li>
+<li><strong>More constraints</strong> – Additional built-in constraints (e.g., <code>std::comparable</code>, <code>std::numeric</code>)</li>
+<li><strong>Custom constraints</strong> – Define your own constraints (traits/concepts)</li>
+<li><strong>Type inference</strong> – Infer type parameters from context where possible</li>
+<li><strong>Default type parameters</strong> – Specify default types for optional parameters</li>
+<li><strong>Where clauses</strong> – More flexible constraint syntax</li>
+</ul>
+<h2 id="best-practices-1"><a class="header" href="#best-practices-1">Best Practices</a></h2>
+<ol>
+<li>
+<p><strong>Use descriptive names</strong> – Even with single letters, choose meaningful ones:</p>
+<ul>
+<li><code>T</code> for general Type</li>
+<li><code>K</code> for Key</li>
+<li><code>V</code> for Value</li>
+<li><code>E</code> for Error</li>
+<li><code>R</code> for Result</li>
+</ul>
+</li>
+<li>
+<p><strong>Apply constraints appropriately</strong> – Only add <code>std::copyable</code> when you actually need to copy values</p>
+</li>
+<li>
+<p><strong>Document type requirements</strong> – Comment on what operations your generic code expects:</p>
+<pre><code class="language-cpp">// T must support equality comparison (not enforced yet)
+struct Set&lt;T&gt; { /* ... */ }
+</code></pre>
+</li>
+<li>
+<p><strong>Prefer references when possible</strong> – If you don’t need to copy, use references:</p>
+<pre><code class="language-cpp">fun inspect&lt;T&gt;(value: &amp;const T) {
+    // No copy required
+}
+</code></pre>
+</li>
+<li>
+<p><strong>Be explicit</strong> – Always specify type parameters clearly:</p>
+<pre><code class="language-cpp">// Good
+let box = new Box&lt;int64&gt;(42);
+
+// Not supported
+// let box = new Box(42);
+</code></pre>
+</li>
+</ol>
+<hr>
+<p>See also:</p>
+<ul>
+<li><a href="#language-reference">Language Reference</a> – Complete language syntax</li>
+<li><a href="#standard-library">Standard Library</a> – Generic types in the standard library</li>
+<li><a href="#memory-model-and-ownership">Memory Model</a> – Copy semantics and ownership</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h1>
+<blockquote>
+<p><strong>Note:</strong><br>The standard library is a work in progress. Some modules are complete while others are still in development. This documentation reflects the current state of the implemented modules.</p>
+</blockquote>
+<h2 id="overview-2"><a class="header" href="#overview-2">Overview</a></h2>
+<p>The Atlas77 standard library provides essential data structures, utilities, and I/O functions. The library is organized into modules that can be imported individually.</p>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Module</th><th>Description</th></tr>
+<tr><th>Module</th><th>Description</th><th>Status</th></tr>
 </thead>
 <tbody>
-<tr><td><code>std/io</code></td><td>Input/output functions</td></tr>
-<tr><td><code>std/fs</code></td><td>File handling functions</td></tr>
-<tr><td><code>std/string</code></td><td>String manipulation functions</td></tr>
-<tr><td><code>std/vector</code></td><td>Vector manipulation functions</td></tr>
-<tr><td><code>std/time</code></td><td>Time functions</td></tr>
-<tr><td><code>std/math</code></td><td>Math functions</td></tr>
-<tr><td><code>std/option</code></td><td>Option type and functions</td></tr>
-<tr><td><code>std/result</code></td><td>Result type and functions</td></tr>
-<tr><td><code>std/box</code></td><td>Box type and functions</td></tr>
-<tr><td><code>std/iter</code></td><td>Iterator type and functions</td></tr>
-<tr><td><code>std/map</code></td><td>Map type and functions</td></tr>
+<tr><td><code>std/io</code></td><td>Input/output and panic functions</td><td>✅ Stable</td></tr>
+<tr><td><code>std/fs</code></td><td>File system operations</td><td>✅ Stable</td></tr>
+<tr><td><code>std/string</code></td><td>String manipulation and the String struct</td><td>✅ Stable</td></tr>
+<tr><td><code>std/vector</code></td><td>Dynamic array (Vector<t>)</t></td><td>✅ Stable</td></tr>
+<tr><td><code>std/optional</code></td><td>optional<t> type for nullable values</t></td><td>✅ Stable</td></tr>
+<tr><td><code>std/expected</code></td><td>expected&lt;T, E&gt; for error handling</td><td>✅ Stable</td></tr>
+<tr><td><code>std/iter</code></td><td>Iterator utilities</td><td>✅ Stable</td></tr>
+<tr><td><code>std/time</code></td><td>Time operations and formatting</td><td>✅ Stable</td></tr>
+<tr><td><code>std/math</code></td><td>Mathematical functions</td><td>✅ Stable</td></tr>
+<tr><td><code>std/map</code></td><td>Map&lt;K, V&gt; key-value container</td><td>✅ Stable</td></tr>
+<tr><td><code>std/queue</code></td><td>Queue<t> FIFO data structure</t></td><td>✅ Stable</td></tr>
+<tr><td><code>std/box</code></td><td>Box<t> container (deprecated)</t></td><td>⚠️ Deprecated</td></tr>
+<tr><td><code>std/mem</code></td><td>Memory utilities</td><td>✅ Stable</td></tr>
 </tbody>
 </table>
 </div>
-<p>You can see what is implemented with the checkboxes below.</p>
 <h2 id="stdio"><a class="header" href="#stdio"><code>std/io</code></a></h2>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>print&lt;T&gt;(val: T) -&gt; unit</code>: Print a value to the standard output.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>println&lt;T&gt;(val: T) -&gt; unit</code>: Print a value to the standard output followed by a newline.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>input() -&gt; str</code>: Read a line from the standard input.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>panic(msg: string) -&gt; !</code>: Abort the program with an error message.</li>
-</ul>
+<p>Basic input/output and program control functions.</p>
+<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
+<h4 id="printts-t"><a class="header" href="#printts-t"><code>print&lt;T&gt;(s: T)</code></a></h4>
+<p>Print a value to standard output without a newline.</p>
+<pre><code class="language-cpp">import "std/io";
+
+print("Hello");
+print(" World!");
+// Output: Hello World!
+</code></pre>
+<h4 id="printlnts-t"><a class="header" href="#printlnts-t"><code>println&lt;T&gt;(s: T)</code></a></h4>
+<p>Print a value to standard output followed by a newline.</p>
+<pre><code class="language-cpp">import "std/io";
+
+println("Hello, Atlas!");
+// Output: Hello, Atlas!
+//         (newline)
+</code></pre>
+<h4 id="input---string"><a class="header" href="#input---string"><code>input() -&gt; string</code></a></h4>
+<p>Read a line from standard input.</p>
+<pre><code class="language-cpp">import "std/io";
+
+println("Enter your name:");
+let name = input();
+println("Hello, " + name);
+</code></pre>
+<h4 id="panicts-t"><a class="header" href="#panicts-t"><code>panic&lt;T&gt;(s: T)</code></a></h4>
+<p>Abort the program with an error message.</p>
+<pre><code class="language-cpp">import "std/io";
+
+fun divide(a: int64, b: int64) -&gt; int64 {
+    if b == 0 {
+        panic("Division by zero!");
+    }
+    return a / b;
+}
+</code></pre>
 <h2 id="stdfs"><a class="header" href="#stdfs"><code>std/fs</code></a></h2>
-<h3 id="structs-1"><a class="header" href="#structs-1">Structs</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>File</code>: A file type that can be used to read and write files.</li>
-</ul>
-<blockquote>
-<p>NB: <code>File</code> is not stable yet. BEWARE.</p>
-<p>Lack of copy/move semantics makes it tricky to handle files safely.</p>
-</blockquote>
-<pre><code>struct File {
+<p>File system operations for reading, writing, and managing files.</p>
+<h3 id="struct-file"><a class="header" href="#struct-file">Struct: <code>File</code></a></h3>
+<p>Represents a file in the file system.</p>
+<pre><code class="language-cpp">struct File {
 private:
     content: string;
 public:
     path: string;
-    File(path: string) {
-        this.content = "";
-        this.path = path;
-    }
 }
 </code></pre>
-<h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>read(this: File) -&gt; string</code>: Read the entire content of the file.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>open(path: string) -&gt; File</code>: Open a file for reading and writing.</li>
-</ul>
-<blockquote>
-<p>Does the same shit as “read()” but it makes more sense to open once then use <code>read()</code> later if the file got updated</p>
-</blockquote>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>close(this: File) -&gt; unit</code>: Close the file.</li>
-</ul>
-<blockquote>
-<p>NB: This is called automatically in the destructor, BUT because of the current state of the memory, you might wanna do it manually just to be sure.</p>
-</blockquote>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>exists(this: File) -&gt; bool</code>: Check if the file exists.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>read_dir(this: File) -&gt; [string]</code>: Read the contents of a directory.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>read_file(this: File) -&gt; string</code>: Read the entire content of the file and returns it to you. It does not set <code>File.content</code> to the content of the file.</li>
-</ul>
-<h3 id="functions-1"><a class="header" href="#functions-1">Functions</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>read_dir(path: string) -&gt; [string]</code>: Read the contents of a directory.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>read_file(path: string) -&gt; string</code>: Read the entire content of a file.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>write_file(path: string, content: string) -&gt; unit</code>: Write content to a file.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>remove_file(path: string) -&gt; unit</code>: Remove a file.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>file_exists(path: string) -&gt; bool</code>: Check if a file exists.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>close_file(path: string) -&gt; unit</code>: Close a file.</li>
-</ul>
+<h4 id="constructor"><a class="header" href="#constructor">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/fs";
+
+let file = new File("data.txt");
+</code></pre>
+<p>Creates a File object. The file is not opened until <code>read()</code> or <code>open()</code> is called.</p>
+<h4 id="methods-1"><a class="header" href="#methods-1">Methods</a></h4>
+<h5 id="readthis---string"><a class="header" href="#readthis---string"><code>read(&amp;this) -&gt; string</code></a></h5>
+<p>Read the entire content of the file and store it internally.</p>
+<pre><code class="language-cpp">let file = new File("data.txt");
+let content = file.read();
+println(content);
+</code></pre>
+<h5 id="openthis"><a class="header" href="#openthis"><code>open(&amp;this)</code></a></h5>
+<p>Open and read the file, storing content internally.</p>
+<pre><code class="language-cpp">let file = new File("data.txt");
+file.open();
+// File content is now loaded
+</code></pre>
+<h5 id="writethis-content-string"><a class="header" href="#writethis-content-string"><code>write(&amp;this, content: string)</code></a></h5>
+<p>Write content to the file.</p>
+<pre><code class="language-cpp">let file = new File("output.txt");
+file.write("Hello, World!");
+</code></pre>
+<h5 id="closethis"><a class="header" href="#closethis"><code>close(this)</code></a></h5>
+<p>Close the file (consumes the File object).</p>
+<pre><code class="language-cpp">let file = new File("data.txt");
+file.read();
+file.close();  // File is consumed
+</code></pre>
+<h5 id="existsthis---bool"><a class="header" href="#existsthis---bool"><code>exists(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if the file exists.</p>
+<pre><code class="language-cpp">let file = new File("config.json");
+if file.exists() {
+    println("File found");
+}
+</code></pre>
+<h5 id="removethis"><a class="header" href="#removethis"><code>remove(&amp;this)</code></a></h5>
+<p>Delete the file from the file system.</p>
+<pre><code class="language-cpp">let file = new File("temp.txt");
+file.remove();
+</code></pre>
+<h5 id="read_dirthis-path-string---string"><a class="header" href="#read_dirthis-path-string---string"><code>read_dir(&amp;this, path: string) -&gt; [string]</code></a></h5>
+<p>Read the contents of a directory (instance method).</p>
+<pre><code class="language-cpp">let file = new File(".");
+let entries = file.read_dir("./src");
+</code></pre>
+<h5 id="read_filethis-path-string---string"><a class="header" href="#read_filethis-path-string---string"><code>read_file(&amp;this, path: string) -&gt; string</code></a></h5>
+<p>Read a file without modifying the File instance’s content.</p>
+<pre><code class="language-cpp">let file = new File("dummy");
+let content = file.read_file("actual.txt");
+</code></pre>
 <h2 id="stdstring"><a class="header" href="#stdstring"><code>std/string</code></a></h2>
-<h3 id="structs-1-1"><a class="header" href="#structs-1-1">Structs</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>String</code>: A string type that can be used to manipulate strings.</li>
-</ul>
-<pre><code>struct String {
+<p>String manipulation functions and the String struct.</p>
+<h3 id="external-functions"><a class="header" href="#external-functions">External Functions</a></h3>
+<h4 id="str_lens-const-string---uint64"><a class="header" href="#str_lens-const-string---uint64"><code>str_len(s: &amp;const string) -&gt; uint64</code></a></h4>
+<p>Get the length of a string primitive (in bytes).</p>
+<pre><code class="language-cpp">import "std/string";
+
+let text = "Hello";
+let length = str_len(&amp;text);  // 5
+</code></pre>
+<h4 id="trims-string---string"><a class="header" href="#trims-string---string"><code>trim(s: string) -&gt; string</code></a></h4>
+<p>Remove leading and trailing whitespace.</p>
+<pre><code class="language-cpp">let text = "  hello  ";
+let trimmed = trim(text);  // "hello"
+</code></pre>
+<h4 id="to_uppers-string---string"><a class="header" href="#to_uppers-string---string"><code>to_upper(s: string) -&gt; string</code></a></h4>
+<p>Convert a string to uppercase.</p>
+<pre><code class="language-cpp">let text = "hello";
+let upper = to_upper(text);  // "HELLO"
+</code></pre>
+<h4 id="to_lowers-string---string"><a class="header" href="#to_lowers-string---string"><code>to_lower(s: string) -&gt; string</code></a></h4>
+<p>Convert a string to lowercase.</p>
+<pre><code class="language-cpp">let text = "HELLO";
+let lower = to_lower(text);  // "hello"
+</code></pre>
+<h4 id="splits-string-sep-string---string"><a class="header" href="#splits-string-sep-string---string"><code>split(s: &amp;string, sep: &amp;string) -&gt; [string]</code></a></h4>
+<p>Split a string by a separator.</p>
+<pre><code class="language-cpp">let text = "apple,banana,cherry";
+let parts = split(&amp;text, &amp;",");
+// ["apple", "banana", "cherry"]
+</code></pre>
+<h4 id="str_cmps1-const-string-s2-const-string---uint64"><a class="header" href="#str_cmps1-const-string-s2-const-string---uint64"><code>str_cmp(s1: &amp;const string, s2: &amp;const string) -&gt; uint64</code></a></h4>
+<p>Compare two strings lexicographically.</p>
+<pre><code class="language-cpp">let result = str_cmp(&amp;"apple", &amp;"banana");
+</code></pre>
+<h4 id="to_charss-const-string---char"><a class="header" href="#to_charss-const-string---char"><code>to_chars(s: &amp;const string) -&gt; [char]</code></a></h4>
+<p>Convert a string to an array of characters.</p>
+<pre><code class="language-cpp">let text = "Hi";
+let chars = to_chars(&amp;text);  // ['H', 'i']
+</code></pre>
+<h4 id="from_charss-char---string"><a class="header" href="#from_charss-char---string"><code>from_chars(s: [char]) -&gt; string</code></a></h4>
+<p>Convert an array of characters to a string.</p>
+<pre><code class="language-cpp">let chars = ['H', 'i'];
+let text = from_chars(chars);  // "Hi"
+</code></pre>
+<h3 id="struct-string"><a class="header" href="#struct-string">Struct: <code>String</code></a></h3>
+<p>A struct wrapper around the primitive string type with additional methods.</p>
+<pre><code class="language-cpp">struct String {
+public:
     s: string;
     len: uint64;
-    String(s: string) {
-        self.s = s;
-        self.len = str_len(s);
-    }
 }
 </code></pre>
-<h4 id="methods-1-1"><a class="header" href="#methods-1-1">Methods</a></h4>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>String::from_chars(chars: [char]) -&gt; String</code>: Create a new <code>String</code> struct from a list of characters.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>String::str_len(s: string) -&gt; uint64</code>: Get the length of a string primitive.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>len(this: String) -&gt; uint64</code>: Get the length of the String.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>is_empty(this: String) -&gt; bool</code>: Check if the String is empty.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>concat(this: String, other: String) -&gt; String</code>: Concatenate two Strings.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>push(this: String, c: char) -&gt; unit</code>: Add a character to the end of the String.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>push_str(this: String, s: String) -&gt; unit</code>: Add a String to the end of the String.</li>
-<li><input disabled="" type="checkbox"> <code>find(this: String, sub_string: String) -&gt; Option&lt;uint64&gt;</code>: Find the index of a substring in the String.</li>
-</ul>
-<blockquote>
-<p>Not stable yet. BEWARE.</p>
-</blockquote>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>get(this: String, index: uint64) -&gt; char</code>: Get a character from the String by index.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>set(this: String, index: uint64, c: char) -&gt; unit</code>: Set a character in the String by index.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_str(this: String) -&gt; string</code>: Convert the String struct to a string primitive.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_chars(this: String) -&gt; [char]</code>: Convert the String struct to a list of characters.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_upper(this: String) -&gt; String</code>: Convert the String to uppercase.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_lower(this: String) -&gt; String</code>: Convert the String to lowercase</li>
-<li><input disabled="" type="checkbox" checked=""> <code>trim(this: String) -&gt; String</code>: Trim whitespace from both ends of the String.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>split(this: String, sep: string) -&gt; [String]</code>: Split the String by a separator.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>into_iter(this: String) -&gt; Iter&lt;char&gt;</code>: Create an iterator (from <code>std/iter</code>) over the characters of the String.</li>
-</ul>
-<h3 id="functions-1-1"><a class="header" href="#functions-1-1">Functions</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>str_len(s: string) -&gt; uint64</code>: Get the length of a string primitive.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>trim(s: string) -&gt; string</code>: Trim whitespace from both ends of a string.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_upper(s: string) -&gt; string</code>: Convert a string to uppercase.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_lower(s: string) -&gt; string</code>: Convert a string to lowercase.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>split(s: string, sep: string) -&gt; [string]</code>: Split a string by a separator.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>str_cmp(s1: string, s2: string) -&gt; uint64</code>: Compare two strings.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_chars(s: string) -&gt; [char]</code>: Convert a string to a list of characters.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>from_chars(s: [char]) -&gt; string</code>: Convert a list of characters to a string.</li>
-</ul>
+<h4 id="constructor-1"><a class="header" href="#constructor-1">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/string";
+
+let str = new String("Hello");
+</code></pre>
+<h4 id="static-methods"><a class="header" href="#static-methods">Static Methods</a></h4>
+<h5 id="stringfrom_charss-char---string"><a class="header" href="#stringfrom_charss-char---string"><code>String::from_chars(s: [char]) -&gt; String</code></a></h5>
+<p>Create a String from an array of characters.</p>
+<pre><code class="language-cpp">let chars = ['H', 'i'];
+let str = String::from_chars(chars);
+</code></pre>
+<h5 id="stringstr_lens-const-string---uint64"><a class="header" href="#stringstr_lens-const-string---uint64"><code>String::str_len(s: &amp;const string) -&gt; uint64</code></a></h5>
+<p>Get the length of a string primitive.</p>
+<pre><code class="language-cpp">let length = String::str_len(&amp;"Hello");  // 5
+</code></pre>
+<h4 id="instance-methods"><a class="header" href="#instance-methods">Instance Methods</a></h4>
+<h5 id="lenthis---uint64"><a class="header" href="#lenthis---uint64"><code>len(&amp;this) -&gt; uint64</code></a></h5>
+<p>Get the length of the String.</p>
+<pre><code class="language-cpp">let str = new String("Hello");
+println(str.len());  // 5
+</code></pre>
+<h5 id="is_emptythis---bool"><a class="header" href="#is_emptythis---bool"><code>is_empty(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if the String is empty.</p>
+<pre><code class="language-cpp">let str = new String("");
+if str.is_empty() {
+    println("String is empty");
+}
+</code></pre>
+<h5 id="concatthis-other-string---string"><a class="header" href="#concatthis-other-string---string"><code>concat(&amp;this, other: String) -&gt; String</code></a></h5>
+<p>Concatenate two Strings.</p>
+<pre><code class="language-cpp">let str1 = new String("Hello");
+let str2 = new String(" World");
+let result = str1.concat(str2);
+</code></pre>
+<h5 id="pushthis-c-char"><a class="header" href="#pushthis-c-char"><code>push(&amp;this, c: char)</code></a></h5>
+<p>Append a character to the String.</p>
+<pre><code class="language-cpp">let str = new String("Hello");
+str.push('!');
+</code></pre>
+<h5 id="push_strthis-s-string"><a class="header" href="#push_strthis-s-string"><code>push_str(&amp;this, s: String)</code></a></h5>
+<p>Append another String.</p>
+<pre><code class="language-cpp">let str1 = new String("Hello");
+let str2 = new String(" World");
+str1.push_str(str2);
+</code></pre>
+<h5 id="getthis-index-uint64---char"><a class="header" href="#getthis-index-uint64---char"><code>get(&amp;this, index: uint64) -&gt; char</code></a></h5>
+<p>Get a character at a specific index.</p>
+<pre><code class="language-cpp">let str = new String("Hello");
+let ch = str.get(0u);  // 'H'
+</code></pre>
+<h5 id="setthis-index-uint64-c-char"><a class="header" href="#setthis-index-uint64-c-char"><code>set(&amp;this, index: uint64, c: char)</code></a></h5>
+<p>Set a character at a specific index.</p>
+<pre><code class="language-cpp">let str = new String("Hello");
+str.set(0u, 'h');  // "hello"
+</code></pre>
+<h5 id="to_strthis---string"><a class="header" href="#to_strthis---string"><code>to_str(&amp;this) -&gt; string</code></a></h5>
+<p>Convert the String struct to a string primitive.</p>
+<pre><code class="language-cpp">let str = new String("Hello");
+let s = str.to_str();
+</code></pre>
+<h5 id="to_charsthis---char"><a class="header" href="#to_charsthis---char"><code>to_chars(&amp;this) -&gt; [char]</code></a></h5>
+<p>Convert the String to an array of characters.</p>
+<pre><code class="language-cpp">let str = new String("Hi");
+let chars = str.to_chars();
+</code></pre>
+<h5 id="to_upperthis---string"><a class="header" href="#to_upperthis---string"><code>to_upper(&amp;this) -&gt; String</code></a></h5>
+<p>Convert to uppercase.</p>
+<pre><code class="language-cpp">let str = new String("hello");
+let upper = str.to_upper();  // "HELLO"
+</code></pre>
+<h5 id="to_lowerthis---string"><a class="header" href="#to_lowerthis---string"><code>to_lower(&amp;this) -&gt; String</code></a></h5>
+<p>Convert to lowercase.</p>
+<pre><code class="language-cpp">let str = new String("HELLO");
+let lower = str.to_lower();  // "hello"
+</code></pre>
+<h5 id="trimthis---string"><a class="header" href="#trimthis---string"><code>trim(&amp;this) -&gt; String</code></a></h5>
+<p>Remove leading and trailing whitespace.</p>
+<pre><code class="language-cpp">let str = new String("  hello  ");
+let trimmed = str.trim();  // "hello"
+</code></pre>
+<h5 id="splitthis-sep-string---string"><a class="header" href="#splitthis-sep-string---string"><code>split(&amp;this, sep: string) -&gt; [String]</code></a></h5>
+<p>Split the String by a separator.</p>
+<pre><code class="language-cpp">let str = new String("a,b,c");
+let parts = str.split(",");
+</code></pre>
+<h5 id="into_iterthis---iterchar"><a class="header" href="#into_iterthis---iterchar"><code>into_iter(this) -&gt; Iter&lt;char&gt;</code></a></h5>
+<p>Consume the String and create an iterator over its characters.</p>
+<pre><code class="language-cpp">let str = new String("Hi");
+let iter = str.into_iter();
+</code></pre>
 <h2 id="stdvector"><a class="header" href="#stdvector"><code>std/vector</code></a></h2>
-<h3 id="structs-2"><a class="header" href="#structs-2">Structs</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>Vector&lt;T&gt;</code>: A vector is a dynamic array that can grow or shrink in size. It has a bunch of methods to manipulate the data.</li>
-</ul>
-<pre><code>struct Vector&lt;T&gt; {
-private:
-    data: [T];
+<p>Dynamic array with resizable capacity.</p>
+<h3 id="external-functions-1"><a class="header" href="#external-functions-1">External Functions</a></h3>
+<h4 id="lentdata-const-t---uint64"><a class="header" href="#lentdata-const-t---uint64"><code>len&lt;T&gt;(data: &amp;const [T]) -&gt; uint64</code></a></h4>
+<p>Get the length of an array.</p>
+<pre><code class="language-cpp">import "std/vector";
+
+let arr = [1, 2, 3];
+let length = len(&amp;arr);  // 3
+</code></pre>
+<h4 id="slicetdata-const-t-start-uint64-end-uint64---t"><a class="header" href="#slicetdata-const-t-start-uint64-end-uint64---t"><code>slice&lt;T&gt;(data: &amp;const [T], start: uint64, end: uint64) -&gt; [T]</code></a></h4>
+<p>Extract a slice from an array.</p>
+<pre><code class="language-cpp">let arr = [1, 2, 3, 4, 5];
+let sub = slice(&amp;arr, 1u, 4u);  // [2, 3, 4]
+</code></pre>
+<h3 id="struct-vectort"><a class="header" href="#struct-vectort">Struct: <code>Vector&lt;T&gt;</code></a></h3>
+<p>A generic dynamic array.</p>
+<pre><code class="language-cpp">struct Vector&lt;T&gt; {
 public:
+    data: [T];
     length: uint64;
     capacity: uint64;
-    Vector(data: [T]) {
-        this.length = len(data);
-        this.capacity = this.length;
-        this.data = data;
-    }
 }
 </code></pre>
-<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>len(this: Vector&lt;T&gt;) -&gt; uint64</code>: Get the length of the vector.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>is_empty(this: Vector&lt;T&gt;) -&gt; bool</code>: Check if the vector is empty.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>push(this: Vector&lt;T&gt;, val: T) -&gt; unit</code>: Add an element to the end of the vector.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>pop(this: Vector&lt;T&gt;) -&gt; T</code>: Remove and return the last element of the vector.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>get(this: Vector&lt;T&gt;, index: uint64) -&gt; T</code>: Get an element from the vector by index.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>set(this: Vector&lt;T&gt;, index: uint64, val: T) -&gt; unit</code>: Set an element in the vector by index.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>into_iter(this: Vector&lt;T&gt;) -&gt; Iter&lt;T&gt;</code>: Create an iterator (from <code>std/iter</code>) over the elements of the vector.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>Vector::&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code>: Create a new vector with a specified capacity.</li>
-</ul>
-<h3 id="functions-2"><a class="header" href="#functions-2">Functions</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>len&lt;T&gt;(lst: [T]) -&gt; uint64</code>: Get the length of a list.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>slice&lt;T&gt;(lst: [T], start: uint64, end: uint64) -&gt; [T]</code>: Get a slice of a list from start to end.</li>
-</ul>
+<h4 id="constructor-2"><a class="header" href="#constructor-2">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/vector";
+
+let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+</code></pre>
+<h4 id="static-methods-1"><a class="header" href="#static-methods-1">Static Methods</a></h4>
+<h5 id="vectortwith_capacitycapacity-uint64---vectort"><a class="header" href="#vectortwith_capacitycapacity-uint64---vectort"><code>Vector::&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code></a></h5>
+<p>Create a vector with a specific initial capacity.</p>
+<pre><code class="language-cpp">let vec = Vector&lt;int64&gt;::with_capacity(10u);
+</code></pre>
+<h4 id="instance-methods-1"><a class="header" href="#instance-methods-1">Instance Methods</a></h4>
+<h5 id="getthis-index-uint64---const-t"><a class="header" href="#getthis-index-uint64---const-t"><code>get(&amp;this, index: uint64) -&gt; &amp;const T</code></a></h5>
+<p>Get a const reference to an element.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let val = vec.get(1u);  // &amp;2
+</code></pre>
+<h5 id="get_mutthis-index-uint64---t"><a class="header" href="#get_mutthis-index-uint64---t"><code>get_mut(&amp;this, index: uint64) -&gt; &amp;T</code></a></h5>
+<p>Get a mutable reference to an element.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let val = vec.get_mut(1u);
+*val = 10;
+</code></pre>
+<h5 id="setthis-index-uint64-val-t"><a class="header" href="#setthis-index-uint64-val-t"><code>set(&amp;this, index: uint64, val: T)</code></a></h5>
+<p>Set an element at a specific index.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+vec.set(1u, 10);
+</code></pre>
+<h5 id="pushthis-val-t"><a class="header" href="#pushthis-val-t"><code>push(&amp;this, val: T)</code></a></h5>
+<p>Add an element to the end of the vector.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2]);
+vec.push(3);
+</code></pre>
+<h5 id="popthis---t"><a class="header" href="#popthis---t"><code>pop(&amp;this) -&gt; T</code></a></h5>
+<p>Remove and return the last element.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let last = vec.pop();  // 3
+</code></pre>
+<h5 id="into_iterthis---itert"><a class="header" href="#into_iterthis---itert"><code>into_iter(this) -&gt; Iter&lt;T&gt;</code></a></h5>
+<p>Consume the vector and create an iterator.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let iter = vec.into_iter();
+</code></pre>
+<h2 id="stdoptional"><a class="header" href="#stdoptional"><code>std/optional</code></a></h2>
+<p>Type-safe nullable values.</p>
+<h3 id="struct-optionalt"><a class="header" href="#struct-optionalt">Struct: <code>optional&lt;T&gt;</code></a></h3>
+<p>Represents a value that may or may not be present.</p>
+<h4 id="static-methods-2"><a class="header" href="#static-methods-2">Static Methods</a></h4>
+<h5 id="optionaltofdata-t---optionalt"><a class="header" href="#optionaltofdata-t---optionalt"><code>optional&lt;T&gt;::of(data: T) -&gt; optional&lt;T&gt;</code></a></h5>
+<p>Create an optional containing a value.</p>
+<pre><code class="language-cpp">import "std/optional";
+
+let opt = optional&lt;int64&gt;::of(42);
+</code></pre>
+<h5 id="optionaltempty---optionalt"><a class="header" href="#optionaltempty---optionalt"><code>optional&lt;T&gt;::empty() -&gt; optional&lt;T&gt;</code></a></h5>
+<p>Create an empty optional.</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
+</code></pre>
+<h4 id="instance-methods-2"><a class="header" href="#instance-methods-2">Instance Methods</a></h4>
+<h5 id="has_valuethis---bool"><a class="header" href="#has_valuethis---bool"><code>has_value(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if the optional contains a value.</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
+if opt.has_value() {
+    println("Has value");
+}
+</code></pre>
+<h5 id="valuethis---t"><a class="header" href="#valuethis---t"><code>value(this) -&gt; T</code></a></h5>
+<p>Consume the optional and return the value (panics if empty).</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
+let val = opt.value();  // 42
+</code></pre>
+<h5 id="value_orthis-default-t---t"><a class="header" href="#value_orthis-default-t---t"><code>value_or(this, default: T) -&gt; T</code></a></h5>
+<p>Consume the optional and return the value or a default.</p>
+<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
+let val = opt.value_or(0);  // 0
+</code></pre>
+<p>See <a href="#error-handling-in-atlas-77">Error Handling</a> for more examples.</p>
+<h2 id="stdexpected"><a class="header" href="#stdexpected"><code>std/expected</code></a></h2>
+<p>Result type for operations that can fail.</p>
+<h3 id="struct-expectedt-e"><a class="header" href="#struct-expectedt-e">Struct: <code>expected&lt;T, E&gt;</code></a></h3>
+<p>Represents either a success value or an error.</p>
+<h4 id="static-methods-3"><a class="header" href="#static-methods-3">Static Methods</a></h4>
+<h5 id="expectedt-eexpectdata-t---expectedt-e"><a class="header" href="#expectedt-eexpectdata-t---expectedt-e"><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code></a></h5>
+<p>Create a successful expected.</p>
+<pre><code class="language-cpp">import "std/expected";
+
+let result = expected&lt;int64, string&gt;::expect(42);
+</code></pre>
+<h5 id="expectedt-eunexpectederror-e---expectedt-e"><a class="header" href="#expectedt-eunexpectederror-e---expectedt-e"><code>expected&lt;T, E&gt;::unexpected(error: E) -&gt; expected&lt;T, E&gt;</code></a></h5>
+<p>Create a failed expected.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
+</code></pre>
+<h4 id="instance-methods-3"><a class="header" href="#instance-methods-3">Instance Methods</a></h4>
+<h5 id="is_expectedthis---bool"><a class="header" href="#is_expectedthis---bool"><code>is_expected(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if this contains a value.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
+if result.is_expected() {
+    println("Success");
+}
+</code></pre>
+<h5 id="is_unexpectedthis---bool"><a class="header" href="#is_unexpectedthis---bool"><code>is_unexpected(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if this contains an error.</p>
+<pre><code class="language-cpp">if result.is_unexpected() {
+    println("Error occurred");
+}
+</code></pre>
+<h5 id="expected_valuethis---t"><a class="header" href="#expected_valuethis---t"><code>expected_value(this) -&gt; T</code></a></h5>
+<p>Consume and return the value (panics if error).</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
+let val = result.expected_value();  // 42
+</code></pre>
+<h5 id="unexpected_valuethis---e"><a class="header" href="#unexpected_valuethis---e"><code>unexpected_value(this) -&gt; E</code></a></h5>
+<p>Consume and return the error (panics if value).</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
+let err = result.unexpected_value();  // "Error"
+</code></pre>
+<h5 id="expected_value_orthis-default-t---t"><a class="header" href="#expected_value_orthis-default-t---t"><code>expected_value_or(this, default: T) -&gt; T</code></a></h5>
+<p>Consume and return the value or a default.</p>
+<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
+let val = result.expected_value_or(0);  // 0
+</code></pre>
+<p>See <a href="#error-handling-in-atlas-77">Error Handling</a> for more examples.</p>
+<h2 id="stditer"><a class="header" href="#stditer"><code>std/iter</code></a></h2>
+<p>Iterator utilities for traversing collections.</p>
+<h3 id="struct-itert"><a class="header" href="#struct-itert">Struct: <code>Iter&lt;T&gt;</code></a></h3>
+<p>Generic iterator over elements of type T.</p>
+<pre><code class="language-cpp">struct Iter&lt;T&gt; {
+public:
+    data: Vector&lt;T&gt;;
+    index: uint64;
+}
+</code></pre>
+<h4 id="constructor-3"><a class="header" href="#constructor-3">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/iter";
+import "std/vector";
+
+let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let iter = new Iter&lt;int64&gt;(vec);
+</code></pre>
+<h4 id="static-methods-4"><a class="header" href="#static-methods-4">Static Methods</a></h4>
+<h5 id="itertfrom_arraydata-t---itert"><a class="header" href="#itertfrom_arraydata-t---itert"><code>Iter&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code></a></h5>
+<p>Create an iterator from an array.</p>
+<pre><code class="language-cpp">let arr = [1, 2, 3];
+let iter = Iter&lt;int64&gt;::from_array(arr);
+</code></pre>
+<h5 id="itercharfrom_stringdata-string---iterchar"><a class="header" href="#itercharfrom_stringdata-string---iterchar"><code>Iter&lt;char&gt;::from_string(data: String) -&gt; Iter&lt;char&gt;</code></a></h5>
+<p>Create an iterator from a String.</p>
+<pre><code class="language-cpp">let str = new String("Hi");
+let iter = Iter&lt;char&gt;::from_string(str);
+</code></pre>
+<h5 id="itercharfrom_strdata-const-string---iterchar"><a class="header" href="#itercharfrom_strdata-const-string---iterchar"><code>Iter&lt;char&gt;::from_str(data: &amp;const string) -&gt; Iter&lt;char&gt;</code></a></h5>
+<p>Create an iterator from a string primitive.</p>
+<pre><code class="language-cpp">let text = "Hi";
+let iter = Iter&lt;char&gt;::from_str(&amp;text);
+</code></pre>
+<h4 id="instance-methods-4"><a class="header" href="#instance-methods-4">Instance Methods</a></h4>
+<h5 id="nextthis---optionalt"><a class="header" href="#nextthis---optionalt"><code>next(&amp;this) -&gt; optional&lt;T&gt;</code></a></h5>
+<p>Get the next item (returns empty if exhausted).</p>
+<pre><code class="language-cpp">let iter = Iter&lt;int64&gt;::from_array([1, 2]);
+let first = iter.next();  // optional::of(1)
+let second = iter.next();  // optional::of(2)
+let third = iter.next();  // optional::empty()
+</code></pre>
+<h5 id="peekthis---optionalconst-t"><a class="header" href="#peekthis---optionalconst-t"><code>peek(&amp;this) -&gt; optional&lt;&amp;const T&gt;</code></a></h5>
+<p>Peek at the next item without advancing.</p>
+<pre><code class="language-cpp">let iter = Iter&lt;int64&gt;::from_array([1, 2]);
+let peeked = iter.peek();  // optional::of(&amp;1)
+let next = iter.next();     // optional::of(1)
+</code></pre>
+<h5 id="has_nextthis---bool"><a class="header" href="#has_nextthis---bool"><code>has_next(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if there are more items.</p>
+<pre><code class="language-cpp">while iter.has_next() {
+    let item = iter.next().value();
+    println(item);
+}
+</code></pre>
 <h2 id="stdtime"><a class="header" href="#stdtime"><code>std/time</code></a></h2>
-<h3 id="structs-3"><a class="header" href="#structs-3">Structs</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>Time</code>: A time type that can be used to represent time.</li>
-</ul>
-<pre><code>struct Time {
+<p>Time operations and formatting.</p>
+<h3 id="struct-time"><a class="header" href="#struct-time">Struct: <code>Time</code></a></h3>
+<p>Represents a point in time.</p>
+<pre><code class="language-cpp">struct Time {
 public:
     sec: int64;
     nsec: int64;
-    Time(sec: int64, nsec: int64) {
-        this.sec = sec;
-        this.nsec = nsec;
-    }
 }
 </code></pre>
-<h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>Time::now() -&gt; Time</code>: Get the current time.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>format(this: Time, fmt: str) -&gt; str</code>: Format the time as a string.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>to_iso_string(this: Time) -&gt; str</code>: Convert the time to an ISO 8601 string.</li>
-</ul>
-<blockquote>
-<p>Yeah well, I don’t know why this function exists, but who knows, maybe it will be useful one day.</p>
-</blockquote>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>sleep(this: Time) -&gt; unit</code>: Sleep for the specified time.</li>
-</ul>
-<blockquote>
-<p>NB: This is a blocking sleep. Might not work. BEWARE.</p>
-</blockquote>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>elapsed(this: Time, since: Time) -&gt; uint64</code>: Calculate the elapsed time between two time values in milliseconds.</li>
-</ul>
-<h3 id="functions-3"><a class="header" href="#functions-3">Functions</a></h3>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>now() -&gt; Time</code>: Get the current time.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>sleep(t: Time) -&gt; unit</code>: Sleep for the specified time.</li>
-</ul>
-<blockquote>
-<p>NB: This is a blocking sleep. Might not work. BEWARE.</p>
-</blockquote>
-<ul>
-<li><input disabled="" type="checkbox" checked=""> <code>format_time(t: Time, fmt: str) -&gt; str</code>: Format the time as a string.</li>
-</ul>
+<h4 id="constructor-4"><a class="header" href="#constructor-4">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/time";
+
+let time = new Time(1234567890, 0);
+</code></pre>
+<h4 id="static-methods-5"><a class="header" href="#static-methods-5">Static Methods</a></h4>
+<h5 id="timenow---time"><a class="header" href="#timenow---time"><code>Time::now() -&gt; Time</code></a></h5>
+<p>Get the current time.</p>
+<pre><code class="language-cpp">let now = Time::now();
+</code></pre>
+<h4 id="instance-methods-5"><a class="header" href="#instance-methods-5">Instance Methods</a></h4>
+<h5 id="formatthis-fmt-string---string"><a class="header" href="#formatthis-fmt-string---string"><code>format(&amp;this, fmt: string) -&gt; string</code></a></h5>
+<p>Format the time as a string.</p>
+<pre><code class="language-cpp">let time = Time::now();
+let formatted = time.format("%Y-%m-%d %H:%M:%S");
+</code></pre>
+<h5 id="to_iso_stringthis---string"><a class="header" href="#to_iso_stringthis---string"><code>to_iso_string(&amp;this) -&gt; string</code></a></h5>
+<p>Convert to ISO 8601 format.</p>
+<pre><code class="language-cpp">let time = Time::now();
+let iso = time.to_iso_string();
+</code></pre>
+<h5 id="sleepthis"><a class="header" href="#sleepthis"><code>sleep(&amp;this)</code></a></h5>
+<p>Sleep for the duration represented by this Time.</p>
+<pre><code class="language-cpp">let duration = new Time(2, 0);  // 2 seconds
+duration.sleep();
+</code></pre>
+<h5 id="elapsedthis-since-time---time"><a class="header" href="#elapsedthis-since-time---time"><code>elapsed(&amp;this, since: Time) -&gt; Time</code></a></h5>
+<p>Calculate elapsed time since another time.</p>
+<pre><code class="language-cpp">let start = Time::now();
+// ... do work ...
+let end = Time::now();
+let duration = end.elapsed(start);
+</code></pre>
 <h2 id="stdmath"><a class="header" href="#stdmath"><code>std/math</code></a></h2>
-<h3 id="functions-4"><a class="header" href="#functions-4">Functions</a></h3>
+<p>Mathematical functions.</p>
+<h3 id="functions-1-1"><a class="header" href="#functions-1-1">Functions</a></h3>
+<h4 id="absx-int64---int64"><a class="header" href="#absx-int64---int64"><code>abs(x: int64) -&gt; int64</code></a></h4>
+<p>Absolute value of an integer.</p>
+<pre><code class="language-cpp">import "std/math";
+
+let result = abs(-5);  // 5
+</code></pre>
+<h4 id="abs_fx-float64---float64"><a class="header" href="#abs_fx-float64---float64"><code>abs_f(x: float64) -&gt; float64</code></a></h4>
+<p>Absolute value of a float.</p>
+<pre><code class="language-cpp">let result = abs_f(-3.14);  // 3.14
+</code></pre>
+<h4 id="roundx-float64---int64"><a class="header" href="#roundx-float64---int64"><code>round(x: float64) -&gt; int64</code></a></h4>
+<p>Round a float to the nearest integer.</p>
+<pre><code class="language-cpp">let result = round(3.7);  // 4
+</code></pre>
+<h4 id="randommin-int64-max-int64---int64"><a class="header" href="#randommin-int64-max-int64---int64"><code>random(min: int64, max: int64) -&gt; int64</code></a></h4>
+<p>Generate a random integer in the range [min, max].</p>
+<pre><code class="language-cpp">let num = random(1, 10);
+</code></pre>
+<h4 id="sin_fx-float64---float64"><a class="header" href="#sin_fx-float64---float64"><code>sin_f(x: float64) -&gt; float64</code></a></h4>
+<p>Sine of x (radians).</p>
+<pre><code class="language-cpp">let result = sin_f(3.14159 / 2.0);  // ~1.0
+</code></pre>
+<h4 id="cos_fx-float64---float64"><a class="header" href="#cos_fx-float64---float64"><code>cos_f(x: float64) -&gt; float64</code></a></h4>
+<p>Cosine of x (radians).</p>
+<pre><code class="language-cpp">let result = cos_f(0.0);  // 1.0
+</code></pre>
+<h4 id="minx-int64-y-int64---int64"><a class="header" href="#minx-int64-y-int64---int64"><code>min(x: int64, y: int64) -&gt; int64</code></a></h4>
+<p>Minimum of two integers.</p>
+<pre><code class="language-cpp">let result = min(5, 10);  // 5
+</code></pre>
+<h4 id="min_fx-float64-y-float64---float64"><a class="header" href="#min_fx-float64-y-float64---float64"><code>min_f(x: float64, y: float64) -&gt; float64</code></a></h4>
+<p>Minimum of two floats.</p>
+<pre><code class="language-cpp">let result = min_f(3.5, 2.1);  // 2.1
+</code></pre>
+<h4 id="maxx-int64-y-int64---int64"><a class="header" href="#maxx-int64-y-int64---int64"><code>max(x: int64, y: int64) -&gt; int64</code></a></h4>
+<p>Maximum of two integers.</p>
+<pre><code class="language-cpp">let result = max(5, 10);  // 10
+</code></pre>
+<h4 id="max_fx-float64-y-float64---float64"><a class="header" href="#max_fx-float64-y-float64---float64"><code>max_f(x: float64, y: float64) -&gt; float64</code></a></h4>
+<p>Maximum of two floats.</p>
+<pre><code class="language-cpp">let result = max_f(3.5, 2.1);  // 3.5
+</code></pre>
+<h4 id="powx-int64-y-int64---int64"><a class="header" href="#powx-int64-y-int64---int64"><code>pow(x: int64, y: int64) -&gt; int64</code></a></h4>
+<p>Raise x to the power of y (integers).</p>
+<pre><code class="language-cpp">let result = pow(2, 10);  // 1024
+</code></pre>
+<h4 id="pow_fx-float64-y-int64---float64"><a class="header" href="#pow_fx-float64-y-int64---float64"><code>pow_f(x: float64, y: int64) -&gt; float64</code></a></h4>
+<p>Raise x to the power of y (float base).</p>
+<pre><code class="language-cpp">let result = pow_f(2.0, 3);  // 8.0
+</code></pre>
+<h2 id="stdmap"><a class="header" href="#stdmap"><code>std/map</code></a></h2>
+<p>Key-value map data structure.</p>
+<h3 id="struct-pairk-v"><a class="header" href="#struct-pairk-v">Struct: <code>Pair&lt;K, V&gt;</code></a></h3>
+<p>A key-value pair.</p>
+<pre><code class="language-cpp">struct Pair&lt;K, V&gt; {
+public:
+    key: K;
+    value: V;
+}
+</code></pre>
+<h4 id="constructor-5"><a class="header" href="#constructor-5">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/map";
+
+let pair = new Pair&lt;int64, string&gt;(1, "one");
+</code></pre>
+<h4 id="instance-methods-6"><a class="header" href="#instance-methods-6">Instance Methods</a></h4>
+<h5 id="get_firstconst-this---k"><a class="header" href="#get_firstconst-this---k"><code>get_first(&amp;const this) -&gt; K</code></a></h5>
+<p>Get the key (requires K to be copyable).</p>
+<pre><code class="language-cpp">let pair = new Pair&lt;int64, string&gt;(1, "one");
+let key = pair.get_first();  // 1
+</code></pre>
+<h5 id="get_secondconst-this---v"><a class="header" href="#get_secondconst-this---v"><code>get_second(&amp;const this) -&gt; V</code></a></h5>
+<p>Get the value (requires V to be copyable).</p>
+<pre><code class="language-cpp">let value = pair.get_second();  // "one"
+</code></pre>
+<h5 id="swapthis---pairv-k"><a class="header" href="#swapthis---pairv-k"><code>swap(this) -&gt; Pair&lt;V, K&gt;</code></a></h5>
+<p>Consume the pair and return a new pair with swapped key and value.</p>
+<pre><code class="language-cpp">let pair = new Pair&lt;int64, string&gt;(1, "one");
+let swapped = pair.swap();  // Pair&lt;string, int64&gt;
+</code></pre>
+<h3 id="struct-mapk-v"><a class="header" href="#struct-mapk-v">Struct: <code>Map&lt;K, V&gt;</code></a></h3>
+<p>A simple key-value map.</p>
+<pre><code class="language-cpp">struct Map&lt;K, V&gt; {
+private:
+    keys: Vector&lt;K&gt;;
+    values: Vector&lt;V&gt;;
+}
+</code></pre>
+<h4 id="constructor-6"><a class="header" href="#constructor-6">Constructor</a></h4>
+<pre><code class="language-cpp">let map = new Map&lt;int64, string&gt;();
+</code></pre>
+<h4 id="instance-methods-7"><a class="header" href="#instance-methods-7">Instance Methods</a></h4>
+<h5 id="getthis-key-k---optionalconst-v"><a class="header" href="#getthis-key-k---optionalconst-v"><code>get(&amp;this, key: K) -&gt; optional&lt;&amp;const V&gt;</code></a></h5>
+<p>Get a const reference to the value for a key.</p>
+<pre><code class="language-cpp">let map = new Map&lt;int64, string&gt;();
+map.insert(1, "one");
+
+let value_opt = map.get(1);
+if value_opt.has_value() {
+    let value_ref = value_opt.value();
+    println(*value_ref);
+}
+</code></pre>
+<h5 id="get_mutthis-key-k---optionalv"><a class="header" href="#get_mutthis-key-k---optionalv"><code>get_mut(&amp;this, key: K) -&gt; optional&lt;&amp;V&gt;</code></a></h5>
+<p>Get a mutable reference to the value for a key.</p>
+<pre><code class="language-cpp">let value_ref = map.get_mut(1);
+if value_ref.has_value() {
+    let val = value_ref.value();
+    *val = "ONE";
+}
+</code></pre>
+<h5 id="insertthis-key-k-value-v"><a class="header" href="#insertthis-key-k-value-v"><code>insert(&amp;this, key: K, value: V)</code></a></h5>
+<p>Insert or update a key-value pair.</p>
+<pre><code class="language-cpp">map.insert(1, "one");
+map.insert(1, "ONE");  // Updates existing
+</code></pre>
+<h5 id="contains_keythis-key-k---bool"><a class="header" href="#contains_keythis-key-k---bool"><code>contains_key(&amp;this, key: K) -&gt; bool</code></a></h5>
+<p>Check if a key exists.</p>
+<pre><code class="language-cpp">if map.contains_key(1) {
+    println("Key found");
+}
+</code></pre>
+<h5 id="removethis-key-k---optionalv"><a class="header" href="#removethis-key-k---optionalv"><code>remove(&amp;this, key: K) -&gt; optional&lt;V&gt;</code></a></h5>
+<p>Remove and return the value for a key.</p>
+<pre><code class="language-cpp">let value = map.remove(1);
+</code></pre>
+<h5 id="lenthis---uint64-1"><a class="header" href="#lenthis---uint64-1"><code>len(&amp;this) -&gt; uint64</code></a></h5>
+<p>Get the number of entries.</p>
+<pre><code class="language-cpp">let count = map.len();
+</code></pre>
+<h5 id="is_emptythis---bool-1"><a class="header" href="#is_emptythis---bool-1"><code>is_empty(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if the map is empty.</p>
+<pre><code class="language-cpp">if map.is_empty() {
+    println("Map is empty");
+}
+</code></pre>
+<h2 id="stdqueue"><a class="header" href="#stdqueue"><code>std/queue</code></a></h2>
+<p>FIFO queue data structure.</p>
+<h3 id="struct-queuet"><a class="header" href="#struct-queuet">Struct: <code>Queue&lt;T&gt;</code></a></h3>
+<p>A first-in-first-out queue.</p>
+<pre><code class="language-cpp">struct Queue&lt;T&gt; {
+private:
+    items: [T];
+public:
+    head: uint64;
+    tail: uint64;
+    size: uint64;
+    count: uint64;
+}
+</code></pre>
+<h4 id="static-methods-6"><a class="header" href="#static-methods-6">Static Methods</a></h4>
+<h5 id="queuetwith_sizesize-uint64---queuet"><a class="header" href="#queuetwith_sizesize-uint64---queuet"><code>Queue::&lt;T&gt;::with_size(size: uint64) -&gt; Queue&lt;T&gt;</code></a></h5>
+<p>Create a queue with a fixed size.</p>
+<pre><code class="language-cpp">import "std/queue";
+
+let queue = Queue&lt;int64&gt;::with_size(10u);
+</code></pre>
+<h4 id="instance-methods-8"><a class="header" href="#instance-methods-8">Instance Methods</a></h4>
+<h5 id="enqueuethis-item-t"><a class="header" href="#enqueuethis-item-t"><code>enqueue(&amp;this, item: T)</code></a></h5>
+<p>Add an item to the back of the queue.</p>
+<pre><code class="language-cpp">queue.enqueue(1);
+queue.enqueue(2);
+</code></pre>
+<h5 id="dequeuethis---t"><a class="header" href="#dequeuethis---t"><code>dequeue(&amp;this) -&gt; T</code></a></h5>
+<p>Remove and return the item at the front.</p>
+<pre><code class="language-cpp">let first = queue.dequeue();  // 1
+</code></pre>
+<h5 id="is_fullthis---bool"><a class="header" href="#is_fullthis---bool"><code>is_full(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if the queue is full.</p>
+<pre><code class="language-cpp">if queue.is_full() {
+    println("Queue is full");
+}
+</code></pre>
+<h5 id="is_emptythis---bool-2"><a class="header" href="#is_emptythis---bool-2"><code>is_empty(&amp;this) -&gt; bool</code></a></h5>
+<p>Check if the queue is empty.</p>
+<pre><code class="language-cpp">if queue.is_empty() {
+    println("Queue is empty");
+}
+</code></pre>
+<h2 id="stdbox"><a class="header" href="#stdbox"><code>std/box</code></a></h2>
+<blockquote>
+<p><strong>⚠️ Deprecated:</strong> This module is deprecated and will be replaced by <code>std/experimental/smart_ptr</code> in the future.</p>
+</blockquote>
+<h3 id="struct-boxt"><a class="header" href="#struct-boxt">Struct: <code>Box&lt;T&gt;</code></a></h3>
+<p>A simple container for a single value.</p>
+<pre><code class="language-cpp">struct Box&lt;T&gt; {
+private:
+    data: T;
+}
+</code></pre>
+<h4 id="constructor-7"><a class="header" href="#constructor-7">Constructor</a></h4>
+<pre><code class="language-cpp">import "std/box";
+
+let box = new Box&lt;int64&gt;(42);
+</code></pre>
+<h4 id="instance-methods-9"><a class="header" href="#instance-methods-9">Instance Methods</a></h4>
+<h5 id="getthis---t"><a class="header" href="#getthis---t"><code>get(&amp;this) -&gt; T</code></a></h5>
+<p>Get the contained value.</p>
+<pre><code class="language-cpp">let value = box.get();
+</code></pre>
+<h5 id="setthis-data-t"><a class="header" href="#setthis-data-t"><code>set(&amp;this, data: T)</code></a></h5>
+<p>Set the contained value.</p>
+<pre><code class="language-cpp">box.set(100);
+</code></pre>
+<h2 id="stdmem"><a class="header" href="#stdmem"><code>std/mem</code></a></h2>
+<p>Memory utilities.</p>
+<h3 id="functions-2"><a class="header" href="#functions-2">Functions</a></h3>
+<h4 id="memcpytdata-const-t---t"><a class="header" href="#memcpytdata-const-t---t"><code>memcpy&lt;T&gt;(data: &amp;const T) -&gt; T</code></a></h4>
+<p>Create a shallow copy of a value.</p>
+<pre><code class="language-cpp">import "std/mem";
+
+let x = 42;
+let y = memcpy(&amp;x);
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> This performs a shallow copy. For deep copies, implement <code>_copy</code> on type T.</p>
+</blockquote>
+<h4 id="delete_from_reftdata-const-t"><a class="header" href="#delete_from_reftdata-const-t"><code>delete_from_ref&lt;T&gt;(data: &amp;const T)</code></a></h4>
+<p>Delete memory referenced by a pointer.</p>
+<pre><code class="language-cpp">// Use with extreme caution - can lead to undefined behavior
+delete_from_ref(&amp;some_value);
+</code></pre>
+<blockquote>
+<p><strong>⚠️ Warning:</strong> This function can lead to undefined behavior. Use with caution.</p>
+</blockquote>
+<hr>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
 <ul>
-<li><input disabled="" type="checkbox" checked=""> <code>abs(x: int64) -&gt; int64</code>: Compute the absolute value of a integer number.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>abs_f(x: float64) -&gt; float64</code>: Compute the absolute value of a floating-point number.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>round(x: float64) -&gt; int64</code>: Round a floating-point number to the nearest integer.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>random(min: int64, max: int64) -&gt; int64</code>: Generate a random integer number in the range <code>[min, max]</code>.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>pow(x: int64, y: int64) -&gt; int64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>pow_f(x: float64, y: float64) -&gt; float64</code>: Compute <code>x</code> raised to the power of <code>y</code>.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>min(x: int64, y: int64) -&gt; int64</code>: Compute the minimum of two integer numbers.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>min_f(x: float64, y: float64) -&gt; float64</code>: Compute the minimum of two floating-point numbers.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>max(x: int64, y: int64) -&gt; int64</code>: Compute the maximum of two integer numbers.</li>
-<li><input disabled="" type="checkbox" checked=""> <code>max_f(x: float64, y: float64) -&gt; float64</code>: Compute the maximum of two floating-point numbers.</li>
+<li><a href="#error-handling-in-atlas-77">Error Handling</a> – Using optional and expected</li>
+<li><a href="#memory-model-and-ownership">Memory Model</a> – Ownership and copy semantics</li>
+<li><a href="#language-reference">Language Reference</a> – Language syntax and features</li>
 </ul>
-<h2 id="stdoption"><a class="header" href="#stdoption"><code>std/option</code></a></h2>
-<h3 id="structs-4"><a class="header" href="#structs-4">Structs</a></h3>
+<h3 id="structs-1"><a class="header" href="#structs-1">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>Option&lt;T&gt;</code>: A type that represents an optional value, which can either be <code>SOME</code> or <code>NONE</code>.</li>
 </ul>
@@ -1672,7 +3005,7 @@ private:
 	}
 }
 </code></pre>
-<h3 id="methods-4"><a class="header" href="#methods-4">Methods</a></h3>
+<h3 id="methods-1-1"><a class="header" href="#methods-1-1">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>is_some(this: Option&lt;T&gt;) -&gt; bool</code>: Check if the option is <code>SOME</code>.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>is_none(this: Option&lt;T&gt;) -&gt; bool</code>: Check if the option is <code>NONE</code>.</li>
@@ -1684,7 +3017,7 @@ private:
 <p>Don’t exist yet.</p>
 </blockquote>
 <h2 id="stdresult"><a class="header" href="#stdresult"><code>std/result</code></a></h2>
-<h3 id="structs-5"><a class="header" href="#structs-5">Structs</a></h3>
+<h3 id="structs-1-1"><a class="header" href="#structs-1-1">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>Result&lt;T, E&gt;</code>: A type that represents either a success <code>OK</code> carrying the type <code>T</code> or an error <code>ERR</code> carrying the type <code>E</code>.</li>
 </ul>
@@ -1705,7 +3038,7 @@ private:
     }
 }
 </code></pre>
-<h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
+<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>Result::&lt;T, E&gt;::ok(value: T) -&gt; Result&lt;T, E&gt;</code>: Create a new <code>OK</code> result.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>Result::&lt;T, E&gt;::err(error: E) -&gt; Result&lt;T, E&gt;</code>: Create a new <code>ERR</code> result.</li>
@@ -1726,8 +3059,8 @@ private:
 <blockquote>
 <p>Don’t exist yet.</p>
 </blockquote>
-<h2 id="stdbox"><a class="header" href="#stdbox"><code>std/box</code></a></h2>
-<h3 id="structs-6"><a class="header" href="#structs-6">Structs</a></h3>
+<h2 id="stdbox-1"><a class="header" href="#stdbox-1"><code>std/box</code></a></h2>
+<h3 id="structs-2"><a class="header" href="#structs-2">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>Box&lt;T&gt;</code>: A type that represents a heap-allocated value of type <code>T</code>.</li>
 </ul>
@@ -1740,13 +3073,13 @@ public:
     }
 }
 </code></pre>
-<h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>
+<h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>get(this: Box&lt;T&gt;) -&gt; T</code>: Get the value inside the box.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>set(this: Box&lt;T&gt;, value: T) -&gt; unit</code>: Set the value inside the box.</li>
 </ul>
-<h2 id="stditer"><a class="header" href="#stditer"><code>std/iter</code></a></h2>
-<h3 id="structs-7"><a class="header" href="#structs-7">Structs</a></h3>
+<h2 id="stditer-1"><a class="header" href="#stditer-1"><code>std/iter</code></a></h2>
+<h3 id="structs-3"><a class="header" href="#structs-3">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>Iter&lt;T&gt;</code>: An iterator type that can be used to iterate over a collection of type <code>T</code>. (as of now it only iters over a <code>Vector&lt;T&gt;</code>.)</li>
 </ul>
@@ -1761,7 +3094,7 @@ public:
     }
 }
 </code></pre>
-<h3 id="methods-7"><a class="header" href="#methods-7">Methods</a></h3>
+<h3 id="methods-4"><a class="header" href="#methods-4">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>next(this: Iter&lt;T&gt;) -&gt; Option&lt;T&gt;</code>: Get the next element in the iterator.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>peek(this: Iter&lt;T&gt;) -&gt; Option&lt;&amp;const T&gt;</code>: Peek at the next element in the iterator without advancing it.</li>
@@ -1769,8 +3102,8 @@ public:
 <li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code>: Create a new iterator from an array.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>Iter::&lt;T&gt;::from_string(data: string) -&gt; Iter&lt;char&gt;</code>: Create a new iterator from a primitive string.</li>
 </ul>
-<h2 id="stdmap"><a class="header" href="#stdmap"><code>std/map</code></a></h2>
-<h3 id="structs-8"><a class="header" href="#structs-8">Structs</a></h3>
+<h2 id="stdmap-1"><a class="header" href="#stdmap-1"><code>std/map</code></a></h2>
+<h3 id="structs-4"><a class="header" href="#structs-4">Structs</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>Map&lt;K, V&gt;</code>: A type that represents a key-value store.</li>
 </ul>
@@ -1785,7 +3118,7 @@ public:
     }
 }
 </code></pre>
-<h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
+<h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
 <ul>
 <li><input disabled="" type="checkbox" checked=""> <code>insert(this: Map&lt;K, V&gt;, key: K, value: V) -&gt; unit</code>: Insert a key-value pair into the map.</li>
 <li><input disabled="" type="checkbox" checked=""> <code>get(this: Map&lt;K, V&gt;, key: K) -&gt; Option&lt;V&gt;</code>: Get a value from the map by key.</li>
@@ -2128,10 +3461,10 @@ without unsafe surface area in Atlas77.</p>
 </blockquote>
 <h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
 <p>The language is actively developed. Feature requests, bug reports, and discussions are welcome. Development happens in the compiler repository.</p>
-<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<h2 id="see-also-1"><a class="header" href="#see-also-1">See Also</a></h2>
 <ul>
 <li><a href="#language-reference">Language Reference</a></li>
-<li><a href="#memory-model">Memory Model</a></li>
+<li><a href="#memory-model-and-ownership">Memory Model</a></li>
 <li><a href="#standard-library">Standard Library</a></li>
 </ul>
 

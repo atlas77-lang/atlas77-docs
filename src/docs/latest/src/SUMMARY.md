@@ -15,7 +15,7 @@
 
 # Type System
 
-- [Generics]()
+- [Generics](./generics.md)
 
 # Standard Library
 
