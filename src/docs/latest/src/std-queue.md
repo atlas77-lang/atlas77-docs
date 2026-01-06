@@ -52,7 +52,8 @@ let second = queue.dequeue();  // 2
 let third = queue.dequeue();   // panic: Queue is empty
 ```
 
-Returns `optional::empty()` if the queue is empty.
+Panics if the queue is empty.
+
 > [!Note]
 > In the future, `Queue<T>.dequeue` may return `optional<T>` to handle empty queues without panicking.
 
