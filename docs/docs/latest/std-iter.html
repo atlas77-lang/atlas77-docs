@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9764d1e9.js";
+            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-1e53146e.js"></script>
@@ -236,132 +236,6 @@ let next = iter.next();     // optional::of(1)
     println(item);
 }
 </code></pre>
-<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
-<h3 id="iterating-over-an-array"><a class="header" href="#iterating-over-an-array">Iterating Over an Array</a></h3>
-<pre><code class="language-cpp">import "std/iter";
-import "std/io";
-
-fun main() {
-    let numbers = [1, 2, 3, 4, 5];
-    let iter = Iter&lt;int64&gt;::from_array(numbers);
-    
-    while iter.has_next() {
-        let num = iter.next().value();
-        println(num);
-    }
-}
-</code></pre>
-<h3 id="iterating-over-a-string"><a class="header" href="#iterating-over-a-string">Iterating Over a String</a></h3>
-<pre><code class="language-cpp">import "std/iter";
-import "std/string";
-import "std/io";
-
-fun main() {
-    let text = "Hello";
-    let iter = Iter&lt;char&gt;::from_str(&amp;text);
-    
-    while iter.has_next() {
-        let ch = iter.next().value();
-        println(ch);
-    }
-}
-</code></pre>
-<h3 id="using-peek"><a class="header" href="#using-peek">Using peek()</a></h3>
-<pre><code class="language-cpp">import "std/iter";
-import "std/io";
-
-fun main() {
-    let numbers = [1, 2, 3];
-    let iter = Iter&lt;int64&gt;::from_array(numbers);
-    
-    while iter.has_next() {
-        let peeked = iter.peek();
-        if peeked.has_value() {
-            let val = *peeked.value();
-            if val &gt; 1 {
-                println("Found number &gt; 1");
-            }
-        }
-        iter.next();
-    }
-}
-</code></pre>
-<h3 id="consuming-a-vector"><a class="header" href="#consuming-a-vector">Consuming a Vector</a></h3>
-<pre><code class="language-cpp">import "std/vector";
-import "std/iter";
-import "std/io";
-
-fun main() {
-    let vec = new Vector&lt;int64&gt;([10, 20, 30]);
-    let iter = vec.into_iter();  // Consumes the vector
-    
-    while iter.has_next() {
-        let num = iter.next().value();
-        println(num * 2);
-    }
-    // vec is no longer accessible here
-}
-</code></pre>
-<h3 id="filtering-with-iterators"><a class="header" href="#filtering-with-iterators">Filtering with Iterators</a></h3>
-<pre><code class="language-cpp">import "std/iter";
-import "std/io";
-
-fun main() {
-    let numbers = [1, 2, 3, 4, 5, 6];
-    let iter = Iter&lt;int64&gt;::from_array(numbers);
-    
-    // Print only even numbers
-    while iter.has_next() {
-        let num = iter.next().value();
-        if num % 2 == 0 {
-            println(num);
-        }
-    }
-}
-</code></pre>
-<h3 id="collecting-from-iterator"><a class="header" href="#collecting-from-iterator">Collecting from Iterator</a></h3>
-<pre><code class="language-cpp">import "std/iter";
-import "std/vector";
-import "std/io";
-
-fun main() {
-    let source = [1, 2, 3, 4, 5];
-    let iter = Iter&lt;int64&gt;::from_array(source);
-    
-    let result = Vector&lt;int64&gt;::with_capacity(5u);
-    
-    while iter.has_next() {
-        let num = iter.next().value();
-        if num % 2 == 0 {
-            result.push(num);
-        }
-    }
-    
-    // result now contains [2, 4]
-    println(result.length);  // 2
-}
-</code></pre>
-<h2 id="performance-considerations"><a class="header" href="#performance-considerations">Performance Considerations</a></h2>
-<ul>
-<li><strong>Memory ownership</strong>: Iterators created with <code>into_iter()</code> take ownership of the collection</li>
-<li><strong>Reference iterators</strong>: <code>from_array()</code> and <code>from_str()</code> create iterators that reference existing data</li>
-<li><strong>Peek overhead</strong>: <code>peek()</code> is efficient as it doesn’t advance the iterator</li>
-</ul>
-<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
-<ol>
-<li><strong>Use has_next()</strong>: Always check <code>has_next()</code> before calling <code>next()</code> in loops</li>
-<li><strong>Handle optional returns</strong>: Remember that <code>next()</code> returns <code>optional&lt;T&gt;</code></li>
-<li><strong>Understand ownership</strong>: Know when iterators consume their source</li>
-<li><strong>Prefer iterators</strong>: Use iterators over manual indexing for cleaner code</li>
-</ol>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="./std-vector.html">std/vector</a> - Vector’s <code>into_iter()</code> method</li>
-<li><a href="./std-string.html">std/string</a> - String’s <code>into_iter()</code> method</li>
-<li><a href="./std-optional.html">std/optional</a> - Iterator returns optional values</li>
-<li><a href="./std.html">Standard Library Overview</a></li>
-</ul>
 
                     </main>
 

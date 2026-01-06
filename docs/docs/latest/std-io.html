@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9764d1e9.js";
+            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-1e53146e.js"></script>
@@ -218,46 +218,6 @@ fun divide(a: int64, b: int64) -&gt; int64 {
     return a / b;
 }
 </code></pre>
-<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
-<h3 id="basic-output"><a class="header" href="#basic-output">Basic Output</a></h3>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() {
-    println("Welcome to Atlas77!");
-    print("Your score: ");
-    println(42);
-}
-</code></pre>
-<h3 id="reading-user-input"><a class="header" href="#reading-user-input">Reading User Input</a></h3>
-<pre><code class="language-cpp">import "std/io";
-
-fun main() {
-    println("What is your name?");
-    let name = input();
-    println("Hello, " + name + "!");
-}
-</code></pre>
-<h3 id="error-handling-with-panic"><a class="header" href="#error-handling-with-panic">Error Handling with panic</a></h3>
-<pre><code class="language-cpp">import "std/io";
-
-fun safe_divide(a: int64, b: int64) -&gt; int64 {
-    if b == 0 {
-        panic("Cannot divide by zero");
-    }
-    return a / b;
-}
-
-fun main() {
-    let result = safe_divide(10, 2);
-    println(result);  // Output: 5
-}
-</code></pre>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="./std.html">Standard Library Overview</a></li>
-<li><a href="./error-handling.html">Error Handling</a></li>
-</ul>
 
                     </main>
 

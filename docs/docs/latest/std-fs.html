@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9764d1e9.js";
+            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-1e53146e.js"></script>
@@ -243,49 +243,6 @@ let entries = file.read_dir("./src");
 <pre><code class="language-cpp">let file = new File("dummy");
 let content = file.read_file("actual.txt");
 </code></pre>
-<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
-<h3 id="reading-a-file"><a class="header" href="#reading-a-file">Reading a File</a></h3>
-<pre><code class="language-cpp">import "std/fs";
-import "std/io";
-
-fun main() {
-    let file = new File("config.txt");
-    
-    if file.exists() {
-        let content = file.read();
-        println(content);
-    } else {
-        println("File not found");
-    }
-}
-</code></pre>
-<h3 id="writing-to-a-file"><a class="header" href="#writing-to-a-file">Writing to a File</a></h3>
-<pre><code class="language-cpp">import "std/fs";
-import "std/io";
-
-fun main() {
-    let file = new File("output.txt");
-    file.write("Hello from Atlas77!");
-    println("File written successfully");
-}
-</code></pre>
-<h3 id="managing-files-with-raii"><a class="header" href="#managing-files-with-raii">Managing Files with RAII</a></h3>
-<pre><code class="language-cpp">import "std/fs";
-import "std/io";
-
-fun process_file() {
-    let file = new File("data.txt");
-    let content = file.read();
-    println(content);
-    // File automatically closed when it goes out of scope
-}
-</code></pre>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="./std.html">Standard Library Overview</a></li>
-<li><a href="./memory-model.html">Memory Model</a> - RAII and automatic cleanup</li>
-</ul>
 
                     </main>
 

@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9764d1e9.js";
+            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-1e53146e.js"></script>
@@ -251,88 +251,6 @@ let iter = vec.into_iter();
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let val = vec.take(1u);  // 2
 </code></pre>
-<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
-<h3 id="creating-and-using-vectors"><a class="header" href="#creating-and-using-vectors">Creating and Using Vectors</a></h3>
-<pre><code class="language-cpp">import "std/vector";
-import "std/io";
-
-fun main() {
-    let numbers = new Vector&lt;int64&gt;([1, 2, 3]);
-    
-    // Add elements
-    numbers.push(4);
-    numbers.push(5);
-    
-    // Access elements
-    println(*numbers.get(0u));  // 1
-    
-    // Modify elements
-    numbers.set(0u, 10);
-    println(*numbers.get(0u));  // 10
-}
-</code></pre>
-<h3 id="growing-a-vector"><a class="header" href="#growing-a-vector">Growing a Vector</a></h3>
-<pre><code class="language-cpp">import "std/vector";
-import "std/io";
-
-fun main() {
-    let vec = Vector&lt;int64&gt;::with_capacity(5u);
-    
-    let i = 0;
-    while i &lt; 10 {
-        vec.push(i);
-        i = i + 1;
-    }
-    
-    println(vec.length);   // 10
-    println(vec.capacity); // &gt;= 10 (resized automatically)
-}
-</code></pre>
-<h3 id="iterating-over-a-vector"><a class="header" href="#iterating-over-a-vector">Iterating Over a Vector</a></h3>
-<pre><code class="language-cpp">import "std/vector";
-import "std/io";
-
-fun main() {
-    let numbers = new Vector&lt;int64&gt;([1, 2, 3, 4, 5]);
-    let iter = numbers.into_iter();
-    
-    while iter.has_next() {
-        let num = iter.next().value();
-        println(num);
-    }
-}
-</code></pre>
-<h3 id="working-with-strings"><a class="header" href="#working-with-strings">Working with Strings</a></h3>
-<pre><code class="language-cpp">import "std/vector";
-import "std/string";
-import "std/io";
-
-fun main() {
-    let names = new Vector&lt;String&gt;([]);
-    names.push(new String("Alice"));
-    names.push(new String("Bob"));
-    names.push(new String("Charlie"));
-    
-    let i = 0u;
-    while i &lt; names.length {
-        println(names.get(i).to_str());
-        i = i + 1u;
-    }
-}
-</code></pre>
-<h2 id="performance-notes"><a class="header" href="#performance-notes">Performance Notes</a></h2>
-<ul>
-<li><strong>Initial capacity</strong>: Use <code>with_capacity()</code> when you know the size ahead of time to avoid reallocations</li>
-<li><strong>Growth strategy</strong>: The vector doubles its capacity when full</li>
-<li><strong>Memory overhead</strong>: The vector allocates more space than needed for efficient growth</li>
-</ul>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="./std.html">Standard Library Overview</a></li>
-<li><a href="./std-iter.html">std/iter</a> - Iterating over vectors</li>
-<li><a href="./generics.html">Generics</a> - Understanding Vector<t></t></li>
-</ul>
 
                     </main>
 

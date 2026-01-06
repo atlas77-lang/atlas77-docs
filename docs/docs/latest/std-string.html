@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9764d1e9.js";
+            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-1e53146e.js"></script>
@@ -324,51 +324,6 @@ let parts = str.split(",");
 <pre><code class="language-cpp">let str = new String("Hi");
 let iter = str.into_iter();
 </code></pre>
-<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
-<h3 id="string-manipulation"><a class="header" href="#string-manipulation">String Manipulation</a></h3>
-<pre><code class="language-cpp">import "std/string";
-import "std/io";
-
-fun main() {
-    let text = new String("  Hello, World!  ");
-    let trimmed = text.trim();
-    let upper = trimmed.to_upper();
-    println(upper.to_str());  // "HELLO, WORLD!"
-}
-</code></pre>
-<h3 id="splitting-strings"><a class="header" href="#splitting-strings">Splitting Strings</a></h3>
-<pre><code class="language-cpp">import "std/string";
-import "std/io";
-
-fun main() {
-    let csv = new String("apple,banana,cherry");
-    let fruits = csv.split(",");
-    
-    let i = 0u;
-    while i &lt; len(&amp;fruits) {
-        println(fruits[i].to_str());
-        i = i + 1u;
-    }
-}
-</code></pre>
-<h3 id="building-strings"><a class="header" href="#building-strings">Building Strings</a></h3>
-<pre><code class="language-cpp">import "std/string";
-import "std/io";
-
-fun main() {
-    let str = new String("Hello");
-    str.push(' ');
-    str.push_str(new String("World"));
-    str.push('!');
-    println(str.to_str());  // "Hello World!"
-}
-</code></pre>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="./std.html">Standard Library Overview</a></li>
-<li><a href="./std-iter.html">std/iter</a> - String iteration</li>
-</ul>
 
                     </main>
 

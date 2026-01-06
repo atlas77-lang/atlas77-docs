@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9764d1e9.js";
+            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-1e53146e.js"></script>
@@ -215,7 +215,11 @@ if opt.has_value() {
 }
 </code></pre>
 <h3 id="valuethis---t"><a class="header" href="#valuethis---t"><code>value(this) -&gt; T</code></a></h3>
-<p>Consume the optional and return the value (panics if empty).</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>Known issues, this method leaks memory if <code>T</code> is an object.
+Consume the optional and return the value (panics if empty).</p>
+</blockquote>
 <pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
 let val = opt.value();  // 42
 </code></pre>
@@ -223,130 +227,14 @@ let val = opt.value();  // 42
 <p><strong>Warning:</strong> This method panics if the optional is empty. Always check with <code>has_value()</code> first or use <code>value_or()</code>.</p>
 </blockquote>
 <h3 id="value_orthis-default-t---t"><a class="header" href="#value_orthis-default-t---t"><code>value_or(this, default: T) -&gt; T</code></a></h3>
-<p>Consume the optional and return the value or a default.</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>Known issues, this method leaks memory if <code>T</code> is an object.
+Consume the optional and return the value or a default.</p>
+</blockquote>
 <pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
 let val = opt.value_or(0);  // 0
 </code></pre>
-<h2 id="usage-examples"><a class="header" href="#usage-examples">Usage Examples</a></h2>
-<h3 id="basic-optional-usage"><a class="header" href="#basic-optional-usage">Basic Optional Usage</a></h3>
-<pre><code class="language-cpp">import "std/optional";
-import "std/io";
-
-fun find_user(id: int64) -&gt; optional&lt;string&gt; {
-    if id &gt; 0 {
-        return optional&lt;string&gt;::of("Alice");
-    }
-    return optional&lt;string&gt;::empty();
-}
-
-fun main() {
-    let user = find_user(1);
-    
-    if user.has_value() {
-        println(user.value());
-    } else {
-        println("User not found");
-    }
-}
-</code></pre>
-<h3 id="using-value_or-for-defaults"><a class="header" href="#using-value_or-for-defaults">Using value_or for Defaults</a></h3>
-<pre><code class="language-cpp">import "std/optional";
-import "std/io";
-
-fun get_config_timeout() -&gt; optional&lt;int64&gt; {
-    return optional&lt;int64&gt;::empty();
-}
-
-fun main() {
-    let timeout = get_config_timeout().value_or(30);
-    println(timeout);  // 30
-}
-</code></pre>
-<h3 id="optional-with-structs"><a class="header" href="#optional-with-structs">Optional with Structs</a></h3>
-<pre><code class="language-cpp">import "std/optional";
-import "std/io";
-
-struct User {
-public:
-    id: int64;
-    name: string;
-    
-    User(id: int64, name: string) {
-        this.id = id;
-        this.name = name;
-    }
-}
-
-fun find_user(id: int64) -&gt; optional&lt;User&gt; {
-    if id == 1 {
-        return optional&lt;User&gt;::of(new User(1, "Alice"));
-    }
-    return optional&lt;User&gt;::empty();
-}
-
-fun main() {
-    let user_opt = find_user(1);
-    
-    if user_opt.has_value() {
-        let user = user_opt.value();
-        println(user.name);
-    }
-}
-</code></pre>
-<h3 id="chaining-optional-operations"><a class="header" href="#chaining-optional-operations">Chaining Optional Operations</a></h3>
-<pre><code class="language-cpp">import "std/optional";
-import "std/io";
-
-fun parse_number(s: string) -&gt; optional&lt;int64&gt; {
-    if s == "42" {
-        return optional&lt;int64&gt;::of(42);
-    }
-    return optional&lt;int64&gt;::empty();
-}
-
-fun double_if_even(n: int64) -&gt; optional&lt;int64&gt; {
-    if n % 2 == 0 {
-        return optional&lt;int64&gt;::of(n * 2);
-    }
-    return optional&lt;int64&gt;::empty();
-}
-
-fun main() {
-    let num_opt = parse_number("42");
-    
-    if num_opt.has_value() {
-        let num = num_opt.value();
-        let doubled_opt = double_if_even(num);
-        
-        if doubled_opt.has_value() {
-            println(doubled_opt.value());  // 84
-        }
-    }
-}
-</code></pre>
-<h2 id="when-to-use-optional"><a class="header" href="#when-to-use-optional">When to Use optional</a></h2>
-<p>Use <code>optional&lt;T&gt;</code> when:</p>
-<ul>
-<li>A value might not exist (like finding an item in a collection)</li>
-<li>You want to explicitly handle the “no value” case</li>
-<li>The absence of a value is not an error condition</li>
-<li>You don’t need to communicate <em>why</em> there’s no value</li>
-</ul>
-<p>For operations that can fail with meaningful error information, use <a href="./std-expected.html"><code>expected&lt;T, E&gt;</code></a> instead.</p>
-<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
-<ol>
-<li><strong>Always check before unwrapping</strong>: Use <code>has_value()</code> before calling <code>value()</code></li>
-<li><strong>Prefer value_or()</strong>: When you have a sensible default, use <code>value_or()</code> instead of manual checking</li>
-<li><strong>Document return types</strong>: Make it clear in comments when a function might return empty</li>
-<li><strong>Consider expected</strong>: If you need error context, use <code>expected&lt;T, E&gt;</code> instead</li>
-</ol>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="./std-expected.html">std/expected</a> - For operations that can fail with error information</li>
-<li><a href="./error-handling.html">Error Handling</a> - Complete error handling guide</li>
-<li><a href="./std.html">Standard Library Overview</a></li>
-</ul>
 
                     </main>
 
