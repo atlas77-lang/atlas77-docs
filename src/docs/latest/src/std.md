@@ -15,41 +15,41 @@ The Atlas77 standard library provides essential data structures, utilities, and 
 
 | Module | Description | Status |
 |--------|-------------|--------|
-| [std/io](./std-io.md) | Input/output operations (print, println, input, panic) | ✅ Stable |
-| [std/string](./std-string.md) | String manipulation and text processing | ✅ Stable |
-| [std/mem](./std-mem.md) | Memory management utilities (swap, drop, size_of) | ✅ Stable |
+| [std/io](./libraries/std-io.md) | Input/output operations (print, println, input, panic) | ✅ Stable |
+| [std/string](./libraries/std-string.md) | String manipulation and text processing | ✅ Stable |
+| [std/mem](./libraries/std-mem.md) | Memory management utilities (swap, drop, size_of) | ✅ Stable |
 
 ### Collections
 
 | Module | Description | Status |
 |--------|-------------|--------|
-| [std/vector](./std-vector.md) | Dynamic arrays with Vector<T> | ✅ Stable |
-| [std/map](./std-map.md) | Hash maps for key-value storage with Map<K,V> | ✅ Stable |
-| [std/queue](./std-queue.md) | FIFO queue data structure with Queue<T> | ✅ Stable |
-| [std/iter](./std-iter.md) | Iterator utilities with Iter<T> | ✅ Stable |
+| [std/vector](./libraries/std-vector.md) | Dynamic arrays with Vector<T> | ✅ Stable |
+| [std/map](./libraries/std-map.md) | Hash maps for key-value storage with Map<K,V> | ✅ Stable |
+| [std/queue](./libraries/std-queue.md) | FIFO queue data structure with Queue<T> | ✅ Stable |
+| [std/iter](./libraries/std-iter.md) | Iterator utilities with Iter<T> | ✅ Stable |
 
 ### Error Handling
 
 | Module | Description | Status |
 |--------|-------------|--------|
-| [std/optional](./std-optional.md) | Nullable values with optional<T> | ✅ Stable |
-| [std/expected](./std-expected.md) | Result types for error handling with expected<T,E> | ✅ Stable |
+| [std/optional](./libraries/std-optional.md) | Nullable values with optional<T> | ✅ Stable |
+| [std/expected](./libraries/std-expected.md) | Result types for error handling with expected<T,E> | ✅ Stable |
 
 ### File System
 
 | Module | Description | Status |
 |--------|-------------|--------|
-| [std/fs](./std-fs.md) | File operations (read, write, exists, remove) | ✅ Stable |
+| [std/fs](./libraries/std-fs.md) | File operations (read, write, exists, remove) | ✅ Stable |
 
 ### Math & Time
 
 | Module | Description | Status |
 |--------|-------------|--------|
-| [std/math](./std-math.md) | Mathematical functions (abs, min, max, pow, trigonometry, random) | ✅ Stable |
-| [std/time](./std-time.md) | Time operations and formatting | ✅ Stable |
+| [std/math](./libraries/std-math.md) | Mathematical functions (abs, min, max, pow, trigonometry, random) | ✅ Stable |
+| [std/time](./libraries/std-time.md) | Time operations and formatting | ✅ Stable |
 
 ### Deprecated Modules
 
 | Module | Description | Status |
 |--------|-------------|--------|
-| [std/box](./std-box.md) | Heap-allocated values - use direct allocation instead | ⚠️ Deprecated |
+| [std/box](./libraries/std-box.md) | Heap-allocated values - use direct allocation instead | ⚠️ Deprecated |

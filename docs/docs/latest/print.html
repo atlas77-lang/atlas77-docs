@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-cf5e45f0.js";
+            window.path_to_searchindex_js = "searchindex-57bcc457.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-1e53146e.js"></script>
+        <script src="toc-2a8575da.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -2568,7 +2568,7 @@ let iter = str.into_iter();
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stdvector"><a class="header" href="#stdvector">std/vector</a></h1>
-<p>Dynamic array with resizable capacity.</p>
+<p>Dynamic arrays with resizable capacity.</p>
 <h2 id="external-functions-1"><a class="header" href="#external-functions-1">External Functions</a></h2>
 <h3 id="lentdata-const-t---uint64"><a class="header" href="#lentdata-const-t---uint64"><code>len&lt;T&gt;(data: &amp;const [T]) -&gt; uint64</code></a></h3>
 <p>Get the length of an array.</p>
@@ -2583,10 +2583,11 @@ let length = len(&amp;arr);  // 3
 let sub = slice(&amp;arr, 1u, 4u);  // [2, 3, 4]
 </code></pre>
 <h2 id="struct-vectort"><a class="header" href="#struct-vectort">Struct: <code>Vector&lt;T&gt;</code></a></h2>
-<p>A generic dynamic array.</p>
+<p>A generic dynamic array that automatically resizes as elements are added.</p>
 <pre><code class="language-cpp">struct Vector&lt;T&gt; {
-public:
+private:
     data: [T];
+public:
     length: uint64;
     capacity: uint64;
 }
@@ -2596,48 +2597,76 @@ public:
 
 let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 </code></pre>
+<p>Creates a vector from an array, setting both length and capacity to the array’s length.</p>
+<h2 id="destructor"><a class="header" href="#destructor">Destructor</a></h2>
+<p>The vector’s destructor automatically cleans up all elements within <code>data[0..length]</code> and frees the underlying array.</p>
 <h2 id="static-methods-1"><a class="header" href="#static-methods-1">Static Methods</a></h2>
-<h3 id="vectortwith_capacitycapacity-uint64---vectort"><a class="header" href="#vectortwith_capacitycapacity-uint64---vectort"><code>Vector::&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code></a></h3>
+<h3 id="vectortwith_capacitycapacity-uint64---vectort"><a class="header" href="#vectortwith_capacitycapacity-uint64---vectort"><code>Vector&lt;T&gt;::with_capacity(capacity: uint64) -&gt; Vector&lt;T&gt;</code></a></h3>
 <p>Create a vector with a specific initial capacity.</p>
 <pre><code class="language-cpp">let vec = Vector&lt;int64&gt;::with_capacity(10u);
 </code></pre>
+<p>The vector starts with length 0 but has pre-allocated space for 10 elements.</p>
 <h2 id="instance-methods-1"><a class="header" href="#instance-methods-1">Instance Methods</a></h2>
+<h3 id="lenconst-this---uint64"><a class="header" href="#lenconst-this---uint64"><code>len(&amp;const this) -&gt; uint64</code></a></h3>
+<p>Get the number of elements in the vector.</p>
+<pre><code class="language-cpp">println(vec.len());
+</code></pre>
 <h3 id="getthis-index-uint64---const-t"><a class="header" href="#getthis-index-uint64---const-t"><code>get(&amp;this, index: uint64) -&gt; &amp;const T</code></a></h3>
 <p>Get a const reference to an element.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let val = vec.get(1u);  // &amp;2
 </code></pre>
+<p><strong>Panics</strong> if index is out of bounds.</p>
 <h3 id="get_mutthis-index-uint64---t"><a class="header" href="#get_mutthis-index-uint64---t"><code>get_mut(&amp;this, index: uint64) -&gt; &amp;T</code></a></h3>
 <p>Get a mutable reference to an element.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let val = vec.get_mut(1u);
 *val = 10;
 </code></pre>
+<p><strong>Panics</strong> if index is out of bounds.</p>
 <h3 id="setthis-index-uint64-val-t"><a class="header" href="#setthis-index-uint64-val-t"><code>set(&amp;this, index: uint64, val: T)</code></a></h3>
 <p>Set an element at a specific index.</p>
-<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
-vec.set(1u, 10);
+<pre><code class="language-cpp">vec.set(1u, 10);
 </code></pre>
+<p><strong>Panics</strong> if index is out of bounds.</p>
 <h3 id="pushthis-val-t"><a class="header" href="#pushthis-val-t"><code>push(&amp;this, val: T)</code></a></h3>
 <p>Add an element to the end of the vector.</p>
-<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2]);
-vec.push(3);
+<pre><code class="language-cpp">vec.push(42);
 </code></pre>
+<p>Automatically resizes the vector if capacity is reached (doubles the capacity).</p>
 <h3 id="popthis---t"><a class="header" href="#popthis---t"><code>pop(&amp;this) -&gt; T</code></a></h3>
 <p>Remove and return the last element.</p>
-<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
-let last = vec.pop();  // 3
+<pre><code class="language-cpp">let last = vec.pop();
 </code></pre>
+<p><strong>Panics</strong> if the vector is empty.</p>
+<h3 id="takethis-index-uint64---t"><a class="header" href="#takethis-index-uint64---t"><code>take(&amp;this, index: uint64) -&gt; T</code></a></h3>
+<p>Takes an element out of the vector at the specified index, shifting subsequent elements to the left.</p>
+<pre><code class="language-cpp">let item = vec.take(2u);  // Removes element at index 2
+</code></pre>
+<p><strong>Panics</strong> if index is out of bounds.</p>
+<h3 id="get_slicethis-start-uint64-end-uint64---t"><a class="header" href="#get_slicethis-start-uint64-end-uint64---t"><code>get_slice(&amp;this, start: uint64, end: uint64) -&gt; [T]</code></a></h3>
+<p>Get a slice of the vector as an array.</p>
+<pre><code class="language-cpp">let slice = vec.get_slice(1u, 4u);
+</code></pre>
+<p><strong>Panics</strong> if indices are out of bounds or if <code>start &gt; end</code>.</p>
 <h3 id="into_iterthis---itert"><a class="header" href="#into_iterthis---itert"><code>into_iter(this) -&gt; Iter&lt;T&gt;</code></a></h3>
 <p>Consume the vector and create an iterator.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let iter = vec.into_iter();
 </code></pre>
-<h3 id="takethis-idx-uint64---t"><a class="header" href="#takethis-idx-uint64---t"><code>take(&amp;this, idx: uint64) -&gt; T</code></a></h3>
-<p>Remove and return the element at the specified index.</p>
-<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
-let val = vec.take(1u);  // 2
+<p>The vector cannot be used after calling this method.</p>
+<h3 id="_copyconst-this---vectort"><a class="header" href="#_copyconst-this---vectort"><code>_copy(&amp;const this) -&gt; Vector&lt;T&gt;</code></a></h3>
+<p>Create a copy of the vector.</p>
+<pre><code class="language-cpp">let vec1 = new Vector&lt;int64&gt;([1, 2, 3]);
+let vec2 = vec1._copy();
 </code></pre>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stditer">std/iter</a> - Vector’s <code>into_iter()</code> method returns an iterator</li>
+<li><a href="#stdmem">std/mem</a> - Memory utilities used internally</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stdmap"><a class="header" href="#stdmap">std/map</a></h1>
 <p>Key-value hash map for associating keys with values.</p>
@@ -2743,61 +2772,97 @@ println(map.is_empty());  // true
 <h1 id="stdqueue"><a class="header" href="#stdqueue">std/queue</a></h1>
 <p>Queue (FIFO) data structure for ordered element processing.</p>
 <h2 id="struct-queuet"><a class="header" href="#struct-queuet">Struct: <code>Queue&lt;T&gt;</code></a></h2>
-<p>Generic queue (first-in, first-out) for elements of type T.</p>
+<p>A simple FIFO (first-in, first-out) queue data structure.</p>
 <pre><code class="language-cpp">struct Queue&lt;T&gt; {
-public:
-    data: Vector&lt;T&gt;;
-    front_index: uint64;
+private:
+    items: [T];
+    head: uint64;
+    tail: uint64;
+    size: uint64;
+    count: uint64;
 }
 </code></pre>
 <h2 id="constructor-4"><a class="header" href="#constructor-4">Constructor</a></h2>
 <pre><code class="language-cpp">import "std/queue";
 
-let queue = new Queue&lt;int64&gt;();
+let queue = new Queue&lt;T&gt;(items);
 </code></pre>
-<p>Creates an empty queue.</p>
+<p>Creates a queue from an existing array.</p>
+<h2 id="static-methods-2"><a class="header" href="#static-methods-2">Static Methods</a></h2>
+<h3 id="queuetwith_capacitysize-uint64---queuet"><a class="header" href="#queuetwith_capacitysize-uint64---queuet"><code>Queue&lt;T&gt;::with_capacity(size: uint64) -&gt; Queue&lt;T&gt;</code></a></h3>
+<p>Instantiates a queue with a predefined capacity.</p>
+<pre><code class="language-cpp">let queue = Queue&lt;int64&gt;::with_capacity(10u);
+</code></pre>
+<h3 id="queuetfrom_vectorvec-vectort---queuet"><a class="header" href="#queuetfrom_vectorvec-vectort---queuet"><code>Queue&lt;T&gt;::from_vector(vec: Vector&lt;T&gt;) -&gt; Queue&lt;T&gt;</code></a></h3>
+<p>Creates a queue from a vector.</p>
+<pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
+let queue = Queue&lt;int64&gt;::from_vector(vec);
+</code></pre>
 <h2 id="instance-methods-3"><a class="header" href="#instance-methods-3">Instance Methods</a></h2>
-<h3 id="enqueuethis-item-t"><a class="header" href="#enqueuethis-item-t"><code>enqueue(&amp;this, item: T)</code></a></h3>
-<p>Add an item to the back of the queue.</p>
-<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
-// Queue: [1, 2, 3] (front to back)
+<h3 id="enqueuethis-item-t---optionalunit"><a class="header" href="#enqueuethis-item-t---optionalunit"><code>enqueue(&amp;this, item: T) -&gt; optional&lt;unit&gt;</code></a></h3>
+<p>Enqueues an item to the back of the queue.</p>
+<pre><code class="language-cpp">let result = queue.enqueue(42);
+if result.is_empty() {
+    println("Queue is full");
+}
 </code></pre>
-<h3 id="dequeuethis---t"><a class="header" href="#dequeuethis---t"><code>dequeue(&amp;this) -&gt; T</code></a></h3>
-<p>Remove and return the front item.</p>
-<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
-queue.enqueue(1);
-queue.enqueue(2);
-
-let first = queue.dequeue();   // 1
-let second = queue.dequeue();  // 2
-let third = queue.dequeue();   // panic: Queue is empty
+<p>Returns <code>optional&lt;unit&gt;::empty()</code> if the queue is full.</p>
+<h3 id="enqueue_frontthis-item-t---optionalunit"><a class="header" href="#enqueue_frontthis-item-t---optionalunit"><code>enqueue_front(&amp;this, item: T) -&gt; optional&lt;unit&gt;</code></a></h3>
+<p>Enqueues an item to the front of the queue.</p>
+<pre><code class="language-cpp">let result = queue.enqueue_front(42);
 </code></pre>
-<p>Panics if the queue is empty.</p>
-<blockquote class="blockquote-tag blockquote-tag-note">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
-<p>In the future, <code>Queue&lt;T&gt;.dequeue</code> may return <code>optional&lt;T&gt;</code> to handle empty queues without panicking.</p>
-</blockquote>
-<h3 id="is_emptythis---bool-2"><a class="header" href="#is_emptythis---bool-2"><code>is_empty(&amp;this) -&gt; bool</code></a></h3>
+<p>Returns <code>optional&lt;unit&gt;::empty()</code> if the queue is full.</p>
+<h3 id="dequeuethis---optionalt"><a class="header" href="#dequeuethis---optionalt"><code>dequeue(&amp;this) -&gt; optional&lt;T&gt;</code></a></h3>
+<p>Dequeues an item from the front of the queue.</p>
+<pre><code class="language-cpp">let item = queue.dequeue();
+if item.has_value() {
+    println(item.value());
+}
+</code></pre>
+<p>Returns <code>optional&lt;T&gt;::empty()</code> if the queue is empty.</p>
+<h3 id="dequeue_backthis---optionalt"><a class="header" href="#dequeue_backthis---optionalt"><code>dequeue_back(&amp;this) -&gt; optional&lt;T&gt;</code></a></h3>
+<p>Dequeues an item from the back of the queue.</p>
+<pre><code class="language-cpp">let item = queue.dequeue_back();
+</code></pre>
+<p>Returns <code>optional&lt;T&gt;::empty()</code> if the queue is empty.</p>
+<h3 id="peekconst-this---optionalconst-t"><a class="header" href="#peekconst-this---optionalconst-t"><code>peek(&amp;const this) -&gt; optional&lt;&amp;const T&gt;</code></a></h3>
+<p>View the front item without removing it.</p>
+<pre><code class="language-cpp">let front = queue.peek();
+if front.has_value() {
+    println(*front.value());
+}
+</code></pre>
+<h3 id="peek_backconst-this---optionalconst-t"><a class="header" href="#peek_backconst-this---optionalconst-t"><code>peek_back(&amp;const this) -&gt; optional&lt;&amp;const T&gt;</code></a></h3>
+<p>View the back item without removing it.</p>
+<pre><code class="language-cpp">let back = queue.peek_back();
+</code></pre>
+<h3 id="is_fullconst-this---bool"><a class="header" href="#is_fullconst-this---bool"><code>is_full(&amp;const this) -&gt; bool</code></a></h3>
+<p>Check if the queue is at capacity.</p>
+<pre><code class="language-cpp">if queue.is_full() {
+    println("Queue is full");
+}
+</code></pre>
+<h3 id="is_emptyconst-this---bool"><a class="header" href="#is_emptyconst-this---bool"><code>is_empty(&amp;const this) -&gt; bool</code></a></h3>
 <p>Check if the queue is empty.</p>
-<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
-println(queue.is_empty());  // true
-
-queue.enqueue(1);
-println(queue.is_empty());  // false
+<pre><code class="language-cpp">if queue.is_empty() {
+    println("Queue is empty");
+}
 </code></pre>
-<h3 id="is_fullthis---bool"><a class="header" href="#is_fullthis---bool"><code>is_full(&amp;this) -&gt; bool</code></a></h3>
-<p>Check if the queue is full.</p>
-<pre><code class="language-cpp">let queue = new Queue&lt;int64&gt;();
-println(queue.is_full());  // false
-
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
-println(queue.is_full());  // true
+<h3 id="lenconst-this---uint64-1"><a class="header" href="#lenconst-this---uint64-1"><code>len(&amp;const this) -&gt; uint64</code></a></h3>
+<p>Get the number of items in the queue.</p>
+<pre><code class="language-cpp">println("Queue has " + queue.len() + " items");
 </code></pre>
+<h3 id="to_vectorthis---vectort"><a class="header" href="#to_vectorthis---vectort"><code>to_vector(this) -&gt; Vector&lt;T&gt;</code></a></h3>
+<p>Consumes the queue and returns a vector containing all items.</p>
+<pre><code class="language-cpp">let vec = queue.to_vector();
+</code></pre>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdvector">std/vector</a> - Dynamic arrays</li>
+<li><a href="#stdoptional">std/optional</a> - Queue methods return optional values</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stditer"><a class="header" href="#stditer">std/iter</a></h1>
 <p>Iterator utilities for traversing collections.</p>
@@ -2816,7 +2881,7 @@ import "std/vector";
 let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let iter = new Iter&lt;int64&gt;(vec);
 </code></pre>
-<h2 id="static-methods-2"><a class="header" href="#static-methods-2">Static Methods</a></h2>
+<h2 id="static-methods-3"><a class="header" href="#static-methods-3">Static Methods</a></h2>
 <h3 id="itertfrom_arraydata-t---itert"><a class="header" href="#itertfrom_arraydata-t---itert"><code>Iter&lt;T&gt;::from_array(data: [T]) -&gt; Iter&lt;T&gt;</code></a></h3>
 <p>Create an iterator from an array.</p>
 <pre><code class="language-cpp">let arr = [1, 2, 3];
@@ -2859,7 +2924,7 @@ let next = iter.next();     // optional::of(1)
 <h1 id="stdoptional"><a class="header" href="#stdoptional">std/optional</a></h1>
 <p>Type-safe nullable values.</p>
 <h2 id="struct-optionalt"><a class="header" href="#struct-optionalt">Struct: <code>optional&lt;T&gt;</code></a></h2>
-<p>Represents a value that may or may not be present.</p>
+<p>A lightweight container for an optional value of type <code>T</code>.</p>
 <pre><code class="language-cpp">union optional_storage&lt;T&gt; { 
     value: T;
     empty: unit;
@@ -2869,48 +2934,61 @@ struct optional&lt;T&gt; {
 private:
     data: optional_storage&lt;T&gt;;
     has_value: bool;
+public:
+    ~optional();
+    fun _copy(&amp;const this) -&gt; optional&lt;T&gt;;
 }
 </code></pre>
-<h2 id="static-methods-3"><a class="header" href="#static-methods-3">Static Methods</a></h2>
+<p>When <code>has_value</code> is true, <code>data.value</code> is valid and will be dropped by the destructor.</p>
+<h2 id="static-methods-4"><a class="header" href="#static-methods-4">Static Methods</a></h2>
 <h3 id="optionaltofdata-t---optionalt"><a class="header" href="#optionaltofdata-t---optionalt"><code>optional&lt;T&gt;::of(data: T) -&gt; optional&lt;T&gt;</code></a></h3>
-<p>Create an optional containing a value.</p>
+<p>Construct an <code>optional&lt;T&gt;</code> containing <code>data</code>.</p>
 <pre><code class="language-cpp">import "std/optional";
 
-let opt = optional&lt;int64&gt;::of(42);
+let some = optional&lt;int64&gt;::of(42);
 </code></pre>
 <h3 id="optionaltempty---optionalt"><a class="header" href="#optionaltempty---optionalt"><code>optional&lt;T&gt;::empty() -&gt; optional&lt;T&gt;</code></a></h3>
-<p>Create an empty optional.</p>
-<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
+<p>Construct an empty <code>optional&lt;T&gt;</code> with no value.</p>
+<pre><code class="language-cpp">let none = optional&lt;int64&gt;::empty();
 </code></pre>
 <h2 id="instance-methods-5"><a class="header" href="#instance-methods-5">Instance Methods</a></h2>
-<h3 id="has_valuethis---bool"><a class="header" href="#has_valuethis---bool"><code>has_value(&amp;this) -&gt; bool</code></a></h3>
-<p>Check if the optional contains a value.</p>
-<pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
-if opt.has_value() {
-    println("Has value");
+<h3 id="has_valueconst-this---bool"><a class="header" href="#has_valueconst-this---bool"><code>has_value(&amp;const this) -&gt; bool</code></a></h3>
+<p>Returns true if a value is present.</p>
+<pre><code class="language-cpp">if opt.has_value() {
+    println("has value");
+}
+</code></pre>
+<h3 id="is_emptyconst-this---bool-1"><a class="header" href="#is_emptyconst-this---bool-1"><code>is_empty(&amp;const this) -&gt; bool</code></a></h3>
+<p>Returns true if no value is present.</p>
+<pre><code class="language-cpp">if opt.is_empty() {
+    println("is empty");
 }
 </code></pre>
 <h3 id="valuethis---t"><a class="header" href="#valuethis---t"><code>value(this) -&gt; T</code></a></h3>
-<blockquote class="blockquote-tag blockquote-tag-warning">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
-<p>Known issues, this method leaks memory if <code>T</code> is an object.
-Consume the optional and return the value (panics if empty).</p>
-</blockquote>
+<p>Consume the optional and return the contained value.</p>
 <pre><code class="language-cpp">let opt = optional&lt;int64&gt;::of(42);
 let val = opt.value();  // 42
 </code></pre>
 <blockquote>
-<p><strong>Warning:</strong> This method panics if the optional is empty. Always check with <code>has_value()</code> first or use <code>value_or()</code>.</p>
+<p><strong>Panics</strong> with a descriptive message when <code>has_value</code> is false. Consider using <code>value_or(default)</code> to avoid panics.</p>
+</blockquote>
+<blockquote>
+<p><strong>Known Issue:</strong> Memory leak may occur for complex types. This will be fixed in a future version.</p>
 </blockquote>
 <h3 id="value_orthis-default-t---t"><a class="header" href="#value_orthis-default-t---t"><code>value_or(this, default: T) -&gt; T</code></a></h3>
-<blockquote class="blockquote-tag blockquote-tag-warning">
-<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
-<p>Known issues, this method leaks memory if <code>T</code> is an object.
-Consume the optional and return the value or a default.</p>
-</blockquote>
+<p>Consume the optional and return the contained value or <code>default</code> if empty.</p>
 <pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
-let val = opt.value_or(0);  // 0
+let n = opt.value_or(0);  // 0
 </code></pre>
+<blockquote>
+<p><strong>Known Issue:</strong> Same as <code>value()</code> - potential memory leak for complex types.</p>
+</blockquote>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="#stdexpected">std/expected</a> - For operations that can fail with error information</li>
+<li><a href="#standard-library">Standard Library Overview</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stdexpected"><a class="header" href="#stdexpected">std/expected</a></h1>
 <p>Result type for operations that can fail with error information.</p>
@@ -2927,7 +3005,7 @@ private:
     has_expected_value: bool;
 }
 </code></pre>
-<h2 id="static-methods-4"><a class="header" href="#static-methods-4">Static Methods</a></h2>
+<h2 id="static-methods-5"><a class="header" href="#static-methods-5">Static Methods</a></h2>
 <h3 id="expectedt-eexpectdata-t---expectedt-e"><a class="header" href="#expectedt-eexpectdata-t---expectedt-e"><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code></a></h3>
 <p>Create a successful expected.</p>
 <pre><code class="language-cpp">import "std/expected";
@@ -3063,7 +3141,7 @@ public:
 let time = new Time(1234567890, 0);
 </code></pre>
 <p>Creates a Time with the specified seconds and nanoseconds.</p>
-<h2 id="static-methods-5"><a class="header" href="#static-methods-5">Static Methods</a></h2>
+<h2 id="static-methods-6"><a class="header" href="#static-methods-6">Static Methods</a></h2>
 <h3 id="timenow---time"><a class="header" href="#timenow---time"><code>Time::now() -&gt; Time</code></a></h3>
 <p>Get the current time.</p>
 <pre><code class="language-cpp">let now = Time::now();
