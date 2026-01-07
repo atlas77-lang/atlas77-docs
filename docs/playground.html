@@ -271,7 +271,7 @@
             </button>
           </div>
         </div>
-        <textarea class="editor" id="editor" spellcheck="false" placeholder="// Write your Atlas 77 code here...">import std/io;
+        <textarea class="editor" id="editor" spellcheck="false" placeholder="// Write your Atlas 77 code here...">import "std/io";
 
 fun main() {
   println("Hello, Atlas 77!");
@@ -399,19 +399,19 @@ fun main() {
     <script>
       // Example code snippets
       const examples = {
-        hello: `import std/io;
+        hello: `import "std/io";
 
 fun main() {
   println("Hello, Atlas 77!");
 }`,
-        variables: `import std/io;
+        variables: `import "std/io";
 
 fun main() {
   let name: string = "Atlas";
   let version: int64 = 7;
   println("Welcome to Atlas 77!");
 }`,
-        functions: `import std/io;
+        functions: `import "std/io";
 
 fun add(a: int64, b: int64) -> int64 {
   return a + b;
@@ -421,7 +421,7 @@ fun main() {
   let result: int64 = add(5, 7);
   println(result);
 }`,
-        loops: `import std/io;
+        loops: `import "std/io";
 
 fun main() {
   let i: int64 = 0;
@@ -430,8 +430,8 @@ fun main() {
     i = i + 1;
   }
 }`,
-        io: `import std/fs;
-import std/io;
+        io: `import "std/fs";
+import "std/io";
 
 fun main() {
   let content: string = "Hello, file!";
