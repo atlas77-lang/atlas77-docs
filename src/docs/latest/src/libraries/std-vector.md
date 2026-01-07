@@ -167,9 +167,3 @@ let vec1 = new Vector<int64>([1, 2, 3]);
 let vec2 = vec1._copy();
 ```
 
----
-
-**See also:**
-- [std/iter](./std-iter.md) - Vector's `into_iter()` method returns an iterator
-- [std/mem](./std-mem.md) - Memory utilities used internally
-- [Standard Library Overview](../std.md)

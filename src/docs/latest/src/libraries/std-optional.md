@@ -77,8 +77,6 @@ let val = opt.value();  // 42
 
 > **Panics** with a descriptive message when `has_value` is false. Consider using `value_or(default)` to avoid panics.
 
-> **Known Issue:** Memory leak may occur for complex types. This will be fixed in a future version.
-
 ### `value_or(this, default: T) -> T`
 
 Consume the optional and return the contained value or `default` if empty.
@@ -87,11 +85,3 @@ Consume the optional and return the contained value or `default` if empty.
 let opt = optional<int64>::empty();
 let n = opt.value_or(0);  // 0
 ```
-
-> **Known Issue:** Same as `value()` - potential memory leak for complex types.
-
----
-
-**See also:**
-- [std/expected](./std-expected.md) - For operations that can fail with error information
-- [Standard Library Overview](../std.md)

@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-57bcc457.js";
+            window.path_to_searchindex_js = "searchindex-3fc4b5f9.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-2a8575da.js"></script>
+        <script src="toc-4ae58274.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -2660,13 +2660,6 @@ let iter = vec.into_iter();
 <pre><code class="language-cpp">let vec1 = new Vector&lt;int64&gt;([1, 2, 3]);
 let vec2 = vec1._copy();
 </code></pre>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="#stditer">std/iter</a> - Vector’s <code>into_iter()</code> method returns an iterator</li>
-<li><a href="#stdmem">std/mem</a> - Memory utilities used internally</li>
-<li><a href="#standard-library">Standard Library Overview</a></li>
-</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stdmap"><a class="header" href="#stdmap">std/map</a></h1>
 <p>Key-value hash map for associating keys with values.</p>
@@ -2856,13 +2849,6 @@ if front.has_value() {
 <p>Consumes the queue and returns a vector containing all items.</p>
 <pre><code class="language-cpp">let vec = queue.to_vector();
 </code></pre>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="#stdvector">std/vector</a> - Dynamic arrays</li>
-<li><a href="#stdoptional">std/optional</a> - Queue methods return optional values</li>
-<li><a href="#standard-library">Standard Library Overview</a></li>
-</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stditer"><a class="header" href="#stditer">std/iter</a></h1>
 <p>Iterator utilities for traversing collections.</p>
@@ -2972,23 +2958,11 @@ let val = opt.value();  // 42
 <blockquote>
 <p><strong>Panics</strong> with a descriptive message when <code>has_value</code> is false. Consider using <code>value_or(default)</code> to avoid panics.</p>
 </blockquote>
-<blockquote>
-<p><strong>Known Issue:</strong> Memory leak may occur for complex types. This will be fixed in a future version.</p>
-</blockquote>
 <h3 id="value_orthis-default-t---t"><a class="header" href="#value_orthis-default-t---t"><code>value_or(this, default: T) -&gt; T</code></a></h3>
 <p>Consume the optional and return the contained value or <code>default</code> if empty.</p>
 <pre><code class="language-cpp">let opt = optional&lt;int64&gt;::empty();
 let n = opt.value_or(0);  // 0
 </code></pre>
-<blockquote>
-<p><strong>Known Issue:</strong> Same as <code>value()</code> - potential memory leak for complex types.</p>
-</blockquote>
-<hr>
-<p><strong>See also:</strong></p>
-<ul>
-<li><a href="#stdexpected">std/expected</a> - For operations that can fail with error information</li>
-<li><a href="#standard-library">Standard Library Overview</a></li>
-</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="stdexpected"><a class="header" href="#stdexpected">std/expected</a></h1>
 <p>Result type for operations that can fail with error information.</p>

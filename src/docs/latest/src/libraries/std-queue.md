@@ -148,10 +148,3 @@ Consumes the queue and returns a vector containing all items.
 ```cpp
 let vec = queue.to_vector();
 ```
-
----
-
-**See also:**
-- [std/vector](./std-vector.md) - Dynamic arrays
-- [std/optional](./std-optional.md) - Queue methods return optional values
-- [Standard Library Overview](../std.md)
