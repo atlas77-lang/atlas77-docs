@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-3fc4b5f9.js";
+            window.path_to_searchindex_js = "../searchindex-0821e098.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-4ae58274.js"></script>
@@ -185,9 +185,9 @@
 <h2 id="struct-mapk-v"><a class="header" href="#struct-mapk-v">Struct: <code>Map&lt;K, V&gt;</code></a></h2>
 <p>Generic hash map that associates keys of type K with values of type V.</p>
 <pre><code class="language-cpp">struct Map&lt;K, V&gt; {
-public:
-    buckets: Vector&lt;Vector&lt;MapEntry&lt;K, V&gt;&gt;&gt;;
-    size: uint64;
+private:
+    keys: Vector&lt;K&gt;;
+    values: Vector&lt;V&gt;;
 }
 </code></pre>
 <h2 id="constructor"><a class="header" href="#constructor">Constructor</a></h2>
@@ -204,8 +204,8 @@ map.insert("age", 25);
 map.insert("score", 100);
 map.insert("age", 26);  // Updates existing value
 </code></pre>
-<h3 id="getthis-key-k---optionalconst-v"><a class="header" href="#getthis-key-k---optionalconst-v"><code>get(&amp;this, key: K) -&gt; optional&lt;&amp;const V&gt;</code></a></h3>
-<p>Get a reference to the value for a key.</p>
+<h3 id="getconst-this-key-k---optionalconst-v"><a class="header" href="#getconst-this-key-k---optionalconst-v"><code>get(&amp;const this, key: K) -&gt; optional&lt;&amp;const V&gt;</code></a></h3>
+<p>Get a const reference to the value for a key.</p>
 <pre><code class="language-cpp">let map = new Map&lt;string, int64&gt;();
 map.insert("age", 25);
 

@@ -8,9 +8,9 @@ Generic hash map that associates keys of type K with values of type V.
 
 ```cpp
 struct Map<K, V> {
-public:
-    buckets: Vector<Vector<MapEntry<K, V>>>;
-    size: uint64;
+private:
+    keys: Vector<K>;
+    values: Vector<V>;
 }
 ```
 
@@ -37,9 +37,9 @@ map.insert("score", 100);
 map.insert("age", 26);  // Updates existing value
 ```
 
-### `get(&this, key: K) -> optional<&const V>`
+### `get(&const this, key: K) -> optional<&const V>`
 
-Get a reference to the value for a key.
+Get a const reference to the value for a key.
 
 ```cpp
 let map = new Map<string, int64>();

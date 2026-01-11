@@ -40,18 +40,8 @@ public:
     /// If `has_value` is true, `this.data.value` is deleted. Otherwise,
     /// nothing is performed.
     ~optional() {
-        println("Destroying optional");
         if (this.has_value) {
             delete this.data.value;
-        }
-    }
-    fun _copy(&const this) -> optional<T> {
-        if (*this.has_value) {
-            // Access through const reference - copy the value from the union
-            let value = this.data.value;
-            return optional<T>::of(value);
-        } else {
-            return optional<T>::empty();
         }
     }
     /// Construct an `optional<T>` containing `data`.
@@ -92,9 +82,6 @@ public:
     ///
     /// Panics with a descriptive message when `has_value` is false.
     /// Consider using `value_or(default)` to avoid panics.
-    /// 
-    /// Known Issue: It crashes if it is actually a consuming method and we add a "delete this".
-    /// I'll try to fix it, but we'll see later.
     fun value(this) -> T {
         if (!this.has_value) {
             panic("Called value on a empty optional");
@@ -112,7 +99,6 @@ public:
     /// Example:
     ///     let opt = optional<int64>::empty();
     ///     let n = opt.value_or(0);
-    /// Known Issue: Same as optional<T>.value()
     fun value_or(this, default: T) -> T {
         if (this.has_value) {
             // Move the value out before marking as empty

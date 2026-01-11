@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-3fc4b5f9.js";
+            window.path_to_searchindex_js = "../searchindex-0821e098.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-4ae58274.js"></script>
@@ -224,7 +224,7 @@ let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 <p>Get the number of elements in the vector.</p>
 <pre><code class="language-cpp">println(vec.len());
 </code></pre>
-<h3 id="getthis-index-uint64---const-t"><a class="header" href="#getthis-index-uint64---const-t"><code>get(&amp;this, index: uint64) -&gt; &amp;const T</code></a></h3>
+<h3 id="getconst-this-index-uint64---const-t"><a class="header" href="#getconst-this-index-uint64---const-t"><code>get(&amp;const this, index: uint64) -&gt; &amp;const T</code></a></h3>
 <p>Get a const reference to an element.</p>
 <pre><code class="language-cpp">let vec = new Vector&lt;int64&gt;([1, 2, 3]);
 let val = vec.get(1u);  // &amp;2
@@ -268,11 +268,6 @@ let val = vec.get_mut(1u);
 let iter = vec.into_iter();
 </code></pre>
 <p>The vector cannot be used after calling this method.</p>
-<h3 id="_copyconst-this---vectort"><a class="header" href="#_copyconst-this---vectort"><code>_copy(&amp;const this) -&gt; Vector&lt;T&gt;</code></a></h3>
-<p>Create a copy of the vector.</p>
-<pre><code class="language-cpp">let vec1 = new Vector&lt;int64&gt;([1, 2, 3]);
-let vec2 = vec1._copy();
-</code></pre>
 
                     </main>
 

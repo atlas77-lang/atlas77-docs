@@ -13,6 +13,8 @@ public:
     index: uint64;
 }
 ```
+> [!Warning]
+> `Iter<T>` uses a `Vector<T>` under the hood and every `.next()` calls use the `Vector<T>.take(i)` method, which moves out `T` then collapses the vector to not have empty holes. It's very inefficient for long iterator. `Iter<T>` should be reworked to use `[T]` under the hood and manage it by itself.
 
 ## Constructor
 
@@ -22,6 +24,18 @@ import "std/vector";
 
 let vec = new Vector<int64>([1, 2, 3]);
 let iter = new Iter<int64>(vec);
+```
+
+## Copy Constructor
+> [!NOTE]
+> Most copy constructors need `T` to be copyable, it is not yet properly enforced by the compiler. Currently you will get a weird error akin to "use of moved value" somewhere in the std lib code.
+```cpp
+import "std/iter";
+import "std/vector";
+
+let vec = new Vector<int64>([1, 2, 3]);
+let iter = new Iter<int64>(vec);
+let iter_copy = new Iter<int64>(&iter);
 ```
 
 ## Static Methods

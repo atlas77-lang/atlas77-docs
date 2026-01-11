@@ -74,7 +74,7 @@ Get the number of elements in the vector.
 println(vec.len());
 ```
 
-### `get(&this, index: uint64) -> &const T`
+### `get(&const this, index: uint64) -> &const T`
 
 Get a const reference to an element.
 
@@ -157,13 +157,3 @@ let iter = vec.into_iter();
 ```
 
 The vector cannot be used after calling this method.
-
-### `_copy(&const this) -> Vector<T>`
-
-Create a copy of the vector.
-
-```cpp
-let vec1 = new Vector<int64>([1, 2, 3]);
-let vec2 = vec1._copy();
-```
-
