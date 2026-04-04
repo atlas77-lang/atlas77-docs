@@ -1,0 +1,642 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Atlas77 Language Manual - Atlas77</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-ad449319.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-27c2cb2e.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Atlas77</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/atlas77-lang/Atlas77" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/atlas77-lang/Atlas77/edit/main/src/docs/latest/./src/atlas77-language-manual.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="atlas77-v080-language-manual"><a class="header" href="#atlas77-v080-language-manual">Atlas77 v0.8.0 Language Manual</a></h1>
+<p>This manual documents Atlas77 as it exists in v0.8.0.
+It focuses on behavior that is visible in the compiler pipeline and in the current standard library implementation.</p>
+<h2 id="1-language-fundamentals"><a class="header" href="#1-language-fundamentals">1. Language Fundamentals</a></h2>
+<h3 id="11-primitive-types"><a class="header" href="#11-primitive-types">1.1 Primitive Types</a></h3>
+<p>Atlas77 defines the following primitive scalar/value types in the language reference:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Meaning</th><th>Size</th></tr>
+</thead>
+<tbody>
+<tr><td>int8</td><td>Signed integer</td><td>1 byte</td></tr>
+<tr><td>int16</td><td>Signed integer</td><td>2 bytes</td></tr>
+<tr><td>int32</td><td>Signed integer</td><td>4 bytes</td></tr>
+<tr><td>int64</td><td>Signed integer</td><td>8 bytes</td></tr>
+<tr><td>uint8</td><td>Unsigned integer</td><td>1 byte</td></tr>
+<tr><td>uint16</td><td>Unsigned integer</td><td>2 bytes</td></tr>
+<tr><td>uint32</td><td>Unsigned integer</td><td>4 bytes</td></tr>
+<tr><td>uint64</td><td>Unsigned integer</td><td>8 bytes</td></tr>
+<tr><td>float32</td><td>IEEE-like floating point</td><td>4 bytes</td></tr>
+<tr><td>float64</td><td>IEEE-like floating point</td><td>8 bytes</td></tr>
+<tr><td>bool</td><td>true/false</td><td>1 byte</td></tr>
+<tr><td>char</td><td>Single Unicode code point</td><td>4 bytes</td></tr>
+<tr><td>string</td><td>UTF-8 byte string</td><td>Variable</td></tr>
+<tr><td>unit</td><td>Empty value type</td><td>0 bytes (semantic)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Status note: the generated language-reference page also states that some primitive types are planned or not fully implemented yet. Treat compiler support as authoritative over table intent.</p>
+<pre><code class="language-atlas77">fun main() {
+    let a: int64 = 42;
+    let b: uint8 = 255;
+    let c: float64 = 3.14159;
+    let ok: bool = true;
+    let ch: char = 'A';
+    let s: string = "atlas";
+}
+</code></pre>
+<h3 id="12-structs"><a class="header" href="#12-structs">1.2 Structs</a></h3>
+<p>Atlas77 structs are nominal types with fields and methods. In current code style, object creation is done with factory/static methods such as Type::new(…) or with struct literals.</p>
+<pre><code class="language-atlas77">public struct Person {
+public:
+    name: string;
+    age: int32;
+
+    fun new(name: string, age: int32) -&gt; Person {
+        return Person { .name = name, .age = age };
+    }
+
+    fun birthday(*this) {
+        this-&gt;age = this-&gt;age + 1;
+    }
+}
+
+fun main() {
+    let p = Person::new("Ada", 30);
+    p.birthday();
+}
+</code></pre>
+<p>Member access uses . on values and -&gt; through pointers to values.</p>
+<h3 id="13-pointers"><a class="header" href="#13-pointers">1.3 Pointers</a></h3>
+<p>Atlas77 uses explicit raw pointers:</p>
+<ul>
+<li>*T for mutable pointer access</li>
+<li>*const T for immutable pointer access</li>
+</ul>
+<pre><code class="language-atlas77">fun read_first(ptr: *const int64) -&gt; int64 {
+    return *ptr;
+}
+
+fun set_first(ptr: *int64, v: int64) {
+    *ptr = v;
+}
+</code></pre>
+<blockquote>
+<p>NB: References are not yet implemented, but is a planned feature for future releases.</p>
+</blockquote>
+<h2 id="2-the-atlas77-memory-model"><a class="header" href="#2-the-atlas77-memory-model">2. The Atlas77 Memory Model</a></h2>
+<p>Source of truth: ownership specification in docs/ownership_spec.md.</p>
+<h3 id="21-value-semantics-trivial-vs-resource-types"><a class="header" href="#21-value-semantics-trivial-vs-resource-types">2.1 Value Semantics: Trivial vs Resource Types</a></h3>
+<p>Trivially copyable values can be copied implicitly.
+Resource values require deterministic drop and cannot be implicitly copied.</p>
+<pre><code class="language-atlas77">let x: int64 = 10;
+let y: int64 = x; // copy is valid
+</code></pre>
+<pre><code class="language-atlas77">let r: Resource = make_resource();
+let r2: Resource = r; // invalid: non-trivial implicit copy
+</code></pre>
+<h3 id="22-ownership-transfer-with-movex"><a class="header" href="#22-ownership-transfer-with-movex">2.2 Ownership Transfer with move(x)</a></h3>
+<p>move(x) transfers ownership and invalidates x for later use.</p>
+<pre><code class="language-atlas77">let a = build_resource();
+let b = move(a);
+use(a); // invalid after move
+</code></pre>
+<p>Compiler diagnostics include moved/deleted/consumed and potentially-moved variants at branch joins.</p>
+<h3 id="23-deterministic-cleanup-and-destructors"><a class="header" href="#23-deterministic-cleanup-and-destructors">2.3 Deterministic Cleanup and Destructors</a></h3>
+<p>The compiler inserts delete operations in HIR, and lowers to destructor calls (and free when needed) in generated C.</p>
+<pre><code class="language-atlas77">public struct FileHandle {
+private:
+    raw: *uint8;
+public:
+    ~FileHandle() {
+        if this-&gt;raw != null {
+            free(this-&gt;raw);
+        }
+    }
+}
+</code></pre>
+<p>Scope-exit cleanup, return-path cleanup, and reassignment pre-delete are handled by ownership/lifecycle passes.</p>
+<h2 id="3-standard-library-reference"><a class="header" href="#3-standard-library-reference">3. Standard Library Reference</a></h2>
+<h3 id="31-stdmemory"><a class="header" href="#31-stdmemory">3.1 std/memory</a></h3>
+<p>Current low-level primitives:</p>
+<ul>
+<li>malloc<t>(size)</t></li>
+<li>free<t>(ptr)</t></li>
+<li>memcpy<t>(dest, src, size)</t></li>
+<li>sizeof<t>() and alignof<t>() wrappers</t></t></li>
+<li>move<t>(from) intrinsic</t></li>
+</ul>
+<pre><code class="language-atlas77">import "std/memory";
+
+fun main() {
+    let buf = malloc&lt;uint8&gt;(128);
+    // ... use buf
+    free(buf);
+}
+</code></pre>
+<h3 id="32-vector"><a class="header" href="#32-vector">3.2 Vector<t></t></a></h3>
+<p>Vector<t> in std/vector owns heap storage and tracks length/capacity.</t></p>
+<ul>
+<li>push doubles capacity when full (0 -&gt; 1 -&gt; 2 -&gt; 4 …)</li>
+<li>pop and take move values out</li>
+<li>destructor deletes elements in range [0, length)</li>
+</ul>
+<pre><code class="language-atlas77">import "std/vector";
+
+fun main() {
+    let v = Vector&lt;int64&gt;::with_capacity(2);
+    v.push(10);
+    v.push(20);
+    v.push(30); // growth occurs
+
+    let last = v.pop();
+    let first = v.take(0);
+}
+</code></pre>
+<p>Ownership note: element type T should be designed with Atlas77 drop semantics in mind, since vector cleanup calls delete on stored elements.</p>
+<h3 id="33-string"><a class="header" href="#33-string">3.3 String</a></h3>
+<p>String in std/string is an owning byte-buffer wrapper over *uint8 with explicit len/capacity.</p>
+<ul>
+<li>UTF-8 bytes, length in bytes</li>
+<li>c_str() ensures trailing NUL and may reallocate</li>
+<li>with_capacity reserves space manually</li>
+</ul>
+<pre><code class="language-atlas77">import "std/string";
+
+fun main() {
+    let s = String::from_chars("hello");
+    let t = s.to_upper();
+    let u = s.concat(&amp;t);
+    print(u.c_str());
+}
+</code></pre>
+<p>Implementation note: string behavior currently reflects pragmatic std internals, not a finalized immutable string design.</p>
+<h3 id="34-optional"><a class="header" href="#34-optional">3.4 optional<t></t></a></h3>
+<p>optional<t> is a tagged union-like utility for nullable values.</t></p>
+<ul>
+<li>optional<t>::of(value)</t></li>
+<li>optional<t>::empty()</t></li>
+<li>has_value(), is_empty(), value(), value_or(default)</li>
+</ul>
+<pre><code class="language-atlas77">import "std/optional";
+
+fun maybe_even(n: int64) -&gt; optional&lt;int64&gt; {
+    if (n % 2 == 0) {
+        return optional&lt;int64&gt;::of(n);
+    }
+    return optional&lt;int64&gt;::empty();
+}
+</code></pre>
+<p>value() consumes and panics on empty.</p>
+<h3 id="35-expectedt-e"><a class="header" href="#35-expectedt-e">3.5 expected&lt;T, E&gt;</a></h3>
+<p>expected&lt;T, E&gt; models success or error outcomes.</p>
+<ul>
+<li>expected&lt;T, E&gt;::expect(v)</li>
+<li>expected&lt;T, E&gt;::unexpected(e)</li>
+<li>is_expected(), is_unexpected()</li>
+<li>expected_value(), unexpected_value(), *_or(default)</li>
+</ul>
+<pre><code class="language-atlas77">import "std/expected";
+
+fun parse_nonzero(v: int64) -&gt; expected&lt;int64, string&gt; {
+    if (v == 0) {
+        return expected&lt;int64, string&gt;::unexpected("zero is not allowed");
+    }
+    return expected&lt;int64, string&gt;::expect(v);
+}
+</code></pre>
+<h3 id="36-io"><a class="header" href="#36-io">3.6 io</a></h3>
+<p>std/io provides print, println, input, panic, printf plus FILE/Stdin interop-facing types.</p>
+<pre><code class="language-atlas77">import "std/io";
+
+fun main() {
+    print("Name: ");
+    let name = input();
+    println(name.c_str());
+}
+</code></pre>
+<h3 id="37-experimental-shared_ptr"><a class="header" href="#37-experimental-shared_ptr">3.7 Experimental shared_ptr</a></h3>
+<p>std/experimental/smart_ptr.atlas currently includes shared_ptr<t> with a strong counter block.</t></p>
+<ul>
+<li>copy increments counter</li>
+<li>release decrements and deletes at zero</li>
+<li>no weak pointers</li>
+<li>no cycle handling</li>
+</ul>
+<pre><code class="language-atlas77">import "std/experimental/smart_ptr";
+
+fun main() {
+    let p = shared_ptr&lt;int64&gt;::make(10);
+    let q = p.copy();
+    // both point to same rc_block
+}
+</code></pre>
+<h3 id="38-raylib-wrapper-state"><a class="header" href="#38-raylib-wrapper-state">3.8 Raylib Wrapper State</a></h3>
+<p>Current raylib binding code is an extern-heavy prototype, not a finished package story:</p>
+<ul>
+<li>requires raylib.h and host linker setup</li>
+<li>mixes extern structs/functions with Atlas-side helpers</li>
+<li>demonstrates practical app loop structure</li>
+</ul>
+<pre><code class="language-atlas77">extern fun InitWindow(width: int32, height: int32, title: *const uint8);
+extern fun WindowShouldClose() -&gt; bool;
+extern fun BeginDrawing();
+extern fun EndDrawing();
+
+fun main() {
+    InitWindow(800, 450, "demo");
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        EndDrawing();
+    }
+}
+</code></pre>
+<p>Planned direction: expose library gating with a compiler flag before introducing a full build configuration format.</p>
+<h2 id="4-c-interoperability"><a class="header" href="#4-c-interoperability">4. C Interoperability</a></h2>
+<h3 id="41-extern-functions-and-structs"><a class="header" href="#41-extern-functions-and-structs">4.1 Extern Functions and Structs</a></h3>
+<p>Use extern fun and extern struct to declare C ABI symbols.</p>
+<pre><code class="language-atlas77">extern struct FILE {
+    handle: uint64;
+}
+
+extern fun printf&lt;T&gt;(fmt: *uint8, value: T);
+
+fun main() {
+    printf("%s\n", "hello from atlas77");
+}
+</code></pre>
+<h3 id="42-atlas77-to-c-pipeline"><a class="header" href="#42-atlas77-to-c-pipeline">4.2 Atlas77 to C Pipeline</a></h3>
+<p>The compiler flow in libraries/lib.rs is:</p>
+<ol>
+<li>Parse source to AST.</li>
+<li>Lower AST to HIR.</li>
+<li>Monomorphize generics.</li>
+<li>Type check.</li>
+<li>Run ownership pass and inject delete semantics.</li>
+<li>Lower HIR to LIR.</li>
+<li>Emit C99 source and generated header in build/.</li>
+<li>Invoke selected C compiler backend.</li>
+</ol>
+<p>The generated artifacts include:</p>
+<ul>
+<li>build/output.atlas</li>
+<li>build/output.atlas_lir</li>
+<li>build/output.atlas_c.c</li>
+<li>build/__atlas77_header.h</li>
+</ul>
+<h3 id="43-tcc-vs-gccclang-workflow"><a class="header" href="#43-tcc-vs-gccclang-workflow">4.3 TCC vs GCC/Clang Workflow</a></h3>
+<p>CLI behavior from libraries/main.rs and libraries/lib.rs:</p>
+<ul>
+<li>Build defaults to TinyCC (tinycc or tcc)</li>
+<li>Release and debug are mutually exclusive CLI flags</li>
+<li>GCC/Clang/MSVC/Intel are selectable backends</li>
+<li>Extra linker/compiler flags are passed through with repeated –c-arg</li>
+</ul>
+<p>Example commands:</p>
+<pre><code class="language-c">atlas77 build src/main.atlas -c tinycc -o ./build
+atlas77 build src/main.atlas -c gcc -r --c-arg=-lm --c-arg=-lraylib
+atlas77 build src/main.atlas -c clang -r
+atlas77 check src/main.atlas
+</code></pre>
+<p>Practical guidance:</p>
+<ul>
+<li>Use TinyCC for fast local iteration.</li>
+<li>Use GCC or Clang for stricter diagnostics and release optimization validation.</li>
+</ul>
+<h2 id="5-advanced-features"><a class="header" href="#5-advanced-features">5. Advanced Features</a></h2>
+<h3 id="51-generics"><a class="header" href="#51-generics">5.1 Generics</a></h3>
+<p>Atlas77 supports generic structs and functions with explicit type parameters.</p>
+<pre><code class="language-atlas77">public struct Pair&lt;T&gt; {
+public:
+    a: T;
+    b: T;
+}
+
+fun pick_first&lt;T&gt;(x: T, _y: T) -&gt; T {
+    return x;
+}
+
+fun main() {
+    let p = Pair&lt;int64&gt; { .a = 1, .b = 2 };
+    let v = pick_first&lt;int64&gt;(p.a, p.b);
+}
+</code></pre>
+<p>Current codebase also demonstrates generic constraints in library helpers (for example copy&lt;T: std::copyable&gt; in std/memory).</p>
+<h3 id="52-function-pointers"><a class="header" href="#52-function-pointers">5.2 Function Pointers</a></h3>
+<p>Atlas77 supports typed function pointers, including static functions, generic function instances, and method pointers.</p>
+<pre><code class="language-atlas77">struct Foo {
+public:
+    fp: fun(int32, int32) -&gt; int32;
+    add_const_fp: fun(*const Foo, int32) -&gt; int32;
+
+    fun add(a: int32, b: int32) -&gt; int32 {
+        return a + b;
+    }
+
+    fun add_const(*const this, value: int32) -&gt; int32 {
+        return value + 100;
+    }
+}
+
+fun pick_first&lt;T&gt;(a: T, _b: T) -&gt; T {
+    return a;
+}
+
+fun main() {
+    let add_fn: fun(int32, int32) -&gt; int32 = Foo::add;
+    let foo = Foo {
+        .fp = add_fn,
+        .add_const_fp = Foo::add_const,
+    };
+
+    let r1 = foo.fp(2, 3);
+    let r2 = foo.add_const_fp(&amp;foo, 11);
+
+    let pick_i64: fun(int64, int64) -&gt; int64 = pick_first&lt;int64&gt;;
+    let r3 = pick_i64(10, 20);
+}
+</code></pre>
+<h3 id="53-intrinsics"><a class="header" href="#53-intrinsics">5.3 Intrinsics</a></h3>
+<p>Core intrinsics in std/memory:</p>
+<ul>
+<li>size_of<t>()</t></li>
+<li>align_of<t>()</t></li>
+<li>move<t>(value)</t></li>
+</ul>
+<p>User-facing wrappers:</p>
+<ul>
+<li>sizeof<t>()</t></li>
+<li>alignof<t>()</t></li>
+</ul>
+<pre><code class="language-atlas77">import "std/memory";
+
+fun main() {
+    let s = sizeof&lt;int64&gt;();
+    let a = alignof&lt;int64&gt;();
+
+    let x = String::new();
+    let y = move(x);
+    // x is invalid after move
+}
+</code></pre>
+<h2 id="6-real-world-application-structure"><a class="header" href="#6-real-world-application-structure">6. Real-World Application Structure</a></h2>
+<p>The raylib sample demonstrates a typical Atlas77 program skeleton for interactive apps:</p>
+<ol>
+<li>Extern declarations for host APIs.</li>
+<li>Domain structs/enums for runtime state.</li>
+<li>Initialization block.</li>
+<li>Main loop with update + draw phases.</li>
+<li>Deterministic shutdown.</li>
+</ol>
+<pre><code class="language-atlas77">fun main() {
+    InitWindow(800, 450, "2d camera");
+    SetTargetFPS(60);
+
+    while (!WindowShouldClose()) {
+        // update
+        // draw
+    }
+
+    CloseWindow();
+}
+</code></pre>
+<p>This structure maps cleanly onto Atlas77 ownership rules because state lifetime is explicit and scoped.</p>
+<h2 id="7-operational-notes-and-caveats"><a class="header" href="#7-operational-notes-and-caveats">7. Operational Notes and Caveats</a></h2>
+<ul>
+<li>Atlas77 is under active development; not all documented types/features are equally mature.</li>
+<li>Standard library modules are practical and evolving, not frozen ABI contracts.</li>
+<li>Pointer-heavy code must be audited manually; ownership pass does not replace C interop discipline.</li>
+<li>Use check and multiple C backends in CI to catch backend-specific issues early.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="language-reference.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="memory-model.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="language-reference.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="memory-model.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

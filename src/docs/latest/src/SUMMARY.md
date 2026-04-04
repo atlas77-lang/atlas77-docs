@@ -6,9 +6,20 @@
     - [Hello, World!](./hello_world.md)
 - [Programming a Guessing Game](./guessing_game.md)
 
+# Learn Atlas77
+
+- [Learn Atlas77](./learn-atlas77.md)
+    - [Hello Atlas77](./learn-01-hello-atlas77.md)
+    - [Core Syntax](./learn-02-core-syntax.md)
+    - [Ownership Basics](./learn-03-ownership-basics.md)
+    - [Working With The Standard Library](./learn-04-working-with-stdlib.md)
+    - [Generics And Function Pointers](./learn-05-generics-and-function-pointers.md)
+    - [C Interop And Project Shape](./learn-06-c-interop-and-project-shape.md)
+
 # Language Reference
 
 - [Language Reference](./language-reference.md)
+- [Atlas77 Language Manual](./atlas77-language-manual.md)
 - [Memory Model](./memory-model.md)
 - [Error Handling](./error-handling.md)
 - [Reserved Keywords](./reserved_keywords.md)
@@ -21,18 +32,11 @@
 
 - [std](./std.md)
     - [std/io](./libraries/std-io.md)
-    - [std/fs](./libraries/std-fs.md)
     - [std/string](./libraries/std-string.md)
     - [std/vector](./libraries/std-vector.md)
-    - [std/map](./libraries/std-map.md)
-    - [std/queue](./libraries/std-queue.md)
-    - [std/iter](./libraries/std-iter.md)
     - [std/optional](./libraries/std-optional.md)
     - [std/expected](./libraries/std-expected.md)
-    - [std/math](./libraries/std-math.md)
-    - [std/time](./libraries/std-time.md)
     - [std/mem](./libraries/std-mem.md)
-    - [std/box](./libraries/std-box.md)
 
 # Libraries and Modules
 

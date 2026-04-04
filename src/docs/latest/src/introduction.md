@@ -1,21 +1,10 @@
 # Introduction
 
-Welcome to *The Atlas77 Programming Language*, an experimental book about the Atlas77 programming language. Experimental because I'm trying to gather and lay down my thoughts about the language as I develop it to normalize the language in itself.
+Atlas77 is an experimental systems-style language with explicit ownership, deterministic cleanup, and a C-oriented toolchain.
 
-Atlas77 is a statically typed, compiled programming language running on a VM that I do in my free time.
-I hope to be able to use it for future projects. Don't expect it to be production-ready anytime soon.
+This book is split into two tracks:
 
-I would describe it as a modern take of C++. And for that it takes inspiration from many languages like:
-- Rust/C++/C# for the syntax
-- Java/CPython for the runtime
+- Learn Atlas77: practical, step-by-step onboarding
+- Language Reference: lower-level semantics and detailed behavior
 
-# Goals
-
-- Having a `core::graphics` module that links to Vulkan/OpenGL/DirectX.
-- Having a `core::sdl` module that links to SDL.
-- Bootstrapping the compiler.
-- Having a `core::ffi` module that allows interfacing with C libraries.
-- Having a `core::ffi` module that allows interfacing with Rust libraries.
-- Making a game with it.
-- Linking to [blue_engine](https://github.com/AryanpurTech/BlueEngine) (see [blue_engine](./blue_engine.md) documentation).
-- It should work 😁
+If you are new, start with Getting Started and keep examples small.

@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-0821e098.js";
+            window.path_to_searchindex_js = "searchindex-ad449319.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-4ae58274.js"></script>
+        <script src="toc-27c2cb2e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -180,283 +180,24 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="error-handling-in-atlas-77"><a class="header" href="#error-handling-in-atlas-77">Error Handling in Atlas 77</a></h1>
-<p>Atlas 77 provides explicit error handling through <code>optional&lt;T&gt;</code> and <code>expected&lt;T, E&gt;</code> types. There is <strong>no implicit error propagation</strong>; errors must be handled explicitly to avoid “hidden magic.”</p>
-<h2 id="philosophy"><a class="header" href="#philosophy">Philosophy</a></h2>
-<p>Error handling in Atlas 77 is <strong>explicit and intentional</strong>:</p>
-<ul>
-<li>No automatic exception throwing or catching</li>
-<li>No implicit <code>try</code>/<code>?</code> operator for error propagation</li>
-<li>Errors must be checked and handled at the point they occur</li>
-<li>This gives you <strong>maximum control</strong> over error recovery</li>
-</ul>
-<h2 id="optional-type"><a class="header" href="#optional-type">optional Type</a></h2>
-<p>The <code>optional&lt;T&gt;</code> type represents a value that may or may not exist.</p>
-<h3 id="creating-optional-values"><a class="header" href="#creating-optional-values">Creating optional Values</a></h3>
-<p>Use <code>optional&lt;T&gt;</code> for fallible operations that don’t need error details:</p>
-<pre><code class="language-cpp">import "std/optional";
+                        <h1 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h1>
+<p>Atlas77 standard style favors explicit result types.</p>
+<p>Use optional<t> for maybe-present values:</t></p>
+<pre><code class="language-atlas77">import "std/optional";
 
-struct User {
-public:
-    id: int64;
-    name: string;
-    
-    User(id: int64, name: string) {
-        this.id = id;
-        this.name = name;
-    }
-}
-
-fun find_user(id: int64) -&gt; optional&lt;User&gt; {
-    if id &gt; 0 {
-        // Found user
-        let user = new User(id, "Alice");
-        return optional&lt;User&gt;::of(user);
-    } else {
-        // Not found
-        return optional&lt;User&gt;::empty();
-    }
+fun find_id(ok: bool) -&gt; optional&lt;int64&gt; {
+    if ok { return optional&lt;int64&gt;::of(1); }
+    return optional&lt;int64&gt;::empty();
 }
 </code></pre>
-<h3 id="checking-optional-values"><a class="header" href="#checking-optional-values">Checking optional Values</a></h3>
-<pre><code class="language-cpp">let user_opt = find_user(42);
+<p>Use expected&lt;T, E&gt; for value-or-error outcomes:</p>
+<pre><code class="language-atlas77">import "std/expected";
 
-// Check if value exists
-if user_opt.has_value() {
-    let user = user_opt.value();  // Consumes the optional
-    println(user.name);
-} else {
-    println("User not found");
+fun parse(x: int64) -&gt; expected&lt;int64, string&gt; {
+    if x &lt; 0 { return expected&lt;int64, string&gt;::unexpected("negative"); }
+    return expected&lt;int64, string&gt;::expect(x);
 }
 </code></pre>
-<h3 id="using-value_or-for-defaults"><a class="header" href="#using-value_or-for-defaults">Using value_or for Defaults</a></h3>
-<pre><code class="language-cpp">import "std/optional";
-
-fun get_config_value(key: string) -&gt; optional&lt;string&gt; {
-    // ... lookup logic ...
-    return optional&lt;string&gt;::empty();
-}
-
-fun main() {
-    let timeout = get_config_value("timeout").value_or("30");
-    println(timeout);  // Prints: 30
-}
-</code></pre>
-<h2 id="expected-type"><a class="header" href="#expected-type">expected Type</a></h2>
-<p>The <code>expected&lt;T, E&gt;</code> type represents either a success with a value, or a failure with an error.</p>
-<h3 id="creating-expected-values"><a class="header" href="#creating-expected-values">Creating expected Values</a></h3>
-<p>Use <code>expected&lt;T, E&gt;</code> when operations can fail and you need to communicate why:</p>
-<pre><code class="language-cpp">import "std/expected";
-
-fun parse_int(s: string) -&gt; expected&lt;int64, string&gt; {
-    // Try to parse string to integer
-    if is_valid_number(s) {
-        let number: int64 = convert_to_int(s);
-        return expected&lt;int64, string&gt;::expect(number);
-    } else {
-        return expected&lt;int64, string&gt;::unexpected("Invalid number format");
-    }
-}
-</code></pre>
-<h3 id="checking-expected-values"><a class="header" href="#checking-expected-values">Checking expected Values</a></h3>
-<pre><code class="language-cpp">let result = parse_int("42");
-
-// Explicit check with is_expected
-if result.is_expected() {
-    let number = result.expected_value();  // Consumes the expected
-    println(number);
-} else {
-    let error = result.unexpected_value();  // Consumes the expected
-    println(error);
-}
-</code></pre>
-<h3 id="using-expected_value_or-for-defaults"><a class="header" href="#using-expected_value_or-for-defaults">Using expected_value_or for Defaults</a></h3>
-<pre><code class="language-cpp">import "std/expected";
-
-fun divide(a: int64, b: int64) -&gt; expected&lt;int64, string&gt; {
-    if b == 0 {
-        return expected&lt;int64, string&gt;::unexpected("Division by zero");
-    }
-    return expected&lt;int64, string&gt;::expect(a / b);
-}
-
-fun main() {
-    let result = divide(10, 0).expected_value_or(0);
-    println(result);  // Prints: 0
-}
-</code></pre>
-<h3 id="pattern-checking-both-success-and-error"><a class="header" href="#pattern-checking-both-success-and-error">Pattern: Checking Both Success and Error</a></h3>
-<pre><code class="language-cpp">let result = parse_int("invalid");
-
-if result.is_expected() {
-    let value = result.expected_value();
-    println(value);
-} else if result.is_unexpected() {
-    let error = result.unexpected_value();
-    println(error);  // Prints: Invalid number format
-}
-</code></pre>
-<h2 id="panic"><a class="header" href="#panic">Panic</a></h2>
-<p>For unrecoverable errors, use <code>panic()</code> to abort the program:</p>
-<pre><code class="language-cpp">import "std/io";
-
-fun critical_operation() {
-    if invalid_state {
-        panic("Critical error: invalid state detected!");
-    }
-}
-</code></pre>
-<p><code>panic()</code> will:</p>
-<ol>
-<li>Print the error message</li>
-<li>Terminate the program immediately</li>
-<li>Bypass normal cleanup (use sparingly)</li>
-</ol>
-<h2 id="pattern-examples"><a class="header" href="#pattern-examples">Pattern Examples</a></h2>
-<h3 id="optional-handling"><a class="header" href="#optional-handling">optional Handling</a></h3>
-<pre><code class="language-cpp">import "std/optional";
-
-struct User {
-public:
-    id: int64;
-    name: string;
-    
-    User(id: int64, name: string) {
-        this.id = id;
-        this.name = name;
-    }
-}
-
-fun find_user(id: int64) -&gt; optional&lt;User&gt; {
-    if id &gt; 0 {
-        let user = new User(id, "Alice");
-        return optional&lt;User&gt;::of(user);
-    }
-    return optional&lt;User&gt;::empty();
-}
-
-fun get_user_name(id: int64) -&gt; optional&lt;string&gt; {
-    let user_opt = find_user(id);
-    
-    if user_opt.has_value() {
-        let user = user_opt.value();
-        return optional&lt;string&gt;::of(user.name);
-    } else {
-        return optional&lt;string&gt;::empty();
-    }
-}
-
-// Usage
-fun main() {
-    let name_opt = get_user_name(1);
-    if name_opt.has_value() {
-        println(name_opt.value());
-    } else {
-        println("User not found");
-    }
-}
-</code></pre>
-<h3 id="expected-chaining"><a class="header" href="#expected-chaining">expected Chaining</a></h3>
-<p>When multiple fallible operations depend on each other:</p>
-<pre><code class="language-cpp">import "std/expected";
-import "std/fs";
-
-fun read_and_parse() -&gt; expected&lt;int64, string&gt; {
-    // First operation
-    let file = new File("numbers.txt");
-    if !file.exists() {
-        return expected&lt;int64, string&gt;::unexpected("File not found");
-    }
-    
-    let content = file.read();
-    
-    // Second operation (depends on first)
-    let number = parse_int(content);
-    if number.is_unexpected() {
-        return expected&lt;int64, string&gt;::unexpected(number.unexpected_value());
-    }
-    
-    // Success
-    return expected&lt;int64, string&gt;::expect(number.expected_value());
-}
-</code></pre>
-<h3 id="nested-expected-with-meaningful-errors"><a class="header" href="#nested-expected-with-meaningful-errors">Nested expected with Meaningful Errors</a></h3>
-<pre><code class="language-cpp">import "std/expected";
-
-struct ParseError {
-public:
-    line: int64;
-    column: int64;
-    message: string;
-    
-    ParseError(line: int64, column: int64, message: string) {
-        this.line = line;
-        this.column = column;
-        this.message = message;
-    }
-}
-
-fun parse_config(path: string) -&gt; expected&lt;Config, ParseError&gt; {
-    // Try to read file
-    let file = new File(path);
-    if !file.exists() {
-        let error = new ParseError(0, 0, "File not found");
-        return expected&lt;Config, ParseError&gt;::unexpected(error);
-    }
-    
-    let content = file.read();
-    
-    // Try to parse content
-    let config = parse_config_text(content);
-    return config;
-}
-</code></pre>
-<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
-<ol>
-<li><strong>Check explicitly</strong> – Always use <code>has_value()</code> / <code>is_expected()</code> / <code>is_unexpected()</code> before consuming values</li>
-<li><strong>Provide context</strong> – Include helpful error information in <code>expected&lt;T, E&gt;</code></li>
-<li><strong>Fail fast</strong> – Return errors early rather than propagating invalid states</li>
-<li><strong>Use optional for simple cases</strong> – When you only need to know if something exists</li>
-<li><strong>Use expected for complex cases</strong> – When you need to communicate failure reasons</li>
-<li><strong>Avoid panics in libraries</strong> – Let caller decide how to handle errors</li>
-<li><strong>Document error cases</strong> – Explain what errors an operation can produce</li>
-<li><strong>Remember consuming methods</strong> – <code>value()</code>, <code>expected_value()</code>, and <code>unexpected_value()</code> consume the container</li>
-</ol>
-<h2 id="api-reference"><a class="header" href="#api-reference">API Reference</a></h2>
-<h3 id="optional-methods"><a class="header" href="#optional-methods">optional<t> Methods</t></a></h3>
-<ul>
-<li><code>optional&lt;T&gt;::of(data: T) -&gt; optional&lt;T&gt;</code> – Create an optional containing a value</li>
-<li><code>optional&lt;T&gt;::empty() -&gt; optional&lt;T&gt;</code> – Create an empty optional</li>
-<li><code>has_value(&amp;this) -&gt; bool</code> – Check if a value is present</li>
-<li><code>value(this) -&gt; T</code> – Consume and return the value (panics if empty)</li>
-<li><code>value_or(this, default: T) -&gt; T</code> – Consume and return the value or default</li>
-</ul>
-<h3 id="expectedt-e-methods"><a class="header" href="#expectedt-e-methods">expected&lt;T, E&gt; Methods</a></h3>
-<ul>
-<li><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code> – Create a successful expected</li>
-<li><code>expected&lt;T, E&gt;::unexpected(error: E) -&gt; expected&lt;T, E&gt;</code> – Create a failed expected</li>
-<li><code>is_expected(&amp;this) -&gt; bool</code> – Check if this holds a value</li>
-<li><code>is_unexpected(&amp;this) -&gt; bool</code> – Check if this holds an error</li>
-<li><code>expected_value(this) -&gt; T</code> – Consume and return the value (panics if error)</li>
-<li><code>unexpected_value(this) -&gt; E</code> – Consume and return the error (panics if value)</li>
-<li><code>expected_value_or(this, default: T) -&gt; T</code> – Consume and return the value or default</li>
-<li><code>unexpected_value_or(this, default: E) -&gt; E</code> – Consume and return the error or default</li>
-</ul>
-<h2 id="future-improvements"><a class="header" href="#future-improvements">Future Improvements</a></h2>
-<p>In the future, Atlas 77 may introduce:</p>
-<ul>
-<li>Discriminated unions for more flexible error types</li>
-<li>Error traits for better composability</li>
-<li>More ergonomic error propagation operators</li>
-</ul>
-<p>However, the core design will remain <strong>explicit and visible</strong>, avoiding hidden control flow.</p>
-<hr>
-<p>See also:</p>
-<ul>
-<li><a href="./language-reference.html">Language Reference</a> – Error handling in context</li>
-<li><a href="./memory-model.html">Memory Model</a> – Resource safety and ownership</li>
-<li><a href="./std.html">Standard Library</a> – Available error types and utilities</li>
-</ul>
 
                     </main>
 

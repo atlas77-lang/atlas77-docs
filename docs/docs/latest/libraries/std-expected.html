@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-0821e098.js";
+            window.path_to_searchindex_js = "../searchindex-ad449319.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-4ae58274.js"></script>
+        <script src="../toc-27c2cb2e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -181,68 +181,25 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="stdexpected"><a class="header" href="#stdexpected">std/expected</a></h1>
-<p>Result type for operations that can fail with error information.</p>
-<h2 id="struct-expectedt-e"><a class="header" href="#struct-expectedt-e">Struct: <code>expected&lt;T, E&gt;</code></a></h2>
-<p>Represents either a success value or an error.</p>
-<pre><code class="language-cpp">union expected_storage&lt;T, E&gt; { 
-    expected_value: T;
-    unexpected_value: E;
-}
+<p>expected&lt;T, E&gt; represents success (T) or error (E).</p>
+<pre><code class="language-atlas77">import "std/expected";
 
-struct expected&lt;T, E&gt; {
-private:
-    data: expected_storage&lt;T, E&gt;;
-    has_expected_value: bool;
+fun parse_age(age: int64) -&gt; expected&lt;int64, string&gt; {
+    if age &lt; 0 {
+        return expected&lt;int64, string&gt;::unexpected("invalid age");
+    }
+    return expected&lt;int64, string&gt;::expect(age);
 }
 </code></pre>
-<h2 id="static-methods"><a class="header" href="#static-methods">Static Methods</a></h2>
-<h3 id="expectedt-eexpectdata-t---expectedt-e"><a class="header" href="#expectedt-eexpectdata-t---expectedt-e"><code>expected&lt;T, E&gt;::expect(data: T) -&gt; expected&lt;T, E&gt;</code></a></h3>
-<p>Create a successful expected.</p>
-<pre><code class="language-cpp">import "std/expected";
-
-let result = expected&lt;int64, string&gt;::expect(42);
-</code></pre>
-<h3 id="expectedt-eunexpectederror-e---expectedt-e"><a class="header" href="#expectedt-eunexpectederror-e---expectedt-e"><code>expected&lt;T, E&gt;::unexpected(error: E) -&gt; expected&lt;T, E&gt;</code></a></h3>
-<p>Create a failed expected.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error occurred");
-</code></pre>
-<h2 id="instance-methods"><a class="header" href="#instance-methods">Instance Methods</a></h2>
-<h3 id="is_expectedthis---bool"><a class="header" href="#is_expectedthis---bool"><code>is_expected(&amp;this) -&gt; bool</code></a></h3>
-<p>Check if this contains a value.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
-if result.is_expected() {
-    println("Success");
-}
-</code></pre>
-<h3 id="is_unexpectedthis---bool"><a class="header" href="#is_unexpectedthis---bool"><code>is_unexpected(&amp;this) -&gt; bool</code></a></h3>
-<p>Check if this contains an error.</p>
-<pre><code class="language-cpp">if result.is_unexpected() {
-    println("Error occurred");
-}
-</code></pre>
-<h3 id="expected_valuethis---t"><a class="header" href="#expected_valuethis---t"><code>expected_value(this) -&gt; T</code></a></h3>
-<p>Consume and return the value (panics if error).</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
-let val = result.expected_value();  // 42
-</code></pre>
-<blockquote>
-<p><strong>Warning:</strong> This method panics if the expected contains an error. Always check with <code>is_expected()</code> first or use <code>expected_value_or()</code>.</p>
-</blockquote>
-<h3 id="unexpected_valuethis---e"><a class="header" href="#unexpected_valuethis---e"><code>unexpected_value(this) -&gt; E</code></a></h3>
-<p>Consume and return the error (panics if value).</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
-let err = result.unexpected_value();  // "Error"
-</code></pre>
-<h3 id="expected_value_orthis-default-t---t"><a class="header" href="#expected_value_orthis-default-t---t"><code>expected_value_or(this, default: T) -&gt; T</code></a></h3>
-<p>Consume and return the value or a default.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::unexpected("Error");
-let val = result.expected_value_or(0);  // 0
-</code></pre>
-<h3 id="unexpected_value_orthis-default-e---e"><a class="header" href="#unexpected_value_orthis-default-e---e"><code>unexpected_value_or(this, default: E) -&gt; E</code></a></h3>
-<p>Consume and return the error or a default.</p>
-<pre><code class="language-cpp">let result = expected&lt;int64, string&gt;::expect(42);
-let err = result.unexpected_value_or("No error");  // "No error"
-</code></pre>
+<p>Key APIs:</p>
+<ul>
+<li>expect</li>
+<li>unexpected</li>
+<li>is_expected</li>
+<li>is_unexpected</li>
+<li>expected_value / unexpected_value</li>
+<li>expected_value_or / unexpected_value_or</li>
+</ul>
 
                     </main>
 
@@ -252,7 +209,7 @@ let err = result.unexpected_value_or("No error");  // "No error"
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../libraries/std-math.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../libraries/std-mem.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -266,7 +223,7 @@ let err = result.unexpected_value_or("No error");  // "No error"
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../libraries/std-math.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../libraries/std-mem.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

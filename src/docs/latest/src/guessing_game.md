@@ -1,15 +1,26 @@
-# Programming a Guessing Game in Atlas77
+# Programming A Guessing Game
 
-## Setting up
+This chapter is a guided exercise.
 
-First create a new Atlas77 project:
+Goals:
 
-```bash
-atlas77 init guessing_game
-cd guessing_game
+- Read input from the terminal
+- Parse and compare values
+- Use loops and conditions
+
+Minimal loop structure:
+
+```atlas77
+import "std/io";
+
+fun main() {
+    let running: bool = true;
+    while running {
+        print("Guess: ");
+        let guess = input();
+        println(guess.c_str());
+        // add parse + compare logic here
+        break;
+    }
+}
 ```
-
-Then open the `src/main.atlas` file in your favorite text editor.
-
-## Writing the Game Code
-
